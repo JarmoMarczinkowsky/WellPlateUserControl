@@ -1,0 +1,120 @@
+﻿<Window x:Class="WellPlateUserControl.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WellPlateUserControl"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid x:Name="gButtonControl">
+
+            <Grid x:Name="gLabelGroup"
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Bottom"
+            >
+                <Label x:Name="lblWellColor"
+                   Width="80"
+                   Height="25"
+                   Content="Grid color"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom"
+                   Margin="0,0,90,160"
+
+            />
+            </Grid>
+            
+            
+            <ComboBox x:Name="cboxWellColor"
+                      Width="80"
+                      Height="25"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Bottom"
+                      Margin="0,0,0,160"
+            >
+                <ComboBoxItem IsSelected="True" >Black</ComboBoxItem>
+                <ComboBoxItem IsSelected="False">Blue</ComboBoxItem>
+                <ComboBoxItem IsSelected="False">Green</ComboBoxItem>
+                <ComboBoxItem IsSelected="False">Silver</ComboBoxItem>
+                <ComboBoxItem IsSelected="False">Red</ComboBoxItem>
+            </ComboBox>
+
+            <Label x:Name="lblClickColor"
+                   Width="80"
+                   Height="25"
+                   Content="Click color"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom"
+                   Margin="0,0,90,125"
+
+            />
+            <ComboBox x:Name="cboxWellClickColor"
+                      Width="80"
+                      Height="25"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Bottom"
+                      Margin="0,0,0,125"
+                      
+                >
+                <ComboBoxItem IsSelected="False">Black</ComboBoxItem>
+                <ComboBoxItem IsSelected="False">Blue</ComboBoxItem>
+                <ComboBoxItem IsSelected="False">Green</ComboBoxItem>
+                <ComboBoxItem IsSelected="False">Silver</ComboBoxItem>
+                <ComboBoxItem IsSelected="True" >Red</ComboBoxItem>
+            </ComboBox>
+
+            <Label x:Name="lblWellSize"
+                   Width="90"
+                   Height="25"
+                   Content="Wellplate size"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom"
+                   Margin="0,0,90,90"
+
+            />
+            <ComboBox x:Name="cboxWellSize"
+                      Width="80"
+                      Height="25"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Bottom"
+                      Margin="0,0,0,90"
+                      
+                >
+                <ComboBoxItem IsSelected="False">4x6</ComboBoxItem>
+                <ComboBoxItem IsSelected="False">6x8</ComboBoxItem>
+                <ComboBoxItem IsSelected="True" >8x12</ComboBoxItem>
+                <ComboBoxItem IsSelected="False">16x24</ComboBoxItem>
+            </ComboBox>
+
+            <Label x:Name="lblColorCoordinate"
+                   Width="115"
+                   Height="25"
+                   Content="Coordinate to color"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom"
+                   Margin="0,0,90,55"
+
+            />
+            <TextBox x:Name="txbInputWellSize"
+                     Width="80"
+                     Height="25"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Bottom"
+                     Margin="0,0,0,55"
+             />
+            
+            <Button x:Name="btnGenerate" 
+                    Width="80" 
+                    Height="25" 
+                    Content="Generate" 
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,0,20"
+                    >
+            </Button>
+        </Grid>
+        <Grid x:Name="gGenerateWellPlate">
+            
+        </Grid>
+    </Grid>
+</Window>
