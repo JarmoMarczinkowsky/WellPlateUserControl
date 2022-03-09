@@ -32,6 +32,7 @@ namespace WellPlateUserControl
         private int _distanceFromWall;
         private int _loopCounter;
         
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -43,7 +44,7 @@ namespace WellPlateUserControl
             cboxWellClickColor.ItemsSource = colors;
             cboxWellSize.ItemsSource = sizes;
 
-            cboxWellColor.SelectedItem = cboxWellColor.Items[3];
+            cboxWellColor.SelectedItem = cboxWellColor.Items[2];
             cboxWellClickColor.SelectedItem = cboxWellClickColor.Items[8];
             cboxWellSize.SelectedItem = cboxWellSize.Items[2];
             
@@ -67,6 +68,10 @@ namespace WellPlateUserControl
             //preparation for the coordinate system
             _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+            //converts the colors
+            var _colorConverter = (Color)ColorConverter.ConvertFromString(_cboxGridColor);
+            var _clickColorConverter = (Color)ColorConverter.ConvertFromString(_cboxClickColor);
+
             //clears the previous shapes
             gGenerateWellPlate.Children.Clear();
 
@@ -80,7 +85,7 @@ namespace WellPlateUserControl
                     Ellipse ellipse = new Ellipse();
                     ellipse.VerticalAlignment = VerticalAlignment.Bottom;
                     ellipse.HorizontalAlignment = HorizontalAlignment.Left;
-                    ellipse.Fill = new SolidColorBrush(Colors.Black);
+                    ellipse.Fill = new SolidColorBrush(_colorConverter);
                     ellipse.Width = _shapeSize;
                     ellipse.Height = _shapeSize;
                     ellipse.Name = $"{_alphabet[height]}{width + 1}_{_loopCounter + 1}"; //example 'a5_5'                    
@@ -104,9 +109,46 @@ namespace WellPlateUserControl
             //Debug tijd
             Debug.WriteLine("size is: " + _cboxWellPlateSize);
 
+            //prepares wellplate color
+            
+
             //prepares wellplate size
             _widthWellPlate = Convert.ToInt32(_cboxWellPlateSize.Split("x")[0]);
             _heightWellPlate = Convert.ToInt32(_cboxWellPlateSize.Split("x")[1]);
         }
+
+        private void ClickForColor(object sender, MouseButtonEventArgs e)
+        {
+            //gets the values of the comboboxes
+            GetComboBoxes();
+
+            //converts the colors
+            var colorConverter = (Color)ColorConverter.ConvertFromString(_cboxGridColor);
+            var clickColorConverter = (Color)ColorConverter.ConvertFromString(_cboxClickColor);
+
+
+            foreach (object child in gGenerateWellPlate.Children)
+            {
+                Ellipse ellipse = child as Ellipse;
+                if (((Ellipse)child).IsMouseOver)
+                {
+                    SolidColorBrush brush = ellipse.Fill as SolidColorBrush;
+                    if (brush != null)
+                    {
+                        if (brush.Color == colorConverter)
+                        {
+                            ellipse.Fill = new SolidColorBrush(clickColorConverter);
+                        }
+                        else
+                        {
+                            ellipse.Fill = new SolidColorBrush(colorConverter);
+                        }
+                    }
+
+                }
+            }
+        }
+
+        
     }
 }
