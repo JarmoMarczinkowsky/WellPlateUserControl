@@ -24,11 +24,13 @@ namespace WellPlateUserControl
         private string _cboxGridColor;
         private string _cboxClickColor;
         private string _cboxWellPlateSize;
+        private string _alphabet;
         private int _widthWellPlate;
         private int _heightWellPlate;
         private int _shapeSize;
         private int _shapeDistance;
         private int _distanceFromWall;
+        private int _loopCounter;
         
         public MainWindow()
         {
@@ -62,6 +64,9 @@ namespace WellPlateUserControl
             _shapeDistance = 1;
             _distanceFromWall = 15;
 
+            //preparation for the coordinate system
+            _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
             //clears the previous shapes
             gGenerateWellPlate.Children.Clear();
 
@@ -70,13 +75,18 @@ namespace WellPlateUserControl
             {
                 for (int width = 0; width < _widthWellPlate; width++)
                 {
+                    _loopCounter++;
+
                     Ellipse ellipse = new Ellipse();
                     ellipse.VerticalAlignment = VerticalAlignment.Bottom;
                     ellipse.HorizontalAlignment = HorizontalAlignment.Left;
                     ellipse.Fill = new SolidColorBrush(Colors.Black);
                     ellipse.Width = _shapeSize;
                     ellipse.Height = _shapeSize;
+                    ellipse.Name = $"{_alphabet[height]}{width + 1}_{_loopCounter + 1}"; //example 'a5_5'                    
                     ellipse.Margin = new Thickness(_distanceFromWall + width * _shapeSize * _shapeDistance, 0, 0, _distanceFromWall + height * _shapeSize);
+
+                    Debug.WriteLine(ellipse.Name);
 
                     gGenerateWellPlate.Children.Add(ellipse);
                 }
