@@ -64,7 +64,7 @@ namespace WellPlateUserControl
             //sets the values of the shapes
             _shapeSize = 15;
             _shapeDistance = 1;
-            _distanceFromWall = 15;
+            _distanceFromWall = 5;
 
             //preparation for the coordinate system
             _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -91,9 +91,11 @@ namespace WellPlateUserControl
                     ellipse.Width = _shapeSize;
                     ellipse.Height = _shapeSize;
                     ellipse.Name = $"{_alphabet[height]}{width + 1}_{_loopCounter + 1}"; //example 'a5_5'                    
-                    ellipse.Margin = new Thickness(_distanceFromWall + width * _shapeSize * _shapeDistance, 0, 0, _heightWellPlate * _shapeSize - (_distanceFromWall + height * _shapeSize));
-
-                    Debug.WriteLine(ellipse.Name);
+                    ellipse.Margin = new Thickness(
+                        _distanceFromWall + width * _shapeSize * _shapeDistance, //left
+                        0,  //up
+                        0, //right
+                        _distanceFromWall + _heightWellPlate * _shapeSize - (_distanceFromWall + height * _shapeSize)); //down
 
                     gGenerateWellPlate.Children.Add(ellipse);
                 }
@@ -154,30 +156,39 @@ namespace WellPlateUserControl
 
             var clickColorConverter = (Color)ColorConverter.ConvertFromString(_cboxClickColor);
 
-            foreach (object child in gGenerateWellPlate.Children)
+            if (txbCoordinateToColor.Text != "")
             {
-                Ellipse ellipse = child as Ellipse;
-
-                //is number
-                if (int.TryParse(txbCoordinateToColor.Text.Trim(), out int checkNumber))
+                foreach (object child in gGenerateWellPlate.Children)
                 {
-                    if (ellipse.Name.Split("_")[1] == txbCoordinateToColor.Text)
+                    Ellipse ellipse = child as Ellipse;
+
+                    //is number
+                    if (int.TryParse(txbCoordinateToColor.Text.Trim(), out int checkNumber))
                     {
-                        ellipse.Fill = new SolidColorBrush(clickColorConverter);
+                        if (ellipse.Name.Split("_")[1] == txbCoordinateToColor.Text)
+                        {
+                            ellipse.Fill = new SolidColorBrush(clickColorConverter);
+                        }
                     }
-                }
 
-                //is alphabetic
-                else
-                {
-                    _createEllipseName = $"{txbCoordinateToColor.Text.ToUpper()}";
-
-                    if (ellipse.Name.Contains(_createEllipseName))
+                    //is alphabetic
+                    else
                     {
-                        ellipse.Fill = new SolidColorBrush(clickColorConverter);
+                        _createEllipseName = $"{txbCoordinateToColor.Text.ToUpper()}";
+
+                        if (ellipse.Name.Contains(_createEllipseName))
+                        {
+                            ellipse.Fill = new SolidColorBrush(clickColorConverter);
+                        }
                     }
                 }
             }
+            else
+            {
+                MessageBox.Show("Input field can't be empty", MessageBoxButton.OK.ToString());
+            }
+
+            
         }
     }
 }
