@@ -68,6 +68,7 @@ namespace WellPlateUserControl
 
             //preparation for the coordinate system
             _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            _loopCounter = -1;
 
             //converts the colors
             var _colorConverter = (Color)ColorConverter.ConvertFromString(_cboxGridColor);
@@ -90,7 +91,7 @@ namespace WellPlateUserControl
                     ellipse.Width = _shapeSize;
                     ellipse.Height = _shapeSize;
                     ellipse.Name = $"{_alphabet[height]}{width + 1}_{_loopCounter + 1}"; //example 'a5_5'                    
-                    ellipse.Margin = new Thickness(_distanceFromWall + width * _shapeSize * _shapeDistance, 0, 0, _distanceFromWall + height * _shapeSize);
+                    ellipse.Margin = new Thickness(_distanceFromWall + width * _shapeSize * _shapeDistance, 0, 0, _heightWellPlate * _shapeSize - (_distanceFromWall + height * _shapeSize));
 
                     Debug.WriteLine(ellipse.Name);
 
@@ -106,12 +107,6 @@ namespace WellPlateUserControl
             _cboxGridColor = cboxWellColor.SelectedItem as string;
             _cboxClickColor = cboxWellClickColor.SelectedItem as string;
             _cboxWellPlateSize = cboxWellSize.SelectedItem as string;
-
-            //Debug tijd
-            Debug.WriteLine("size is: " + _cboxWellPlateSize);
-
-            //prepares wellplate color
-            
 
             //prepares wellplate size
             _widthWellPlate = Convert.ToInt32(_cboxWellPlateSize.Split("x")[0]);
@@ -131,8 +126,11 @@ namespace WellPlateUserControl
             foreach (object child in gGenerateWellPlate.Children)
             {
                 Ellipse ellipse = child as Ellipse;
+                
                 if (((Ellipse)child).IsMouseOver)
                 {
+                    Debug.WriteLine(ellipse.Name);
+
                     SolidColorBrush brush = ellipse.Fill as SolidColorBrush;
                     if (brush != null)
                     {
@@ -152,6 +150,8 @@ namespace WellPlateUserControl
 
         private void CoordinateToColor(object sender, RoutedEventArgs e)
         {
+            GetComboBoxes();
+
             var clickColorConverter = (Color)ColorConverter.ConvertFromString(_cboxClickColor);
 
             foreach (object child in gGenerateWellPlate.Children)
