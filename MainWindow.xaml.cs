@@ -25,6 +25,7 @@ namespace WellPlateUserControl
         private string _cboxClickColor;
         private string _cboxWellPlateSize;
         private string _alphabet;
+        private string _createEllipseName;
         private int _widthWellPlate;
         private int _heightWellPlate;
         private int _shapeSize;
@@ -149,6 +150,34 @@ namespace WellPlateUserControl
             }
         }
 
-        
+        private void CoordinateToColor(object sender, RoutedEventArgs e)
+        {
+            var clickColorConverter = (Color)ColorConverter.ConvertFromString(_cboxClickColor);
+
+            foreach (object child in gGenerateWellPlate.Children)
+            {
+                Ellipse ellipse = child as Ellipse;
+
+                //is number
+                if (int.TryParse(txbCoordinateToColor.Text.Trim(), out int checkNumber))
+                {
+                    if (ellipse.Name.Split("_")[1] == txbCoordinateToColor.Text)
+                    {
+                        ellipse.Fill = new SolidColorBrush(clickColorConverter);
+                    }
+                }
+
+                //is alphabetic
+                else
+                {
+                    _createEllipseName = $"{txbCoordinateToColor.Text.ToUpper()}";
+
+                    if (ellipse.Name.Contains(_createEllipseName))
+                    {
+                        ellipse.Fill = new SolidColorBrush(clickColorConverter);
+                    }
+                }
+            }
+        }
     }
 }
