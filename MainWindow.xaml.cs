@@ -38,17 +38,20 @@ namespace WellPlateUserControl
         {
             InitializeComponent();
 
+            //creates the lists for the comboboxes
             List<string> sizes = new List<string>() { "4x6", "6x8", "8x12", "16x24" };
             List<string> colors = new List<string>() { "Aqua", "Beige", "Black", "Blue", "Brown", "Gray", "Green", "Pink", "Red", "Yellow" };
 
+            //fills the comboboxes
             cboxWellColor.ItemsSource = colors;
             cboxWellClickColor.ItemsSource = colors;
             cboxWellSize.ItemsSource = sizes;
 
-            cboxWellColor.SelectedItem = cboxWellColor.Items[2];
-            cboxWellClickColor.SelectedItem = cboxWellClickColor.Items[8];
-            cboxWellSize.SelectedItem = cboxWellSize.Items[2];
-            
+            //makes the comboboxes select an item
+            cboxWellColor.SelectedItem = cboxWellColor.Items[2]; //selects 'Black'
+            cboxWellClickColor.SelectedItem = cboxWellClickColor.Items[8]; //selects 'Red'
+            cboxWellSize.SelectedItem = cboxWellSize.Items[2]; //selects '8x12'
+
         }
 
         private void cboxWellSize_Selected(object sender, RoutedEventArgs e)
@@ -84,13 +87,24 @@ namespace WellPlateUserControl
                 {
                     _loopCounter++;
 
+                    //creates ellipse
                     Ellipse ellipse = new Ellipse();
+
+                    //takes care of the alignment
                     ellipse.VerticalAlignment = VerticalAlignment.Bottom;
                     ellipse.HorizontalAlignment = HorizontalAlignment.Left;
+
+                    //makes it  the color from the combobox
                     ellipse.Fill = new SolidColorBrush(_colorConverter);
+                    
+                    //makes the ellipse a certain size
                     ellipse.Width = _shapeSize;
                     ellipse.Height = _shapeSize;
+
+                    //gives the ellipse a name. It starts with the coordinates followed by a underscore with the number of the ellipse
                     ellipse.Name = $"{_alphabet[height]}{width + 1}_{_loopCounter + 1}"; //example 'a5_5'                    
+                    
+                    //takes care of the position of the ellipse
                     ellipse.Margin = new Thickness(
                         _distanceFromWall + width * _shapeSize * _shapeDistance, //left
                         0,  //up
@@ -124,7 +138,7 @@ namespace WellPlateUserControl
             var colorConverter = (Color)ColorConverter.ConvertFromString(_cboxGridColor);
             var clickColorConverter = (Color)ColorConverter.ConvertFromString(_cboxClickColor);
 
-
+            //loops through each of the ellipses
             foreach (object child in gGenerateWellPlate.Children)
             {
                 Ellipse ellipse = child as Ellipse;
@@ -136,10 +150,14 @@ namespace WellPlateUserControl
                     SolidColorBrush brush = ellipse.Fill as SolidColorBrush;
                     if (brush != null)
                     {
+
+                        //if an ellipse is the first color, convert it to the other color if you click it
                         if (brush.Color == colorConverter)
                         {
                             ellipse.Fill = new SolidColorBrush(clickColorConverter);
                         }
+
+                        //if an ellipse is the clicked color, convert it to the first color if you click it
                         else
                         {
                             ellipse.Fill = new SolidColorBrush(colorConverter);
@@ -152,6 +170,7 @@ namespace WellPlateUserControl
 
         private void CoordinateToColor(object sender, RoutedEventArgs e)
         {
+            //gets all the values of the comboboxes
             GetComboBoxes();
 
             var clickColorConverter = (Color)ColorConverter.ConvertFromString(_cboxClickColor);
