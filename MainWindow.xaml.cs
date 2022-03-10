@@ -125,8 +125,8 @@ namespace WellPlateUserControl
             _cboxWellPlateSize = cboxWellSize.SelectedItem as string;
 
             //prepares wellplate size
-            _widthWellPlate = Convert.ToInt32(_cboxWellPlateSize.Split("x")[0]);
-            _heightWellPlate = Convert.ToInt32(_cboxWellPlateSize.Split("x")[1]);
+            _heightWellPlate = Convert.ToInt32(_cboxWellPlateSize.Split("x")[0]);
+            _widthWellPlate = Convert.ToInt32(_cboxWellPlateSize.Split("x")[1]);
         }
 
         private void ClickForColor(object sender, MouseButtonEventArgs e)
