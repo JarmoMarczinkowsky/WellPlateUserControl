@@ -116,18 +116,20 @@
               Width="590"
               Height="430"
               >
-            <Rectangle      x:Name="rectPlaceHolder"
-                            Width="350" 
-                            Height="240" 
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Bottom"
-                            Fill="LightGray"
-                            Margin="15,0,0,15"
-                            >
-                
-            </Rectangle>
+            
                 
         </Grid>
+
+        <Rectangle x:Name="rectPlaceHolder"
+                   Width="360" 
+                   Height="240"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Bottom"
+                   Fill="LightGray"
+                   Margin="5,0,0,15"
+                            >
+
+        </Rectangle>
     </Grid>
     
 

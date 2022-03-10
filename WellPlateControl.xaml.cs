@@ -50,8 +50,7 @@ namespace WellPlateUserControl
             cboxWellClickColor.SelectedItem = cboxWellClickColor.Items[8]; //selects 'Red'
             cboxWellSize.SelectedItem = cboxWellSize.Items[2]; //selects '8x12'
 
-            rectPlaceHolder.Visibility = Visibility.Hidden;
-
+            
         }
 
         private void GenerateWellPlate(object sender, RoutedEventArgs e)
