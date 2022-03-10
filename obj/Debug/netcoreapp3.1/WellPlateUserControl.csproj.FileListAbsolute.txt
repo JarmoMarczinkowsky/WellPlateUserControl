@@ -20,3 +20,4 @@ C:\Users\jarmo\Documents\School\Softwaredeveloper\Leerjaar 2\Stage\Applicaties\W
 C:\Users\jarmo\Documents\School\Softwaredeveloper\Leerjaar 2\Stage\Applicaties\WellPlateUserControl\obj\Debug\netcoreapp3.1\WellPlateUserControl.dll
 C:\Users\jarmo\Documents\School\Softwaredeveloper\Leerjaar 2\Stage\Applicaties\WellPlateUserControl\obj\Debug\netcoreapp3.1\WellPlateUserControl.pdb
 C:\Users\jarmo\Documents\School\Softwaredeveloper\Leerjaar 2\Stage\Applicaties\WellPlateUserControl\obj\Debug\netcoreapp3.1\WellPlateUserControl.genruntimeconfig.cache
+C:\Users\jarmo\Documents\School\Softwaredeveloper\Leerjaar 2\Stage\Applicaties\WellPlateUserControl\obj\Debug\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs

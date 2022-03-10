@@ -37,7 +37,7 @@ namespace WellPlateUserControl
             InitializeComponent();
 
             //creates the lists for the comboboxes
-            List<string> sizes = new List<string>() { "4x6", "6x8", "8x12", "16x25" };
+            List<string> sizes = new List<string>() { "4x6", "6x8", "8x12", "16x24" };
             List<string> colors = new List<string>() { "Aqua", "Beige", "Black", "Blue", "Brown", "Gray", "Green", "Pink", "Red", "Yellow" };
 
             //fills the comboboxes
@@ -49,6 +49,9 @@ namespace WellPlateUserControl
             cboxWellColor.SelectedItem = cboxWellColor.Items[2]; //selects 'Black'
             cboxWellClickColor.SelectedItem = cboxWellClickColor.Items[8]; //selects 'Red'
             cboxWellSize.SelectedItem = cboxWellSize.Items[2]; //selects '8x12'
+
+            rectPlaceHolder.Visibility = Visibility.Hidden;
+
         }
 
         private void GenerateWellPlate(object sender, RoutedEventArgs e)

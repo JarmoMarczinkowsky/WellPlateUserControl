@@ -10,7 +10,7 @@
         ResizeMode="NoResize"
         Title="MainWindow" Height="450" Width="600">
     <Grid>
-        <Grid x:Name="gButtonControl">
+        <!--<Grid x:Name="gButtonControl">
 
             <Grid x:Name="gLabelGroup"
                   HorizontalAlignment="Right"
@@ -118,6 +118,9 @@
               Width="590"
               Height="430">
             
-        </Grid>
+        </Grid>-->
+        <local:WellPlateControl>
+            
+        </local:WellPlateControl>
     </Grid>
 </Window>
