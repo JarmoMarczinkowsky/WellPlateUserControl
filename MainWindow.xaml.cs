@@ -145,7 +145,7 @@ namespace WellPlateUserControl
                 
                 if (((Ellipse)child).IsMouseOver)
                 {
-                    Debug.WriteLine(ellipse.Name);
+                   
 
                     SolidColorBrush brush = ellipse.Fill as SolidColorBrush;
                     if (brush != null)
@@ -155,12 +155,14 @@ namespace WellPlateUserControl
                         if (brush.Color == colorConverter)
                         {
                             ellipse.Fill = new SolidColorBrush(clickColorConverter);
+                            Debug.WriteLine($"{ellipse.Name}: turned on");
                         }
 
                         //if an ellipse is the clicked color, convert it to the first color if you click it
                         else
                         {
                             ellipse.Fill = new SolidColorBrush(colorConverter);
+                            Debug.WriteLine($"{ellipse.Name}: turned off");
                         }
                     }
 
