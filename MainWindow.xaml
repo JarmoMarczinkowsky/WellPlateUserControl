@@ -5,9 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WellPlateUserControl"
         mc:Ignorable="d"
-        WindowState="Normal"
-        WindowStyle="ToolWindow"
-        ResizeMode="NoResize"
         Title="MainWindow" Height="450" Width="600">
     <Grid>
         <!--<Grid x:Name="gButtonControl">

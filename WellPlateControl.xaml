@@ -14,7 +14,7 @@
                   HorizontalAlignment="Right"
                   VerticalAlignment="Bottom"
             >
-                <Label x:Name="lblWellColor"
+                <!--<Label x:Name="lblWellColor"
                    Width="80"
                    Height="25"
                    Content="Grid color"
@@ -32,8 +32,8 @@
                    VerticalAlignment="Bottom"
                    Margin="0,0,90,125"
 
-            />
-                <Label x:Name="lblWellSize"
+            />-->
+                <!--<Label x:Name="lblWellSize"
                    Width="90"
                    Height="25"
                    Content="Wellplate size"
@@ -41,8 +41,8 @@
                    VerticalAlignment="Bottom"
                    Margin="0,0,90,90"
 
-            />
-                <Button x:Name="lblColorCoordinate"
+            />-->
+                <!--<Button x:Name="lblColorCoordinate"
                    Width="115"
                    Height="25"
                    Content="Coordinate to color"
@@ -51,12 +51,12 @@
                    Margin="0,0,90,55"
                    Click="CoordinateToColor"
 
-            />
+            />-->
 
             </Grid>
 
 
-            <ComboBox x:Name="cboxWellColor"
+            <!--<ComboBox x:Name="cboxWellColor"
                       Width="80"
                       Height="25"
                       HorizontalAlignment="Right"
@@ -64,9 +64,9 @@
                       Margin="0,0,0,160"
             >
 
-            </ComboBox>
+            </ComboBox>-->
 
-            <ComboBox x:Name="cboxWellClickColor"
+            <!--<ComboBox x:Name="cboxWellClickColor"
                       Width="80"
                       Height="25"
                       HorizontalAlignment="Right"
@@ -75,10 +75,10 @@
                       
                 >
 
-            </ComboBox>
+            </ComboBox>-->
 
 
-            <ComboBox x:Name="cboxWellSize"
+            <!--<ComboBox x:Name="cboxWellSize"
                       Width="80"
                       Height="25"
                       HorizontalAlignment="Right"
@@ -87,18 +87,18 @@
                       
                 >
 
-            </ComboBox>
+            </ComboBox>-->
 
 
-            <TextBox x:Name="txbCoordinateToColor"
+            <!--<TextBox x:Name="txbCoordinateToColor"
                      Width="80"
                      Height="25"
                      HorizontalAlignment="Right"
                      VerticalAlignment="Bottom"
                      Margin="0,0,0,55"
-             />
+             />-->
 
-            <Button x:Name="btnGenerate" 
+            <!--<Button x:Name="btnGenerate" 
                     Width="80" 
                     Height="25" 
                     Content="Generate" 
@@ -107,7 +107,7 @@
                     Margin="0,0,0,20"
                     Click="GenerateWellPlate"
                     >
-            </Button>
+            </Button>-->
         </Grid>
 
         <Grid PreviewMouseDown="ClickForColor" x:Name="gGenerateWellPlate"
