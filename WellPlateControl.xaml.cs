@@ -46,8 +46,8 @@ namespace WellPlateUserControl
         {
             InitializeComponent();
 
-            //GetValues();
-            
+            GetValues();
+
 
 
             //creates the lists for the comboboxes
@@ -68,7 +68,7 @@ namespace WellPlateUserControl
 
             //rectPlaceHolder.Visibility = Visibility.Hidden;
 
-            
+            Debug.WriteLine("Run Start");
 
 
         }
@@ -81,6 +81,7 @@ namespace WellPlateUserControl
 
         public void GetValues()
         {
+            Debug.WriteLine("GetValues lukt");
             //puts the content of the comboboxes in three different strings
             //_cboxGridColor = cboxWellColor.SelectedItem as string;
             //_cboxClickColor = cboxWellClickColor.SelectedItem as string;
@@ -113,11 +114,13 @@ namespace WellPlateUserControl
 
         public bool SetWellPlateSize(int inputLength, int inputWidth)
         {
+            rectPlaceHolder.Visibility = Visibility.Collapsed;
+            Debug.WriteLine("-----------------------------------\r\nHier\r\n--------------------------------------------");
             if (inputLength > 0 && inputLength < 27 && inputWidth > 0 && inputWidth < 27)
             {
                 _heightWellPlate = inputWidth;
                 _widthWellPlate = inputLength;
-
+                Debug.WriteLine("Dit wordt ook gerund");
                 //sets the values of the shapes
                 _shapeSize = 15;
                 _shapeDistance = 1;
@@ -164,11 +167,12 @@ namespace WellPlateUserControl
                         gGenerateWellPlate.Children.Add(ellipse);
                     }
                 }
-
+                Debug.WriteLine("True");
                 return true;
             }
             else
             {
+                Debug.WriteLine("False");
                 throw new ArgumentOutOfRangeException($"Number can't be bigger than 26 or smaller than 1: length = {inputLength}, width = {inputWidth}");
             }
         }
@@ -196,7 +200,7 @@ namespace WellPlateUserControl
 
             try
             {
-                _colorConverter = (Color)ColorConverter.ConvertFromString(wellColor);
+                _clickColorConverter = (Color)ColorConverter.ConvertFromString(wellColor);
                 return true;
             }
             catch
@@ -237,7 +241,15 @@ namespace WellPlateUserControl
             
         }
 
-
+        /// <summary>
+        /// <para>Give a number or a coordinate and the coordinate will get the 'click' color.</para>
+        /// <para>Example: 'A4' colors the 4th circle on the upper row.</para>
+        /// <para>Example 2: '4' also colors the 4th circle on the upper row</para>
+        /// <para>Use ';' to highlight more coordinates. Works with numbers and coordinates</para>
+        /// <para>Example: 'A1;B3;B5;20' wil highlight all these coordinates</para>
+        /// </summary>
+        /// <param name="coordinate"></param>
+        /// <returns>True or false</returns>
         public bool ColorCoordinate(string coordinate)
         {
             _coordinatesForColor = coordinate.Split(";".Trim()).ToList();

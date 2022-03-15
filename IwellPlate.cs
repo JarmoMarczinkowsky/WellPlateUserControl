@@ -15,7 +15,7 @@ namespace WellPlateUserControl
 
         bool ColorCoordinate(string colorToCoordinate);
 
-        bool ColorCoordinate(int coordinate);
+        //bool ColorCoordinate(int coordinate);
 
     }
 }

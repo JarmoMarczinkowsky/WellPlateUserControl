@@ -1,4 +1,3 @@
-C:\Users\jarmo\Documents\School\Softwaredeveloper\Leerjaar 2\Stage\Applicaties\WellPlateUserControl\obj\Debug\netcoreapp3.1\WellPlateUserControl.csproj.AssemblyReference.cache
 C:\Users\jarmo\Documents\School\Softwaredeveloper\Leerjaar 2\Stage\Applicaties\WellPlateUserControl\obj\Debug\netcoreapp3.1\MainWindow.g.cs
 C:\Users\jarmo\Documents\School\Softwaredeveloper\Leerjaar 2\Stage\Applicaties\WellPlateUserControl\obj\Debug\netcoreapp3.1\WellPlateControl.g.cs
 C:\Users\jarmo\Documents\School\Softwaredeveloper\Leerjaar 2\Stage\Applicaties\WellPlateUserControl\obj\Debug\netcoreapp3.1\App.g.cs

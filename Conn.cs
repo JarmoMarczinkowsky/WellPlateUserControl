@@ -20,22 +20,22 @@ namespace WellPlateUserControl
 
         public bool SetGridColor(string gridColor)
         {
-            throw new NotImplementedException();
+            return _wellPlate.SetGridColor(gridColor);
         }
 
         public bool SetClickColor(string clickColor)
         {
-            throw new NotImplementedException();
+            return _wellPlate.SetClickColor(clickColor);
         }
 
         public bool ColorCoordinate(string colorToCoordinate)
         {
-            throw new NotImplementedException();
+            return _wellPlate.ColorCoordinate(colorToCoordinate);
         }
 
-        public bool ColorCoordinate(int coordinate)
-        {
-            throw new NotImplementedException();
-        }
+        //public bool ColorCoordinate(int coordinate)
+        //{
+        //    return _wellPlate.ColorCoordinate(coordinate);
+        //}
     }
 }
