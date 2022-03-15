@@ -114,13 +114,19 @@ namespace WellPlateUserControl
 
         public bool SetWellPlateSize(int inputLength, int inputWidth)
         {
-            rectPlaceHolder.Visibility = Visibility.Collapsed;
+            lblTestLabel.Content = "De labeltest is gelukt";
+            
+
+            Debug.WriteLine(lblTestLabel.Content);
+            rectPlaceHolder.Fill = new SolidColorBrush(Colors.Red);
+            //MessageBox.Show("Test");
+
             Debug.WriteLine("-----------------------------------\r\nHier\r\n--------------------------------------------");
             if (inputLength > 0 && inputLength < 27 && inputWidth > 0 && inputWidth < 27)
             {
                 _heightWellPlate = inputWidth;
                 _widthWellPlate = inputLength;
-                Debug.WriteLine("Dit wordt ook gerund");
+                
                 //sets the values of the shapes
                 _shapeSize = 15;
                 _shapeDistance = 1;
@@ -130,9 +136,10 @@ namespace WellPlateUserControl
                 _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 _loopCounter = -1;
 
+                gButtonControl.Children.Remove(lblTestLabel);
                 //clears the previous shapes
                 gGenerateWellPlate.Children.Clear();
-
+                
                 //generates the shapes
                 for (int height = 0; height < _heightWellPlate; height++)
                 {
@@ -167,7 +174,7 @@ namespace WellPlateUserControl
                         gGenerateWellPlate.Children.Add(ellipse);
                     }
                 }
-                Debug.WriteLine("True");
+                Debug.WriteLine("SetWellPlateSize doorgelopen");
                 return true;
             }
             else
@@ -181,7 +188,7 @@ namespace WellPlateUserControl
         {
             string wellColor;
             wellColor = ColorValidator(gridColor);
-
+            Debug.WriteLine("SetGridColor doorgelopen");
             try
             {
                 _clickColorConverter = (Color)ColorConverter.ConvertFromString(wellColor);
@@ -191,13 +198,14 @@ namespace WellPlateUserControl
             {
                 throw new Exception();
             }
+            
         }
 
         public bool SetClickColor(string clickColor)
         {
             string wellColor = ColorValidator(clickColor);
             //return true;
-
+            Debug.WriteLine("clickColor doorgelopen");
             try
             {
                 _clickColorConverter = (Color)ColorConverter.ConvertFromString(wellColor);
@@ -207,7 +215,7 @@ namespace WellPlateUserControl
             {
                 throw new Exception();
             }
-
+            
         }
 
         public string ColorValidator(string inputColor)
@@ -236,7 +244,7 @@ namespace WellPlateUserControl
             {
                 wellColor = inputColor;
             }
-
+            Debug.WriteLine("ColorValidator doorgelopen");
             return wellColor;
             
         }
@@ -326,6 +334,7 @@ namespace WellPlateUserControl
 
                 }
             }
+            Debug.WriteLine("Click");
         }
 
         private void CoordinateToColor(object sender, RoutedEventArgs e)

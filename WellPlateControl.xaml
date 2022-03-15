@@ -130,6 +130,13 @@
                             >
 
         </Rectangle>
+
+        <Label x:Name="lblTestLabel"
+               Margin="0,-40,0,0"
+               HorizontalAlignment="Center"
+               FontWeight="Black"
+               VerticalAlignment="Center"
+               Foreground="Red">TestLabel</Label>
     </Grid>
     
 
