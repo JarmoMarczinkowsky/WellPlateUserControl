@@ -27,19 +27,19 @@ namespace TestApplication
         {
             InitializeComponent();
 
-            
+            globalWellPlate.SetGridColor(Colors.Black); //https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.colors?view=windowsdesktop-6.0
+            globalWellPlate.SetClickColor(Colors.Red); 
+            globalWellPlate.SetWellPlateSize(8, 6); //width, height
+            globalWellPlate.ColorCoordinate("C3;C5;E2;F3;F4;F5;E6"); //multiple coordinates get split with a ';'
+
+
 
         }
 
         private void ConnTest(object sender, RoutedEventArgs e)
         {
             //make sure the colors get set before the grid size
-            globalWellPlate.SetGridColor("Black"); //supports hex, rgb or name simply just a color https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.colors?view=windowsdesktop-6.0
-            globalWellPlate.SetClickColor("Red");
-            globalWellPlate.SetWellPlateSize(8, 6);
-            globalWellPlate.ColorCoordinate("A1;A2;B1;600"); //multiple coordinates get split with a ';'
             
-
 
         }
     }

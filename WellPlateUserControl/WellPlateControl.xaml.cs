@@ -46,30 +46,6 @@ namespace WellPlateUserControl
         {
             InitializeComponent();
 
-            
-            //hoi
-            
-
-            //creates the lists for the comboboxes
-            //List<string> sizes = new List<string>() { "4x6", "6x8", "8x12", "16x24" };
-            //List<string> colors = new List<string>() { "Aqua", "Beige", "Black", "Blue", "Brown", "Gray", "Green", "Pink", "Red", "Yellow" };
-
-            //_wellPlateSize = "6x8";
-
-            //fills the comboboxes
-            //cboxWellColor.ItemsSource = colors;
-            //cboxWellClickColor.ItemsSource = colors;
-            //cboxWellSize.ItemsSource = sizes;
-
-            //makes the comboboxes select an item
-            //cboxWellColor.SelectedItem = cboxWellColor.Items[2]; //selects 'Black'
-            //cboxWellClickColor.SelectedItem = cboxWellClickColor.Items[8]; //selects 'Red'
-            //cboxWellSize.SelectedItem = cboxWellSize.Items[2]; //selects '8x12'
-
-            //rectPlaceHolder.Visibility = Visibility.Hidden;
-
-            Debug.WriteLine("Run Start");
-
             rectPlaceHolder.Visibility = Visibility.Hidden;
         }
 
@@ -80,12 +56,12 @@ namespace WellPlateUserControl
         }
         
         /// <summary>
-        /// <para>Takes care of the wellplate. Uses width and length ints to determine the size</para>
-        /// <para>Also takes care of the color of the grid</para>
+        /// <para>Takes care of the wellplate size</para>
+        /// <para>Use: '8,6' will create a grid that is 8 wide and 6 high</para>
         /// </summary>
         /// <param name="inputLength"></param>
         /// <param name="inputWidth"></param>
-        /// <returns>Bool; true or false if variables are < 1 or > 26</returns>
+        /// <returns>True if method succeeds and an out of range error if the values are higher than 26 or smaller than 1</returns>
         public bool SetWellPlateSize(int inputLength, int inputWidth)
         {
             
@@ -152,18 +128,19 @@ namespace WellPlateUserControl
         }
 
         /// <summary>
-        /// Converts the inputted gridcolor to a readable format for the code.
+        /// <para>Converts the inputted gridcolor to a readable format for the code.</para>
+        /// <para>Use: 'Color.[wishedColor]' without square brackets</para>
         /// </summary>
         /// <param name="clickColor"></param>
-        /// <returns>Bool; true or false</returns>
-        public bool SetGridColor(string gridColor)
+        /// <returns>True if the color succeeds to be puth inside the variable and an error if it fails to be put inside the variable</returns>
+        public bool SetGridColor(Color gridColor)
         {
-            string wellColor;
-            wellColor = ColorValidator(gridColor);
+            //string wellColor;
+            //wellColor = ColorValidator(gridColor);
             Debug.WriteLine("SetGridColor doorgelopen");
             try
             {
-                _colorConverter = (Color)ColorConverter.ConvertFromString(wellColor);
+                _colorConverter = gridColor; //(Color)ColorConverter.ConvertFromString
                 return true;
             }
             catch
@@ -173,18 +150,18 @@ namespace WellPlateUserControl
         }
 
         /// <summary>
-        /// Converts the inputted clickcolor to a readable format for the code.
+        /// <para>Converts the inputted clickcolor to a readable format for the code.</para>
+        /// <para>Use: 'Color.[wishedColor]' without square brackets</para>
         /// </summary>
         /// <param name="clickColor"></param>
-        /// <returns>Bool; true or false</returns>
-        public bool SetClickColor(string clickColor)
+        /// <returns>True if the color succeeds to be puth inside the variable and an error if it fails to be put inside the variable</returns>
+        public bool SetClickColor(Color clickColor)
         {
-            string wellColor = ColorValidator(clickColor);
-            //return true;
+            
             Debug.WriteLine("clickColor doorgelopen");
             try
             {
-                _clickColorConverter = (Color)ColorConverter.ConvertFromString(wellColor);
+                _clickColorConverter = clickColor;
                 return true;
             }
             catch
@@ -200,36 +177,36 @@ namespace WellPlateUserControl
         /// </summary>
         /// <param name="inputColor"></param>
         /// <returns>String; so it can use the converted format in the right method</returns>
-        public string ColorValidator(string inputColor)
-        {
-            string wellColor = "";
-            if (inputColor.Contains(",")) //Check for rgb
-            {
-                string[] splitNewColor = inputColor.Split(",");
-                int red = int.Parse(splitNewColor[0].Trim());
-                int green = int.Parse(splitNewColor[1].Trim());
-                int blue = int.Parse(splitNewColor[2].Trim());
+        //private string ColorValidator(Color inputColor)
+        //{
+        //    string wellColor = "";
+        //    if (inputColor.Contains(",")) //Check for rgb
+        //    {
+        //        string[] splitNewColor = inputColor.Split(",");
+        //        int red = int.Parse(splitNewColor[0].Trim());
+        //        int green = int.Parse(splitNewColor[1].Trim());
+        //        int blue = int.Parse(splitNewColor[2].Trim());
 
-                wellColor = $"#{red:X2}{green:X2}{blue:X2}";
-                //Debug.WriteLine($"Hex: {inputColor}");
+        //        wellColor = $"#{red:X2}{green:X2}{blue:X2}";
+        //        //Debug.WriteLine($"Hex: {inputColor}");
 
                 
-            }
+        //    }
 
-            else if (char.IsLetter(inputColor.FirstOrDefault()))
-            {
-                wellColor = char.ToUpper(inputColor.First()) + inputColor.Substring(1).ToLower();
+        //    else if (char.IsLetter(inputColor.FirstOrDefault()))
+        //    {
+        //        wellColor = char.ToUpper(inputColor.First()) + inputColor.Substring(1).ToLower();
 
-            }
+        //    }
 
-            else
-            {
-                wellColor = inputColor;
-            }
-            Debug.WriteLine("ColorValidator doorgelopen");
-            return wellColor;
+        //    else
+        //    {
+        //        wellColor = inputColor;
+        //    }
+        //    Debug.WriteLine("ColorValidator doorgelopen");
+        //    return wellColor;
             
-        }
+        //}
 
         /// <summary>
         /// <para>Give a number or a coordinate and the coordinate will get the 'click' color.</para>
@@ -242,6 +219,7 @@ namespace WellPlateUserControl
         /// <returns>True or false</returns>
         public bool ColorCoordinate(string coordinate)
         {
+            string formattedCoordinate;
             _coordinatesForColor = coordinate.Split(";".Trim()).ToList();
 
             try
@@ -255,10 +233,12 @@ namespace WellPlateUserControl
                         {
                             Ellipse ellipse = child as Ellipse;
 
+                            formattedCoordinate = newCoordinate.Trim();
+
                             //is number
-                            if (int.TryParse(newCoordinate.Trim(), out int checkNumber))
+                            if (int.TryParse(formattedCoordinate.Trim(), out int checkNumber))
                             {
-                                if (ellipse.Name.Split("_")[1] == newCoordinate)
+                                if (ellipse.Name.Split("_")[1] == formattedCoordinate)
                                 {
                                     ellipse.Fill = new SolidColorBrush(_clickColorConverter);
                                 }
@@ -267,7 +247,7 @@ namespace WellPlateUserControl
                             //is alphabetic
                             else
                             {
-                                _createEllipseName = $"{newCoordinate.ToUpper()}";
+                                _createEllipseName = $"{formattedCoordinate.ToUpper()}";
 
                                 if (ellipse.Name.Split("_")[0] == _createEllipseName)
                                 {

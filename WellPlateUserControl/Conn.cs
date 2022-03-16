@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
+
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows.Media;
 
 namespace WellPlateUserControl
 {
-    
-
-    
     public class Conn : IwellPlate
     {
         private static WellPlateControl _wellPlate = new WellPlateControl();
@@ -18,12 +16,12 @@ namespace WellPlateUserControl
             return _wellPlate.SetWellPlateSize(length, width);
         }
 
-        public bool SetGridColor(string gridColor)
+        public bool SetGridColor(Color gridColor)
         {
             return _wellPlate.SetGridColor(gridColor);
         }
 
-        public bool SetClickColor(string clickColor)
+        public bool SetClickColor(Color clickColor)
         {
             return _wellPlate.SetClickColor(clickColor);
         }

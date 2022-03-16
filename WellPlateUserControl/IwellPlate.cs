@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows.Media;
 
 namespace WellPlateUserControl
 {
@@ -9,9 +10,9 @@ namespace WellPlateUserControl
     {
         bool SetWellPlateSize(int width, int length);
 
-        bool SetGridColor(string gridColor);
+        bool SetGridColor(Color gridColor);
 
-        bool SetClickColor(string clickColor);
+        bool SetClickColor(Color clickColor);
 
         bool ColorCoordinate(string colorToCoordinate);
 
