@@ -36,9 +36,10 @@ namespace TestApplication
             //_wellPlate.SetWellPlateSize(6, 8);
             //_wellPlate.SetGridColor("Black");
             //_wellPlate.SetClickColor("Red");
+            globalWellPlate.SetGridColor("Red");
+            globalWellPlate.SetClickColor("Green");
             globalWellPlate.SetWellPlateSize(10, 16);
-            globalWellPlate.SetGridColor("Black");
-            globalWellPlate.SetClickColor("Red");
+            
 
         }
     }

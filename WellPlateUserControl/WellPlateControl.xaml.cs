@@ -124,7 +124,9 @@ namespace WellPlateUserControl
         {
             lblTestLabel.Content = "De labeltest is gelukt";
 
-           
+            //string wellColor;
+            //wellColor = ColorValidator("Black");
+
 
             Debug.WriteLine(lblTestLabel.Content);
             
@@ -164,7 +166,7 @@ namespace WellPlateUserControl
                         ellipse.HorizontalAlignment = HorizontalAlignment.Left;
 
                         //makes it  the color from the combobox
-                        ellipse.Fill = new SolidColorBrush(Colors.Black);//_colorConverter
+                        ellipse.Fill = new SolidColorBrush(_colorConverter);//
 
                         //makes the ellipse a certain size
                         ellipse.Width = _shapeSize;
@@ -200,7 +202,7 @@ namespace WellPlateUserControl
             Debug.WriteLine("SetGridColor doorgelopen");
             try
             {
-                _clickColorConverter = (Color)ColorConverter.ConvertFromString(wellColor);
+                _colorConverter = (Color)ColorConverter.ConvertFromString(wellColor);
                 return true;
             }
             catch
@@ -328,22 +330,22 @@ namespace WellPlateUserControl
                     if (brush != null)
                     {
                         //if an ellipse is the first color, convert it to the other color if you click it
-                        if (brush.Color == _colorConverter)
+                        if (brush.Color == _colorConverter) //_colorConverter
                         {
-                            ellipse.Fill = new SolidColorBrush(_clickColorConverter);
+                            ellipse.Fill = new SolidColorBrush(_clickColorConverter); //_clickColorConverter
                             Debug.WriteLine($"{ellipse.Name}: turned on");
                         }
                         //if an ellipse is the clicked color, convert it to the first color if you click it
                         else
                         {
-                            ellipse.Fill = new SolidColorBrush(_colorConverter);
+                            ellipse.Fill = new SolidColorBrush(_colorConverter); //_colorConverter
                             Debug.WriteLine($"{ellipse.Name}: turned off");
                         }
                     }
 
                 }
             }
-            Debug.WriteLine("Click");
+            
         }
 
         private void CoordinateToColor(object sender, RoutedEventArgs e)
