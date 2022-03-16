@@ -93,7 +93,7 @@ namespace WellPlateUserControl {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/WellPlateUserControl;V1.0.0.0;component/wellplatecontrol.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/WellPlateUserControl;component/wellplatecontrol.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\WellPlateControl.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

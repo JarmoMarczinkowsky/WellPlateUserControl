@@ -70,7 +70,7 @@ namespace WellPlateUserControl
 
             Debug.WriteLine("Run Start");
 
-
+            rectPlaceHolder.Visibility = Visibility.Hidden;
         }
 
         private void GenerateWellPlate(object sender, RoutedEventArgs e)
@@ -78,7 +78,9 @@ namespace WellPlateUserControl
 
 
         }
-
+        /// <summary>
+        /// Oude method, wordt ooit nog weggehaald
+        /// </summary>
         public void GetValues()
         {
             Debug.WriteLine("GetValues lukt");
@@ -111,13 +113,21 @@ namespace WellPlateUserControl
 
 
         }
-
+        /// <summary>
+        /// <para>Takes care of the wellplate. Uses width and length ints to determine the size</para>
+        /// <para>Also takes care of the color of the grid</para>
+        /// </summary>
+        /// <param name="inputLength"></param>
+        /// <param name="inputWidth"></param>
+        /// <returns>Bool; true or false if variables are < 1 or > 26</returns>
         public bool SetWellPlateSize(int inputLength, int inputWidth)
         {
             lblTestLabel.Content = "De labeltest is gelukt";
 
+           
+
             Debug.WriteLine(lblTestLabel.Content);
-            rectPlaceHolder.Fill = new SolidColorBrush(Colors.Red);
+            
             //MessageBox.Show("Test");
 
             Debug.WriteLine("-----------------------------------\r\nHier\r\n--------------------------------------------");
@@ -138,7 +148,7 @@ namespace WellPlateUserControl
                 gButtonControl.Children.Remove(lblTestLabel);
                 //clears the previous shapes
                 gGenerateWellPlate.Children.Clear();
-                
+
                 //generates the shapes
                 for (int height = 0; height < _heightWellPlate; height++)
                 {

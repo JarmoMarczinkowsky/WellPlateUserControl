@@ -33,14 +33,13 @@ namespace TestApplication
 
         private void ConnTest(object sender, RoutedEventArgs e)
         {
-            _wellPlate.SetWellPlateSize(6, 8);
-            _wellPlate.SetGridColor("Black");
-            _wellPlate.SetClickColor("Red");
+            //_wellPlate.SetWellPlateSize(6, 8);
+            //_wellPlate.SetGridColor("Black");
+            //_wellPlate.SetClickColor("Red");
+            globalWellPlate.SetWellPlateSize(10, 16);
+            globalWellPlate.SetGridColor("Black");
+            globalWellPlate.SetClickColor("Red");
 
-            Label myLabel = new Label();
-            myLabel.Content = "Net nieuw";
-            gRefreshTest.Children.Add(myLabel);
-        
         }
     }
 }
