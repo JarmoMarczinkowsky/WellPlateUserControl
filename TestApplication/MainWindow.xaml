@@ -10,8 +10,8 @@
         <global:WellPlateControl x:Name="globalWellPlate"/>
         
         
-        <Button x:Name="ConnClick" Click="ConnTest"
+        <!--<Button x:Name="ConnClick" Click="ConnTest"
                 Width="20"
-                Height="20"/>
+                Height="20"/>-->
     </Grid>
 </Window>

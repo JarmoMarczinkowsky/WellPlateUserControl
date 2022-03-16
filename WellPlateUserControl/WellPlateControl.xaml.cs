@@ -79,7 +79,7 @@ namespace WellPlateUserControl
                 _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 _loopCounter = -1;
 
-                gButtonControl.Children.Remove(lblTestLabel);
+                //gButtonControl.Children.Remove(lblTestLabel);
                 //clears the previous shapes
                 gGenerateWellPlate.Children.Clear();
 
