@@ -164,7 +164,7 @@ namespace WellPlateUserControl
                         ellipse.HorizontalAlignment = HorizontalAlignment.Left;
 
                         //makes it  the color from the combobox
-                        ellipse.Fill = new SolidColorBrush(_colorConverter);
+                        ellipse.Fill = new SolidColorBrush(Colors.Black);//_colorConverter
 
                         //makes the ellipse a certain size
                         ellipse.Width = _shapeSize;
