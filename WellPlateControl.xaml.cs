@@ -47,8 +47,8 @@ namespace WellPlateUserControl
             InitializeComponent();
 
             GetValues();
-
-
+            //hoi
+            
 
             //creates the lists for the comboboxes
             //List<string> sizes = new List<string>() { "4x6", "6x8", "8x12", "16x24" };
