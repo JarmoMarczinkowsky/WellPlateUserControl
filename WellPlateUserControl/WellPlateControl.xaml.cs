@@ -122,17 +122,7 @@ namespace WellPlateUserControl
         /// <returns>Bool; true or false if variables are < 1 or > 26</returns>
         public bool SetWellPlateSize(int inputLength, int inputWidth)
         {
-            lblTestLabel.Content = "De labeltest is gelukt";
-
-            //string wellColor;
-            //wellColor = ColorValidator("Black");
-
-
-            Debug.WriteLine(lblTestLabel.Content);
             
-            //MessageBox.Show("Test");
-
-            Debug.WriteLine("-----------------------------------\r\nHier\r\n--------------------------------------------");
             if (inputLength > 0 && inputLength < 27 && inputWidth > 0 && inputWidth < 27)
             {
                 _heightWellPlate = inputWidth;
@@ -298,7 +288,7 @@ namespace WellPlateUserControl
                             {
                                 _createEllipseName = $"{newCoordinate.ToUpper()}";
 
-                                if (ellipse.Name.Contains(_createEllipseName))
+                                if (ellipse.Name.Split("_")[0] == _createEllipseName)
                                 {
                                     ellipse.Fill = new SolidColorBrush(_clickColorConverter);
                                 }

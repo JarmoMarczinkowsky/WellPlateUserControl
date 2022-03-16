@@ -33,13 +33,13 @@ namespace TestApplication
 
         private void ConnTest(object sender, RoutedEventArgs e)
         {
-            //_wellPlate.SetWellPlateSize(6, 8);
-            //_wellPlate.SetGridColor("Black");
-            //_wellPlate.SetClickColor("Red");
-            globalWellPlate.SetGridColor("Red");
+            //make sure the colors get set before the grid size
+            globalWellPlate.SetGridColor("Black");
             globalWellPlate.SetClickColor("Green");
-            globalWellPlate.SetWellPlateSize(10, 16);
+            globalWellPlate.SetWellPlateSize(8, 6);
+            globalWellPlate.ColorCoordinate("A1;A2;B1;6"); //multiple coordinates get split with a ';'
             
+
 
         }
     }
