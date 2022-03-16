@@ -35,9 +35,9 @@ namespace TestApplication
         {
             //make sure the colors get set before the grid size
             globalWellPlate.SetGridColor("Black");
-            globalWellPlate.SetClickColor("Green");
+            globalWellPlate.SetClickColor("Red");
             globalWellPlate.SetWellPlateSize(8, 6);
-            globalWellPlate.ColorCoordinate("A1;A2;B1;6"); //multiple coordinates get split with a ';'
+            globalWellPlate.ColorCoordinate("A1;A2;B1;600"); //multiple coordinates get split with a ';'
             
 
 

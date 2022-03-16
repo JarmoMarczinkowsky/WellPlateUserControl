@@ -46,7 +46,7 @@ namespace WellPlateUserControl
         {
             InitializeComponent();
 
-            GetValues();
+            
             //hoi
             
 
@@ -78,41 +78,7 @@ namespace WellPlateUserControl
 
 
         }
-        /// <summary>
-        /// Oude method, wordt ooit nog weggehaald
-        /// </summary>
-        public void GetValues()
-        {
-            Debug.WriteLine("GetValues lukt");
-            //puts the content of the comboboxes in three different strings
-            //_cboxGridColor = cboxWellColor.SelectedItem as string;
-            //_cboxClickColor = cboxWellClickColor.SelectedItem as string;
-            //_cboxWellPlateSize = cboxWellSize.SelectedItem as string;
-
-            //removes the need for the combobox: wellplateSize 
-            //_wellPlateSize = "10x12"; //height x width
-
-            //removes the need for the combobox: gridColor
-            //_gridColor = "Black";
-
-            //removes the need for the combobox: clickColor
-            //_clickColor = "Red";
-
-            //removes the need for the textbox: CoordinateToColor
-            //_colorCoordinate = "A2";
-
-            //ColorValidator(_gridColor);
-
-            //prepares wellplate size
-            //_heightWellPlate = Convert.ToInt32(_wellPlateSize.Split("x")[0]);
-            //_widthWellPlate = Convert.ToInt32(_wellPlateSize.Split("x")[1]);
-
-
-            //prepares the coordinate to color system
-            //_coordinatesForColor = _colorCoordinate.Split(";".Trim()).ToList();
-
-
-        }
+        
         /// <summary>
         /// <para>Takes care of the wellplate. Uses width and length ints to determine the size</para>
         /// <para>Also takes care of the color of the grid</para>
@@ -185,6 +151,11 @@ namespace WellPlateUserControl
             }
         }
 
+        /// <summary>
+        /// Converts the inputted gridcolor to a readable format for the code.
+        /// </summary>
+        /// <param name="clickColor"></param>
+        /// <returns>Bool; true or false</returns>
         public bool SetGridColor(string gridColor)
         {
             string wellColor;
@@ -197,11 +168,15 @@ namespace WellPlateUserControl
             }
             catch
             {
-                throw new Exception();
+                throw new FormatException($"Can't convert color, are you sure you're using a valid color?{Environment.NewLine}https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.colors?view=windowsdesktop-6.0");
             }
-            
         }
 
+        /// <summary>
+        /// Converts the inputted clickcolor to a readable format for the code.
+        /// </summary>
+        /// <param name="clickColor"></param>
+        /// <returns>Bool; true or false</returns>
         public bool SetClickColor(string clickColor)
         {
             string wellColor = ColorValidator(clickColor);
@@ -214,11 +189,17 @@ namespace WellPlateUserControl
             }
             catch
             {
-                throw new Exception();
+                throw new FormatException($"Can't convert color, are you sure you're using a valid color?{Environment.NewLine}https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.colors?view=windowsdesktop-6.0");
             }
             
         }
 
+        /// <summary>
+        /// <para>Checks the format of the colors you've given by SetGridColor and SetClickColor.</para>
+        /// <para>After checking the format, it converts rgb to hex, makes the first character of your color uppercase or simply accepts it</para>
+        /// </summary>
+        /// <param name="inputColor"></param>
+        /// <returns>String; so it can use the converted format in the right method</returns>
         public string ColorValidator(string inputColor)
         {
             string wellColor = "";
@@ -300,12 +281,17 @@ namespace WellPlateUserControl
             }
             catch
             {
-                throw new Exception();
+                throw new Exception($"Something went wrong with the coordinates. Are you sure you are using coordinates or numbers?{Environment.NewLine}Examples: A5 to color coordinate A5.{Environment.NewLine}5 to color ellipse number 5.{Environment.NewLine}Use ';' to color multiple wells. Example: A5;B5;13 ");
             }
         }
 
 
-
+        /// <summary>
+        /// <para>If you click an ellipse, it will get the color of the 'clickcolor'.</para>
+        /// <para>If you click it again, it will change back to the grid color</para>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClickForColor(object sender, MouseButtonEventArgs e)
         {
             
@@ -341,7 +327,7 @@ namespace WellPlateUserControl
         private void CoordinateToColor(object sender, RoutedEventArgs e)
         {
             //gets all the values of the comboboxes
-            GetValues();
+            
 
 
 
