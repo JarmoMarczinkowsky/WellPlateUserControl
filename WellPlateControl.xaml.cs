@@ -115,7 +115,6 @@ namespace WellPlateUserControl
         public bool SetWellPlateSize(int inputLength, int inputWidth)
         {
             lblTestLabel.Content = "De labeltest is gelukt";
-            
 
             Debug.WriteLine(lblTestLabel.Content);
             rectPlaceHolder.Fill = new SolidColorBrush(Colors.Red);
