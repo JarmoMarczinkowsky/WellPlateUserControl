@@ -22,14 +22,14 @@ namespace WellPlateUserControl
     public partial class WellPlateControl : UserControl
     {
 
-        private string _gridColor;
+        //private string _gridColor;
 
-        private string _clickColor;
+        //private string _clickColor;
         //private string _cboxWellPlateSize;
-        private string _wellPlateSize;
+        //private string _wellPlateSize;
         private string _alphabet;
         private string _createEllipseName;
-        private string _colorCoordinate;
+        //private string _colorCoordinate;
         
         private int _widthWellPlate;
         private int _heightWellPlate;

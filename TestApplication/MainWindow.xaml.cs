@@ -32,8 +32,6 @@ namespace TestApplication
             globalWellPlate.SetWellPlateSize(8, 6); //width, height
             globalWellPlate.ColorCoordinate("C3;C5;E2;F3;F4;F5;E6"); //multiple coordinates get split with a ';'
 
-
-
         }
 
         private void ConnTest(object sender, RoutedEventArgs e)
