@@ -54,8 +54,9 @@ namespace WellPlateUserControl
 
 
         }
-        
+
         /// <summary>
+        /// <para>Use this method <b>after</b> you've stated the colors</para>
         /// <para>Takes care of the wellplate size</para>
         /// <para>Use: '8,6' will create a grid that is 8 wide and 6 high</para>
         /// </summary>
