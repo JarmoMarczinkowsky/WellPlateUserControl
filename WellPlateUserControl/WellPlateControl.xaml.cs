@@ -136,8 +136,6 @@ namespace WellPlateUserControl
         /// <returns>True if the color succeeds to be puth inside the variable and an error if it fails to be put inside the variable</returns>
         public bool SetGridColor(Color gridColor)
         {
-            //string wellColor;
-            //wellColor = ColorValidator(gridColor);
             Debug.WriteLine("SetGridColor doorgelopen");
             try
             {
@@ -171,43 +169,6 @@ namespace WellPlateUserControl
             }
             
         }
-
-        /// <summary>
-        /// <para>Checks the format of the colors you've given by SetGridColor and SetClickColor.</para>
-        /// <para>After checking the format, it converts rgb to hex, makes the first character of your color uppercase or simply accepts it</para>
-        /// </summary>
-        /// <param name="inputColor"></param>
-        /// <returns>String; so it can use the converted format in the right method</returns>
-        //private string ColorValidator(Color inputColor)
-        //{
-        //    string wellColor = "";
-        //    if (inputColor.Contains(",")) //Check for rgb
-        //    {
-        //        string[] splitNewColor = inputColor.Split(",");
-        //        int red = int.Parse(splitNewColor[0].Trim());
-        //        int green = int.Parse(splitNewColor[1].Trim());
-        //        int blue = int.Parse(splitNewColor[2].Trim());
-
-        //        wellColor = $"#{red:X2}{green:X2}{blue:X2}";
-        //        //Debug.WriteLine($"Hex: {inputColor}");
-
-                
-        //    }
-
-        //    else if (char.IsLetter(inputColor.FirstOrDefault()))
-        //    {
-        //        wellColor = char.ToUpper(inputColor.First()) + inputColor.Substring(1).ToLower();
-
-        //    }
-
-        //    else
-        //    {
-        //        wellColor = inputColor;
-        //    }
-        //    Debug.WriteLine("ColorValidator doorgelopen");
-        //    return wellColor;
-            
-        //}
 
         /// <summary>
         /// <para>Give a number or a coordinate and the coordinate will get the 'click' color.</para>
@@ -303,17 +264,6 @@ namespace WellPlateUserControl
                 }
             }
             
-        }
-
-        private void CoordinateToColor(object sender, RoutedEventArgs e)
-        {
-            //gets all the values of the comboboxes
-            
-
-
-
-
-
         }
     }
 }
