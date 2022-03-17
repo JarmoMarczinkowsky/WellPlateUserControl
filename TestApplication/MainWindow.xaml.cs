@@ -27,10 +27,10 @@ namespace TestApplication
         {
             InitializeComponent();
 
-            //globalWellPlate.SetGridColor(Colors.Green); //https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.colors?view=windowsdesktop-6.0
-            //globalWellPlate.SetClickColor(Colors.GreenYellow);
+            globalWellPlate.SetGridColor(Colors.Black); //https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.colors?view=windowsdesktop-6.0
+            globalWellPlate.SetClickColor(Colors.Red);
             globalWellPlate.SetWellPlateSize(8, 6); //width, height
-            globalWellPlate.ColorCoordinate("C3;C5;E2;F3;F4;F5;E6"); //multiple coordinates get split with a ';'
+            globalWellPlate.ColorCoordinate("1;B2;3;C4;D5"); //multiple coordinates get split with a ';'
 
 
         }

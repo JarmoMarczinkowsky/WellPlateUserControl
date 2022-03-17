@@ -61,20 +61,20 @@ namespace WellPlateUserControl
             rectPlaceHolder.Visibility = Visibility.Hidden;
         }
 
-        private void GenerateWellPlate(object sender, RoutedEventArgs e)
-        {
+        //private void GenerateWellPlate(object sender, RoutedEventArgs e)
+        //{
 
 
-        }
+        //}
 
         /// <summary>
         /// <para>Use this method <b>after</b> you've stated the colors</para>
         /// <para>Takes care of the wellplate size</para>
-        /// <para>Use: '8,6' will create a grid that is 8 wide and 6 high</para>
+        /// <example>Use: '8,6' will create a grid that is 8 wide and 6 high</example>
         /// </summary>
         /// <param name="inputLength"></param>
         /// <param name="inputWidth"></param>
-        /// <returns>True if method succeeds and an out of range error if the values are higher than 26 or smaller than 1</returns>
+        /// <returns>True if method succeeds and an out of range error if a values are higher than 26 or smaller than 1</returns>
         public bool SetWellPlateSize(int inputLength, int inputWidth)
         {
             
@@ -95,8 +95,6 @@ namespace WellPlateUserControl
                 //gButtonControl.Children.Remove(lblTestLabel);
                 //clears the previous shapes
                 gGenerateWellPlate.Children.Clear();
-
-                
 
                 //generates the shapes
                 for (int height = 0; height < _heightWellPlate; height++)
@@ -151,7 +149,7 @@ namespace WellPlateUserControl
 
         /// <summary>
         /// <para>Converts the inputted gridcolor to a readable format for the code.</para>
-        /// <para>Use: 'Color.[wishedColor]' without square brackets</para>
+        /// <example>Use: 'Colors.[wishedColor]' without square brackets</example>
         /// </summary>
         /// <param name="clickColor"></param>
         /// <returns>True if the color succeeds to be puth inside the variable and an error if it fails to be put inside the variable</returns>
@@ -173,7 +171,7 @@ namespace WellPlateUserControl
 
         /// <summary>
         /// <para>Converts the inputted clickcolor to a readable format for the code.</para>
-        /// <para>Use: 'Color.[wishedColor]' without square brackets</para>
+        /// <example>Use: 'Colors.[wishedColor]' without square brackets</example>
         /// </summary>
         /// <param name="clickColor"></param>
         /// <returns>True if the color succeeds to be puth inside the variable and an error if it fails to be put inside the variable</returns>
@@ -196,10 +194,10 @@ namespace WellPlateUserControl
 
         /// <summary>
         /// <para>Give a number or a coordinate and the coordinate will get the 'click' color.</para>
-        /// <para>Example: 'A4' colors the 4th circle on the upper row.</para>
-        /// <para>Example 2: '4' also colors the 4th circle on the upper row</para>
-        /// <para>Use ';' to highlight more coordinates. Works with numbers and coordinates</para>
-        /// <para>Example: 'A1;B3;B5;20' wil highlight all these coordinates</para>
+        /// <para>Use '<b>;</b>' to highlight more coordinates. Works with numbers and coordinates</para>
+        /// <para><b>Example:</b> 'A4' colors the 4th circle on the upper row.</para>
+        /// <para><b>Example 2:</b> '4' also colors the 4th circle on the upper row</para>
+        /// <para><b>Example:</b> 'A1;B3;B5;20' wil highlight all these coordinates</para>
         /// </summary>
         /// <param name="coordinate"></param>
         /// <returns>True or false</returns>

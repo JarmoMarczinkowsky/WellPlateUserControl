@@ -110,7 +110,9 @@
             </Button>-->
         </Grid>
 
-        <Grid PreviewMouseDown="ClickForColor" x:Name="gGenerateWellPlate"
+        <Grid PreviewMouseDown="ClickForColor" 
+              x:Name="gGenerateWellPlate"
+               
               HorizontalAlignment="Left"
               VerticalAlignment="Bottom"
               Width="590"

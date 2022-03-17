@@ -32,10 +32,5 @@ namespace WellPlateUserControl
         }
 
 
-
-        //public bool ColorCoordinate(int coordinate)
-        //{
-        //    return _wellPlate.ColorCoordinate(coordinate);
-        //}
     }
 }
