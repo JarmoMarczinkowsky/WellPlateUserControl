@@ -16,6 +16,8 @@ namespace WellPlateUserControl
 
         bool ColorCoordinate(string colorToCoordinate);
 
+        bool SetCircleSize(float circleSizeMultiplier);
+
         //bool ColorCoordinate(int coordinate);
 
     }

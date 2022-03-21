@@ -21,15 +21,8 @@ namespace WellPlateUserControl
     /// </summary>
     public partial class WellPlateControl : UserControl
     {
-
-        //private string _gridColor;
-
-        //private string _clickColor;
-        //private string _cboxWellPlateSize;
-        //private string _wellPlateSize;
         private string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private string _createEllipseName;
-        //private string _colorCoordinate;
         
         private int _widthWellPlate;
         private int _heightWellPlate;
@@ -38,6 +31,8 @@ namespace WellPlateUserControl
         private int _distanceFromWall = 5;
         private int _loopCounter;
 
+        private float _circleSizeMultiplier = 1;
+        
         public bool _setTheGridColor;
         public bool _setTheClickColor;
 
@@ -102,8 +97,8 @@ namespace WellPlateUserControl
                         {
                             VerticalAlignment = VerticalAlignment.Bottom,
                             HorizontalAlignment = HorizontalAlignment.Left,
-                            Width = _shapeSize,
-                            Height = _shapeSize,
+                            Width = _shapeSize * _circleSizeMultiplier,
+                            Height = _shapeSize * _circleSizeMultiplier,
                             Name = $"{_alphabet[height]}{width + 1}_{1 + height + _heightWellPlate * width}", //$"{_alphabet[height]}{width + 1}_{_loopCounter + 1}"
                         };
 
@@ -119,10 +114,10 @@ namespace WellPlateUserControl
 
                         //takes care of the position of the ellipse
                         ellipse.Margin = new Thickness(
-                            _distanceFromWall + width * _shapeSize * _shapeDistance, //left
+                            (_distanceFromWall + width * _shapeSize * _shapeDistance) * _circleSizeMultiplier, //left
                             0,  //up
                             0, //right
-                            _distanceFromWall + _heightWellPlate * _shapeSize - (_distanceFromWall + height * _shapeSize)); //down
+                            (_distanceFromWall + _heightWellPlate * _shapeSize - (_distanceFromWall + height * _shapeSize)) * _circleSizeMultiplier); //down
 
                         gGenerateWellPlate.Children.Add(ellipse);
                     }
@@ -316,6 +311,28 @@ namespace WellPlateUserControl
                 }
             }
             
+        }
+
+        /// <summary>
+        /// <para>Set this before the wellplatesize</para>
+        /// <para>Sets the size of the circles. It works as a multiplier</para>
+        /// <example>So '2' is 2 times as big as the circles are normally and '0.5' is half so big as it is normally</example>
+        /// </summary>
+        /// <param name="circleSizeMultiplier"></param>
+        public bool SetCircleSize(float circleSizeMultiplier)
+        {
+            try
+            {
+                _circleSizeMultiplier = circleSizeMultiplier;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                //ex.Message("Test");
+                return false;
+            }
+
+
         }
     }
 }

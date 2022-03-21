@@ -31,6 +31,11 @@ namespace WellPlateUserControl
             return _wellPlate.ColorCoordinate(colorToCoordinate);
         }
 
+        public bool SetCircleSize(float circleSizeMultiplier)
+        {
+            return _wellPlate.SetCircleSize(circleSizeMultiplier);
+        }
+
 
     }
 }

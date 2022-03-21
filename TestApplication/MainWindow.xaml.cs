@@ -29,9 +29,9 @@ namespace TestApplication
 
             globalWellPlate.SetGridColor(Colors.Black); //https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.colors?view=windowsdesktop-6.0
             globalWellPlate.SetClickColor(Colors.Red);
+            //globalWellPlate.SetCircleSize(0.5f);
             globalWellPlate.SetWellPlateSize(8, 6); //width, height
             globalWellPlate.ColorCoordinate("1;B2;3;C4;D5"); //multiple coordinates get split with a ';'
-
 
         }
 
