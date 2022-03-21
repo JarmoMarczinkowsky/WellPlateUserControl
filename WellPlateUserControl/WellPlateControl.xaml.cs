@@ -402,6 +402,12 @@ namespace WellPlateUserControl
             }
         }
 
+        /// <summary>
+        /// <para>Input a number and get the coordinate it belongs to</para>
+        /// <example>Example: '4' in a 8x6 returns D1</example>
+        /// </summary>
+        /// <param name="coordinate">Integer that gets used to convert to the correct coordinate</param>
+        /// <returns>String with the coordinate the number is linked to. If it doesn't find anything, it will return "nothing found"</returns>
         public string CoordinateConverter(int coordinate)
         {
             foreach (string loopedCoordinate in _coordinates)
@@ -414,6 +420,12 @@ namespace WellPlateUserControl
             return "nothing found";
         }
 
+        /// <summary>
+        /// <para>Input a coordinate and get the number it belongs to</para>
+        /// <example>Example: 'D1' in a 8x6 grid returns 4</example>
+        /// </summary>
+        /// <param name="coordinate">String that gets used to convert to the correct number</param>
+        /// <returns>Integer with the number the coordinate is linked to. If it doesn't find anything, it will return '-1'</returns>
         public int CoordinateConverter(string coordinate)
         {
             foreach (string loopedCoordinate in _coordinates)
@@ -426,12 +438,20 @@ namespace WellPlateUserControl
             return -1;
         }
 
+        /// <summary>
+        /// Gives a list of every colored well
+        /// </summary>
+        /// <returns>A list of every colored well</returns>
         public List<string> GiveColoredList()
         {
             Debug.WriteLine(_coloredCoordinates.Count);
             return _coloredCoordinates;
         }
 
+        /// <summary>
+        /// Gives a list of every not-colored well
+        /// </summary>
+        /// <returns>A list of every not-colored well</returns>
         public List<string> GiveNotColoredList()
         {
             Debug.WriteLine(_notColoredCoordinates.Count);

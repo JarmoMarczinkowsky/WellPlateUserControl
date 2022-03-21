@@ -34,7 +34,7 @@ namespace TestApplication
             globalWellPlate.SetCircleSize(2F);
             globalWellPlate.SetWellPlateSize(8, 6); //width, height
             globalWellPlate.ColorCoordinate("A2;5"); //multiple coordinates get split with a ';'
-            Debug.WriteLine(globalWellPlate.CoordinateConverter("A5"));
+            Debug.WriteLine(globalWellPlate.CoordinateConverter(4));
 
         }
 
