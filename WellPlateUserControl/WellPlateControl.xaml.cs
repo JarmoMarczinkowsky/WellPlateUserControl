@@ -46,6 +46,7 @@ namespace WellPlateUserControl
         //private Color _defaultStrokeColor;
 
         private List<string> _coordinatesForColor;
+        private List<string> _coordinates = new List<string>();
         
 
         public WellPlateControl()
@@ -70,12 +71,13 @@ namespace WellPlateUserControl
         /// <returns>True if method succeeds and an out of range error if a values are higher than 26 or smaller than 1</returns>
         public bool SetWellPlateSize(int inputWidth, int inputHeight)
         {
-            
             if (inputWidth > 0 && inputWidth < _alphabet.Length && inputHeight > 0 && inputHeight < _alphabet.Length)
             {
                 _heightWellPlate = inputHeight;
                 _widthWellPlate = inputWidth;
-                
+
+                _coordinates.Clear();
+
                 //sets the values of the shapes
                 //_shapeSize = 15;
                 //_shapeDistance = 1;
@@ -106,7 +108,7 @@ namespace WellPlateUserControl
                             Name = $"{_alphabet[height]}{width + 1}_{1 + height + _heightWellPlate * width}", //$"{_alphabet[height]}{width + 1}_{_loopCounter + 1}"
                             //Stroke = new SolidColorBrush(_strokeColor),
                         };
-
+                        _coordinates.Add(ellipse.Name);
                         //makes it  the color from the combobox
                         if (_setTheGridColor)
                         {
@@ -131,6 +133,8 @@ namespace WellPlateUserControl
                             0, //right
                             (_distanceFromWall + _heightWellPlate * _shapeSize - (_distanceFromWall + height * _shapeSize)) * _circleSizeMultiplier); //down
 
+                        _coordinates.Add(ellipse.Name);
+                        
                         gGenerateWellPlate.Children.Add(ellipse);
                     }
                 }
@@ -366,6 +370,30 @@ namespace WellPlateUserControl
             {
                 return false;
             }
+        }
+
+        public string CoordinateConverter(int coordinate)
+        {
+            foreach (string loopedCoordinate in _coordinates)
+            {
+                if (loopedCoordinate.Split("_")[1].Trim() == coordinate.ToString())
+                {
+                    return $"{loopedCoordinate.Split("_")[0]}";
+                }
+            }
+            return "nothing found";
+        }
+
+        public int CoordinateConverter(string coordinate)
+        {
+            foreach (string loopedCoordinate in _coordinates)
+            {
+                if (loopedCoordinate.Split("_")[0] == coordinate.ToUpper())
+                {
+                    return Convert.ToInt32(loopedCoordinate.Split("_")[1].Trim());
+                }
+            }
+            return -1;
         }
     }
 }

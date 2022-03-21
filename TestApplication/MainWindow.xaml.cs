@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,7 +34,7 @@ namespace TestApplication
             globalWellPlate.SetCircleSize(2F);
             globalWellPlate.SetWellPlateSize(8, 6); //width, height
             globalWellPlate.ColorCoordinate("1;B2;3;C4;D5"); //multiple coordinates get split with a ';'
-
+            Debug.WriteLine(globalWellPlate.CoordinateConverter("A5"));
         }
 
         private void ConnTest(object sender, RoutedEventArgs e)

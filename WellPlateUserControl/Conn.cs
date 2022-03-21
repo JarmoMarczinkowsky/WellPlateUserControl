@@ -41,5 +41,15 @@ namespace WellPlateUserControl
             return _wellPlate.SetStrokeColor(strokeColor);
         }
 
+        public string CoordinateConverter(int coordinate)
+        {
+            return _wellPlate.CoordinateConverter(coordinate);
+        }
+
+        public int CoordinateConverter(string coordinate)
+        {
+            return _wellPlate.CoordinateConverter(coordinate);
+        }
+
     }
 }

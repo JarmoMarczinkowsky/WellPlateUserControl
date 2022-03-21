@@ -20,6 +20,10 @@ namespace WellPlateUserControl
 
         bool SetStrokeColor(Color strokeColor);
 
+        string CoordinateConverter(int coordinate);
+
+        int CoordinateConverter(string coordinate);
+
         //bool ColorCoordinate(int coordinate);
 
     }
