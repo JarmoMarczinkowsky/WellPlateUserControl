@@ -27,15 +27,15 @@ namespace WellPlateUserControl
         //private string _clickColor;
         //private string _cboxWellPlateSize;
         //private string _wellPlateSize;
-        private string _alphabet;
+        private string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private string _createEllipseName;
         //private string _colorCoordinate;
         
         private int _widthWellPlate;
         private int _heightWellPlate;
-        private int _shapeSize;
-        private int _shapeDistance;
-        private int _distanceFromWall;
+        private int _shapeSize = 15;
+        private int _shapeDistance = 1;
+        private int _distanceFromWall = 5;
         private int _loopCounter;
 
         public bool _setTheGridColor;
@@ -61,35 +61,29 @@ namespace WellPlateUserControl
             rectPlaceHolder.Visibility = Visibility.Hidden;
         }
 
-        //private void GenerateWellPlate(object sender, RoutedEventArgs e)
-        //{
-
-
-        //}
-
         /// <summary>
         /// <para>Use this method <b>after</b> you've stated the colors</para>
         /// <para>Takes care of the wellplate size</para>
         /// <example>Use: '8,6' will create a grid that is 8 wide and 6 high</example>
         /// </summary>
-        /// <param name="inputLength"></param>
-        /// <param name="inputWidth"></param>
+        /// <param name="inputWidth">The width that the grid is going to be</param>
+        /// <param name="inputHeight">The height that the grid is going to be</param>
         /// <returns>True if method succeeds and an out of range error if a values are higher than 26 or smaller than 1</returns>
-        public bool SetWellPlateSize(int inputLength, int inputWidth)
+        public bool SetWellPlateSize(int inputWidth, int inputHeight)
         {
             
-            if (inputLength > 0 && inputLength < 27 && inputWidth > 0 && inputWidth < 27)
+            if (inputWidth > 0 && inputWidth < _alphabet.Length && inputHeight > 0 && inputHeight < _alphabet.Length)
             {
-                _heightWellPlate = inputWidth;
-                _widthWellPlate = inputLength;
+                _heightWellPlate = inputHeight;
+                _widthWellPlate = inputWidth;
                 
                 //sets the values of the shapes
-                _shapeSize = 15;
-                _shapeDistance = 1;
-                _distanceFromWall = 5;
+                //_shapeSize = 15;
+                //_shapeDistance = 1;
+                //_distanceFromWall = 5;
 
                 //preparation for the coordinate system
-                _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                //_alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 _loopCounter = -1;
 
                 //gButtonControl.Children.Remove(lblTestLabel);
@@ -104,11 +98,14 @@ namespace WellPlateUserControl
                         _loopCounter++;
 
                         //creates ellipse
-                        Ellipse ellipse = new Ellipse();
-
-                        //takes care of the alignment
-                        ellipse.VerticalAlignment = VerticalAlignment.Bottom;
-                        ellipse.HorizontalAlignment = HorizontalAlignment.Left;
+                        Ellipse ellipse = new Ellipse()
+                        {
+                            VerticalAlignment = VerticalAlignment.Bottom,
+                            HorizontalAlignment = HorizontalAlignment.Left,
+                            Width = _shapeSize,
+                            Height = _shapeSize,
+                            Name = $"{_alphabet[height]}{width + 1}_{1 + height + _heightWellPlate * width}", //$"{_alphabet[height]}{width + 1}_{_loopCounter + 1}"
+                        };
 
                         //makes it  the color from the combobox
                         if (_setTheGridColor)
@@ -120,13 +117,6 @@ namespace WellPlateUserControl
                             ellipse.Fill = new SolidColorBrush(_defaultGridColor);
                         }
 
-                        //makes the ellipse a certain size
-                        ellipse.Width = _shapeSize;
-                        ellipse.Height = _shapeSize;
-
-                        //gives the ellipse a name. It starts with the coordinates followed by a underscore with the number of the ellipse
-                        ellipse.Name = $"{_alphabet[height]}{width + 1}_{_loopCounter + 1}"; //example 'a5_5'                    
-
                         //takes care of the position of the ellipse
                         ellipse.Margin = new Thickness(
                             _distanceFromWall + width * _shapeSize * _shapeDistance, //left
@@ -137,13 +127,13 @@ namespace WellPlateUserControl
                         gGenerateWellPlate.Children.Add(ellipse);
                     }
                 }
-                Debug.WriteLine("SetWellPlateSize doorgelopen");
+                
                 return true;
             }
             else
             {
-                Debug.WriteLine("False");
-                throw new ArgumentOutOfRangeException($"Number can't be bigger than 26 or smaller than 1: length = {inputLength}, width = {inputWidth}");
+                
+                throw new ArgumentOutOfRangeException($"Number can't be bigger than 26 or smaller than 1: length = {inputWidth}, width = {inputHeight}");
             }
         }
 
@@ -151,21 +141,21 @@ namespace WellPlateUserControl
         /// <para>Converts the inputted gridcolor to a readable format for the code.</para>
         /// <example>Use: 'Colors.[wishedColor]' without square brackets</example>
         /// </summary>
-        /// <param name="clickColor"></param>
+        /// <param name="gridColor">the color of the grid</param>
         /// <returns>True if the color succeeds to be puth inside the variable and an error if it fails to be put inside the variable</returns>
         public bool SetGridColor(Color gridColor)
         {
-            Debug.WriteLine("SetGridColor doorgelopen");
+            
             try
             {
                 _colorConverter = gridColor; //(Color)ColorConverter.ConvertFromString
                 _setTheGridColor = true;
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
-                
-                throw new FormatException($"Can't convert color, are you sure you're using a valid color?{Environment.NewLine}https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.colors?view=windowsdesktop-6.0");
+                //ex.Message($"Can't convert color, are you sure you're using a valid color?");
+                return false;
             }
         }
 
@@ -173,21 +163,23 @@ namespace WellPlateUserControl
         /// <para>Converts the inputted clickcolor to a readable format for the code.</para>
         /// <example>Use: 'Colors.[wishedColor]' without square brackets</example>
         /// </summary>
-        /// <param name="clickColor"></param>
+        /// <param name="clickColor">the color of the wells that you see when you click on them. Is also used for the coordinate system colors</param>
         /// <returns>True if the color succeeds to be puth inside the variable and an error if it fails to be put inside the variable</returns>
         public bool SetClickColor(Color clickColor)
         {
             
-            Debug.WriteLine("clickColor doorgelopen");
+            
             try
             {
                 _clickColorConverter = clickColor;
                 _setTheClickColor = true;
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
-                throw new FormatException($"Can't convert color, are you sure you're using a valid color?{Environment.NewLine}https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.colors?view=windowsdesktop-6.0");
+                //ex.Message($"Can't convert color, are you sure you're using a valid color ?").ToString();
+                return false;
+
             }
             
         }
@@ -199,14 +191,14 @@ namespace WellPlateUserControl
         /// <para><b>Example 2:</b> '4' also colors the 4th circle on the upper row</para>
         /// <para><b>Example:</b> 'A1;B3;B5;20' wil highlight all these coordinates</para>
         /// </summary>
-        /// <param name="coordinate"></param>
-        /// <returns>True or false</returns>
+        /// <param name="coordinate">the coordinate that is about to get colored. Put an ';' in it if you need to color more coordinates</param>
+        /// <returns>True if everything succeeds or false if the code fails</returns>
         public bool ColorCoordinate(string coordinate)
         {
             string formattedCoordinate;
             _coordinatesForColor = coordinate.Split(";".Trim()).ToList();
 
-            Debug.WriteLine(_clickColorConverter);
+            //Debug.WriteLine(_clickColorConverter);
 
             try
             {
@@ -260,9 +252,11 @@ namespace WellPlateUserControl
                 }
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Exception($"Something went wrong with the coordinates. Are you sure you are using coordinates or numbers?{Environment.NewLine}Examples: A5 to color coordinate A5.{Environment.NewLine}5 to color ellipse number 5.{Environment.NewLine}Use ';' to color multiple wells. Example: A5;B5;13 ");
+                //ex.Message("Something went wrong with the coordinates. Are you sure you are using coordinates or numbers?{Environment.NewLine}Examples: A5 to color coordinate A5.{Environment.NewLine}5 to color ellipse number 5.{Environment.NewLine}Use ';' to color multiple wells. Example: A5;B5;13 ");
+                return false;
+            
             }
         }
 
