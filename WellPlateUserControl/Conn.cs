@@ -36,6 +36,10 @@ namespace WellPlateUserControl
             return _wellPlate.SetCircleSize(circleSizeMultiplier);
         }
 
+        public bool SetStrokeColor(Color strokeColor)
+        {
+            return _wellPlate.SetStrokeColor(strokeColor);
+        }
 
     }
 }

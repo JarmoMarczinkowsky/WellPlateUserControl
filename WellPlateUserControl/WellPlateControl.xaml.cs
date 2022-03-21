@@ -33,13 +33,17 @@ namespace WellPlateUserControl
 
         private float _circleSizeMultiplier = 1;
         
-        public bool _setTheGridColor;
-        public bool _setTheClickColor;
+        private bool _setTheGridColor;
+        private bool _setTheClickColor;
+        private bool _setStrokeColor;
+        
 
         private Color _colorConverter;
         private Color _clickColorConverter;
+        private Color _strokeColor;
         private Color _defaultGridColor;
         private Color _defaultClickColor;
+        //private Color _defaultStrokeColor;
 
         private List<string> _coordinatesForColor;
         
@@ -100,6 +104,7 @@ namespace WellPlateUserControl
                             Width = _shapeSize * _circleSizeMultiplier,
                             Height = _shapeSize * _circleSizeMultiplier,
                             Name = $"{_alphabet[height]}{width + 1}_{1 + height + _heightWellPlate * width}", //$"{_alphabet[height]}{width + 1}_{_loopCounter + 1}"
+                            //Stroke = new SolidColorBrush(_strokeColor),
                         };
 
                         //makes it  the color from the combobox
@@ -111,6 +116,13 @@ namespace WellPlateUserControl
                         {
                             ellipse.Fill = new SolidColorBrush(_defaultGridColor);
                         }
+
+                        if (_setStrokeColor)
+                        {
+                            ellipse.Stroke = new SolidColorBrush(_strokeColor);
+                            ellipse.StrokeThickness = ellipse.Width * 0.08; //0.08 is around 16% of circle 
+                        }
+                        
 
                         //takes care of the position of the ellipse
                         ellipse.Margin = new Thickness(
@@ -333,6 +345,27 @@ namespace WellPlateUserControl
             }
 
 
+        }
+
+        /// <summary>
+        /// <para>Set <b>before</b> the wellplatesize</para>
+        /// <para>Used to give an outline color to the circles in the wellplate</para>
+        /// <example>Use: Colors.[wishedColor] without brackets</example>
+        /// </summary>
+        /// <param name="strokeColor"></param>
+        /// <returns>True if succeeds or false if it doesn't succeed</returns>
+        public bool SetStrokeColor(Color strokeColor)
+        {
+            try
+            {
+                _strokeColor = strokeColor;
+                _setStrokeColor = true;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }
