@@ -24,6 +24,10 @@ namespace WellPlateUserControl
 
         int CoordinateConverter(string coordinate);
 
+        List<string> GiveColoredList();
+
+        List<string> GiveNotColoredList();
+
         //bool ColorCoordinate(int coordinate);
 
     }

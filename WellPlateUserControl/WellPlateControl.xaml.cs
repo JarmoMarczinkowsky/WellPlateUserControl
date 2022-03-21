@@ -30,6 +30,8 @@ namespace WellPlateUserControl
         private int _shapeDistance = 1;
         private int _distanceFromWall = 5;
         private int _loopCounter;
+        private int _amountColored;
+        private int _amountNotColored;
 
         private float _circleSizeMultiplier = 1;
         
@@ -47,6 +49,8 @@ namespace WellPlateUserControl
 
         private List<string> _coordinatesForColor;
         private List<string> _coordinates = new List<string>();
+        private List<string> _coloredCoordinates = new List<string>();
+        private List<string> _notColoredCoordinates = new List<string>();
         
 
         public WellPlateControl()
@@ -59,6 +63,8 @@ namespace WellPlateUserControl
             _setTheClickColor = false;
 
             rectPlaceHolder.Visibility = Visibility.Hidden;
+
+            
         }
 
         /// <summary>
@@ -134,7 +140,9 @@ namespace WellPlateUserControl
                             (_distanceFromWall + _heightWellPlate * _shapeSize - (_distanceFromWall + height * _shapeSize)) * _circleSizeMultiplier); //down
 
                         _coordinates.Add(ellipse.Name);
-                        
+                        _notColoredCoordinates.Add(ellipse.Name);
+
+
                         gGenerateWellPlate.Children.Add(ellipse);
                     }
                 }
@@ -237,6 +245,8 @@ namespace WellPlateUserControl
                                     {
                                         ellipse.Fill = new SolidColorBrush(_defaultClickColor);
                                     }
+                                    _notColoredCoordinates.Remove(ellipse.Name);
+                                    _coloredCoordinates.Add(ellipse.Name);
                                     
                                 }
                             }
@@ -256,6 +266,8 @@ namespace WellPlateUserControl
                                     {
                                         ellipse.Fill = new SolidColorBrush(_defaultClickColor);
                                     }
+                                    _notColoredCoordinates.Remove(ellipse.Name);
+                                    _coloredCoordinates.Add(ellipse.Name);
                                 }
                             }
                         }
@@ -297,12 +309,17 @@ namespace WellPlateUserControl
                             if (brush.Color == _colorConverter) //_colorConverter
                             {
                                 ellipse.Fill = new SolidColorBrush(_clickColorConverter); //_clickColorConverter
+                                _coloredCoordinates.Add(ellipse.Name);
+                                _notColoredCoordinates.Remove(ellipse.Name);
                                 Debug.WriteLine($"{ellipse.Name}: turned on");
                             }
                             //if an ellipse is the clicked color, convert it to the first color if you click it
                             else
                             {
                                 ellipse.Fill = new SolidColorBrush(_colorConverter); //_colorConverter
+                                _coloredCoordinates.Remove(ellipse.Name);
+                                _notColoredCoordinates.Add(ellipse.Name);
+
                                 Debug.WriteLine($"{ellipse.Name}: turned off");
                             }
                         }
@@ -312,12 +329,18 @@ namespace WellPlateUserControl
                             if (brush.Color == _defaultGridColor) //_colorConverter
                             {
                                 ellipse.Fill = new SolidColorBrush(_defaultClickColor); //_clickColorConverter
+                                _coloredCoordinates.Add(ellipse.Name);
+                                _notColoredCoordinates.Remove(ellipse.Name);
+                                
                                 Debug.WriteLine($"{ellipse.Name}: turned on");
                             }
                             //if an ellipse is the clicked color, convert it to the first color if you click it
                             else
                             {
                                 ellipse.Fill = new SolidColorBrush(_defaultGridColor); //_colorConverter
+                                _coloredCoordinates.Remove(ellipse.Name);
+                                _notColoredCoordinates.Add(ellipse.Name);
+
                                 Debug.WriteLine($"{ellipse.Name}: turned off");
                             }
                         }
@@ -325,8 +348,15 @@ namespace WellPlateUserControl
                     }
 
                 }
+                
             }
-            
+            Debug.WriteLine("--------------------------------");
+            foreach (string testColor in _coloredCoordinates)
+            {
+                Debug.WriteLine(testColor);
+            }
+            Debug.WriteLine("--------------------------------");
+
         }
 
         /// <summary>
@@ -394,6 +424,18 @@ namespace WellPlateUserControl
                 }
             }
             return -1;
+        }
+
+        public List<string> GiveColoredList()
+        {
+            Debug.WriteLine(_coloredCoordinates.Count);
+            return _coloredCoordinates;
+        }
+
+        public List<string> GiveNotColoredList()
+        {
+            Debug.WriteLine(_notColoredCoordinates.Count);
+            return _notColoredCoordinates;
         }
     }
 }

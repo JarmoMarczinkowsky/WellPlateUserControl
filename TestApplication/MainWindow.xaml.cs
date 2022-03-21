@@ -28,13 +28,14 @@ namespace TestApplication
         {
             InitializeComponent();
 
-            globalWellPlate.SetGridColor(Colors.Black); //https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.colors?view=windowsdesktop-6.0
+            globalWellPlate.SetGridColor(Colors.Black); 
             globalWellPlate.SetClickColor(Colors.Red);
             //globalWellPlate.SetStrokeColor(Colors.Blue);
             globalWellPlate.SetCircleSize(2F);
             globalWellPlate.SetWellPlateSize(8, 6); //width, height
-            globalWellPlate.ColorCoordinate("1;B2;3;C4;D5"); //multiple coordinates get split with a ';'
+            globalWellPlate.ColorCoordinate("A2;5"); //multiple coordinates get split with a ';'
             Debug.WriteLine(globalWellPlate.CoordinateConverter("A5"));
+
         }
 
         private void ConnTest(object sender, RoutedEventArgs e)

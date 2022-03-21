@@ -51,5 +51,14 @@ namespace WellPlateUserControl
             return _wellPlate.CoordinateConverter(coordinate);
         }
 
+        public List<string> GiveColoredList()
+        {
+            return _wellPlate.GiveColoredList();
+        }
+
+        public List<string> GiveNotColoredList()
+        {
+            return _wellPlate.GiveNotColoredList();
+        }
     }
 }
