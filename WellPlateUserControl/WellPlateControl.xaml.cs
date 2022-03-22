@@ -34,7 +34,7 @@ namespace WellPlateUserControl
         private int _amountColored;
         private int _amountNotColored;
 
-        private float _circleSizeMultiplier = 1;
+        private double _circleSizeMultiplier = 1;
         private float _shapeDistance = 1;
 
         private bool _setTheGridColor;
@@ -298,6 +298,55 @@ namespace WellPlateUserControl
             
             }
         }
+        /// <summary>
+        /// <para>Set <b>after</b> the WellPlateSize</para>
+        /// <para>This function is being used to color a well based on the corresponding coordinate and color.</para>
+        /// <example>Example: '"A5",Colors.Aqua' will color coordinate A5 with the color 'Aqua'</example>
+        /// </summary>
+        /// <param name="coordinate"></param>
+        /// <param name="chosenColor"></param>
+        /// <returns>True if it succeeds and false if it doesn't succeed in coloring the correct coordinate</returns>
+        public bool ColorCoordinate(string coordinate, Color chosenColor)
+        {
+            try
+            {
+                foreach (object child in gGenerateWellPlate.Children)
+                {
+                    Rectangle ellipse = child as Rectangle;
+                    if (ellipse.Name.Split("_")[0] == coordinate.ToUpper().Trim())
+                    {
+                        ellipse.Fill = new SolidColorBrush(chosenColor);
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex + $"{Environment.NewLine}");
+                return false;
+            }
+        }
+
+        public bool ColorCoordinate(int coordinate, Color chosenColor)
+        {
+            try
+            {
+                foreach (object child in gGenerateWellPlate.Children)
+                {
+                    Rectangle ellipse = child as Rectangle;
+                    if (ellipse.Name.Split("_")[1] == coordinate.ToString())
+                    {
+                        ellipse.Fill = new SolidColorBrush(chosenColor);
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex + $"{Environment.NewLine}");
+                return false;
+            }
+        }
 
 
         /// <summary>
@@ -382,7 +431,7 @@ namespace WellPlateUserControl
         /// <example>So '2' is 2 times as big as the circles are normally and '0.5' is half so big as it is normally</example>
         /// </summary>
         /// <param name="circleSizeMultiplier"></param>
-        public bool SetCircleSize(float circleSizeMultiplier)
+        public bool SetCircleSize(double circleSizeMultiplier)
         {
             try
             {

@@ -16,7 +16,11 @@ namespace WellPlateUserControl
 
         bool ColorCoordinate(string colorToCoordinate);
 
-        bool SetCircleSize(float circleSizeMultiplier);
+        public bool ColorCoordinate(string coordinate, Color chosenColor);
+
+        public bool ColorCoordinate(int coordinate, Color chosenColor);
+
+        bool SetCircleSize(double circleSizeMultiplier);
 
         bool SetStrokeColor(Color strokeColor);
 
