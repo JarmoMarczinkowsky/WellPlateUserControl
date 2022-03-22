@@ -487,6 +487,7 @@ namespace WellPlateUserControl
 
         /// <summary>
         /// <para>Set <b>before</b> the wellplatesize</para>
+        /// <para>Makes all the wells rectangles instead of ellipses</para>
         /// </summary>
         /// <returns>True</returns>
         public bool IsRectangle()
