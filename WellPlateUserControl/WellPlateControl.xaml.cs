@@ -303,8 +303,8 @@ namespace WellPlateUserControl
         /// <para>This function is being used to color a well based on the corresponding coordinate and color.</para>
         /// <example>Example: '"A5",Colors.Aqua' will color coordinate A5 with the color 'Aqua'</example>
         /// </summary>
-        /// <param name="coordinate"></param>
-        /// <param name="chosenColor"></param>
+        /// <param name="coordinate">The coordinate that needs to be colored. For example: "A5" or "D4" </param>
+        /// <param name="chosenColor">The color that the coordinate needs to be colored. For example Colors.Aqua to make the color Aqua</param>
         /// <returns>True if it succeeds and false if it doesn't succeed in coloring the correct coordinate</returns>
         public bool ColorCoordinate(string coordinate, Color chosenColor)
         {
@@ -327,6 +327,14 @@ namespace WellPlateUserControl
             }
         }
 
+        /// <summary>
+        /// <para>Set <b>after</b> the WellPlateSize</para>
+        /// <para>This function is being used to color a well based on the corresponding coordinate and color.</para>
+        /// <example>Example: '"A5",Colors.Aqua' will color coordinate A5 with the color 'Aqua'</example>
+        /// </summary>
+        /// <param name="coordinate">The number that needs to be colored. For example: 3 or 52 </param>
+        /// <param name="chosenColor">The color that the coordinate needs to be colored. For example Colors.Aqua to make the color Aqua</param>
+        /// <returns>True if it succeeds and false if it doesn't succeed in coloring the correct coordinate</returns>
         public bool ColorCoordinate(int coordinate, Color chosenColor)
         {
             try
