@@ -19,7 +19,7 @@ Set the stroke of the wells in the wellplate.
 Set this function before the WellPlateSize.
 [Optional]
 
-<b>SetCircleSize(1F)</b>
+<b>SetCircleSize(1)</b>
 Set the size of the wells in your usercontrol. It works as a multiplier, so '2F' is 2 times as big as it is normally.
 '0.5F' is half so big as it is normally.
 It works with a float, so put a 'F' after your desired multipliersize.
