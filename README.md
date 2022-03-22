@@ -1,8 +1,8 @@
 # WellPlateUserControl
 
-A usercontrol that creates a grid for the wellplate.
+<h3>A usercontrol that creates a grid for the wellplate.</h3>
 
-Functions:
+<b>Functions:</b>
 
 <b>SetGridColor(Colors.[wishedColor])</b> 
 Gives the grid the color that you wish it to be. Default is black.
