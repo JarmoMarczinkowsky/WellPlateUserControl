@@ -190,6 +190,7 @@ namespace WellPlateUserControl
             catch (Exception ex)
             {
                 //ex.Message($"Can't convert color, are you sure you're using a valid color?");
+                MessageBox.Show(ex + Environment.NewLine + "Can't convert color, are you sure you're using a valid color?");
                 return false;
             }
         }
@@ -210,7 +211,7 @@ namespace WellPlateUserControl
             }
             catch (Exception ex)
             {
-                //ex.Message($"Can't convert color, are you sure you're using a valid color ?").ToString();
+                MessageBox.Show(ex + $"{Environment.NewLine}Can't convert color, are you sure you're using a valid color ?");
                 return false;
 
             }
@@ -291,8 +292,9 @@ namespace WellPlateUserControl
             }
             catch (Exception ex)
             {
-                //ex.Message("Something went wrong with the coordinates. Are you sure you are using coordinates or numbers?{Environment.NewLine}Examples: A5 to color coordinate A5.{Environment.NewLine}5 to color ellipse number 5.{Environment.NewLine}Use ';' to color multiple wells. Example: A5;B5;13 ");
+                MessageBox.Show(ex + $"{Environment.NewLine}Something went wrong with the coordinates. Are you sure you are using coordinates or numbers?");
                 return false;
+                
             
             }
         }
@@ -389,7 +391,7 @@ namespace WellPlateUserControl
             }
             catch (Exception ex)
             {
-                //ex.Message("Test");
+                MessageBox.Show(ex + $"{Environment.NewLine}Could not convert the value for circlesize. Are you sure you are using a float?");
                 return false;
             }
 
@@ -413,6 +415,7 @@ namespace WellPlateUserControl
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex + $"{Environment.NewLine}Could not convert color. Are you sure you are using a valid color?");
                 return false;
             }
         }
