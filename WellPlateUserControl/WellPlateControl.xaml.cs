@@ -23,22 +23,25 @@ namespace WellPlateUserControl
     {
         private string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private string _createEllipseName;
+        private string _lastClickedCoordinate;
         
         private int _widthWellPlate;
         private int _heightWellPlate;
         private int _shapeSize = 15;
-        private int _shapeDistance = 1;
+        
         private int _distanceFromWall = 5;
         private int _loopCounter;
         private int _amountColored;
         private int _amountNotColored;
 
         private float _circleSizeMultiplier = 1;
-        
+        private float _shapeDistance = 1;
+
         private bool _setTheGridColor;
         private bool _setTheClickColor;
         private bool _setStrokeColor;
-        
+        private bool _setRectangle;
+        private bool _getLastCoordinateActive;
 
         private Color _colorConverter;
         private Color _clickColorConverter;
@@ -105,7 +108,7 @@ namespace WellPlateUserControl
                         _loopCounter++;
 
                         //creates ellipse
-                        Ellipse ellipse = new Ellipse()
+                        Rectangle ellipse = new Rectangle()
                         {
                             VerticalAlignment = VerticalAlignment.Bottom,
                             HorizontalAlignment = HorizontalAlignment.Left,
@@ -130,14 +133,27 @@ namespace WellPlateUserControl
                             ellipse.Stroke = new SolidColorBrush(_strokeColor);
                             ellipse.StrokeThickness = ellipse.Width * 0.08; //0.08 is around 16% of circle 
                         }
-                        
+
+                        //checks if the user wants a rectangle. Otherwise it will round the rectangles so it looks like circles.
+                        if (_setRectangle)
+                        {
+                            ellipse.RadiusX = 0;
+                            ellipse.RadiusY = 0;
+                            _shapeDistance = 1.05F;
+                        }
+                        else
+                        {
+                            ellipse.RadiusX = 150;
+                            ellipse.RadiusY = 150;
+                        }
+
 
                         //takes care of the position of the ellipse
                         ellipse.Margin = new Thickness(
                             (_distanceFromWall + width * _shapeSize * _shapeDistance) * _circleSizeMultiplier, //left
                             0,  //up
                             0, //right
-                            (_distanceFromWall + _heightWellPlate * _shapeSize - (_distanceFromWall + height * _shapeSize)) * _circleSizeMultiplier); //down
+                            (_distanceFromWall + _heightWellPlate * _shapeSize - (_distanceFromWall + height * _shapeSize)) * _circleSizeMultiplier * _shapeDistance); //down
 
                         _coordinates.Add(ellipse.Name);
                         _notColoredCoordinates.Add(ellipse.Name);
@@ -186,8 +202,6 @@ namespace WellPlateUserControl
         /// <returns>True if the color succeeds to be puth inside the variable and an error if it fails to be put inside the variable</returns>
         public bool SetClickColor(Color clickColor)
         {
-            
-            
             try
             {
                 _clickColorConverter = clickColor;
@@ -228,7 +242,7 @@ namespace WellPlateUserControl
                     {
                         foreach (object child in gGenerateWellPlate.Children)
                         {
-                            Ellipse ellipse = child as Ellipse;
+                            Rectangle ellipse = child as Rectangle;
 
                             formattedCoordinate = newCoordinate.Trim();
 
@@ -296,13 +310,14 @@ namespace WellPlateUserControl
             //loops through each of the ellipses
             foreach (object child in gGenerateWellPlate.Children)
             {
-                Ellipse ellipse = child as Ellipse;
+                Rectangle ellipse = child as Rectangle;
 
-                if (((Ellipse)child).IsMouseOver)
+                if (((Rectangle)child).IsMouseOver)
                 {
                     SolidColorBrush brush = ellipse.Fill as SolidColorBrush;
                     if (brush != null)
                     {
+                        _lastClickedCoordinate = $"{ellipse.Name.Split("_")[0]}";
                         if (_setTheClickColor)
                         {
                             //if an ellipse is the first color, convert it to the other color if you click it
@@ -311,6 +326,7 @@ namespace WellPlateUserControl
                                 ellipse.Fill = new SolidColorBrush(_clickColorConverter); //_clickColorConverter
                                 _coloredCoordinates.Add(ellipse.Name);
                                 _notColoredCoordinates.Remove(ellipse.Name);
+
                                 Debug.WriteLine($"{ellipse.Name}: turned on");
                             }
                             //if an ellipse is the clicked color, convert it to the first color if you click it
@@ -331,8 +347,8 @@ namespace WellPlateUserControl
                                 ellipse.Fill = new SolidColorBrush(_defaultClickColor); //_clickColorConverter
                                 _coloredCoordinates.Add(ellipse.Name);
                                 _notColoredCoordinates.Remove(ellipse.Name);
-                                
-                                Debug.WriteLine($"{ellipse.Name}: turned on");
+
+                               Debug.WriteLine($"{ellipse.Name}: turned on");
                             }
                             //if an ellipse is the clicked color, convert it to the first color if you click it
                             else
@@ -344,19 +360,18 @@ namespace WellPlateUserControl
                                 Debug.WriteLine($"{ellipse.Name}: turned off");
                             }
                         }
+
+                        //if (_getLastCoordinateActive)
+                        //{
+                        //    GetLastClickedCoordinate();
+                        //}
                         
                     }
 
                 }
                 
             }
-            Debug.WriteLine("--------------------------------");
-            foreach (string testColor in _coloredCoordinates)
-            {
-                Debug.WriteLine(testColor);
-            }
-            Debug.WriteLine("--------------------------------");
-
+            
         }
 
         /// <summary>
@@ -456,6 +471,28 @@ namespace WellPlateUserControl
         {
             Debug.WriteLine(_notColoredCoordinates.Count);
             return _notColoredCoordinates;
+        }
+
+
+        public string GetLastClickedCoordinate()
+        {
+            _getLastCoordinateActive = true;
+
+            if (_lastClickedCoordinate == null)
+            {
+                _lastClickedCoordinate = "nothing";
+            }
+            return _lastClickedCoordinate;
+        }
+
+        /// <summary>
+        /// <para>Set <b>before</b> the wellplatesize</para>
+        /// </summary>
+        /// <returns>True</returns>
+        public bool IsRectangle()
+        {
+            _setRectangle = true;
+            return true;
         }
     }
 }

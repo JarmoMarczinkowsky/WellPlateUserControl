@@ -28,7 +28,9 @@ namespace WellPlateUserControl
 
         List<string> GiveNotColoredList();
 
-        //bool ColorCoordinate(int coordinate);
+        public string GetLastClickedCoordinate();
+
+        public bool IsRectangle();
 
     }
 }

@@ -60,5 +60,15 @@ namespace WellPlateUserControl
         {
             return _wellPlate.GiveNotColoredList();
         }
+
+        public string GetLastClickedCoordinate()
+        {
+            return _wellPlate.GetLastClickedCoordinate();
+        }
+
+        public bool IsRectangle()
+        {
+            return _wellPlate.IsRectangle();
+        }
     }
 }
