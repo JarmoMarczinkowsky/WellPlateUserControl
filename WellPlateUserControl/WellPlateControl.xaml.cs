@@ -157,7 +157,7 @@ namespace WellPlateUserControl
                             (_distanceFromWall + _heightWellPlate * _shapeSize - (_distanceFromWall + height * _shapeSize)) * _circleSizeMultiplier * _shapeDistance); //down
 
                         _coordinates.Add(ellipse.Name);
-                        _notColoredCoordinates.Add(ellipse.Name);
+                        //_notColoredCoordinates.Add(ellipse.Name);
 
 
                         gGenerateWellPlate.Children.Add(ellipse);
@@ -261,8 +261,7 @@ namespace WellPlateUserControl
                                     {
                                         ellipse.Fill = new SolidColorBrush(_defaultClickColor);
                                     }
-                                    _notColoredCoordinates.Remove(ellipse.Name);
-                                    _coloredCoordinates.Add(ellipse.Name);
+                                    
 
                                 }
                             }
@@ -282,8 +281,7 @@ namespace WellPlateUserControl
                                     {
                                         ellipse.Fill = new SolidColorBrush(_defaultClickColor);
                                     }
-                                    _notColoredCoordinates.Remove(ellipse.Name);
-                                    _coloredCoordinates.Add(ellipse.Name);
+                                    
                                 }
                             }
                         }
@@ -317,6 +315,7 @@ namespace WellPlateUserControl
                     if (ellipse.Name.Split("_")[0] == coordinate.ToUpper().Trim())
                     {
                         ellipse.Fill = new SolidColorBrush(chosenColor);
+                        
                     }
                 }
                 return true;
@@ -346,6 +345,7 @@ namespace WellPlateUserControl
                     if (ellipse.Name.Split("_")[1] == coordinate.ToString())
                     {
                         ellipse.Fill = new SolidColorBrush(chosenColor);
+                        
                     }
                 }
                 return true;
@@ -384,8 +384,7 @@ namespace WellPlateUserControl
                             if (brush.Color == _colorConverter) //_colorConverter
                             {
                                 ellipse.Fill = new SolidColorBrush(_clickColorConverter); //_clickColorConverter
-                                _coloredCoordinates.Add(ellipse.Name);
-                                _notColoredCoordinates.Remove(ellipse.Name);
+                               
 
                                 Debug.WriteLine($"{ellipse.Name}: turned on");
                             }
@@ -393,8 +392,7 @@ namespace WellPlateUserControl
                             else
                             {
                                 ellipse.Fill = new SolidColorBrush(_colorConverter); //_colorConverter
-                                _coloredCoordinates.Remove(ellipse.Name);
-                                _notColoredCoordinates.Add(ellipse.Name);
+                                
 
                                 Debug.WriteLine($"{ellipse.Name}: turned off");
                             }
@@ -405,18 +403,15 @@ namespace WellPlateUserControl
                             if (brush.Color == _defaultGridColor) //_colorConverter
                             {
                                 ellipse.Fill = new SolidColorBrush(_defaultClickColor); //_clickColorConverter
-                                _coloredCoordinates.Add(ellipse.Name);
-                                _notColoredCoordinates.Remove(ellipse.Name);
+                                
 
-                               Debug.WriteLine($"{ellipse.Name}: turned on");
+                                Debug.WriteLine($"{ellipse.Name}: turned on");
                             }
                             //if an ellipse is the clicked color, convert it to the first color if you click it
                             else
                             {
                                 ellipse.Fill = new SolidColorBrush(_defaultGridColor); //_colorConverter
-                                _coloredCoordinates.Remove(ellipse.Name);
-                                _notColoredCoordinates.Add(ellipse.Name);
-
+                                
                                 Debug.WriteLine($"{ellipse.Name}: turned off");
                             }
                         }
@@ -428,7 +423,6 @@ namespace WellPlateUserControl
                 }
 
             }
-            
 
         }
 
@@ -513,23 +507,72 @@ namespace WellPlateUserControl
         }
 
         /// <summary>
-        /// Gives a list of every colored well
+        /// <para>Set this function <b>after</b> WellPlateSize.</para>
+        /// <para>Gives a list of every colored well.</para>
         /// </summary>
         /// <returns>A list of every colored well</returns>
         public List<string> GiveColoredList()
         {
+            UpdateColoredList();
+
             Debug.WriteLine(_coloredCoordinates.Count);
             return _coloredCoordinates;
         }
 
         /// <summary>
-        /// Gives a list of every not-colored well
+        /// <para>Set this function <b>after</b> WellPlateSize.</para>
+        /// <para>Gives a list of every not-colored well.</para>
         /// </summary>
         /// <returns>A list of every not-colored well</returns>
         public List<string> GiveNotColoredList()
         {
+            UpdateColoredList();
+            _notColoredCoordinates.Clear();
+
+            foreach (object child in gGenerateWellPlate.Children)
+            {
+                Rectangle ellipse = child as Rectangle;
+
+                if (!_coloredCoordinates.Contains(ellipse.Name.Split("_")[0].Trim()))
+                {
+                    _notColoredCoordinates.Add(ellipse.Name.Split("_")[0]);
+                }
+            }
+            
             Debug.WriteLine(_notColoredCoordinates.Count);
             return _notColoredCoordinates;
+        }
+
+        private void UpdateColoredList()
+        {
+            _coloredCoordinates.Clear();
+
+            foreach (object child in gGenerateWellPlate.Children)
+            {
+                Rectangle ellipse = child as Rectangle;
+                SolidColorBrush brush = ellipse.Fill as SolidColorBrush;
+
+                if (brush != null)
+                {
+                    if (_setTheGridColor)
+                    {
+                        if (brush.Color != _defaultGridColor)
+                        {
+                            _coloredCoordinates.Add(ellipse.Name.Split("_")[0]);
+                        }
+
+                    }
+                    else
+                    {
+                        if (brush.Color != _colorConverter)
+                        {
+                            _coloredCoordinates.Add(ellipse.Name.Split("_")[0]);
+                        }
+                    }
+
+                }
+            }
+            
         }
 
         /// <summary>

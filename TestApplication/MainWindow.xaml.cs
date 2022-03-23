@@ -39,8 +39,10 @@ namespace TestApplication
             globalWellPlate.ColorCoordinate(3, Colors.Green);
             globalWellPlate.ColorCoordinate("A5", Colors.DarkBlue);
             globalWellPlate.ColorCoordinate("B1");
-            Debug.WriteLine(globalWellPlate.CoordinateConverter(4));
-            Debug.WriteLine(globalWellPlate.GetLastClickedCoordinate());
+            //Debug.WriteLine(globalWellPlate.CoordinateConverter(4));
+            //Debug.WriteLine(globalWellPlate.GetLastClickedCoordinate());
+            globalWellPlate.GiveColoredList();
+            globalWellPlate.GiveNotColoredList();
         }
 
         private void ConnTest(object sender, RoutedEventArgs e)
