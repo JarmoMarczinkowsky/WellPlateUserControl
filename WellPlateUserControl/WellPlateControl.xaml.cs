@@ -332,7 +332,7 @@ namespace WellPlateUserControl
         /// <para>This function is being used to color a well based on the corresponding coordinate and color.</para>
         /// <example>Example: '"A5",Colors.Aqua' will color coordinate A5 with the color 'Aqua'</example>
         /// </summary>
-        /// <param name="coordinate">The number that needs to be colored. For example: 3 or 52 </param>
+        /// <param name="coordinate">The number that a coordinate has that needs to be colored. For example: 3 or 52 </param>
         /// <param name="chosenColor">The color that the coordinate needs to be colored. For example Colors.Aqua to make the color Aqua</param>
         /// <returns>True if it succeeds and false if it doesn't succeed in coloring the correct coordinate</returns>
         public bool ColorCoordinate(int coordinate, Color chosenColor)
@@ -420,10 +420,7 @@ namespace WellPlateUserControl
                             }
                         }
 
-                        //if (_getLastCoordinateActive)
-                        //{
-                        //    GetLastClickedCoordinate();
-                        //}
+                       
                         
                     }
 
@@ -533,15 +530,13 @@ namespace WellPlateUserControl
             return _notColoredCoordinates;
         }
 
-
+        /// <summary>
+        /// <para>Returns the last clicked coordinate in a string.</para>
+        /// <example>For example: if you click 'A5' it will return 'A5'.</example>
+        /// </summary>
+        /// <returns>String with the last clicked coordinate.</returns>
         public string GetLastClickedCoordinate()
         {
-            _getLastCoordinateActive = true;
-
-            if (_lastClickedCoordinate == null)
-            {
-                _lastClickedCoordinate = "nothing";
-            }
             return _lastClickedCoordinate;
         }
 
