@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WellPlateUserControl"
         mc:Ignorable="d"
         
-        d:DesignHeight="450" d:DesignWidth="600">
+        d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid x:Name="gButtonControl">
 
@@ -114,13 +114,8 @@
               x:Name="gGenerateWellPlate"
                
               HorizontalAlignment="Left"
-              VerticalAlignment="Bottom"
-              Width="590"
-              Height="430"
-              >
+              VerticalAlignment="Bottom"/>
             
-                
-        </Grid>
 
         <Rectangle x:Name="rectPlaceHolder"
                    Width="360" 

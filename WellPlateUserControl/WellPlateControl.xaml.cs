@@ -33,6 +33,7 @@ namespace WellPlateUserControl
         private int _loopCounter;
         private int _amountColored;
         private int _amountNotColored;
+        private int _maxWidth = 600;
 
         private double _circleSizeMultiplier = 1;
         private float _shapeDistance = 1;
@@ -41,6 +42,7 @@ namespace WellPlateUserControl
         private bool _setTheClickColor;
         private bool _setStrokeColor;
         private bool _setRectangle;
+        private bool _setMaxWidth;
         private bool _getLastCoordinateActive;
         private bool _isWellEditable;
 
@@ -88,13 +90,7 @@ namespace WellPlateUserControl
 
                 _coordinates.Clear();
 
-                //sets the values of the shapes
-                //_shapeSize = 15;
-                //_shapeDistance = 1;
-                //_distanceFromWall = 5;
-
                 //preparation for the coordinate system
-                //_alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 _loopCounter = -1;
 
                 //gButtonControl.Children.Remove(lblTestLabel);
@@ -113,13 +109,33 @@ namespace WellPlateUserControl
                         {
                             VerticalAlignment = VerticalAlignment.Bottom,
                             HorizontalAlignment = HorizontalAlignment.Left,
-                            Width = _shapeSize * _circleSizeMultiplier,
-                            Height = _shapeSize * _circleSizeMultiplier,
+                            //Width = _shapeSize * _circleSizeMultiplier,
+                            //Height = _shapeSize * _circleSizeMultiplier,
                             Name = $"{_alphabet[height]}{width + 1}_{1 + height + _heightWellPlate * width}", //$"{_alphabet[height]}{width + 1}_{_loopCounter + 1}"
                             //Stroke = new SolidColorBrush(_strokeColor),
                         };
                         _coordinates.Add(ellipse.Name);
                         //makes it  the color from the combobox
+
+                        //checks if the user wants a rectangle. Otherwise it will round the rectangles so it looks like circles.
+                        if (_setRectangle)
+                        {
+                            ellipse.RadiusX = 0;
+                            ellipse.RadiusY = 0;
+                            _shapeDistance = 1.05F;
+                        }
+                        else
+                        {
+                            ellipse.RadiusX = 150;
+                            ellipse.RadiusY = 150;
+                        }
+
+                        //_maxWidth = 600;
+
+                        ellipse.Width = _maxWidth / (_shapeDistance  * _widthWellPlate);
+                        ellipse.Height = _maxWidth / (_shapeDistance * _widthWellPlate);
+                        //Debug.WriteLine("the numbers: { _distanceFromWall + width * _shapeSize * _shapeDistance) *_circleSizeMultiplier}");
+
                         if (_setTheGridColor)
                         {
                             ellipse.Fill = new SolidColorBrush(_colorConverter);
@@ -135,28 +151,20 @@ namespace WellPlateUserControl
                             ellipse.StrokeThickness = ellipse.Width * 0.08; //0.08 is around 16% of circle 
                         }
 
-                        //checks if the user wants a rectangle. Otherwise it will round the rectangles so it looks like circles.
-                        if (_setRectangle)
-                        {
-                            ellipse.RadiusX = 0;
-                            ellipse.RadiusY = 0;
-                            _shapeDistance = 1.05F;
-                        }
-                        else
-                        {
-                            ellipse.RadiusX = 150;
-                            ellipse.RadiusY = 150;
-                        }
+                        
 
 
                         //takes care of the position of the ellipse
                         ellipse.Margin = new Thickness(
-                            (_distanceFromWall + width * _shapeSize * _shapeDistance) * _circleSizeMultiplier, //left
+                            width * ellipse.Width * _shapeDistance /** _circleSizeMultiplier*/, //left
                             0,  //up
                             0, //right
-                            (_distanceFromWall + _heightWellPlate * _shapeSize - (_distanceFromWall + height * _shapeSize)) * _circleSizeMultiplier * _shapeDistance); //down
+                            (_heightWellPlate * ellipse.Width - (height * ellipse.Width) - ellipse.Height) * _circleSizeMultiplier * _shapeDistance); //down
 
+                        Debug.WriteLine($"Width test: { ellipse.Width + width * ellipse.Width * _shapeDistance /** _circleSizeMultiplier*/}");
+                        //Debug.WriteLine($"Width: {ellipse.Width}");
                         _coordinates.Add(ellipse.Name);
+                        
                         //_notColoredCoordinates.Add(ellipse.Name);
 
 
@@ -605,6 +613,12 @@ namespace WellPlateUserControl
         public bool IsEditable()
         {
             _isWellEditable = true;
+            return true;
+        }
+
+        public bool SetMaxWidth(int maxWidth)
+        {
+            _maxWidth = maxWidth;
             return true;
         }
     }

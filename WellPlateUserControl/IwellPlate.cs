@@ -38,5 +38,7 @@ namespace WellPlateUserControl
 
         public bool IsEditable();
 
+        public bool SetMaxWidth(int maxWidth);
+
     }
 }

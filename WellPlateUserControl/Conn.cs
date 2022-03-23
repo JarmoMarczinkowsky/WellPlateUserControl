@@ -85,5 +85,10 @@ namespace WellPlateUserControl
         {
             return _wellPlate.IsEditable();
         }
+
+        public bool SetMaxWidth(int maxWidth)
+        {
+            return _wellPlate.SetMaxWidth(maxWidth);
+        }
     }
 }
