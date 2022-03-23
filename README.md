@@ -66,3 +66,10 @@ GiveNotColoredList()
 Returns a list with the coordinates of every well that is currently not colored.
 Set this function after the WellPlateSize.
 [Optional]
+```
+SetMaxWidth(width in pixels)
+```
+Set the max width of the wells that need to be generated. 
+Uses an integer for the 'width in pixels'.
+Default is 600 pixels.
+[Optional]
