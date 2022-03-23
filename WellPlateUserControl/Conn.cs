@@ -80,5 +80,10 @@ namespace WellPlateUserControl
         {
             return _wellPlate.IsRectangle();
         }
+
+        public bool IsEditable()
+        {
+            return _wellPlate.IsEditable();
+        }
     }
 }

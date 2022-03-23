@@ -36,5 +36,7 @@ namespace WellPlateUserControl
 
         public bool IsRectangle();
 
+        public bool IsEditable();
+
     }
 }

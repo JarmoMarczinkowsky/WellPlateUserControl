@@ -24,11 +24,11 @@ namespace WellPlateUserControl
         private string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private string _createEllipseName;
         private string _lastClickedCoordinate;
-        
+
         private int _widthWellPlate;
         private int _heightWellPlate;
         private int _shapeSize = 15;
-        
+
         private int _distanceFromWall = 5;
         private int _loopCounter;
         private int _amountColored;
@@ -42,6 +42,7 @@ namespace WellPlateUserControl
         private bool _setStrokeColor;
         private bool _setRectangle;
         private bool _getLastCoordinateActive;
+        private bool _isWellEditable;
 
         private Color _colorConverter;
         private Color _clickColorConverter;
@@ -54,7 +55,7 @@ namespace WellPlateUserControl
         private List<string> _coordinates = new List<string>();
         private List<string> _coloredCoordinates = new List<string>();
         private List<string> _notColoredCoordinates = new List<string>();
-        
+
 
         public WellPlateControl()
         {
@@ -67,7 +68,7 @@ namespace WellPlateUserControl
 
             rectPlaceHolder.Visibility = Visibility.Hidden;
 
-            
+
         }
 
         /// <summary>
@@ -162,12 +163,12 @@ namespace WellPlateUserControl
                         gGenerateWellPlate.Children.Add(ellipse);
                     }
                 }
-                
+
                 return true;
             }
             else
             {
-                
+
                 throw new ArgumentOutOfRangeException($"Number can't be bigger than 26 or smaller than 1: length = {inputWidth}, width = {inputHeight}");
             }
         }
@@ -180,7 +181,7 @@ namespace WellPlateUserControl
         /// <returns>True if the color succeeds to be puth inside the variable and an error if it fails to be put inside the variable</returns>
         public bool SetGridColor(Color gridColor)
         {
-            
+
             try
             {
                 _colorConverter = gridColor; //(Color)ColorConverter.ConvertFromString
@@ -215,7 +216,7 @@ namespace WellPlateUserControl
                 return false;
 
             }
-            
+
         }
 
         /// <summary>
@@ -262,7 +263,7 @@ namespace WellPlateUserControl
                                     }
                                     _notColoredCoordinates.Remove(ellipse.Name);
                                     _coloredCoordinates.Add(ellipse.Name);
-                                    
+
                                 }
                             }
 
@@ -294,8 +295,8 @@ namespace WellPlateUserControl
             {
                 MessageBox.Show(ex + $"{Environment.NewLine}Something went wrong with the coordinates. Are you sure you are using coordinates or numbers?");
                 return false;
-                
-            
+
+
             }
         }
         /// <summary>
@@ -365,7 +366,7 @@ namespace WellPlateUserControl
         /// <param name="e"></param>
         private void ClickForColor(object sender, MouseButtonEventArgs e)
         {
-            
+
             //loops through each of the ellipses
             foreach (object child in gGenerateWellPlate.Children)
             {
@@ -377,7 +378,7 @@ namespace WellPlateUserControl
                     if (brush != null)
                     {
                         _lastClickedCoordinate = $"{ellipse.Name.Split("_")[0]}";
-                        if (_setTheClickColor)
+                        if (_setTheClickColor && _isWellEditable)
                         {
                             //if an ellipse is the first color, convert it to the other color if you click it
                             if (brush.Color == _colorConverter) //_colorConverter
@@ -398,7 +399,7 @@ namespace WellPlateUserControl
                                 Debug.WriteLine($"{ellipse.Name}: turned off");
                             }
                         }
-                        else
+                        else if (_isWellEditable)
                         {
                             //if an ellipse is the first color, convert it to the other color if you click it
                             if (brush.Color == _defaultGridColor) //_colorConverter
@@ -420,14 +421,15 @@ namespace WellPlateUserControl
                             }
                         }
 
-                       
-                        
+
+
                     }
 
                 }
-                
+
             }
             
+
         }
 
         /// <summary>
@@ -531,6 +533,7 @@ namespace WellPlateUserControl
         }
 
         /// <summary>
+        /// <para>Set after the WellPlateSize.</para>
         /// <para>Returns the last clicked coordinate in a string.</para>
         /// <example>For example: if you click 'A5' it will return 'A5'.</example>
         /// </summary>
@@ -548,6 +551,17 @@ namespace WellPlateUserControl
         public bool IsRectangle()
         {
             _setRectangle = true;
+            return true;
+        }
+
+        /// <summary>
+        /// <para>Makes the wellplate clickable. If you click a well, it will change to the set color you used for the clickcolor.</para>
+        /// <para>Default is turned off.</para>
+        /// </summary>
+        /// <returns>True, because I can't return a void.</returns>
+        public bool IsEditable()
+        {
+            _isWellEditable = true;
             return true;
         }
     }

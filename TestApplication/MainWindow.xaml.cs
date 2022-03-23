@@ -28,6 +28,7 @@ namespace TestApplication
         {
             InitializeComponent();
 
+            globalWellPlate.IsEditable();
             globalWellPlate.SetGridColor(Colors.Black); 
             globalWellPlate.SetClickColor(Colors.Red);
             //globalWellPlate.SetStrokeColor(Colors.Blue);
@@ -40,7 +41,6 @@ namespace TestApplication
             globalWellPlate.ColorCoordinate("B1");
             Debug.WriteLine(globalWellPlate.CoordinateConverter(4));
             Debug.WriteLine(globalWellPlate.GetLastClickedCoordinate());
-
         }
 
         private void ConnTest(object sender, RoutedEventArgs e)
