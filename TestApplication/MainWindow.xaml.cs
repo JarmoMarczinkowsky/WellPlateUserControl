@@ -30,8 +30,9 @@ namespace TestApplication
 
             globalWellPlate.IsEditable();
             //globalWellPlate.SetGridColor(Colors.Purple);
-            globalWellPlate.SetClickColor(Colors.Tan);
-            //globalWellPlate.SetStroke(Colors.Blue);
+            //globalWellPlate.SetClickColor(Colors.Tan);
+            globalWellPlate.SetStroke(Colors.Blue);
+            globalWellPlate.SetStroke(Colors.LightGray, 40);
             //globalWellPlate.SetCircleSize(3.9);
             //globalWellPlate.IsRectangle();
             globalWellPlate.SetMaxHeight(600);

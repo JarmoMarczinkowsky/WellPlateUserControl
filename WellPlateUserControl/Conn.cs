@@ -46,15 +46,10 @@ namespace WellPlateUserControl
             return _wellPlate.SetCircleSize(circleSizeMultiplier);
         }
 
-        public bool SetStroke(Color strokeColor)
+        public bool SetStroke(Color strokeColor, double strokeThickness)
         {
-            return _wellPlate.SetStroke(strokeColor);
+            return _wellPlate.SetStroke(strokeColor, strokeThickness);
         }
-
-        //bool SetStroke(Color strokeColor, double strokeThickness)
-        //{
-        //    return _wellPlate.SetStroke(strokeColor, strokeThickness);
-        //}
 
         public string CoordinateConverter(int coordinate)
         {

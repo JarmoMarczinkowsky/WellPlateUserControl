@@ -22,9 +22,7 @@ namespace WellPlateUserControl
 
         bool SetCircleSize(double circleSizeMultiplier);
 
-        bool SetStroke(Color strokeColor);
-
-        //bool SetStroke(Color strokeColor, double strokeThickness);
+        bool SetStroke(Color strokeColor, double strokeThickness);
 
         string CoordinateConverter(int coordinate);
 

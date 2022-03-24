@@ -408,10 +408,12 @@ namespace WellPlateUserControl
 
         /// <summary>
         /// <para>Set <b>before</b> the wellplatesize</para>
-        /// <para>Used to give an outline color to the circles in the wellplate</para>
+        /// <para>Used to give an outline color to the circles in the wellplate.</para>
+        /// <para>Give second argument to set the thickness of the stroke.</para>
         /// <example>Use: Colors.[wishedColor] without brackets</example>
+        /// <exmple>Use: 15 for a 15% thick border in the ellipse</exmple>
         /// </summary>
-        /// <param name="strokeColor"></param>
+        /// <param name="strokeColor">Color of the stroke</param>
         /// <returns>True if succeeds or false if it doesn't succeed</returns>
         public bool SetStroke(Color strokeColor)
         {
@@ -432,6 +434,8 @@ namespace WellPlateUserControl
         /// <para>Set <b>before</b> the wellplatesize</para>
         /// <para>Used to give an outline color to the circles in the wellplate.</para>
         /// <para>Also used to set the thickness of the stroke.</para>
+        /// <example>Use: Colors.[wishedColor] without brackets</example>
+        /// <exmple>Use: 15 for a 15% thick border in the ellipse</exmple>
         /// </summary>
         /// <param name="strokeColor">The color of the stroke.</param>
         /// <param name="strokeThickness">The thickness of the stroke in percentages.</param>
