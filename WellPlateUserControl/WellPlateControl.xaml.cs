@@ -43,6 +43,7 @@ namespace WellPlateUserControl
         private bool _setStrokeColor;
         private bool _setRectangle;
         private bool _setMaxWidth;
+        private bool _setMaxHeight;
         private bool _getLastCoordinateActive;
         private bool _isWellEditable;
 
@@ -97,6 +98,8 @@ namespace WellPlateUserControl
                 //clears the previous shapes
                 gGenerateWellPlate.Children.Clear();
 
+                _maxWidth = _maxWidth - 18;
+
                 //generates the shapes
                 for (int height = 0; height < _heightWellPlate; height++)
                 {
@@ -128,9 +131,10 @@ namespace WellPlateUserControl
                         {
                             ellipse.RadiusX = 150;
                             ellipse.RadiusY = 150;
+                            _shapeDistance = 1;
                         }
 
-                        //_maxWidth = 600;
+
 
                         ellipse.Width = _maxWidth / (_shapeDistance  * _widthWellPlate);
                         ellipse.Height = _maxWidth / (_shapeDistance * _widthWellPlate);
@@ -159,9 +163,9 @@ namespace WellPlateUserControl
                             width * ellipse.Width * _shapeDistance /** _circleSizeMultiplier*/, //left
                             0,  //up
                             0, //right
-                            (_heightWellPlate * ellipse.Width - (height * ellipse.Width) - ellipse.Height) * _circleSizeMultiplier * _shapeDistance); //down
+                            (_heightWellPlate * ellipse.Width - (height * ellipse.Width) - ellipse.Height) * _shapeDistance); //down
 
-                        Debug.WriteLine($"Width test: { ellipse.Width + width * ellipse.Width * _shapeDistance /** _circleSizeMultiplier*/}");
+                        Debug.WriteLine($"Width test: { ellipse.Width + width * ellipse.Width * _shapeDistance}");
                         //Debug.WriteLine($"Width: {ellipse.Width}");
                         _coordinates.Add(ellipse.Name);
                         
