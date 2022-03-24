@@ -90,5 +90,10 @@ namespace WellPlateUserControl
         {
             return _wellPlate.SetMaxWidth(maxWidth);
         }
+
+        public bool SetMaxHeight(int maxHeight)
+        {
+            return _wellPlate.SetMaxHeight(maxHeight);
+        }
     }
 }

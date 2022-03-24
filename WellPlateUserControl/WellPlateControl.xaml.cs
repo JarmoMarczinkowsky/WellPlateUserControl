@@ -34,6 +34,7 @@ namespace WellPlateUserControl
         private int _amountColored;
         private int _amountNotColored;
         private int _maxWidth = 600;
+        private int _maxHeight = 600;
 
         private double _circleSizeMultiplier = 1;
         private float _shapeDistance = 1;
@@ -99,6 +100,7 @@ namespace WellPlateUserControl
                 gGenerateWellPlate.Children.Clear();
 
                 _maxWidth = _maxWidth - 18;
+                _maxHeight = _maxHeight - 1;
 
                 //generates the shapes
                 for (int height = 0; height < _heightWellPlate; height++)
@@ -135,9 +137,16 @@ namespace WellPlateUserControl
                         }
 
 
-
-                        ellipse.Width = _maxWidth / (_shapeDistance  * _widthWellPlate);
-                        ellipse.Height = _maxWidth / (_shapeDistance * _widthWellPlate);
+                        if (_setMaxHeight)
+                        {
+                            ellipse.Width = _maxHeight / (_shapeDistance * (_heightWellPlate + 1));
+                            ellipse.Height = _maxHeight / (_shapeDistance * (_heightWellPlate + 1));
+                        }
+                        else
+                        {
+                            ellipse.Width = _maxWidth / (_shapeDistance  * _widthWellPlate);
+                            ellipse.Height = _maxWidth / (_shapeDistance * _widthWellPlate);
+                        }
                         //Debug.WriteLine("the numbers: { _distanceFromWall + width * _shapeSize * _shapeDistance) *_circleSizeMultiplier}");
 
                         if (_setTheGridColor)
@@ -165,12 +174,9 @@ namespace WellPlateUserControl
                             0, //right
                             (_heightWellPlate * ellipse.Width - (height * ellipse.Width) - ellipse.Height) * _shapeDistance); //down
 
-                        Debug.WriteLine($"Width test: { ellipse.Width + width * ellipse.Width * _shapeDistance}");
-                        //Debug.WriteLine($"Width: {ellipse.Width}");
-                        _coordinates.Add(ellipse.Name);
+                       _coordinates.Add(ellipse.Name);
                         
                         //_notColoredCoordinates.Add(ellipse.Name);
-
 
                         gGenerateWellPlate.Children.Add(ellipse);
                     }
@@ -555,6 +561,9 @@ namespace WellPlateUserControl
             return _notColoredCoordinates;
         }
 
+        /// <summary>
+        /// Will clear the list of every colored coordinate and refill them with the colored coordinates.
+        /// </summary>
         private void UpdateColoredList()
         {
             _coloredCoordinates.Clear();
@@ -620,9 +629,36 @@ namespace WellPlateUserControl
             return true;
         }
 
+        /// <summary>
+        /// <para>Set this function <b>before</b> the WellPlateSize</para>
+        /// <para>Used to set the maximum width in pixels of the wellplate.</para>
+        /// <para>Default is 600.</para>
+        /// <para>Will choose the highest line of code if both are set.</para>
+        /// </summary>
+        /// <param name="maxWidth">Integer that is used for the maximum width in pixels.</param>
+        /// <returns>True, because I can't return a void.</returns>
         public bool SetMaxWidth(int maxWidth)
         {
             _maxWidth = maxWidth;
+            _setMaxWidth = true;
+            return true;
+        }
+
+        /// <summary>
+        /// <para>Set this function <b>before</b> the WellPlateSize</para>
+        /// <para>Used to set the maximum height in pixels of the wellplate.</para>
+        /// <para>Will choose the highest line of code if both are set.</para>
+        /// </summary>
+        /// <param name="maxHeight">Integer that is used for the maximum height in pixels.</param>
+        /// <returns>True, because I can't return a void.</returns>
+        public bool SetMaxHeight(int maxHeight)
+        {
+            _maxHeight = maxHeight;
+            if (!_setMaxWidth)
+            {
+                _setMaxHeight = true;
+            }
+            
             return true;
         }
     }
