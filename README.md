@@ -16,10 +16,12 @@ Sets the color of a clicked well to the color you wished. Default is red.
 Set this function before the WellPlateSize.
 [Optional]
 ```
-SetStrokeColor(Colors.[wishedColor])
+SetStrokeColor(Colors.[wishedColor], [optional] strokeThickness)
 ```
-Set the stroke of the wells in the wellplate.
 Set this function before the WellPlateSize.
+Set the stroke of the wells in the wellplate.
+The [optional] part is optional and defines the thickness of the stroke.
+Thickness of the stroke is set in percentages.
 [Optional]
 ```
 SetCircleSize(number)
