@@ -89,7 +89,6 @@ namespace WellPlateUserControl
                 //preparation for the coordinate system
                 _loopCounter = -1;
 
-                //gButtonControl.Children.Remove(lblTestLabel);
                 //clears the previous shapes
                 gGenerateWellPlate.Children.Clear();
 
@@ -108,12 +107,10 @@ namespace WellPlateUserControl
                         {
                             VerticalAlignment = VerticalAlignment.Bottom,
                             HorizontalAlignment = HorizontalAlignment.Left,
-                            //Width = _shapeSize * _circleSizeMultiplier,
-                            //Height = _shapeSize * _circleSizeMultiplier,
                             Name = $"{_alphabet[height]}{width + 1}_{1 + height + _heightWellPlate * width}", //$"{_alphabet[height]}{width + 1}_{_loopCounter + 1}"
-                            //Stroke = new SolidColorBrush(_strokeColor),
                             Fill = new SolidColorBrush(_colorConverter)
                         };
+
                         _coordinates.Add(ellipse.Name);
                         //makes it  the color from the combobox
 
@@ -159,8 +156,6 @@ namespace WellPlateUserControl
 
                        _coordinates.Add(ellipse.Name);
                         
-                        //_notColoredCoordinates.Add(ellipse.Name);
-
                         gGenerateWellPlate.Children.Add(ellipse);
                     }
                 }
@@ -185,13 +180,12 @@ namespace WellPlateUserControl
 
             try
             {
-                _colorConverter = gridColor; //(Color)ColorConverter.ConvertFromString
+                _colorConverter = gridColor; 
                 _setTheGridColor = true;
                 return true;
             }
             catch (Exception ex)
             {
-                //ex.Message($"Can't convert color, are you sure you're using a valid color?");
                 MessageBox.Show(ex + Environment.NewLine + "Can't convert color, are you sure you're using a valid color?");
                 return false;
             }
@@ -233,8 +227,6 @@ namespace WellPlateUserControl
         {
             string formattedCoordinate;
             _coordinatesForColor = coordinate.Split(";".Trim()).ToList();
-
-            //Debug.WriteLine(_clickColorConverter);
 
             try
             {
