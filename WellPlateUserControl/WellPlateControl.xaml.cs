@@ -21,7 +21,7 @@ namespace WellPlateUserControl
     /// </summary>
     public partial class WellPlateControl : UserControl
     {
-        private string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private string _createEllipseName;
         private string _lastClickedCoordinate;
 
@@ -36,8 +36,10 @@ namespace WellPlateUserControl
         private int _maxWidth = 600;
         private int _maxHeight = 600;
 
-        private double _circleSizeMultiplier = 1;
         private float _shapeDistance = 1;
+        
+        private double _strokeThickness = 0.08;
+        private double _circleSizeMultiplier = 1;
 
         private bool _setTheGridColor;
         private bool _setTheClickColor;
@@ -67,8 +69,8 @@ namespace WellPlateUserControl
 
             _defaultGridColor = Colors.Black;
             _defaultClickColor = Colors.Red;
-            _setTheGridColor = false;
-            _setTheClickColor = false;
+            //_setTheGridColor = false;
+            //_setTheClickColor = false;
 
             rectPlaceHolder.Visibility = Visibility.Hidden;
 
@@ -161,7 +163,7 @@ namespace WellPlateUserControl
                         if (_setStrokeColor)
                         {
                             ellipse.Stroke = new SolidColorBrush(_strokeColor);
-                            ellipse.StrokeThickness = ellipse.Width * 0.08; //0.08 is around 16% of circle 
+                            ellipse.StrokeThickness = ellipse.Width * _strokeThickness; //0.08 is around 16% of circle 
                         }
 
                         
@@ -473,7 +475,7 @@ namespace WellPlateUserControl
         /// </summary>
         /// <param name="strokeColor"></param>
         /// <returns>True if succeeds or false if it doesn't succeed</returns>
-        public bool SetStrokeColor(Color strokeColor)
+        public bool SetStroke(Color strokeColor)
         {
             try
             {
@@ -487,6 +489,32 @@ namespace WellPlateUserControl
                 return false;
             }
         }
+
+        /// <summary>
+        /// <para>Set <b>before</b> the wellplatesize</para>
+        /// <para>Used to give an outline color to the circles in the wellplate.</para>
+        /// <para>Also used to set the thickness of the stroke.</para>
+        /// </summary>
+        /// <param name="strokeColor">The color of the stroke.</param>
+        /// <param name="strokeThickness">The thickness of the stroke in percentages.</param>
+        /// <returns></returns>
+        public bool SetStroke(Color strokeColor, double strokeThickness)
+        {
+            try
+            {
+                _strokeColor = strokeColor;
+                _setStrokeColor = true;
+                _strokeThickness = strokeThickness / 100 / 2;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex + $"{Environment.NewLine}Could not convert color. Are you sure you are using a valid color?");
+                return false;
+            }
+        }
+
+
 
         /// <summary>
         /// <para>Input a number and get the coordinate it belongs to</para>
@@ -661,5 +689,7 @@ namespace WellPlateUserControl
             
             return true;
         }
+
+
     }
 }
