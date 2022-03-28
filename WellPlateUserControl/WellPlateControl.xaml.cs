@@ -24,10 +24,9 @@ namespace WellPlateUserControl
         const string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private string _createEllipseName;
         private string _lastClickedCoordinate;
-
+        
         private int _widthWellPlate;
         private int _heightWellPlate;
-        //private int _shapeSize = 15;
 
         private int _maxWidth = 600;
         private int _maxHeight = 600;
@@ -36,21 +35,16 @@ namespace WellPlateUserControl
         
         private double _strokeThickness = 0.08;
 
-
-        //private bool _setTheGridColor;
-        //private bool _setTheClickColor;
         private bool _setStrokeColor;
         private bool _setRectangle;
         private bool _setMaxWidth;
         private bool _setMaxHeight;
-        //private bool _getLastCoordinateActive;
         private bool _isWellEditable;
 
         private Color _colorConverter = Colors.Black;
         private Color _clickColorConverter = Colors.Red;
         private Color _strokeColor;
         
-        //private List<string> _coordinatesForColor;
         private List<string> _coordinates = new List<string>();
         private List<string> _coloredCoordinates = new List<string>();
         private List<string> _notColoredCoordinates = new List<string>();
