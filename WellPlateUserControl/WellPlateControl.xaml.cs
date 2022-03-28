@@ -92,7 +92,7 @@ namespace WellPlateUserControl
                 gGenerateWellPlate.Children.Clear();
 
                 _maxWidth -= 18;
-                _maxHeight -= 1;
+                _maxHeight -= 50;
 
                 //generates the shapes
                 for (int height = 0; height < _heightWellPlate; height++)
@@ -101,8 +101,8 @@ namespace WellPlateUserControl
                     {
                         //_loopCounter++;
 
-                        //creates ellipse
-                        Rectangle ellipse = new Rectangle()
+                        //creates rectangle
+                        Rectangle rectangle = new Rectangle()
                         {
                             VerticalAlignment = VerticalAlignment.Bottom,
                             HorizontalAlignment = HorizontalAlignment.Left,
@@ -110,19 +110,19 @@ namespace WellPlateUserControl
                             Fill = new SolidColorBrush(_colorConverter)
                         };
 
-                        _coordinates.Add(ellipse.Name);
+                        _coordinates.Add(rectangle.Name);
                         
                         //checks if the user wants a rectangle. Otherwise it will round the rectangles so it looks like circles.
                         if (_setRectangle)
                         {
-                            ellipse.RadiusX = 0;
-                            ellipse.RadiusY = 0;
+                            rectangle.RadiusX = 0;
+                            rectangle.RadiusY = 0;
                             _shapeDistance = 1.05F;
                         }
                         else
                         {
-                            ellipse.RadiusX = 150;
-                            ellipse.RadiusY = 150;
+                            rectangle.RadiusX = 150;
+                            rectangle.RadiusY = 150;
                             _shapeDistance = 1;
                         }
 
@@ -130,32 +130,38 @@ namespace WellPlateUserControl
                         //default if the maximum width is not set is 600
                         if (_setMaxHeight)
                         {
-                            ellipse.Width = _maxHeight / (_shapeDistance * (_heightWellPlate + 1));
-                            ellipse.Height = _maxHeight / (_shapeDistance * (_heightWellPlate + 1));
+                            rectangle.Width = _maxHeight / (_shapeDistance * _heightWellPlate);
+                            rectangle.Height = _maxHeight / (_shapeDistance * _heightWellPlate); //(_heightWellPlate + 1)
                         }
                         else
                         {
-                            ellipse.Width = _maxWidth / (_shapeDistance  * _widthWellPlate);
-                            ellipse.Height = _maxWidth / (_shapeDistance * _widthWellPlate);
+                            rectangle.Width = _maxWidth / (_shapeDistance  * _widthWellPlate);
+                            rectangle.Height = _maxWidth / (_shapeDistance * _widthWellPlate);
                         }
                         
                         //checks if stroke color is set and sets the stroke afterwards.
                         if (_setStrokeColor)
                         {
-                            ellipse.Stroke = new SolidColorBrush(_strokeColor);
-                            ellipse.StrokeThickness = ellipse.Width * _strokeThickness;
+                            rectangle.Stroke = new SolidColorBrush(_strokeColor);
+                            rectangle.StrokeThickness = rectangle.Width * _strokeThickness;
                         }
 
-                        //takes care of the position of the ellipse
-                        ellipse.Margin = new Thickness(
-                            width * ellipse.Width * _shapeDistance, //left
+                        //takes care of the position of the rectangle
+                        rectangle.Margin = new Thickness(
+                            width * rectangle.Width * _shapeDistance, //left
                             0,  //up
                             0, //right
-                            (_heightWellPlate * ellipse.Width - (height * ellipse.Width) - ellipse.Height) * _shapeDistance); //down
+                            (_heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) * _shapeDistance); //down
 
-                       _coordinates.Add(ellipse.Name);
+                        double heightDebugger = 0;
+                        heightDebugger = (_heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) *_shapeDistance;
+                        heightDebugger += rectangle.Height;
+
+                        //Debug.WriteLine("height " + (_heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) * _shapeDistance + rectangle.Height);
+
+                        _coordinates.Add(rectangle.Name);
                         
-                        gGenerateWellPlate.Children.Add(ellipse);
+                        gGenerateWellPlate.Children.Add(rectangle);
                     }
                 }
                 return true;
@@ -214,18 +220,18 @@ namespace WellPlateUserControl
                     {
                         foreach (object child in gGenerateWellPlate.Children)
                         {
-                            Rectangle ellipse = child as Rectangle;
+                            Rectangle rectangle = child as Rectangle;
 
                             formattedCoordinate = newCoordinate.Trim();
 
-                            if (ellipse != null)
+                            if (rectangle != null)
                             {
                                 //is number
                                 if (char.IsDigit(formattedCoordinate[0]))
                                 {
-                                    if (ellipse.Name.Split("_")[1] == formattedCoordinate)
+                                    if (rectangle.Name.Split("_")[1] == formattedCoordinate)
                                     {
-                                        ellipse.Fill = new SolidColorBrush(_clickColorConverter);
+                                        rectangle.Fill = new SolidColorBrush(_clickColorConverter);
                                     }
                                 }
 
@@ -234,9 +240,9 @@ namespace WellPlateUserControl
                                 {
                                     _createEllipseName = $"{formattedCoordinate.ToUpper()}";
 
-                                    if (ellipse.Name.Split("_")[0] == _createEllipseName)
+                                    if (rectangle.Name.Split("_")[0] == _createEllipseName)
                                     {
-                                        ellipse.Fill = new SolidColorBrush(_clickColorConverter);
+                                        rectangle.Fill = new SolidColorBrush(_clickColorConverter);
                                     }
                                 }
                             }
@@ -264,10 +270,10 @@ namespace WellPlateUserControl
         {
             foreach (object child in gGenerateWellPlate.Children)
             {
-                Rectangle ellipse = child as Rectangle;
-                if (ellipse.Name.Split("_")[0] == coordinate.ToUpper().Trim())
+                Rectangle rectangle = child as Rectangle;
+                if (rectangle.Name.Split("_")[0] == coordinate.ToUpper().Trim())
                 {
-                    ellipse.Fill = new SolidColorBrush(chosenColor);                        
+                    rectangle.Fill = new SolidColorBrush(chosenColor);                        
                 }
             }
             return true;
@@ -285,47 +291,47 @@ namespace WellPlateUserControl
         {
             foreach (object child in gGenerateWellPlate.Children)
             {
-                Rectangle ellipse = child as Rectangle;
-                if (ellipse.Name.Split("_")[1] == coordinate.ToString())
+                Rectangle rectangle = child as Rectangle;
+                if (rectangle.Name.Split("_")[1] == coordinate.ToString())
                 {
-                    ellipse.Fill = new SolidColorBrush(chosenColor);                        
+                    rectangle.Fill = new SolidColorBrush(chosenColor);                        
                 }
             }
             return true;
         }
 
         /// <summary>
-        /// <para>If you click an ellipse, it will get the color of the 'clickcolor'.</para>
+        /// <para>If you click an rectangle, it will get the color of the 'clickcolor'.</para>
         /// <para>If you click it again, it will change back to the grid color</para>
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ClickForColor(object sender, MouseButtonEventArgs e)
         {
-            //loops through each of the ellipses
+            //loops through each of the rectangles
             foreach (object child in gGenerateWellPlate.Children)
             {
-                Rectangle ellipse = child as Rectangle;
+                Rectangle rectangle = child as Rectangle;
 
                 if (((Rectangle)child).IsMouseOver)
                 {
-                    SolidColorBrush brush = ellipse.Fill as SolidColorBrush;
+                    SolidColorBrush brush = rectangle.Fill as SolidColorBrush;
                     if (brush != null)
                     {
-                        _lastClickedCoordinate = $"{ellipse.Name.Split("_")[0]}";
+                        _lastClickedCoordinate = $"{rectangle.Name.Split("_")[0]}";
                         if (/*_setTheClickColor && */_isWellEditable)
                         {
-                            //if an ellipse is the first color, convert it to the other color if you click it
+                            //if an rectangle is the first color, convert it to the other color if you click it
                             if (brush.Color == _colorConverter) //_colorConverter
                             {
-                                ellipse.Fill = new SolidColorBrush(_clickColorConverter); //_clickColorConverter
-                                Debug.WriteLine($"{ellipse.Name}: turned on");
+                                rectangle.Fill = new SolidColorBrush(_clickColorConverter); //_clickColorConverter
+                                Debug.WriteLine($"{rectangle.Name}: turned on");
                             }
-                            //if an ellipse is the clicked color, convert it to the first color if you click it
+                            //if an rectangle is the clicked color, convert it to the first color if you click it
                             else
                             {
-                                ellipse.Fill = new SolidColorBrush(_colorConverter); //_colorConverter
-                                Debug.WriteLine($"{ellipse.Name}: turned off");
+                                rectangle.Fill = new SolidColorBrush(_colorConverter); //_colorConverter
+                                Debug.WriteLine($"{rectangle.Name}: turned off");
                             }
                         }                        
                     }
@@ -338,7 +344,7 @@ namespace WellPlateUserControl
         /// <para>Used to give an outline color to the circles in the wellplate.</para>
         /// <para>Give second argument to set the thickness of the stroke.</para>
         /// <example>Use: Colors.Green</example><br></br>
-        /// <example>Use: 15 for a 15% thick border in the ellipse</example>
+        /// <example>Use: 15 for a 15% thick border in the rectangle</example>
         /// </summary>
         /// <param name="strokeColor">Color of the stroke</param>
         /// <returns>True if it succeeds or false if it doesn't succeed</returns>
@@ -354,7 +360,7 @@ namespace WellPlateUserControl
         /// <para>Used to give an outline color to the circles in the wellplate.</para>
         /// <para>Also used to set the thickness of the stroke.</para>
         /// <example>Use: Colors.[wishedColor] without brackets</example>
-        /// <exmple>Use: 15 for a 15% thick border in the ellipse</exmple>
+        /// <exmple>Use: 15 for a 15% thick border in the rectangle</exmple>
         /// </summary>
         /// <param name="strokeColor">The color of the stroke.</param>
         /// <param name="strokeThickness">The thickness of the stroke in percentages.</param>
@@ -430,11 +436,11 @@ namespace WellPlateUserControl
 
             foreach (object child in gGenerateWellPlate.Children)
             {
-                Rectangle ellipse = child as Rectangle;
+                Rectangle rectangle = child as Rectangle;
 
-                if (!_coloredCoordinates.Contains(ellipse.Name.Split("_")[0].Trim()))
+                if (!_coloredCoordinates.Contains(rectangle.Name.Split("_")[0].Trim()))
                 {
-                    _notColoredCoordinates.Add(ellipse.Name.Split("_")[0]);
+                    _notColoredCoordinates.Add(rectangle.Name.Split("_")[0]);
                 }
             }
             
@@ -451,14 +457,14 @@ namespace WellPlateUserControl
 
             foreach (object child in gGenerateWellPlate.Children)
             {
-                Rectangle ellipse = child as Rectangle;
-                SolidColorBrush brush = ellipse.Fill as SolidColorBrush;
+                Rectangle rectangle = child as Rectangle;
+                SolidColorBrush brush = rectangle.Fill as SolidColorBrush;
 
                 if (brush != null)
                 {
                     if (brush.Color != _colorConverter)
                     {
-                        _coloredCoordinates.Add(ellipse.Name.Split("_")[0]);
+                        _coloredCoordinates.Add(rectangle.Name.Split("_")[0]);
                     }
                 }
             }            
@@ -477,7 +483,7 @@ namespace WellPlateUserControl
 
         /// <summary>
         /// <para>Set <b>before</b> the wellplatesize</para>
-        /// <para>Makes all the wells rectangles instead of ellipses</para>
+        /// <para>Makes all the wells rectangles instead of rectangles</para>
         /// </summary>
         /// <returns>True</returns>
         public bool IsRectangle()
