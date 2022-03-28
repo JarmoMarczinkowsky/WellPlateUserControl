@@ -29,10 +29,6 @@ namespace WellPlateUserControl
         private int _heightWellPlate;
         //private int _shapeSize = 15;
 
-        //private int _distanceFromWall = 5;
-        //private int _loopCounter;
-        //private int _amountColored;
-        //private int _amountNotColored;
         private int _maxWidth = 600;
         private int _maxHeight = 600;
 
@@ -67,8 +63,15 @@ namespace WellPlateUserControl
         }
 
         /// <summary>
-        /// <para>Use this method <b>after</b> you've stated the colors</para>
-        /// <para>Takes care of the wellplate size</para>
+        /// <para>Generates the wellplate</para>
+        /// <para>If you have set the colors, set this <b>after</b> them</para>
+        /// <para>Can be used without defining other parameters like colors.</para>
+        /// <example>If used without other parameters, a few default values will be used:</example><br></br>
+        /// <example>maxWidth = 600</example><br></br>
+        /// <example>No stroke</example>
+        /// <example>strokeThickness = 16%</example><br></br>
+        /// <example>gridColor = black</example><br></br>
+        /// <example>clickColor = red</example><br></br>
         /// <example>Use: '8,6' will create a grid that is 8 wide and 6 high</example>
         /// </summary>
         /// <param name="inputWidth">The width that the grid is going to be</param>
@@ -152,12 +155,6 @@ namespace WellPlateUserControl
                             0,  //up
                             0, //right
                             (_heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) * _shapeDistance); //down
-
-                        double heightDebugger = 0;
-                        heightDebugger = (_heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) *_shapeDistance;
-                        heightDebugger += rectangle.Height;
-
-                        //Debug.WriteLine("height " + (_heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) * _shapeDistance + rectangle.Height);
 
                         _coordinates.Add(rectangle.Name);
                         
@@ -313,27 +310,30 @@ namespace WellPlateUserControl
             {
                 Rectangle rectangle = child as Rectangle;
 
-                if (((Rectangle)child).IsMouseOver)
+                if (rectangle != null)
                 {
-                    SolidColorBrush brush = rectangle.Fill as SolidColorBrush;
-                    if (brush != null)
+                    if (((Rectangle)child).IsMouseOver)
                     {
-                        _lastClickedCoordinate = $"{rectangle.Name.Split("_")[0]}";
-                        if (/*_setTheClickColor && */_isWellEditable)
+                        SolidColorBrush brush = rectangle.Fill as SolidColorBrush;
+                        if (brush != null)
                         {
-                            //if an rectangle is the first color, convert it to the other color if you click it
-                            if (brush.Color == _colorConverter) //_colorConverter
+                            _lastClickedCoordinate = $"{rectangle.Name.Split("_")[0]}";
+                            if (/*_setTheClickColor && */_isWellEditable)
                             {
-                                rectangle.Fill = new SolidColorBrush(_clickColorConverter); //_clickColorConverter
-                                Debug.WriteLine($"{rectangle.Name}: turned on");
+                                //if an rectangle is the first color, convert it to the other color if you click it
+                                if (brush.Color == _colorConverter) //_colorConverter
+                                {
+                                    rectangle.Fill = new SolidColorBrush(_clickColorConverter); //_clickColorConverter
+                                    Debug.WriteLine($"{rectangle.Name}: turned on");
+                                }
+                                //if an rectangle is the clicked color, convert it to the first color if you click it
+                                else
+                                {
+                                    rectangle.Fill = new SolidColorBrush(_colorConverter); //_colorConverter
+                                    Debug.WriteLine($"{rectangle.Name}: turned off");
+                                }
                             }
-                            //if an rectangle is the clicked color, convert it to the first color if you click it
-                            else
-                            {
-                                rectangle.Fill = new SolidColorBrush(_colorConverter); //_colorConverter
-                                Debug.WriteLine($"{rectangle.Name}: turned off");
-                            }
-                        }                        
+                        }
                     }
                 }
             }
@@ -420,7 +420,7 @@ namespace WellPlateUserControl
         {
             UpdateColoredList();
 
-            Debug.WriteLine(_coloredCoordinates.Count);
+            
             return _coloredCoordinates;
         }
 
@@ -444,7 +444,7 @@ namespace WellPlateUserControl
                 }
             }
             
-            Debug.WriteLine(_notColoredCoordinates.Count);
+           
             return _notColoredCoordinates;
         }
 

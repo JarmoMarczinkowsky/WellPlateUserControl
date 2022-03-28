@@ -33,7 +33,7 @@ namespace TestApplication
             globalWellPlate.SetClickColor(Colors.Red);
             globalWellPlate.SetStroke(Colors.Blue);
             globalWellPlate.SetStroke(Colors.DarkBlue, 20);
-            //globalWellPlate.IsRectangle();
+            globalWellPlate.IsRectangle();
             globalWellPlate.SetMaxHeight(600);
             //globalWellPlate.SetMaxWidth(600);
             globalWellPlate.SetWellPlateSize(8, 4); //width, height
