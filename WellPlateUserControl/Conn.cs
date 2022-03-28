@@ -41,24 +41,24 @@ namespace WellPlateUserControl
             return _wellPlate.ColorCoordinate(coordinate, chosenColor);
         }
 
-        public bool SetCircleSize(double circleSizeMultiplier)
-        {
-            return _wellPlate.SetCircleSize(circleSizeMultiplier);
-        }
+        //public bool SetCircleSize(double circleSizeMultiplier)
+        //{
+        //    return _wellPlate.SetCircleSize(circleSizeMultiplier);
+        //}
 
         public bool SetStroke(Color strokeColor, double strokeThickness)
         {
             return _wellPlate.SetStroke(strokeColor, strokeThickness);
         }
 
-        public string CoordinateConverter(int coordinate)
+        public string NumberToCoordinate(int coordinate)
         {
-            return _wellPlate.CoordinateConverter(coordinate);
+            return _wellPlate.NumberToCoordinate(coordinate);
         }
 
-        public int CoordinateConverter(string coordinate)
+        public int CoordinateToNumber(string coordinate)
         {
-            return _wellPlate.CoordinateConverter(coordinate);
+            return _wellPlate.CoordinateToNumber(coordinate);
         }
 
         public List<string> GiveColoredList()

@@ -27,34 +27,34 @@ namespace WellPlateUserControl
 
         private int _widthWellPlate;
         private int _heightWellPlate;
-        private int _shapeSize = 15;
+        //private int _shapeSize = 15;
 
-        private int _distanceFromWall = 5;
-        private int _loopCounter;
-        private int _amountColored;
-        private int _amountNotColored;
+        //private int _distanceFromWall = 5;
+        //private int _loopCounter;
+        //private int _amountColored;
+        //private int _amountNotColored;
         private int _maxWidth = 600;
         private int _maxHeight = 600;
 
         private float _shapeDistance = 1;
         
         private double _strokeThickness = 0.08;
-        private double _circleSizeMultiplier = 1;
 
-        private bool _setTheGridColor;
-        private bool _setTheClickColor;
+
+        //private bool _setTheGridColor;
+        //private bool _setTheClickColor;
         private bool _setStrokeColor;
         private bool _setRectangle;
         private bool _setMaxWidth;
         private bool _setMaxHeight;
-        private bool _getLastCoordinateActive;
+        //private bool _getLastCoordinateActive;
         private bool _isWellEditable;
 
         private Color _colorConverter = Colors.Black;
         private Color _clickColorConverter = Colors.Red;
         private Color _strokeColor;
         
-        private List<string> _coordinatesForColor;
+        //private List<string> _coordinatesForColor;
         private List<string> _coordinates = new List<string>();
         private List<string> _coloredCoordinates = new List<string>();
         private List<string> _notColoredCoordinates = new List<string>();
@@ -63,10 +63,7 @@ namespace WellPlateUserControl
         public WellPlateControl()
         {
             InitializeComponent();
-
             rectPlaceHolder.Visibility = Visibility.Hidden;
-
-
         }
 
         /// <summary>
@@ -79,7 +76,9 @@ namespace WellPlateUserControl
         /// <returns>True if method succeeds and an out of range error if a values are higher than 26 or smaller than 1</returns>
         public bool SetWellPlateSize(int inputWidth, int inputHeight)
         {
-            if (inputWidth > 0 && inputWidth < _alphabet.Length && inputHeight > 0 && inputHeight < _alphabet.Length)
+            if (inputWidth > 0 && inputWidth < _alphabet.Length 
+                               && inputHeight > 0 
+                               && inputHeight < _alphabet.Length)
             {
                 _heightWellPlate = inputHeight;
                 _widthWellPlate = inputWidth;
@@ -87,20 +86,20 @@ namespace WellPlateUserControl
                 _coordinates.Clear();
 
                 //preparation for the coordinate system
-                _loopCounter = -1;
+                //_loopCounter = -1;
 
                 //clears the previous shapes
                 gGenerateWellPlate.Children.Clear();
 
-                _maxWidth = _maxWidth - 18;
-                _maxHeight = _maxHeight - 1;
+                _maxWidth -= 18;
+                _maxHeight -= 1;
 
                 //generates the shapes
                 for (int height = 0; height < _heightWellPlate; height++)
                 {
                     for (int width = 0; width < _widthWellPlate; width++)
                     {
-                        _loopCounter++;
+                        //_loopCounter++;
 
                         //creates ellipse
                         Rectangle ellipse = new Rectangle()
@@ -112,8 +111,7 @@ namespace WellPlateUserControl
                         };
 
                         _coordinates.Add(ellipse.Name);
-                        //makes it  the color from the combobox
-
+                        
                         //checks if the user wants a rectangle. Otherwise it will round the rectangles so it looks like circles.
                         if (_setRectangle)
                         {
@@ -128,7 +126,8 @@ namespace WellPlateUserControl
                             _shapeDistance = 1;
                         }
 
-
+                        //checks if the user has set a maximum height, otherwise it is going to use the maximum width that is set
+                        //default if the maximum width is not set is 600
                         if (_setMaxHeight)
                         {
                             ellipse.Width = _maxHeight / (_shapeDistance * (_heightWellPlate + 1));
@@ -144,12 +143,12 @@ namespace WellPlateUserControl
                         if (_setStrokeColor)
                         {
                             ellipse.Stroke = new SolidColorBrush(_strokeColor);
-                            ellipse.StrokeThickness = ellipse.Width * _strokeThickness; //0.08 is around 16% of circle 
+                            ellipse.StrokeThickness = ellipse.Width * _strokeThickness;
                         }
 
                         //takes care of the position of the ellipse
                         ellipse.Margin = new Thickness(
-                            width * ellipse.Width * _shapeDistance /** _circleSizeMultiplier*/, //left
+                            width * ellipse.Width * _shapeDistance, //left
                             0,  //up
                             0, //right
                             (_heightWellPlate * ellipse.Width - (height * ellipse.Width) - ellipse.Height) * _shapeDistance); //down
@@ -159,66 +158,44 @@ namespace WellPlateUserControl
                         gGenerateWellPlate.Children.Add(ellipse);
                     }
                 }
-
                 return true;
             }
             else
             {
-
                 throw new ArgumentOutOfRangeException($"Number can't be bigger than 26 or smaller than 1: length = {inputWidth}, width = {inputHeight}");
             }
         }
 
         /// <summary>
-        /// <para>Converts the inputted gridcolor to a readable format for the code.</para>
-        /// <example>Use: 'Colors.[wishedColor]' without square brackets</example>
+        /// <para>Converts the entered gridcolor to a readable format for the code.</para>
+        /// <example>Use: 'Colors.Red' (without quotes).</example>
         /// </summary>
         /// <param name="gridColor">the color of the grid</param>
-        /// <returns>True if the color succeeds to be puth inside the variable and an error if it fails to be put inside the variable</returns>
+        /// <returns>True if the color succeeds to be put inside the variable and an error if it fails to be put inside the variable</returns>
         public bool SetGridColor(Color gridColor)
         {
-
-            try
-            {
-                _colorConverter = gridColor; 
-                _setTheGridColor = true;
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex + Environment.NewLine + "Can't convert color, are you sure you're using a valid color?");
-                return false;
-            }
+            _colorConverter = gridColor; 
+            return true;            
         }
 
         /// <summary>
-        /// <para>Converts the inputted clickcolor to a readable format for the code.</para>
+        /// <para>Converts the entered clickcolor to a readable format for the code.</para>
         /// <example>Use: 'Colors.[wishedColor]' without square brackets</example>
         /// </summary>
         /// <param name="clickColor">the color of the wells that you see when you click on them. Is also used for the coordinate system colors</param>
-        /// <returns>True if the color succeeds to be puth inside the variable and an error if it fails to be put inside the variable</returns>
+        /// <returns>True if the color succeeds to be put inside the variable and an error if it fails to be put inside the variable</returns>
         public bool SetClickColor(Color clickColor)
         {
-            try
-            {
-                _clickColorConverter = clickColor;
-                _setTheClickColor = true;
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex + $"{Environment.NewLine}Can't convert color, are you sure you're using a valid color ?");
-                return false;
-
-            }
-
+            _clickColorConverter = clickColor;
+            return true;
         }
 
         /// <summary>
         /// <para>Give a number or a coordinate and the coordinate will get the 'click' color.</para>
         /// <para>Use '<b>;</b>' to highlight more coordinates. Works with numbers and coordinates</para>
+        /// <para>For the next examples a 8x6 wellplate is being used</para>
         /// <para><b>Example:</b> 'A4' colors the 4th circle on the upper row.</para>
-        /// <para><b>Example 2:</b> '4' also colors the 4th circle on the upper row</para>
+        /// <para><b>Example 2:</b> '4' also colors the 4th circle on the first column</para>
         /// <para><b>Example:</b> 'A1;B3;B5;20' wil highlight all these coordinates</para>
         /// </summary>
         /// <param name="coordinate">the coordinate that is about to get colored. Put an ';' in it if you need to color more coordinates</param>
@@ -226,14 +203,14 @@ namespace WellPlateUserControl
         public bool ColorCoordinate(string coordinate)
         {
             string formattedCoordinate;
-            _coordinatesForColor = coordinate.Split(";".Trim()).ToList();
+            List<string> coordinatesForColor = coordinate.Split(";".Trim()).ToList();
 
             try
             {
                 //coordinate to color system
-                foreach (string newCoordinate in _coordinatesForColor)
+                foreach (string newCoordinate in coordinatesForColor)
                 {
-                    if (newCoordinate != "")
+                    if (!string.IsNullOrWhiteSpace(newCoordinate))
                     {
                         foreach (object child in gGenerateWellPlate.Children)
                         {
@@ -241,25 +218,26 @@ namespace WellPlateUserControl
 
                             formattedCoordinate = newCoordinate.Trim();
 
-                            //is number
-                            if (int.TryParse(formattedCoordinate.Trim(), out int checkNumber))
+                            if (ellipse != null)
                             {
-                                if (ellipse.Name.Split("_")[1] == formattedCoordinate)
+                                //is number
+                                if (char.IsDigit(formattedCoordinate[0]))
                                 {
-                                    ellipse.Fill = new SolidColorBrush(_clickColorConverter);
-
+                                    if (ellipse.Name.Split("_")[1] == formattedCoordinate)
+                                    {
+                                        ellipse.Fill = new SolidColorBrush(_clickColorConverter);
+                                    }
                                 }
-                            }
 
-                            //is alphabetic
-                            else
-                            {
-                                _createEllipseName = $"{formattedCoordinate.ToUpper()}";
-
-                                if (ellipse.Name.Split("_")[0] == _createEllipseName)
+                                //is alphabetic
+                                else
                                 {
+                                    _createEllipseName = $"{formattedCoordinate.ToUpper()}";
 
-                                    ellipse.Fill = new SolidColorBrush(_clickColorConverter);
+                                    if (ellipse.Name.Split("_")[0] == _createEllipseName)
+                                    {
+                                        ellipse.Fill = new SolidColorBrush(_clickColorConverter);
+                                    }
                                 }
                             }
                         }
@@ -271,10 +249,9 @@ namespace WellPlateUserControl
             {
                 MessageBox.Show(ex + $"{Environment.NewLine}Something went wrong with the coordinates. Are you sure you are using coordinates or numbers?");
                 return false;
-
-
             }
         }
+
         /// <summary>
         /// <para>Set <b>after</b> the WellPlateSize</para>
         /// <para>This function is being used to color a well based on the corresponding coordinate and color.</para>
@@ -285,24 +262,15 @@ namespace WellPlateUserControl
         /// <returns>True if it succeeds and false if it doesn't succeed in coloring the correct coordinate</returns>
         public bool ColorCoordinate(string coordinate, Color chosenColor)
         {
-            try
+            foreach (object child in gGenerateWellPlate.Children)
             {
-                foreach (object child in gGenerateWellPlate.Children)
+                Rectangle ellipse = child as Rectangle;
+                if (ellipse.Name.Split("_")[0] == coordinate.ToUpper().Trim())
                 {
-                    Rectangle ellipse = child as Rectangle;
-                    if (ellipse.Name.Split("_")[0] == coordinate.ToUpper().Trim())
-                    {
-                        ellipse.Fill = new SolidColorBrush(chosenColor);
-                        
-                    }
+                    ellipse.Fill = new SolidColorBrush(chosenColor);                        
                 }
-                return true;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex + $"{Environment.NewLine}");
-                return false;
-            }
+            return true;
         }
 
         /// <summary>
@@ -315,26 +283,16 @@ namespace WellPlateUserControl
         /// <returns>True if it succeeds and false if it doesn't succeed in coloring the correct coordinate</returns>
         public bool ColorCoordinate(int coordinate, Color chosenColor)
         {
-            try
+            foreach (object child in gGenerateWellPlate.Children)
             {
-                foreach (object child in gGenerateWellPlate.Children)
+                Rectangle ellipse = child as Rectangle;
+                if (ellipse.Name.Split("_")[1] == coordinate.ToString())
                 {
-                    Rectangle ellipse = child as Rectangle;
-                    if (ellipse.Name.Split("_")[1] == coordinate.ToString())
-                    {
-                        ellipse.Fill = new SolidColorBrush(chosenColor);
-                        
-                    }
+                    ellipse.Fill = new SolidColorBrush(chosenColor);                        
                 }
-                return true;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex + $"{Environment.NewLine}");
-                return false;
-            }
+            return true;
         }
-
 
         /// <summary>
         /// <para>If you click an ellipse, it will get the color of the 'clickcolor'.</para>
@@ -344,7 +302,6 @@ namespace WellPlateUserControl
         /// <param name="e"></param>
         private void ClickForColor(object sender, MouseButtonEventArgs e)
         {
-
             //loops through each of the ellipses
             foreach (object child in gGenerateWellPlate.Children)
             {
@@ -362,72 +319,34 @@ namespace WellPlateUserControl
                             if (brush.Color == _colorConverter) //_colorConverter
                             {
                                 ellipse.Fill = new SolidColorBrush(_clickColorConverter); //_clickColorConverter
-                               
-
                                 Debug.WriteLine($"{ellipse.Name}: turned on");
                             }
                             //if an ellipse is the clicked color, convert it to the first color if you click it
                             else
                             {
                                 ellipse.Fill = new SolidColorBrush(_colorConverter); //_colorConverter
-                                
-
                                 Debug.WriteLine($"{ellipse.Name}: turned off");
                             }
-                        }
-                        
+                        }                        
                     }
-
                 }
-
             }
-
-        }
-
-        /// <summary>
-        /// <para>Set this before the wellplatesize</para>
-        /// <para>Sets the size of the circles. It works as a multiplier</para>
-        /// <example>So '2' is 2 times as big as the circles are normally and '0.5' is half so big as it is normally</example>
-        /// </summary>
-        /// <param name="circleSizeMultiplier"></param>
-        public bool SetCircleSize(double circleSizeMultiplier)
-        {
-            try
-            {
-                _circleSizeMultiplier = circleSizeMultiplier;
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex + $"{Environment.NewLine}Could not convert the value for circlesize. Are you sure you are using a float?");
-                return false;
-            }
-
-
         }
 
         /// <summary>
         /// <para>Set <b>before</b> the wellplatesize</para>
         /// <para>Used to give an outline color to the circles in the wellplate.</para>
         /// <para>Give second argument to set the thickness of the stroke.</para>
-        /// <example>Use: Colors.[wishedColor] without brackets</example>
-        /// <exmple>Use: 15 for a 15% thick border in the ellipse</exmple>
+        /// <example>Use: Colors.Green</example><br></br>
+        /// <example>Use: 15 for a 15% thick border in the ellipse</example>
         /// </summary>
         /// <param name="strokeColor">Color of the stroke</param>
-        /// <returns>True if succeeds or false if it doesn't succeed</returns>
+        /// <returns>True if it succeeds or false if it doesn't succeed</returns>
         public bool SetStroke(Color strokeColor)
         {
-            try
-            {
-                _strokeColor = strokeColor;
-                _setStrokeColor = true;
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex + $"{Environment.NewLine}Could not convert color. Are you sure you are using a valid color?");
-                return false;
-            }
+            _strokeColor = strokeColor;
+            _setStrokeColor = true;
+            return true;
         }
 
         /// <summary>
@@ -439,21 +358,13 @@ namespace WellPlateUserControl
         /// </summary>
         /// <param name="strokeColor">The color of the stroke.</param>
         /// <param name="strokeThickness">The thickness of the stroke in percentages.</param>
-        /// <returns></returns>
+        /// <returns>True if it succeeds and false if it doesn't succeed.</returns>
         public bool SetStroke(Color strokeColor, double strokeThickness)
         {
-            try
-            {
-                _strokeColor = strokeColor;
-                _setStrokeColor = true;
-                _strokeThickness = strokeThickness / 100 / 2;
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex + $"{Environment.NewLine}Could not convert color. Are you sure you are using a valid color?");
-                return false;
-            }
+            _strokeColor = strokeColor;
+            _strokeThickness = strokeThickness / 100 / 2;
+            _setStrokeColor = true;
+            return true;
         }
 
 
@@ -464,7 +375,7 @@ namespace WellPlateUserControl
         /// </summary>
         /// <param name="coordinate">Integer that gets used to convert to the correct coordinate</param>
         /// <returns>String with the coordinate the number is linked to. If it doesn't find anything, it will return "nothing found"</returns>
-        public string CoordinateConverter(int coordinate)
+        public string NumberToCoordinate(int coordinate)
         {
             foreach (string loopedCoordinate in _coordinates)
             {
@@ -473,7 +384,7 @@ namespace WellPlateUserControl
                     return $"{loopedCoordinate.Split("_")[0]}";
                 }
             }
-            return "nothing found";
+            return "";
         }
 
         /// <summary>
@@ -482,7 +393,7 @@ namespace WellPlateUserControl
         /// </summary>
         /// <param name="coordinate">String that gets used to convert to the correct number</param>
         /// <returns>Integer with the number the coordinate is linked to. If it doesn't find anything, it will return '-1'</returns>
-        public int CoordinateConverter(string coordinate)
+        public int CoordinateToNumber(string coordinate)
         {
             foreach (string loopedCoordinate in _coordinates)
             {
@@ -528,7 +439,6 @@ namespace WellPlateUserControl
             }
             
             Debug.WriteLine(_notColoredCoordinates.Count);
-            
             return _notColoredCoordinates;
         }
 
@@ -550,12 +460,8 @@ namespace WellPlateUserControl
                     {
                         _coloredCoordinates.Add(ellipse.Name.Split("_")[0]);
                     }
-
                 }
-            }
-
-
-            
+            }            
         }
 
         /// <summary>
@@ -623,7 +529,5 @@ namespace WellPlateUserControl
             
             return true;
         }
-
-
     }
 }

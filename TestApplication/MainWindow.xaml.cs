@@ -29,18 +29,18 @@ namespace TestApplication
             InitializeComponent();
 
             globalWellPlate.IsEditable();
-            //globalWellPlate.SetGridColor(Colors.Purple);
-            //globalWellPlate.SetClickColor(Colors.Tan);
+            globalWellPlate.SetGridColor(Colors.Black);
+            globalWellPlate.SetClickColor(Colors.Red);
             globalWellPlate.SetStroke(Colors.Blue);
-            globalWellPlate.SetStroke(Colors.LightGray, 40);
-            //globalWellPlate.SetCircleSize(3.9);
+            globalWellPlate.SetStroke(Colors.DarkBlue, 20);
             //globalWellPlate.IsRectangle();
-            globalWellPlate.SetMaxHeight(600);
-            globalWellPlate.SetMaxWidth(700);
+            //globalWellPlate.SetMaxHeight(600);
+            globalWellPlate.SetMaxWidth(600);
             globalWellPlate.SetWellPlateSize(3, 3); //width, height
             //globalWellPlate.ColorCoordinate("A2;5"); //multiple coordinates get split with a ';'
             globalWellPlate.ColorCoordinate(3, Colors.Green);
-            globalWellPlate.ColorCoordinate("A3", Colors.DarkBlue);
+            globalWellPlate.ColorCoordinate("A3", Colors.DarkCyan);
+            globalWellPlate.ColorCoordinate("B3", Colors.Turquoise);
             globalWellPlate.ColorCoordinate("B1");
             //Debug.WriteLine(globalWellPlate.CoordinateConverter(4));
             //Debug.WriteLine(globalWellPlate.GetLastClickedCoordinate());

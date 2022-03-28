@@ -20,13 +20,13 @@ namespace WellPlateUserControl
 
         public bool ColorCoordinate(int coordinate, Color chosenColor);
 
-        bool SetCircleSize(double circleSizeMultiplier);
+        //bool SetCircleSize(double circleSizeMultiplier);
 
         bool SetStroke(Color strokeColor, double strokeThickness);
 
-        string CoordinateConverter(int coordinate);
+        string NumberToCoordinate(int coordinate);
 
-        int CoordinateConverter(string coordinate);
+        int CoordinateToNumber(string coordinate);
 
         List<string> GiveColoredList();
 
