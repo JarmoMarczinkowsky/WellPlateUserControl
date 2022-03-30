@@ -396,9 +396,14 @@ namespace WellPlateUserControl
         /// <example>Example: 'D1' in a 8x6 grid returns 4</example>
         /// </summary>
         /// <param name="coordinate">String that gets used to convert to the correct number</param>
-        /// <returns>Integer with the number the coordinate is linked to. If it doesn't find anything, it will return '-1'</returns>
+        /// <returns>Integer with the number the coordinate is linked to. <br>If it doesn't find anything, it will return -1</br>.<br>If it notices a null or whitespace it will return -2.</br></returns>
         public int CoordinateToNumber(string coordinate)
         {
+            if (String.IsNullOrWhiteSpace(coordinate))
+            {
+                return -2;
+            }
+
             foreach (string loopedCoordinate in _coordinates)
             {
                 if (loopedCoordinate.Split("_")[0] == coordinate.ToUpper())

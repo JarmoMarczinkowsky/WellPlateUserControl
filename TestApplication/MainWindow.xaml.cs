@@ -32,7 +32,7 @@ namespace TestApplication
             //globalWellPlate.SetGridColor(Colors.Black);
             //globalWellPlate.SetClickColor(Colors.SteelBlue);
             //globalWellPlate.SetStroke(Color.FromRgb(0,255,0));
-            globalWellPlate.SetStroke(Colors.Gold, -50);
+            globalWellPlate.SetStroke(Colors.Gold, 50);
             //globalWellPlate.IsRectangle(null);
             //globalWellPlate.SetMaxWidth(800);
             //globalWellPlate.SetMaxHeight(700);
@@ -43,12 +43,12 @@ namespace TestApplication
             //globalWellPlate.ColorCoordinate("B3", Colors.Turquoise);
             //globalWellPlate.ColorCoordinate("B1");
             //Debug.WriteLine(globalWellPlate.NumberToCoordinate(1));
-            //Debug.WriteLine(globalWellPlate.CoordinateToNumber("1"));
+            Debug.WriteLine(globalWellPlate.CoordinateToNumber(null));
             //Debug.WriteLine(globalWellPlate.GetLastClickedCoordinate());
             //globalWellPlate.GiveColoredList();
             //globalWellPlate.GiveNotColoredList();
 
-            
+
 
         }
 

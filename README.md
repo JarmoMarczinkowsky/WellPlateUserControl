@@ -50,12 +50,17 @@ Enter "A5", with the double quotes, to color coordinate a5. Enter "3", with the 
 Set this function after the WellPlateSize.
 [Optional]
 ```
-CoordinateConverter(coordinate or number)
+NumberToCoordinate(number)
 ```
 Returns the coordinate belonging to that number. For example: '4' returns 'D4' in a 8x6 wellplate.
-Also works with coordinates. For example: "D4" returns '4' in a 8x6 wellplate.
 Set this function after the WellPlateSize.
 [Optional]
+```
+CoordinateToNumber(coordinate)
+```
+Returns the number belonging to that coordinate. 
+For example: "D4" returns '4' in a 8x6 wellplate.
+Set this function after the WellPlateSize.
 ```
 GiveColoredList()
 ```
