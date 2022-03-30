@@ -36,10 +36,11 @@ Sets the size of the wellplate. The first number is the width and the second num
 Set this function after the colors, circlesize and/or the rectangle and before the coordinateconverter and/or functions that return items
 [Mandatory]
 ```
-ColorCoordinate(coordinate or number)
+ColorCoordinate(coordinate or number, [optional] Colors.[wishedColor])
 ```
-Works with a string. It colors the coordinate that you enter with the 'clickColor' you entered earlier. 
+Works with strings and numbers. It colors the coordinate that you enter with the 'clickColor' you entered earlier. 
 Enter "A5", with the double quotes, to color coordinate a5. Enter "3", with the double quotes, to color the third well in the wellplate.
+The '[optional]' is optional and takes care of the color of the chosen well.
 Set this function after the WellPlateSize.
 [Optional]
 ```
