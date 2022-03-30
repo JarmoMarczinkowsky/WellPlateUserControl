@@ -34,8 +34,5 @@ namespace WellPlateUserControl
 
         public bool IsRectangle();
 
-        public bool SetMaxWidth(int maxWidth);
-
-
     }
 }

@@ -81,10 +81,5 @@ namespace WellPlateUserControl
             return _wellPlate.IsRectangle();
         }
 
-        public bool SetMaxWidth(int maxWidth)
-        {
-            return _wellPlate.SetMaxWidth(maxWidth);
-        }
-
     }
 }

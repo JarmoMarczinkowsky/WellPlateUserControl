@@ -27,7 +27,7 @@ namespace WellPlateUserControl
         
         private int _widthWellPlate;
         private int _heightWellPlate;
-        private int _maxWidth = 600;
+        public int MaxWidth = 600;
         public int MaxHeight = 600;
 
         private float _shapeDistance = 1;
@@ -83,6 +83,17 @@ namespace WellPlateUserControl
                 _setMaxHeight = true;
             }
 
+            if (MaxWidth < 1)
+            {
+                throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 1");
+
+            }
+            else if (MaxWidth != 600)
+            {
+                _setMaxWidth = true;
+            }
+
+
 
             if (inputWidth > 0 && inputWidth < _alphabet.Length 
                                && inputHeight > 0 
@@ -96,7 +107,7 @@ namespace WellPlateUserControl
                 //clears the previous shapes
                 gGenerateWellPlate.Children.Clear();
 
-                _maxWidth -= 18;
+                MaxWidth -= 18;
                 MaxHeight -= 50;
 
                 //generates the shapes
@@ -140,8 +151,8 @@ namespace WellPlateUserControl
                         }
                         else
                         {
-                            rectangle.Width = _maxWidth / (_shapeDistance  * _widthWellPlate);
-                            rectangle.Height = _maxWidth / (_shapeDistance * _widthWellPlate);
+                            rectangle.Width = MaxWidth / (_shapeDistance  * _widthWellPlate);
+                            rectangle.Height = MaxWidth / (_shapeDistance * _widthWellPlate);
                         }
                         
                         //checks if stroke color is set and sets the stroke afterwards.
@@ -506,25 +517,6 @@ namespace WellPlateUserControl
         {
             _setRectangle = true;
             return true;
-        }
-
-        /// <summary>
-        /// <para>Set this function <b>before</b> the WellPlateSize</para>
-        /// <para>Used to set the maximum width in pixels of the wellplate.</para>
-        /// <para>Default is 600.</para>
-        /// <para>Will choose the highest line of code if both are set.</para>
-        /// </summary>
-        /// <param name="maxWidth">Integer that is used for the maximum width in pixels.</param>
-        /// <returns>True, because I can't return a void.</returns>
-        public bool SetMaxWidth(int maxWidth)
-        {
-            if (maxWidth >= 1)
-            {
-                _maxWidth = maxWidth;
-                _setMaxWidth = true;
-                return true;
-            }
-            throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 1");            
         }
 
         
