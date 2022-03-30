@@ -27,7 +27,6 @@ namespace WellPlateUserControl
         
         private int _widthWellPlate;
         private int _heightWellPlate;
-
         private int _maxWidth = 600;
         private int _maxHeight = 600;
 
@@ -82,9 +81,6 @@ namespace WellPlateUserControl
 
                 _coordinates.Clear();
 
-                //preparation for the coordinate system
-                //_loopCounter = -1;
-
                 //clears the previous shapes
                 gGenerateWellPlate.Children.Clear();
 
@@ -103,7 +99,7 @@ namespace WellPlateUserControl
                         {
                             VerticalAlignment = VerticalAlignment.Bottom,
                             HorizontalAlignment = HorizontalAlignment.Left,
-                            Name = $"{_alphabet[height]}{width + 1}_{1 + height + _heightWellPlate * width}", //$"{_alphabet[height]}{width + 1}_{_loopCounter + 1}"
+                            Name = $"{_alphabet[height]}{width + 1}_{1 + height + _heightWellPlate * width}",
                             Fill = new SolidColorBrush(_colorConverter)
                         };
 
@@ -144,11 +140,12 @@ namespace WellPlateUserControl
                         }
 
                         //takes care of the position of the rectangle
+                        //directions: left, up, right, down
                         rectangle.Margin = new Thickness(
-                            width * rectangle.Width * _shapeDistance, //left
-                            0,  //up
-                            0, //right
-                            (_heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) * _shapeDistance); //down
+                            width * rectangle.Width * _shapeDistance, 
+                            0,  
+                            0, 
+                            (_heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) * _shapeDistance); 
 
                         _coordinates.Add(rectangle.Name);
                         
@@ -322,7 +319,7 @@ namespace WellPlateUserControl
                         if (brush != null)
                         {
                             _lastClickedCoordinate = $"{rectangle.Name.Split("_")[0]}";
-                            if (/*_setTheClickColor && */_isWellEditable)
+                            if (_isWellEditable)
                             {
                                 //if an rectangle is the first color, convert it to the other color if you click it
                                 if (brush.Color == _colorConverter) //_colorConverter
@@ -432,7 +429,6 @@ namespace WellPlateUserControl
         public List<string> GiveColoredList()
         {
             UpdateColoredList();
-
             
             return _coloredCoordinates;
         }
@@ -456,8 +452,6 @@ namespace WellPlateUserControl
                     _notColoredCoordinates.Add(rectangle.Name.Split("_")[0]);
                 }
             }
-            
-           
             return _notColoredCoordinates;
         }
 
@@ -532,8 +526,7 @@ namespace WellPlateUserControl
                 _setMaxWidth = true;
                 return true;
             }
-            throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 1");
-            
+            throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 1");            
         }
 
         /// <summary>
