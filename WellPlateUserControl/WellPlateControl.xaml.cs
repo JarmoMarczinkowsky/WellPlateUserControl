@@ -199,6 +199,11 @@ namespace WellPlateUserControl
         /// <returns>True if everything succeeds or false if the code fails</returns>
         public bool ColorCoordinate(string coordinate)
         {
+            if (String.IsNullOrWhiteSpace(coordinate))
+            {
+                return false;
+            }
+
             string formattedCoordinate;
             List<string> coordinatesForColor = coordinate.Split(";".Trim()).ToList();
 
@@ -259,6 +264,11 @@ namespace WellPlateUserControl
         /// <returns>True if it succeeds and false if it doesn't succeed in coloring the correct coordinate</returns>
         public bool ColorCoordinate(string coordinate, Color chosenColor)
         {
+            if (String.IsNullOrWhiteSpace(coordinate))
+            {
+                return false;
+            }
+
             foreach (object child in gGenerateWellPlate.Children)
             {
                 Rectangle rectangle = child as Rectangle;
