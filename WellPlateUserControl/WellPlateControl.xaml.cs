@@ -35,7 +35,7 @@ namespace WellPlateUserControl
         private double _strokeThickness = 0.08;
 
         private bool _setStrokeColor;
-        private bool _setRectangle;
+        public bool IsRectangle;
         private bool _setMaxWidth;
         private bool _setMaxHeight;
         
@@ -129,7 +129,7 @@ namespace WellPlateUserControl
                         _coordinates.Add(rectangle.Name);
                         
                         //checks if the user wants a rectangle. Otherwise it will round the rectangles so it looks like circles.
-                        if (_setRectangle)
+                        if (IsRectangle)
                         {
                             rectangle.RadiusX = 0;
                             rectangle.RadiusY = 0;
@@ -506,17 +506,6 @@ namespace WellPlateUserControl
         public string GetLastClickedCoordinate()
         {
             return _lastClickedCoordinate;
-        }
-
-        /// <summary>
-        /// <para>Set <b>before</b> the wellplatesize</para>
-        /// <para>Makes all the wells rectangles instead of rectangles</para>
-        /// </summary>
-        /// <returns>True</returns>
-        public bool IsRectangle()
-        {
-            _setRectangle = true;
-            return true;
         }
 
         

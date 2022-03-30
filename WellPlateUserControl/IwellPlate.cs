@@ -32,7 +32,5 @@ namespace WellPlateUserControl
 
         public string GetLastClickedCoordinate();
 
-        public bool IsRectangle();
-
     }
 }

@@ -76,10 +76,5 @@ namespace WellPlateUserControl
             return _wellPlate.GetLastClickedCoordinate();
         }
 
-        public bool IsRectangle()
-        {
-            return _wellPlate.IsRectangle();
-        }
-
     }
 }

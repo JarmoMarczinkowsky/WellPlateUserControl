@@ -32,9 +32,9 @@ namespace TestApplication
             //globalWellPlate.SetClickColor(Colors.SteelBlue);
             globalWellPlate.SetStroke(Color.FromRgb(0, 255, 0));
             globalWellPlate.SetStroke(Colors.Gold, 50);
-            //globalWellPlate.IsRectangle(null);
             //globalWellPlate.MaxWidth = 800;
             //globalWellPlate.MaxHeight = 400;
+            globalWellPlate.IsRectangle = true;
             globalWellPlate.SetWellPlateSize(8,6); //width, height
             globalWellPlate.IsEditable = true;
             //globalWellPlate.ColorCoordinate("a1;A2"); //multiple coordinates get split with a ';'
