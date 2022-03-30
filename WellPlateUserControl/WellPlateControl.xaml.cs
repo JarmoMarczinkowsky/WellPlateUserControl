@@ -201,7 +201,7 @@ namespace WellPlateUserControl
         {
             if (String.IsNullOrWhiteSpace(coordinate))
             {
-                return false;
+                throw new ArgumentNullException("coordinate does not take 'null' for an argument.");
             }
 
             string formattedCoordinate;
@@ -266,7 +266,7 @@ namespace WellPlateUserControl
         {
             if (String.IsNullOrWhiteSpace(coordinate))
             {
-                return false;
+                throw new ArgumentNullException("coordinate does not take 'null' for an argument.");
             }
 
             foreach (object child in gGenerateWellPlate.Children)
@@ -411,7 +411,7 @@ namespace WellPlateUserControl
         {
             if (String.IsNullOrWhiteSpace(coordinate))
             {
-                return -2;
+                throw new ArgumentNullException("coordinate does not take 'null' for an argument.");
             }
 
             foreach (string loopedCoordinate in _coordinates)
@@ -526,9 +526,14 @@ namespace WellPlateUserControl
         /// <returns>True, because I can't return a void.</returns>
         public bool SetMaxWidth(int maxWidth)
         {
-            _maxWidth = maxWidth;
-            _setMaxWidth = true;
-            return true;
+            if (maxWidth >= 1)
+            {
+                _maxWidth = maxWidth;
+                _setMaxWidth = true;
+                return true;
+            }
+            throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 1");
+            
         }
 
         /// <summary>
