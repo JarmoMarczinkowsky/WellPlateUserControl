@@ -246,8 +246,7 @@ namespace WellPlateUserControl
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex + $"{Environment.NewLine}Something went wrong with the coordinates. Are you sure you are using coordinates or numbers?");
-                return false;
+                throw new Exception(ex.ToString());
             }
         }
 
@@ -322,15 +321,15 @@ namespace WellPlateUserControl
                             if (_isWellEditable)
                             {
                                 //if an rectangle is the first color, convert it to the other color if you click it
-                                if (brush.Color == _colorConverter) //_colorConverter
+                                if (brush.Color == _colorConverter)
                                 {
-                                    rectangle.Fill = new SolidColorBrush(_clickColorConverter); //_clickColorConverter
+                                    rectangle.Fill = new SolidColorBrush(_clickColorConverter);
                                     Debug.WriteLine($"{rectangle.Name}: turned on");
                                 }
                                 //if an rectangle is the clicked color, convert it to the first color if you click it
                                 else
                                 {
-                                    rectangle.Fill = new SolidColorBrush(_colorConverter); //_colorConverter
+                                    rectangle.Fill = new SolidColorBrush(_colorConverter);
                                     Debug.WriteLine($"{rectangle.Name}: turned off");
                                 }
                             }
