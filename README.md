@@ -24,13 +24,6 @@ The [optional] part is optional and defines the thickness of the stroke.
 Thickness of the stroke is set in percentages.
 [Optional]
 ```
-SetCircleSize(number)
-```
-Set the size of the wells in your usercontrol. It works as a multiplier, so '2' is 2 times as big as it is normally.
-'0.5' is half so big as it is normally.
-Set this function before the WellPlateSize.
-[Optional]
-```
 IsRectangle()
 ```
 Makes every well a rectangle instead of a circle. Will also increase the distance between the wells with 5 percent.
