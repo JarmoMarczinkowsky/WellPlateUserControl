@@ -28,31 +28,34 @@ namespace TestApplication
         {
             InitializeComponent();
 
-            globalWellPlate.IsEditable();
-            globalWellPlate.SetGridColor(Colors.Black);
-            globalWellPlate.SetClickColor(Colors.Red);
-            globalWellPlate.SetStroke(Colors.Blue);
-            globalWellPlate.SetStroke(Colors.DarkBlue, 20);
-            globalWellPlate.IsRectangle();
-            globalWellPlate.SetMaxHeight(600);
-            //globalWellPlate.SetMaxWidth(600);
-            globalWellPlate.SetWellPlateSize(8, 4); //width, height
-            //globalWellPlate.ColorCoordinate("A2;5"); //multiple coordinates get split with a ';'
-            globalWellPlate.ColorCoordinate(3, Colors.Green);
-            globalWellPlate.ColorCoordinate("A3", Colors.DarkCyan);
-            globalWellPlate.ColorCoordinate("B3", Colors.Turquoise);
-            globalWellPlate.ColorCoordinate("B1");
-            //Debug.WriteLine(globalWellPlate.CoordinateConverter(4));
+            //globalWellPlate.IsEditable();
+            //globalWellPlate.SetGridColor(Colors.Black);
+            //globalWellPlate.SetClickColor(Colors.SteelBlue);
+            //globalWellPlate.SetStroke(Color.FromRgb(0,255,0));
+            globalWellPlate.SetStroke(Colors.Gold, -50);
+            //globalWellPlate.IsRectangle(null);
+            //globalWellPlate.SetMaxWidth(800);
+            //globalWellPlate.SetMaxHeight(700);
+            globalWellPlate.SetWellPlateSize(8,6); //width, height
+            //globalWellPlate.ColorCoordinate("a1;A2"); //multiple coordinates get split with a ';'
+            //globalWellPlate.ColorCoordinate("A1", Colors.Crimson);
+            //globalWellPlate.ColorCoordinate("A3", Colors.DarkCyan);
+            //globalWellPlate.ColorCoordinate("B3", Colors.Turquoise);
+            //globalWellPlate.ColorCoordinate("B1");
+            //Debug.WriteLine(globalWellPlate.NumberToCoordinate(1));
+            //Debug.WriteLine(globalWellPlate.CoordinateToNumber("1"));
             //Debug.WriteLine(globalWellPlate.GetLastClickedCoordinate());
-            globalWellPlate.GiveColoredList();
-            globalWellPlate.GiveNotColoredList();
+            //globalWellPlate.GiveColoredList();
+            //globalWellPlate.GiveNotColoredList();
 
+            
 
         }
 
         private void ConnTest(object sender, RoutedEventArgs e)
         {
             //make sure the colors get set before the grid size
+            //Debug.WriteLine(globalWellPlate.GetLastClickedCoordinate());
             
 
         }

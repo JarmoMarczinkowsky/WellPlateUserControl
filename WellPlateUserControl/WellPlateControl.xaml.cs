@@ -362,9 +362,13 @@ namespace WellPlateUserControl
         public bool SetStroke(Color strokeColor, double strokeThickness)
         {
             _strokeColor = strokeColor;
-            _strokeThickness = strokeThickness / 100 / 2;
-            _setStrokeColor = true;
-            return true;
+            if (strokeThickness >= 0 && strokeThickness <= 100)
+            {
+                _strokeThickness = strokeThickness / 100 / 2;
+                _setStrokeColor = true;
+                return true;
+            }
+            throw new ArgumentOutOfRangeException("Thickness of the stroke can't be smaller than 0 or bigger than 100");
         }
 
 
