@@ -28,7 +28,7 @@ namespace WellPlateUserControl
         private int _widthWellPlate;
         private int _heightWellPlate;
         private int _maxWidth = 600;
-        private int _maxHeight = 600;
+        public int MaxHeight = 600;
 
         private float _shapeDistance = 1;
         
@@ -73,6 +73,17 @@ namespace WellPlateUserControl
         /// <returns>True if method succeeds and an out of range error if a values are higher than 26 or smaller than 1</returns>
         public bool SetWellPlateSize(int inputWidth, int inputHeight)
         {
+            if (MaxHeight < 1)
+            {
+                throw new ArgumentOutOfRangeException("maxHeight can't be smaller than 1");
+
+            }
+            else if (MaxHeight != 600)
+            {
+                _setMaxHeight = true;
+            }
+
+
             if (inputWidth > 0 && inputWidth < _alphabet.Length 
                                && inputHeight > 0 
                                && inputHeight < _alphabet.Length)
@@ -86,7 +97,7 @@ namespace WellPlateUserControl
                 gGenerateWellPlate.Children.Clear();
 
                 _maxWidth -= 18;
-                _maxHeight -= 50;
+                MaxHeight -= 50;
 
                 //generates the shapes
                 for (int height = 0; height < _heightWellPlate; height++)
@@ -124,8 +135,8 @@ namespace WellPlateUserControl
                         //default if the maximum width is not set is 600
                         if (_setMaxHeight)
                         {
-                            rectangle.Width = _maxHeight / (_shapeDistance * _heightWellPlate);
-                            rectangle.Height = _maxHeight / (_shapeDistance * _heightWellPlate); //(_heightWellPlate + 1)
+                            rectangle.Width = MaxHeight / (_shapeDistance * _heightWellPlate);
+                            rectangle.Height = MaxHeight / (_shapeDistance * _heightWellPlate); //(_heightWellPlate + 1)
                         }
                         else
                         {
@@ -516,26 +527,6 @@ namespace WellPlateUserControl
             throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 1");            
         }
 
-        /// <summary>
-        /// <para>Set this function <b>before</b> the WellPlateSize</para>
-        /// <para>Used to set the maximum height in pixels of the wellplate.</para>
-        /// <para>Will choose the highest line of code if both are set.</para>
-        /// </summary>
-        /// <param name="maxHeight">Integer that is used for the maximum height in pixels.</param>
-        /// <returns>True, because I can't return a void.</returns>
-        public bool SetMaxHeight(int maxHeight)
-        {
-            if (maxHeight < 1)
-            {
-                throw new ArgumentOutOfRangeException("maxHeight can't be smaller than 1");
-            }
-            _maxHeight = maxHeight;
-            if (!_setMaxWidth)
-            {
-                _setMaxHeight = true;
-            }
-            
-            return true;
-        }
+        
     }
 }

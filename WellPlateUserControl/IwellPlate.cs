@@ -36,7 +36,6 @@ namespace WellPlateUserControl
 
         public bool SetMaxWidth(int maxWidth);
 
-        public bool SetMaxHeight(int maxHeight);
 
     }
 }
