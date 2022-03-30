@@ -20,8 +20,6 @@ namespace WellPlateUserControl
 
         public bool ColorCoordinate(int coordinate, Color chosenColor);
 
-        //bool SetCircleSize(double circleSizeMultiplier);
-
         bool SetStroke(Color strokeColor, double strokeThickness);
 
         string NumberToCoordinate(int coordinate);
@@ -35,8 +33,6 @@ namespace WellPlateUserControl
         public string GetLastClickedCoordinate();
 
         public bool IsRectangle();
-
-        public bool IsEditable();
 
         public bool SetMaxWidth(int maxWidth);
 

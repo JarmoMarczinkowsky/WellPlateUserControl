@@ -38,7 +38,8 @@ namespace WellPlateUserControl
         private bool _setRectangle;
         private bool _setMaxWidth;
         private bool _setMaxHeight;
-        private bool _isWellEditable;
+        
+        public bool IsEditable;
 
         private Color _colorConverter = Colors.Black;
         private Color _clickColorConverter = Colors.Red;
@@ -318,7 +319,7 @@ namespace WellPlateUserControl
                         if (brush != null)
                         {
                             _lastClickedCoordinate = $"{rectangle.Name.Split("_")[0]}";
-                            if (_isWellEditable)
+                            if (IsEditable)
                             {
                                 //if an rectangle is the first color, convert it to the other color if you click it
                                 if (brush.Color == _colorConverter)
@@ -342,9 +343,7 @@ namespace WellPlateUserControl
         /// <summary>
         /// <para>Set <b>before</b> the wellplatesize</para>
         /// <para>Used to give an outline color to the circles in the wellplate.</para>
-        /// <para>Give second argument to set the thickness of the stroke.</para>
         /// <example>Use: Colors.Green</example><br></br>
-        /// <example>Use: 15 for a 15% thick border in the rectangle</example>
         /// </summary>
         /// <param name="strokeColor">Color of the stroke</param>
         /// <returns>True if it succeeds or false if it doesn't succeed</returns>
@@ -495,17 +494,6 @@ namespace WellPlateUserControl
         public bool IsRectangle()
         {
             _setRectangle = true;
-            return true;
-        }
-
-        /// <summary>
-        /// <para>Makes the wellplate clickable. If you click a well, it will change to the set color you used for the clickcolor.</para>
-        /// <para>Default is turned off.</para>
-        /// </summary>
-        /// <returns>True, because I can't return a void.</returns>
-        public bool IsEditable()
-        {
-            _isWellEditable = true;
             return true;
         }
 
