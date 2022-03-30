@@ -34,8 +34,8 @@ namespace TestApplication
             //globalWellPlate.SetStroke(Color.FromRgb(0,255,0));
             //globalWellPlate.SetStroke(Colors.Gold, 50);
             //globalWellPlate.IsRectangle(null);
-            globalWellPlate.SetMaxWidth(-800);
-            //globalWellPlate.SetMaxHeight(700);
+            //globalWellPlate.SetMaxWidth(800);
+            globalWellPlate.SetMaxHeight(700);
             globalWellPlate.SetWellPlateSize(8,6); //width, height
             //globalWellPlate.ColorCoordinate("a1;A2"); //multiple coordinates get split with a ';'
             //globalWellPlate.ColorCoordinate("A1", Colors.Crimson);

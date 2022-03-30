@@ -545,6 +545,10 @@ namespace WellPlateUserControl
         /// <returns>True, because I can't return a void.</returns>
         public bool SetMaxHeight(int maxHeight)
         {
+            if (maxHeight < 1)
+            {
+                throw new ArgumentOutOfRangeException("maxHeight can't be smaller than 1");
+            }
             _maxHeight = maxHeight;
             if (!_setMaxWidth)
             {
