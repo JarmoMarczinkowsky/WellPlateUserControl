@@ -27,8 +27,8 @@ namespace WellPlateUserControl
         
         private int _widthWellPlate;
         private int _heightWellPlate;
-        public int MaxWidth = 600;
-        public int MaxHeight = 600;
+        public int SetMaxWidth = 600;
+        public int SetMaxHeight = 600;
 
         private float _shapeDistance = 1;
         
@@ -73,22 +73,22 @@ namespace WellPlateUserControl
         /// <returns>True if method succeeds and an out of range error if a values are higher than 26 or smaller than 1</returns>
         public bool SetWellPlateSize(int inputWidth, int inputHeight)
         {
-            if (MaxHeight < 1)
+            if (SetMaxHeight < 1)
             {
-                throw new ArgumentOutOfRangeException("maxHeight can't be smaller than 1");
+                throw new ArgumentOutOfRangeException("SetMaxHeight can't be smaller than 1");
 
             }
-            else if (MaxHeight != 600)
+            else if (SetMaxHeight != 600)
             {
                 _setMaxHeight = true;
             }
 
-            if (MaxWidth < 1)
+            if (SetMaxWidth < 1)
             {
                 throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 1");
 
             }
-            else if (MaxWidth != 600)
+            else if (SetMaxWidth != 600)
             {
                 _setMaxWidth = true;
             }
@@ -107,8 +107,8 @@ namespace WellPlateUserControl
                 //clears the previous shapes
                 gGenerateWellPlate.Children.Clear();
 
-                MaxWidth -= 18;
-                MaxHeight -= 50;
+                SetMaxWidth -= 18;
+                SetMaxHeight -= 50;
 
                 //generates the shapes
                 for (int height = 0; height < _heightWellPlate; height++)
@@ -146,13 +146,13 @@ namespace WellPlateUserControl
                         //default if the maximum width is not set is 600
                         if (_setMaxHeight)
                         {
-                            rectangle.Width = MaxHeight / (_shapeDistance * _heightWellPlate);
-                            rectangle.Height = MaxHeight / (_shapeDistance * _heightWellPlate); //(_heightWellPlate + 1)
+                            rectangle.Width = SetMaxHeight / (_shapeDistance * _heightWellPlate);
+                            rectangle.Height = SetMaxHeight / (_shapeDistance * _heightWellPlate); //(_heightWellPlate + 1)
                         }
                         else
                         {
-                            rectangle.Width = MaxWidth / (_shapeDistance  * _widthWellPlate);
-                            rectangle.Height = MaxWidth / (_shapeDistance * _widthWellPlate);
+                            rectangle.Width = SetMaxWidth / (_shapeDistance  * _widthWellPlate);
+                            rectangle.Height = SetMaxWidth / (_shapeDistance * _widthWellPlate);
                         }
                         
                         //checks if stroke color is set and sets the stroke afterwards.

@@ -32,8 +32,8 @@ namespace TestApplication
             //globalWellPlate.SetClickColor(Colors.SteelBlue);
             globalWellPlate.SetStroke(Color.FromRgb(0, 255, 0));
             globalWellPlate.SetStroke(Colors.Gold, 50);
-            //globalWellPlate.MaxWidth = 800;
-            //globalWellPlate.MaxHeight = 400;
+            globalWellPlate.SetMaxWidth = 400;
+            //globalWellPlate.SetMaxHeight = 400;
             globalWellPlate.IsRectangle = true;
             globalWellPlate.SetWellPlateSize(8,6); //width, height
             globalWellPlate.IsEditable = true;
