@@ -23,7 +23,7 @@ namespace WellPlateUserControl
     {
         const string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private string _createEllipseName;
-        private string _lastClickedCoordinate;
+        public string LastClickedCoordinate { get; private set; }
         
         private int _widthWellPlate;
         private int _heightWellPlate;
@@ -340,20 +340,20 @@ namespace WellPlateUserControl
                         SolidColorBrush brush = rectangle.Fill as SolidColorBrush;
                         if (brush != null)
                         {
-                            _lastClickedCoordinate = $"{rectangle.Name.Split("_")[0]}";
+                            LastClickedCoordinate = $"{rectangle.Name.Split("_")[0]}";
                             if (IsEditable)
                             {
                                 //if an rectangle is the first color, convert it to the other color if you click it
+                                //turns rectangle on
                                 if (brush.Color == _colorConverter)
                                 {
                                     rectangle.Fill = new SolidColorBrush(_clickColorConverter);
-                                    Debug.WriteLine($"{rectangle.Name}: turned on");
                                 }
                                 //if an rectangle is the clicked color, convert it to the first color if you click it
+                                //turns rectangle off
                                 else
                                 {
                                     rectangle.Fill = new SolidColorBrush(_colorConverter);
-                                    Debug.WriteLine($"{rectangle.Name}: turned off");
                                 }
                             }
                         }
@@ -497,16 +497,7 @@ namespace WellPlateUserControl
             }            
         }
 
-        /// <summary>
-        /// <para>Set after the WellPlateSize.</para>
-        /// <para>Returns the last clicked coordinate in a string.</para>
-        /// <example>For example: if you click 'A5' it will return 'A5'.</example>
-        /// </summary>
-        /// <returns>String with the last clicked coordinate.</returns>
-        public string GetLastClickedCoordinate()
-        {
-            return _lastClickedCoordinate;
-        }
+        
 
         
     }

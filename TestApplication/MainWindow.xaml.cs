@@ -44,7 +44,7 @@ namespace TestApplication
             //globalWellPlate.ColorCoordinate("B1");
             //Debug.WriteLine(globalWellPlate.NumberToCoordinate(1));
             //Debug.WriteLine(globalWellPlate.CoordinateToNumber(null));
-            //Debug.WriteLine(globalWellPlate.GetLastClickedCoordinate());
+            Debug.WriteLine(globalWellPlate.LastClickedCoordinate);
             //globalWellPlate.GiveColoredList();
             //globalWellPlate.GiveNotColoredList();
 
