@@ -28,7 +28,7 @@ namespace WellPlateUserControl
         private int _widthWellPlate;
         private int _heightWellPlate;
         public int SetMaxWidth = 600;
-        public int SetMaxHeight = 600;
+        public int SetMaxHeight = 601;
 
         private float _shapeDistance = 1;
         
@@ -54,6 +54,7 @@ namespace WellPlateUserControl
         {
             InitializeComponent();
             rectPlaceHolder.Visibility = Visibility.Hidden;
+            Debug.WriteLine("Before");
         }
 
         /// <summary>
@@ -76,9 +77,8 @@ namespace WellPlateUserControl
             if (SetMaxHeight < 1)
             {
                 throw new ArgumentOutOfRangeException("SetMaxHeight can't be smaller than 1");
-
             }
-            else if (SetMaxHeight != 600)
+            else if (SetMaxHeight != 601)
             {
                 _setMaxHeight = true;
             }
@@ -86,14 +86,8 @@ namespace WellPlateUserControl
             if (SetMaxWidth < 1)
             {
                 throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 1");
-
             }
-            else if (SetMaxWidth != 600)
-            {
-                _setMaxWidth = true;
-            }
-
-
+            
 
             if (inputWidth > 0 && inputWidth < _alphabet.Length 
                                && inputHeight > 0 
@@ -495,7 +489,7 @@ namespace WellPlateUserControl
                         _coloredCoordinates.Add(rectangle.Name.Split("_")[0]);
                     }
                 }
-            }            
+            }
         }
 
         
