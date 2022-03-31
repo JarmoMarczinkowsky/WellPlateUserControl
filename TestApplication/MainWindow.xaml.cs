@@ -31,17 +31,14 @@ namespace TestApplication
             //globalWellPlate.SetGridColor(Colors.Black);
             //globalWellPlate.SetClickColor(Colors.SteelBlue);
             globalWellPlate.SetStroke(Color.FromRgb(0, 255, 0));
-            globalWellPlate.SetStroke(Colors.Gold, 50);
-            globalWellPlate.SetMaxWidth = 400;
-            //globalWellPlate.SetMaxHeight = 400;
-            globalWellPlate.IsRectangle = true;
+            globalWellPlate.SetStroke(Colors.Blue, 10);
+            //globalWellPlate.SetMaxWidth = 800;
+            globalWellPlate.SetMaxHeight = 700;
+            //globalWellPlate.IsRectangle = true;
             globalWellPlate.SetWellPlateSize(8,6); //width, height
             globalWellPlate.IsEditable = true;
             //globalWellPlate.ColorCoordinate("a1;A2"); //multiple coordinates get split with a ';'
             //globalWellPlate.ColorCoordinate("A1", Colors.Crimson);
-            //globalWellPlate.ColorCoordinate("A3", Colors.DarkCyan);
-            //globalWellPlate.ColorCoordinate("B3", Colors.Turquoise);
-            //globalWellPlate.ColorCoordinate("B1");
             //Debug.WriteLine(globalWellPlate.NumberToCoordinate(1));
             //Debug.WriteLine(globalWellPlate.CoordinateToNumber(null));
             Debug.WriteLine(globalWellPlate.LastClickedCoordinate);

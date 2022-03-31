@@ -71,10 +71,10 @@ namespace WellPlateUserControl
             return _wellPlate.GiveNotColoredList();
         }
 
-        public string GetLastClickedCoordinate()
-        {
-            return _wellPlate.GetLastClickedCoordinate();
-        }
+        //public string GetLastClickedCoordinate()
+        //{
+        //    return _wellPlate.GetLastClickedCoordinate();
+        //}
 
     }
 }

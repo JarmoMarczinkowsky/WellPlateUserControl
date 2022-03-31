@@ -30,7 +30,7 @@ namespace WellPlateUserControl
 
         List<string> GiveNotColoredList();
 
-        public string GetLastClickedCoordinate();
+        //public string GetLastClickedCoordinate();
 
     }
 }

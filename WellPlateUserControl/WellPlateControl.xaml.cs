@@ -293,7 +293,7 @@ namespace WellPlateUserControl
                 Rectangle rectangle = child as Rectangle;
                 if (rectangle.Name.Split("_")[0] == coordinate.ToUpper().Trim())
                 {
-                    rectangle.Fill = new SolidColorBrush(chosenColor);                        
+                    rectangle.Fill = new SolidColorBrush(chosenColor);
                 }
             }
             return true;
@@ -314,11 +314,12 @@ namespace WellPlateUserControl
                 Rectangle rectangle = child as Rectangle;
                 if (rectangle.Name.Split("_")[1] == coordinate.ToString())
                 {
-                    rectangle.Fill = new SolidColorBrush(chosenColor);                        
+                    rectangle.Fill = new SolidColorBrush(chosenColor);
                 }
             }
             return true;
         }
+
 
         /// <summary>
         /// <para>If you click an rectangle, it will get the color of the 'clickcolor'.</para>
