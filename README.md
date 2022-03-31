@@ -68,16 +68,18 @@ Returns a list with the coordinates of every well that is currently not colored.
 Set this function after the WellPlateSize.
 [Optional]
 ```
-SetMaxWidth = <value>
+SetMaxWidth = <int>
 ```
+Set this function before 'SetWellPlateSize'.
 Set the maximum width of the wells that need to be generated. 
 Uses an integer for the 'width in pixels'.
 Default is 600 pixels.
 Will choose the highest line of code if both are set.
 [Optional]
 ```
-SetMaxHeight = <value>
+SetMaxHeight = <int>
 ```
+Set this function before 'SetWellPlateSize'.
 Set the maximum height of the wells that need to be generated. 
 Uses an integer for the 'height in pixels'.
 Default is 600 pixels.
@@ -86,6 +88,8 @@ Will choose the highest line of code if both are set.
 ```
 IsEditable = <bool>
 ```
+Set this function before 'SetWellPlateSize'.
 Makes the wellplate editable so you can color wells by clicking on them.
+[Optional]
 
 
