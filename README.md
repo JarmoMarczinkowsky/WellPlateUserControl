@@ -1,5 +1,8 @@
 # WellPlateUserControl
 
+Note:
+The colors are used with the Color class from Microsoft. It is possible to use RGB-colors by using: Color.FromRgb(0,0,0)
+
 <h3>A usercontrol that creates a grid for the wellplate.</h3>
 
 <b>Functions:</b>
@@ -7,7 +10,6 @@
 SetGridColor(Colors.Black) 
 ```
 Gives the grid the color that you wish it to be. Default is black.
-Also supports RGB by doing: Color.FromRgb(0,0,0)
 Set this function before the WellPlateSize.
 [Optional]
 ```
