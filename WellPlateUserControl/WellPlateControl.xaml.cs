@@ -21,25 +21,60 @@ namespace WellPlateUserControl
     /// </summary>
     public partial class WellPlateControl : UserControl
     {
-        const string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        private string _createEllipseName;
         public string LastClickedCoordinate { get; private set; }
+        
+        private int _setMaxHeight = 601;
+        public int SetMaxHeight 
+        {
+            get { return _setMaxHeight; }
+            set 
+            { 
+                if (value < 1)
+                {
+                    throw new ArgumentOutOfRangeException("SetMaxHeight can't be smaller than 1");
+                }
+                else if (value != 601)
+                {
+                    _setMaxHeight = value;
+                    _setTheMaxHeight = true;
+                    Debug.WriteLine("Max Height: " + _setMaxHeight);
+                }
+            }
+        }
+
+        private int _setMaxWidth = 600;
+        public int SetMaxWidth
+        {
+            get { return _setMaxWidth; }
+            set 
+            {
+                if (value< 1)
+                {
+                    throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 1");
+                }
+                else
+                {
+                    _setMaxWidth = value;
+                }
+            }
+        }
+        
+        public bool IsRectangle;
+        public bool IsEditable;
+
+        private const string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private string _createEllipseName;
         
         private int _widthWellPlate;
         private int _heightWellPlate;
-        public int SetMaxHeight = 601;
-        public int SetMaxWidth = 600;
 
         private float _shapeDistance = 1;
         
         private double _strokeThickness = 0.08;
 
         private bool _setStrokeColor;
-        private bool _setMaxWidth;
-        private bool _setMaxHeight;
-        public bool IsRectangle;
-        
-        public bool IsEditable;
+        private bool _setTheMaxWidth;
+        private bool _setTheMaxHeight;
 
         private Color _colorConverter = Colors.Black;
         private Color _clickColorConverter = Colors.Red;
@@ -73,14 +108,14 @@ namespace WellPlateUserControl
         /// <returns>True if method succeeds and an out of range error if a values are higher than 26 or smaller than 1</returns>
         public bool SetWellPlateSize(int inputWidth, int inputHeight)
         {
-            if (SetMaxHeight < 1)
-            {
-                throw new ArgumentOutOfRangeException("SetMaxHeight can't be smaller than 1");
-            }
-            else if (SetMaxHeight != 601)
-            {
-                _setMaxHeight = true;
-            }
+            //if (SetMaxHeight < 1)
+            //{
+            //    throw new ArgumentOutOfRangeException("SetMaxHeight can't be smaller than 1");
+            //}
+            //else if (SetMaxHeight != 601)
+            //{
+            //    _setTheMaxHeight = true;
+            //}
 
             if (SetMaxWidth < 1)
             {
@@ -134,7 +169,7 @@ namespace WellPlateUserControl
 
                         //checks if the user has set a maximum height, otherwise it is going to use the maximum width that is set
                         //default if the maximum width is not set is 600
-                        if (_setMaxHeight)
+                        if (_setTheMaxHeight)
                         {
                             rectangle.Width = SetMaxHeight / (_shapeDistance * _heightWellPlate);
                             rectangle.Height = SetMaxHeight / (_shapeDistance * _heightWellPlate);
