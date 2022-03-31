@@ -27,17 +27,17 @@ namespace WellPlateUserControl
         
         private int _widthWellPlate;
         private int _heightWellPlate;
-        public int SetMaxWidth = 600;
         public int SetMaxHeight = 601;
+        public int SetMaxWidth = 600;
 
         private float _shapeDistance = 1;
         
         private double _strokeThickness = 0.08;
 
         private bool _setStrokeColor;
-        public bool IsRectangle;
         private bool _setMaxWidth;
         private bool _setMaxHeight;
+        public bool IsRectangle;
         
         public bool IsEditable;
 
@@ -54,7 +54,6 @@ namespace WellPlateUserControl
         {
             InitializeComponent();
             rectPlaceHolder.Visibility = Visibility.Hidden;
-            Debug.WriteLine("Before");
         }
 
         /// <summary>
@@ -88,7 +87,6 @@ namespace WellPlateUserControl
                 throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 1");
             }
             
-
             if (inputWidth > 0 && inputWidth < _alphabet.Length 
                                && inputHeight > 0 
                                && inputHeight < _alphabet.Length)
@@ -109,8 +107,6 @@ namespace WellPlateUserControl
                 {
                     for (int width = 0; width < _widthWellPlate; width++)
                     {
-                        //_loopCounter++;
-
                         //creates rectangle
                         Rectangle rectangle = new Rectangle()
                         {
@@ -141,7 +137,7 @@ namespace WellPlateUserControl
                         if (_setMaxHeight)
                         {
                             rectangle.Width = SetMaxHeight / (_shapeDistance * _heightWellPlate);
-                            rectangle.Height = SetMaxHeight / (_shapeDistance * _heightWellPlate); //(_heightWellPlate + 1)
+                            rectangle.Height = SetMaxHeight / (_shapeDistance * _heightWellPlate);
                         }
                         else
                         {
@@ -159,10 +155,10 @@ namespace WellPlateUserControl
                         //takes care of the position of the rectangle
                         //directions: left, up, right, down
                         rectangle.Margin = new Thickness(
-                            width * rectangle.Width * _shapeDistance, 
-                            0,  
-                            0, 
-                            (_heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) * _shapeDistance); 
+                            width * rectangle.Width * _shapeDistance,
+                            0,
+                            0,
+                            (_heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) * _shapeDistance);
 
                         _coordinates.Add(rectangle.Name);
                         
@@ -185,8 +181,8 @@ namespace WellPlateUserControl
         /// <returns>True if the color succeeds to be put inside the variable and an error if it fails to be put inside the variable</returns>
         public bool SetGridColor(Color gridColor)
         {
-            _colorConverter = gridColor; 
-            return true;            
+            _colorConverter = gridColor;
+            return true;
         }
 
         /// <summary>
@@ -444,7 +440,6 @@ namespace WellPlateUserControl
         public List<string> GiveColoredList()
         {
             UpdateColoredList();
-            
             return _coloredCoordinates;
         }
 
