@@ -64,12 +64,13 @@ namespace WellPlateUserControl
 
         private const string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private string _createEllipseName;
-        
+
         private int _widthWellPlate;
         private int _heightWellPlate;
 
         private float _shapeDistance = 1;
         private float _lastRectangleWidth;
+        private float _letterDistance = 50;
 
         private double _strokeThickness = 0.08;
 
@@ -181,10 +182,12 @@ namespace WellPlateUserControl
 
                         _lastRectangleWidth = (float)rectangle.Width;
 
+                        _letterDistance = (float)(rectangle.Width / 1.5);
+
                         //takes care of the position of the rectangle
                         //directions: left, up, right, down
                         rectangle.Margin = new Thickness(
-                            (_shapeDistance * rectangle.Width) - rectangle.Width + width * rectangle.Width * _shapeDistance,
+                            _letterDistance + (_shapeDistance * rectangle.Width) - rectangle.Width + width * rectangle.Width * _shapeDistance,
                             0,
                             0,
                             (_shapeDistance * rectangle.Height) - rectangle.Height + (_heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) * _shapeDistance);
@@ -192,13 +195,55 @@ namespace WellPlateUserControl
                         _coordinates.Add(rectangle.Name);
                         
                         gGenerateWellPlate.Children.Add(rectangle);
+
+                        //takes care of the alphabetic labels
+                        if (width == 0)
+                        {
+                            Label lblAlphabetic = new Label();
+                            lblAlphabetic.Content = $"{_alphabet[height]}";
+                            lblAlphabetic.Foreground = new SolidColorBrush(Colors.Black);
+                            lblAlphabetic.HorizontalAlignment = HorizontalAlignment.Left;
+                            lblAlphabetic.VerticalAlignment = VerticalAlignment.Bottom;
+                            lblAlphabetic.Width = rectangle.Width;
+                            lblAlphabetic.Height = rectangle.Height;
+                            lblAlphabetic.VerticalContentAlignment = VerticalAlignment.Center;
+                            lblAlphabetic.FontSize = rectangle.Height / 2;
+                            lblAlphabetic.Margin = new Thickness(
+                                0,
+                                0,
+                                0,
+                                (_shapeDistance * rectangle.Height) - rectangle.Height + (_heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) * _shapeDistance);
+                            gCoordinates.Children.Add(lblAlphabetic);
+                        }
+
+                        //takes care of the numeric labels
+                        if (height == 0)
+                        {
+                            Label lblNumeric = new Label();
+                            lblNumeric.Content = $"{width + 1}";
+                            lblNumeric.Foreground = new SolidColorBrush(Colors.Black);
+                            //lblNumeric.Background = new SolidColorBrush(Colors.LightGray);
+                            lblNumeric.HorizontalAlignment = HorizontalAlignment.Left;
+                            lblNumeric.VerticalAlignment = VerticalAlignment.Bottom;
+                            lblNumeric.Width = rectangle.Width;
+                            
+                            lblNumeric.HorizontalContentAlignment = HorizontalAlignment.Center;
+                            lblNumeric.FontSize = rectangle.Height / 2;
+                            lblNumeric.Margin = new Thickness(
+                                _letterDistance /*+ (rectangle.Width * 0.2)*/ + (_shapeDistance * rectangle.Width) - rectangle.Width + width * rectangle.Width * _shapeDistance,
+                                0,
+                                0,
+                                (_shapeDistance * rectangle.Height) - rectangle.Height + _heightWellPlate * rectangle.Width /*- (height * rectangle.Width) - rectangle.Height)*/ * _shapeDistance);
+                            gCoordinates.Children.Add(lblNumeric);
+                        }
+
                     }
                 }
 
                 //rectangle that takes care of the outline of the wellplate
                 rectOutline.HorizontalAlignment = HorizontalAlignment.Left;
                 rectOutline.VerticalAlignment = VerticalAlignment.Bottom;
-                rectOutline.Margin = new Thickness(0, 0, 0, 0);
+                rectOutline.Margin = new Thickness(_letterDistance, 0, 0, 0);
                 rectOutline.Fill = new SolidColorBrush(Colors.Transparent);
                 rectOutline.Width = _lastRectangleWidth * _widthWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
                 rectOutline.Height = _lastRectangleWidth * _heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
@@ -206,6 +251,8 @@ namespace WellPlateUserControl
                 rectOutline.StrokeThickness = 5;
                 rectOutline.RadiusX = 20;
                 rectOutline.RadiusY = 20;
+
+                
 
                 return true;
             }

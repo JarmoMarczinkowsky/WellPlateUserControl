@@ -32,11 +32,11 @@ namespace TestApplication
             globalWellPlate.SetClickColor(Colors.Aqua);
             //globalWellPlate.SetStroke(Color.FromRgb(0, 255, 255));
             //globalWellPlate.SetStroke(Colors.Blue, 95);
-            globalWellPlate.SetMaxHeight = 700;
+            globalWellPlate.SetMaxHeight = 400;
             //globalWellPlate.SetMaxWidth = 800;
             //globalWellPlate.IsRectangle = true;
             globalWellPlate.IsEditable = true;
-            globalWellPlate.SetWellPlateSize(12, 8); //width, height
+            globalWellPlate.SetWellPlateSize(24, 16); //width, height
             globalWellPlate.ColorCoordinate("A2;3"); //multiple coordinates get split with a ';'
             //globalWellPlate.ColorCoordinate("B1", Colors.Crimson);
             //Debug.WriteLine(globalWellPlate.NumberToCoordinate(-11));
