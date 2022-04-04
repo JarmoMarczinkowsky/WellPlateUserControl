@@ -110,27 +110,20 @@
             </Button>-->
         </Grid>
 
+
+        <Rectangle x:Name="rectOutline"/>
         <Grid PreviewMouseDown="ClickForColor" 
               x:Name="gGenerateWellPlate"
                
               HorizontalAlignment="Left"
               VerticalAlignment="Bottom"/>
-            
 
-        <Rectangle x:Name="rectPlaceHolder"
-                   Width="360" 
-                   Height="240"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Bottom"
-                   Fill="LightGray"
-                   Margin="5,0,0,15"
-                            >
 
-        </Rectangle>
 
-        
 
-        
+
+
+
     </Grid>
     
 

@@ -69,7 +69,8 @@ namespace WellPlateUserControl
         private int _heightWellPlate;
 
         private float _shapeDistance = 1;
-        
+        private float _lastRectangleWidth;
+
         private double _strokeThickness = 0.08;
 
         private bool _setStrokeColor;
@@ -88,7 +89,7 @@ namespace WellPlateUserControl
         public WellPlateControl()
         {
             InitializeComponent();
-            rectPlaceHolder.Visibility = Visibility.Hidden;
+            //rectPlaceHolder.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -127,6 +128,7 @@ namespace WellPlateUserControl
                     SetMaxHeight -= 50;
                 }
 
+
                 //generates the shapes
                 for (int height = 0; height < _heightWellPlate; height++)
                 {
@@ -154,7 +156,7 @@ namespace WellPlateUserControl
                         {
                             rectangle.RadiusX = 1500;
                             rectangle.RadiusY = 1500;
-                            _shapeDistance = 1;
+                            _shapeDistance = 1.3F;
                         }
 
                         //checks if the user has set a maximum height, otherwise it is going to use the maximum width that is set
@@ -177,19 +179,34 @@ namespace WellPlateUserControl
                             rectangle.StrokeThickness = rectangle.Width * _strokeThickness;
                         }
 
+                        _lastRectangleWidth = (float)rectangle.Width;
+
                         //takes care of the position of the rectangle
                         //directions: left, up, right, down
                         rectangle.Margin = new Thickness(
-                            width * rectangle.Width * _shapeDistance,
+                            (_shapeDistance * rectangle.Width) - rectangle.Width + width * rectangle.Width * _shapeDistance,
                             0,
                             0,
-                            (_heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) * _shapeDistance);
+                            (_shapeDistance * rectangle.Height) - rectangle.Height + (_heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) * _shapeDistance);
 
                         _coordinates.Add(rectangle.Name);
                         
                         gGenerateWellPlate.Children.Add(rectangle);
                     }
                 }
+
+                //rectangle that takes care of the outline of the wellplate
+                rectOutline.HorizontalAlignment = HorizontalAlignment.Left;
+                rectOutline.VerticalAlignment = VerticalAlignment.Bottom;
+                rectOutline.Margin = new Thickness(0, 0, 0, 0);
+                rectOutline.Fill = new SolidColorBrush(Colors.Transparent);
+                rectOutline.Width = _lastRectangleWidth * _widthWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
+                rectOutline.Height = _lastRectangleWidth * _heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
+                rectOutline.Stroke = new SolidColorBrush(Colors.LightGray);
+                rectOutline.StrokeThickness = 5;
+                rectOutline.RadiusX = 20;
+                rectOutline.RadiusY = 20;
+
                 return true;
             }
             else

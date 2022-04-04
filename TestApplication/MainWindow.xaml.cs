@@ -32,22 +32,19 @@ namespace TestApplication
             globalWellPlate.SetClickColor(Colors.Aqua);
             //globalWellPlate.SetStroke(Color.FromRgb(0, 255, 255));
             //globalWellPlate.SetStroke(Colors.Blue, 95);
-            globalWellPlate.SetMaxHeight = 600;
+            globalWellPlate.SetMaxHeight = 700;
             //globalWellPlate.SetMaxWidth = 800;
             //globalWellPlate.IsRectangle = true;
             globalWellPlate.IsEditable = true;
-            globalWellPlate.SetWellPlateSize(8, 6); //width, height
+            globalWellPlate.SetWellPlateSize(12, 8); //width, height
             globalWellPlate.ColorCoordinate("A2;3"); //multiple coordinates get split with a ';'
-            globalWellPlate.ColorCoordinate("B1", Colors.Crimson);
-            Debug.WriteLine(globalWellPlate.NumberToCoordinate(-11));
-            Debug.WriteLine(globalWellPlate.CoordinateToNumber("a2"));
+            //globalWellPlate.ColorCoordinate("B1", Colors.Crimson);
+            //Debug.WriteLine(globalWellPlate.NumberToCoordinate(-11));
+            //Debug.WriteLine(globalWellPlate.CoordinateToNumber("a2"));
             //Debug.WriteLine(globalWellPlate.LastClickedCoordinate);
             
-            List<string> colorList = globalWellPlate.GiveNotColoredList();
-            foreach (string color in colorList)
-            {
-                Debug.WriteLine("Not Color: " + color);
-            }
+            //List<string> colorList = globalWellPlate.GiveColoredList();
+            
             //globalWellPlate.GiveNotColoredList();
 
 
