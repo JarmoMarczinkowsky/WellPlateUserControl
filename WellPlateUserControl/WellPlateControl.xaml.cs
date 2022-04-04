@@ -48,7 +48,7 @@ namespace WellPlateUserControl
             get { return _setMaxWidth; }
             set 
             {
-                if (value< 1)
+                if (value < 1)
                 {
                     throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 1");
                 }
@@ -108,20 +108,6 @@ namespace WellPlateUserControl
         /// <returns>True if method succeeds and an out of range error if a values are higher than 26 or smaller than 1</returns>
         public bool SetWellPlateSize(int inputWidth, int inputHeight)
         {
-            //if (SetMaxHeight < 1)
-            //{
-            //    throw new ArgumentOutOfRangeException("SetMaxHeight can't be smaller than 1");
-            //}
-            //else if (SetMaxHeight != 601)
-            //{
-            //    _setTheMaxHeight = true;
-            //}
-
-            if (SetMaxWidth < 1)
-            {
-                throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 1");
-            }
-            
             if (inputWidth > 0 && inputWidth < _alphabet.Length 
                                && inputHeight > 0 
                                && inputHeight < _alphabet.Length)
@@ -134,8 +120,12 @@ namespace WellPlateUserControl
                 //clears the previous shapes
                 gGenerateWellPlate.Children.Clear();
 
-                SetMaxWidth -= 18;
-                SetMaxHeight -= 50;
+                SetMaxWidth -= 16;
+                
+                if (_setTheMaxHeight)
+                {
+                    SetMaxHeight -= 50;
+                }
 
                 //generates the shapes
                 for (int height = 0; height < _heightWellPlate; height++)
@@ -162,8 +152,8 @@ namespace WellPlateUserControl
                         }
                         else
                         {
-                            rectangle.RadiusX = 150;
-                            rectangle.RadiusY = 150;
+                            rectangle.RadiusX = 1500;
+                            rectangle.RadiusY = 1500;
                             _shapeDistance = 1;
                         }
 
