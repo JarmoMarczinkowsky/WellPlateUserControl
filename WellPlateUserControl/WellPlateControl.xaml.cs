@@ -61,6 +61,7 @@ namespace WellPlateUserControl
         
         public bool IsRectangle;
         public bool IsEditable;
+        public bool TurnCoordinatesOff;
 
         private const string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private string _createEllipseName;
@@ -197,7 +198,7 @@ namespace WellPlateUserControl
                         gGenerateWellPlate.Children.Add(rectangle);
 
                         //takes care of the alphabetic labels
-                        if (width == 0)
+                        if (width == 0 && TurnCoordinatesOff == false)
                         {
                             Label lblAlphabetic = new Label();
                             lblAlphabetic.Content = $"{_alphabet[height]}";
@@ -217,7 +218,7 @@ namespace WellPlateUserControl
                         }
 
                         //takes care of the numeric labels
-                        if (height == 0)
+                        if (height == 0 && TurnCoordinatesOff == false)
                         {
                             Label lblNumeric = new Label();
                             lblNumeric.Content = $"{width + 1}";
@@ -248,9 +249,9 @@ namespace WellPlateUserControl
                 rectOutline.Width = _lastRectangleWidth * _widthWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
                 rectOutline.Height = _lastRectangleWidth * _heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
                 rectOutline.Stroke = new SolidColorBrush(Colors.LightGray);
-                rectOutline.StrokeThickness = 5;
-                rectOutline.RadiusX = 20;
-                rectOutline.RadiusY = 20;
+                rectOutline.StrokeThickness = 3;
+                rectOutline.RadiusX = 15;
+                rectOutline.RadiusY = 15;
 
                 
 
