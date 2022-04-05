@@ -285,7 +285,7 @@ namespace WellPlateUserControl
                             lblNumeric.Width = rectangle.Width;
                             
                             lblNumeric.HorizontalContentAlignment = HorizontalAlignment.Center;
-                            lblNumeric.FontSize = rectangle.Height / 2;
+                            lblNumeric.FontSize = rectangle.Height / 2.5;
                             lblNumeric.Margin = new Thickness(
                                 _letterDistance /*+ (rectangle.Width * 0.2)*/ + (_shapeDistance * rectangle.Width) - rectangle.Width + width * rectangle.Width * _shapeDistance,
                                 0,
@@ -319,17 +319,10 @@ namespace WellPlateUserControl
             }
         }
 
-        /// <summary>
-        /// <para>Converts the entered clickcolor to a readable format for the code.</para>
-        /// <example>Use: 'Colors.[wishedColor]' without square brackets</example>
-        /// </summary>
-        /// <param name="clickColor">the color of the wells that you see when you click on them. Is also used for the coordinate system colors</param>
-        /// <returns>True if the color succeeds to be put inside the variable and an error if it fails to be put inside the variable</returns>
-        //public bool SetClickColor(Color clickColor)
-        //{
-        //    _clickColorConverter = clickColor;
-        //    return true;
-        //}
+        public void GenerateWellPlate()
+        {
+
+        }
 
         /// <summary>
         /// <para>Give a number or a coordinate and the coordinate will get the 'click' color.</para>
@@ -486,44 +479,6 @@ namespace WellPlateUserControl
                 }
             }
         }
-
-        /// <summary>
-        /// <para>Set <b>before</b> the wellplatesize</para>
-        /// <para>Used to give an outline color to the circles in the wellplate.</para>
-        /// <example>Use: Colors.Green</example><br></br>
-        /// </summary>
-        /// <param name="strokeColor">Color of the stroke</param>
-        /// <returns>True if it succeeds or false if it doesn't succeed</returns>
-        //public bool SetStroke(Color strokeColor)
-        //{
-        //    _strokeColor = strokeColor;
-        //    _setStrokeColor = true;
-        //    return true;
-        //}
-
-        /// <summary>
-        /// <para>Set <b>before</b> the wellplatesize</para>
-        /// <para>Used to give an outline color to the circles in the wellplate.</para>
-        /// <para>Also used to set the thickness of the stroke.</para>
-        /// <example>Use: Colors.[wishedColor] without brackets</example>
-        /// <exmple>Use: 15 for a 15% thick border in the rectangle</exmple>
-        /// </summary>
-        /// <param name="strokeColor">The color of the stroke.</param>
-        /// <param name="strokeThickness">The thickness of the stroke in percentages.</param>
-        /// <returns>True if it succeeds and false if it doesn't succeed.</returns>
-        //public bool SetStroke(Color strokeColor, double strokeThickness)
-        //{
-        //    _strokeColor = strokeColor;
-        //    if (strokeThickness >= 0 && strokeThickness <= 100)
-        //    {
-        //        _strokeThickness = strokeThickness / 100 / 2;
-        //        _setStrokeColor = true;
-        //        return true;
-        //    }
-        //    throw new ArgumentOutOfRangeException("Thickness of the stroke can't be smaller than 0 or bigger than 100");
-        //}
-
-
 
         /// <summary>
         /// <para>Input a number and get the coordinate it belongs to</para>

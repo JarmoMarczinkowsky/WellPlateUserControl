@@ -19,13 +19,17 @@ Sets the color of a clicked well to the color you wished. Default is red.
 Set this function before the WellPlateSize.
 [Optional]
 ```
-SetStrokeColor(Colors.Blue, 10)
+SetStrokeColor = Colors.Blue
 ```
-Set this function before the WellPlateSize.
+Set this variable before the WellPlateSize.
 Set the stroke of the wells in the wellplate.
-The second argument is optional and defines the thickness of the stroke.
-Thickness of the stroke is set in percentages.
 [Optional]
+```
+StrokeThickness = 20
+```
+Thickness of the stroke is set in percentages.
+Will create a black stroke is SetStrokeColor is not set.
+Set this variable before WellPlateSize.
 ```
 IsRectangle = <bool>
 ```
