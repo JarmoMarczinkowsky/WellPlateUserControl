@@ -218,64 +218,8 @@ namespace WellPlateUserControl
                 {
                     for (int width = 0; width < _widthWellPlate; width++)
                     {
-                        //creates rectangle
-                        Rectangle rectangle = new Rectangle()
-                        {
-                            VerticalAlignment = VerticalAlignment.Bottom,
-                            HorizontalAlignment = HorizontalAlignment.Left,
-                            Name = $"{_alphabet[height]}{width + 1}_{1 + height + _heightWellPlate * width}",
-                            Fill = new SolidColorBrush(_setGridColor)
-                        };
-
-                        _coordinates.Add(rectangle.Name);
+                        CreateWells(width, height);
                         
-                        //checks if the user wants a rectangle. Otherwise it will round the rectangles so it looks like circles.
-                        if (IsRectangle)
-                        {
-                            rectangle.RadiusX = 0;
-                            rectangle.RadiusY = 0;
-                            _shapeDistance = 1.05F;
-                        }
-                        else
-                        {
-                            rectangle.RadiusX = 1500;
-                            rectangle.RadiusY = 1500;
-                            _shapeDistance = 1.3F;
-                        }
-
-                        //checks if the user has set a maximum height, otherwise it is going to use the maximum width that is set
-                        //default if the maximum width is not set is 600
-                        if (_setTheMaxHeight)
-                        {
-                            rectangle.Width = SetMaxHeight / (_shapeDistance * _heightWellPlate);
-                            rectangle.Height = SetMaxHeight / (_shapeDistance * _heightWellPlate);
-                        }
-                        else
-                        {
-                            rectangle.Width = SetMaxWidth / (_shapeDistance  * _widthWellPlate);
-                            rectangle.Height = SetMaxWidth / (_shapeDistance * _widthWellPlate);
-                        }
-                        
-                        //checks if stroke color is set and sets the stroke afterwards.
-                        if (_setStrokeColor)
-                        {
-                            rectangle.Stroke = new SolidColorBrush(_strokeColor);
-                            rectangle.StrokeThickness = rectangle.Width * _strokeThickness;
-                        }
-
-                        _lastRectangleWidth = (float)rectangle.Width;
-
-                        _letterDistance = (float)(rectangle.Width / 1.5);
-
-                        //takes care of the position of the rectangle
-                        rectangle.Margin = new Thickness(
-                            _letterDistance + (_shapeDistance * rectangle.Width) - rectangle.Width + width * rectangle.Width * _shapeDistance, 0, 0,
-                            (_shapeDistance * rectangle.Height) - rectangle.Height + (_heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) * _shapeDistance);
-
-                        _coordinates.Add(rectangle.Name);
-                        
-                        gGenerateWellPlate.Children.Add(rectangle);
-
                         GenerateLabels(width, height);
                         
                     }
@@ -290,22 +234,67 @@ namespace WellPlateUserControl
             }
         }
 
-        public void GenerateBorder()
+        private void CreateWells(int width, int height)
         {
-            //rectangle that takes care of the outline of the wellplate
-            rectOutline.HorizontalAlignment = HorizontalAlignment.Left;
-            rectOutline.VerticalAlignment = VerticalAlignment.Bottom;
-            rectOutline.Margin = new Thickness(_letterDistance, 0, 0, 0);
-            rectOutline.Fill = new SolidColorBrush(Colors.Transparent);
-            rectOutline.Width = _lastRectangleWidth * _widthWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
-            rectOutline.Height = _lastRectangleWidth * _heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
-            rectOutline.Stroke = new SolidColorBrush(Colors.LightGray);
-            rectOutline.StrokeThickness = 3;
-            rectOutline.RadiusX = 15;
-            rectOutline.RadiusY = 15;
+            Rectangle rectangle = new Rectangle()
+            {
+                VerticalAlignment = VerticalAlignment.Bottom,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                Name = $"{_alphabet[height]}{width + 1}_{1 + height + _heightWellPlate * width}",
+                Fill = new SolidColorBrush(_setGridColor)
+            };
+
+            _coordinates.Add(rectangle.Name);
+
+            //checks if the user wants a rectangle. Otherwise it will round the rectangles so it looks like circles.
+            if (IsRectangle)
+            {
+                rectangle.RadiusX = 0;
+                rectangle.RadiusY = 0;
+                _shapeDistance = 1.05F;
+            }
+            else
+            {
+                rectangle.RadiusX = 1500;
+                rectangle.RadiusY = 1500;
+                _shapeDistance = 1.3F;
+            }
+
+            //checks if the user has set a maximum height, otherwise it is going to use the maximum width that is set
+            //default if the maximum width is not set is 600
+            if (_setTheMaxHeight)
+            {
+                rectangle.Width = SetMaxHeight / (_shapeDistance * _heightWellPlate);
+                rectangle.Height = SetMaxHeight / (_shapeDistance * _heightWellPlate);
+            }
+            else
+            {
+                rectangle.Width = SetMaxWidth / (_shapeDistance * _widthWellPlate);
+                rectangle.Height = SetMaxWidth / (_shapeDistance * _widthWellPlate);
+            }
+
+            //checks if stroke color is set and sets the stroke afterwards.
+            if (_setStrokeColor)
+            {
+                rectangle.Stroke = new SolidColorBrush(_strokeColor);
+                rectangle.StrokeThickness = rectangle.Width * _strokeThickness;
+            }
+
+            _lastRectangleWidth = (float)rectangle.Width;
+
+            _letterDistance = (float)(rectangle.Width / 1.5);
+
+            //takes care of the position of the rectangle
+            rectangle.Margin = new Thickness(
+                _letterDistance + (_shapeDistance * rectangle.Width) - rectangle.Width + width * rectangle.Width * _shapeDistance, 0, 0,
+                (_shapeDistance * rectangle.Height) - rectangle.Height + (_heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) * _shapeDistance);
+
+            _coordinates.Add(rectangle.Name);
+
+            gGenerateWellPlate.Children.Add(rectangle);
         }
 
-        public void GenerateLabels(int width, int height)
+        private void GenerateLabels(int width, int height)
         {
             //takes care of the alphabetic labels
             if (width == 0 && !TurnCoordinatesOff)
@@ -345,6 +334,21 @@ namespace WellPlateUserControl
                     (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + _heightWellPlate * _lastRectangleWidth /*- (height * rectangle.Width) - rectangle.Height)*/ * _shapeDistance);
                 gCoordinates.Children.Add(lblNumeric);
             }
+        }
+        
+        private void GenerateBorder()
+        {
+            //rectangle that takes care of the outline of the wellplate
+            rectOutline.HorizontalAlignment = HorizontalAlignment.Left;
+            rectOutline.VerticalAlignment = VerticalAlignment.Bottom;
+            rectOutline.Margin = new Thickness(_letterDistance, 0, 0, 0);
+            rectOutline.Fill = new SolidColorBrush(Colors.Transparent);
+            rectOutline.Width = _lastRectangleWidth * _widthWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
+            rectOutline.Height = _lastRectangleWidth * _heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
+            rectOutline.Stroke = new SolidColorBrush(Colors.LightGray);
+            rectOutline.StrokeThickness = 3;
+            rectOutline.RadiusX = 15;
+            rectOutline.RadiusY = 15;
         }
 
         /// <summary>
