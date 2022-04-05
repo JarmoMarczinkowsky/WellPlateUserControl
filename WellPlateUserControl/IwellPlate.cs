@@ -20,9 +20,9 @@ namespace WellPlateUserControl
 
         int CoordinateToNumber(string coordinate);
 
-        List<string> GiveColoredList();
+        //List<string> GiveColoredList();
 
-        List<string> GiveNotColoredList();
+        //List<string> GiveNotColoredList();
 
     }
 }

@@ -37,15 +37,19 @@ namespace TestApplication
             //globalWellPlate.SetMaxWidth = 800;
             //globalWellPlate.IsRectangle = true;
             globalWellPlate.IsEditable = true;
-            globalWellPlate.SetWellPlateSize(16,24); //width, height
+            globalWellPlate.SetWellPlateSize(12,8); //width, height
             //globalWellPlate.ColorCoordinate("A2;3"); //multiple coordinates get split with a ';'
             globalWellPlate.ColorCoordinate("A5", Color.FromRgb(222,233,212));
             globalWellPlate.ColorCoordinate("B5", Color.FromRgb(251, 209, 205));
             //Debug.WriteLine(globalWellPlate.NumberToCoordinate(-11));
             //Debug.WriteLine(globalWellPlate.CoordinateToNumber("a2"));
             //Debug.WriteLine(globalWellPlate.LastClickedCoordinate);
+            //List<string> colorList2 = globalWellPlate.GiveColoredList();
+            //List<string> colorList = globalWellPlate.GiveColoredCoordinates;
+            
 
-            //List<string> colorList = globalWellPlate.GiveColoredList();
+            //List<string> notcolorList = globalWellPlate.GiveNotColoredCoordinates;
+            
 
             //globalWellPlate.GiveNotColoredList();
 

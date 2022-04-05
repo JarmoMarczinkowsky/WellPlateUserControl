@@ -58,15 +58,15 @@ namespace WellPlateUserControl
             }
         }
 
-        private List<string> _getColoredList;
-        public List<string> GetColoredList
-        {
-            get
-            {
-                UpdateColoredList();
-                return _coloredCoordinates;
-            }
-        }
+        //private List<string> _getColoredList;
+        //public List<string> GetColoredList
+        //{
+        //    get
+        //    {
+        //        UpdateColoredList();
+        //        return ColoredCoordinates;
+        //    }
+        //}
         public bool IsRectangle;
         public bool IsEditable;
         public bool TurnCoordinatesOff;
@@ -139,8 +139,28 @@ namespace WellPlateUserControl
             }
         }
         private List<string> _coordinates = new List<string>();
+        
         private List<string> _coloredCoordinates = new List<string>();
+        public List<string> GiveColoredCoordinates
+        {
+            get
+            {
+                UpdateColoredList();
+                return _coloredCoordinates;
+            }
+            private set { _coloredCoordinates = value; }
+        }
+
         private List<string> _notColoredCoordinates = new List<string>();
+        public List<string> GiveNotColoredCoordinates
+        {
+            get
+            {
+                GiveNotColoredList();
+                return _notColoredCoordinates;
+            }
+            private set { _notColoredCoordinates = value; }
+        }
 
 
         public WellPlateControl()
@@ -256,60 +276,11 @@ namespace WellPlateUserControl
                         
                         gGenerateWellPlate.Children.Add(rectangle);
 
-                        //takes care of the alphabetic labels
-                        if (width == 0 && !TurnCoordinatesOff)
-                        {
-                            Label lblAlphabetic = new Label();
-                            lblAlphabetic.Content = $"{_alphabet[height]}";
-                            lblAlphabetic.Foreground = new SolidColorBrush(Colors.Black);
-                            lblAlphabetic.HorizontalAlignment = HorizontalAlignment.Left;
-                            lblAlphabetic.VerticalAlignment = VerticalAlignment.Bottom;
-                            lblAlphabetic.Width = rectangle.Width;
-                            lblAlphabetic.Height = rectangle.Height;
-                            lblAlphabetic.VerticalContentAlignment = VerticalAlignment.Center;
-                            lblAlphabetic.FontSize = rectangle.Height / 2.5;
-                            lblAlphabetic.Margin = new Thickness(0, 0, 0,
-                                (_shapeDistance * rectangle.Height) - rectangle.Height + (_heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) * _shapeDistance);
-                            gCoordinates.Children.Add(lblAlphabetic);
-                        }
-
-                        //takes care of the numeric labels
-                        if (height == 0 && !TurnCoordinatesOff)
-                        {
-                            Label lblNumeric = new Label();
-                            lblNumeric.Content = $"{width + 1}";
-                            lblNumeric.Foreground = new SolidColorBrush(Colors.Black);
-                            //lblNumeric.Background = new SolidColorBrush(Colors.LightGray);
-                            lblNumeric.HorizontalAlignment = HorizontalAlignment.Left;
-                            lblNumeric.VerticalAlignment = VerticalAlignment.Bottom;
-                            lblNumeric.Width = rectangle.Width;
-                            
-                            lblNumeric.HorizontalContentAlignment = HorizontalAlignment.Center;
-                            lblNumeric.FontSize = rectangle.Height / 2.5;
-                            lblNumeric.Margin = new Thickness(
-                                _letterDistance /*+ (rectangle.Width * 0.2)*/ + (_shapeDistance * rectangle.Width) - rectangle.Width + width * rectangle.Width * _shapeDistance,
-                                0,
-                                0,
-                                (_shapeDistance * rectangle.Height) - rectangle.Height + _heightWellPlate * rectangle.Width /*- (height * rectangle.Width) - rectangle.Height)*/ * _shapeDistance);
-                            gCoordinates.Children.Add(lblNumeric);
-                        }
-
+                        GenerateLabels(width, height);
+                        
                     }
                 }
-
-                //rectangle that takes care of the outline of the wellplate
-                rectOutline.HorizontalAlignment = HorizontalAlignment.Left;
-                rectOutline.VerticalAlignment = VerticalAlignment.Bottom;
-                rectOutline.Margin = new Thickness(_letterDistance, 0, 0, 0);
-                rectOutline.Fill = new SolidColorBrush(Colors.Transparent);
-                rectOutline.Width = _lastRectangleWidth * _widthWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
-                rectOutline.Height = _lastRectangleWidth * _heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
-                rectOutline.Stroke = new SolidColorBrush(Colors.LightGray);
-                rectOutline.StrokeThickness = 3;
-                rectOutline.RadiusX = 15;
-                rectOutline.RadiusY = 15;
-
-                
+                GenerateBorder();
 
                 return true;
             }
@@ -319,9 +290,61 @@ namespace WellPlateUserControl
             }
         }
 
-        public void GenerateWellPlate()
+        public void GenerateBorder()
         {
+            //rectangle that takes care of the outline of the wellplate
+            rectOutline.HorizontalAlignment = HorizontalAlignment.Left;
+            rectOutline.VerticalAlignment = VerticalAlignment.Bottom;
+            rectOutline.Margin = new Thickness(_letterDistance, 0, 0, 0);
+            rectOutline.Fill = new SolidColorBrush(Colors.Transparent);
+            rectOutline.Width = _lastRectangleWidth * _widthWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
+            rectOutline.Height = _lastRectangleWidth * _heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
+            rectOutline.Stroke = new SolidColorBrush(Colors.LightGray);
+            rectOutline.StrokeThickness = 3;
+            rectOutline.RadiusX = 15;
+            rectOutline.RadiusY = 15;
+        }
 
+        public void GenerateLabels(int width, int height)
+        {
+            //takes care of the alphabetic labels
+            if (width == 0 && !TurnCoordinatesOff)
+            {
+                Label lblAlphabetic = new Label();
+                lblAlphabetic.Content = $"{_alphabet[height]}";
+                lblAlphabetic.Foreground = new SolidColorBrush(Colors.Black);
+                lblAlphabetic.HorizontalAlignment = HorizontalAlignment.Left;
+                lblAlphabetic.VerticalAlignment = VerticalAlignment.Bottom;
+                lblAlphabetic.Width = _lastRectangleWidth;
+                lblAlphabetic.Height = _lastRectangleWidth;
+                lblAlphabetic.VerticalContentAlignment = VerticalAlignment.Center;
+                lblAlphabetic.FontSize = _lastRectangleWidth / 2.5;
+                lblAlphabetic.Margin = new Thickness(0, 0, 0,
+                    (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + (_heightWellPlate * _lastRectangleWidth - (height * _lastRectangleWidth) - _lastRectangleWidth) * _shapeDistance);
+                gCoordinates.Children.Add(lblAlphabetic);
+
+            }
+
+            //takes care of the numeric labels
+            if (height == 0 && !TurnCoordinatesOff)
+            {
+                Label lblNumeric = new Label();
+                lblNumeric.Content = $"{width + 1}";
+                lblNumeric.Foreground = new SolidColorBrush(Colors.Black);
+                //lblNumeric.Background = new SolidColorBrush(Colors.LightGray);
+                lblNumeric.HorizontalAlignment = HorizontalAlignment.Left;
+                lblNumeric.VerticalAlignment = VerticalAlignment.Bottom;
+                lblNumeric.Width = _lastRectangleWidth;
+
+                lblNumeric.HorizontalContentAlignment = HorizontalAlignment.Center;
+                lblNumeric.FontSize = _lastRectangleWidth / 2.5;
+                lblNumeric.Margin = new Thickness(
+                    _letterDistance /*+ (_lastRectangleWidth * 0.2)*/ + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + width * _lastRectangleWidth * _shapeDistance,
+                    0,
+                    0,
+                    (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + _heightWellPlate * _lastRectangleWidth /*- (height * rectangle.Width) - rectangle.Height)*/ * _shapeDistance);
+                gCoordinates.Children.Add(lblNumeric);
+            }
         }
 
         /// <summary>
@@ -537,7 +560,7 @@ namespace WellPlateUserControl
         /// <para>Gives a list of every not-colored well.</para>
         /// </summary>
         /// <returns>A list of every not-colored well</returns>
-        public List<string> GiveNotColoredList()
+        public void GiveNotColoredList()
         {
             UpdateColoredList();
             _notColoredCoordinates.Clear();
@@ -551,7 +574,6 @@ namespace WellPlateUserControl
                     _notColoredCoordinates.Add(rectangle.Name.Split("_")[0]);
                 }
             }
-            return _notColoredCoordinates;
         }
 
         /// <summary>
@@ -575,6 +597,8 @@ namespace WellPlateUserControl
                 }
             }
         }
+
+        
 
         
 
