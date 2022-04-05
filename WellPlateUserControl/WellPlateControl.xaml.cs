@@ -110,9 +110,16 @@ namespace WellPlateUserControl
             }
         }
 
-        private Color _clickColorConverter = Colors.Red;
         private Color _strokeColor;
-        
+        public Color SetStrokeColor
+        {
+            get { return _strokeColor; }
+            set
+            {
+                _setStrokeColor = true;
+                _strokeColor = value;
+            }
+        }
         private List<string> _coordinates = new List<string>();
         private List<string> _coloredCoordinates = new List<string>();
         private List<string> _notColoredCoordinates = new List<string>();
@@ -469,12 +476,12 @@ namespace WellPlateUserControl
         /// </summary>
         /// <param name="strokeColor">Color of the stroke</param>
         /// <returns>True if it succeeds or false if it doesn't succeed</returns>
-        public bool SetStroke(Color strokeColor)
-        {
-            _strokeColor = strokeColor;
-            _setStrokeColor = true;
-            return true;
-        }
+        //public bool SetStroke(Color strokeColor)
+        //{
+        //    _strokeColor = strokeColor;
+        //    _setStrokeColor = true;
+        //    return true;
+        //}
 
         /// <summary>
         /// <para>Set <b>before</b> the wellplatesize</para>

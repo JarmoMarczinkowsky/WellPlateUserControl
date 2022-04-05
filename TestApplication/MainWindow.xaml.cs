@@ -29,7 +29,8 @@ namespace TestApplication
             InitializeComponent();
 
             globalWellPlate.SetGridColor = Color.FromRgb(209, 232, 247);
-            //globalWellPlate.SetClickColor = Color.FromRgb(97,172,223);
+            globalWellPlate.SetClickColor = Color.FromRgb(97,172,223);
+            globalWellPlate.SetStrokeColor = Colors.Black;
             //globalWellPlate.SetStroke(Color.FromRgb(0, 255, 255));
             //globalWellPlate.SetStroke(Colors.Blue, 95);
             globalWellPlate.SetMaxHeight = 700;
