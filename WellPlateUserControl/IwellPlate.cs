@@ -16,8 +16,6 @@ namespace WellPlateUserControl
 
         public bool ColorCoordinate(int coordinate, Color chosenColor);
 
-        bool SetStroke(Color strokeColor, double strokeThickness);
-
         string NumberToCoordinate(int coordinate);
 
         int CoordinateToNumber(string coordinate);

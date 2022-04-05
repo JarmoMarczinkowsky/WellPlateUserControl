@@ -37,7 +37,6 @@ namespace WellPlateUserControl
                 {
                     _setMaxHeight = value;
                     _setTheMaxHeight = true;
-                    Debug.WriteLine("Max Height: " + _setMaxHeight);
                 }
             }
         }
@@ -83,7 +82,26 @@ namespace WellPlateUserControl
         private float _letterDistance = 50;
 
         private double _strokeThickness = 0.08;
-
+        public double StrokeThickness
+        {
+            get { return _strokeThickness; }
+            set
+            {
+                if (value >= 0 && value <= 100)
+                {
+                    _strokeThickness = value / 100 / 2;
+                    if (!_setStrokeColor)
+                    {
+                        _strokeColor = Colors.Black;
+                        _setStrokeColor = true;
+                    }
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("Thickness of the stroke can't be smaller than 0 or bigger than 100");
+                }
+            }
+        }
         private bool _setStrokeColor;
         private bool _setTheMaxWidth;
         private bool _setTheMaxHeight;
@@ -239,7 +257,7 @@ namespace WellPlateUserControl
                         gGenerateWellPlate.Children.Add(rectangle);
 
                         //takes care of the alphabetic labels
-                        if (width == 0 && TurnCoordinatesOff == false)
+                        if (width == 0 && !TurnCoordinatesOff)
                         {
                             Label lblAlphabetic = new Label();
                             lblAlphabetic.Content = $"{_alphabet[height]}";
@@ -256,7 +274,7 @@ namespace WellPlateUserControl
                         }
 
                         //takes care of the numeric labels
-                        if (height == 0 && TurnCoordinatesOff == false)
+                        if (height == 0 && !TurnCoordinatesOff)
                         {
                             Label lblNumeric = new Label();
                             lblNumeric.Content = $"{width + 1}";
@@ -493,17 +511,17 @@ namespace WellPlateUserControl
         /// <param name="strokeColor">The color of the stroke.</param>
         /// <param name="strokeThickness">The thickness of the stroke in percentages.</param>
         /// <returns>True if it succeeds and false if it doesn't succeed.</returns>
-        public bool SetStroke(Color strokeColor, double strokeThickness)
-        {
-            _strokeColor = strokeColor;
-            if (strokeThickness >= 0 && strokeThickness <= 100)
-            {
-                _strokeThickness = strokeThickness / 100 / 2;
-                _setStrokeColor = true;
-                return true;
-            }
-            throw new ArgumentOutOfRangeException("Thickness of the stroke can't be smaller than 0 or bigger than 100");
-        }
+        //public bool SetStroke(Color strokeColor, double strokeThickness)
+        //{
+        //    _strokeColor = strokeColor;
+        //    if (strokeThickness >= 0 && strokeThickness <= 100)
+        //    {
+        //        _strokeThickness = strokeThickness / 100 / 2;
+        //        _setStrokeColor = true;
+        //        return true;
+        //    }
+        //    throw new ArgumentOutOfRangeException("Thickness of the stroke can't be smaller than 0 or bigger than 100");
+        //}
 
 
 
