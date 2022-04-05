@@ -28,24 +28,25 @@ namespace TestApplication
         {
             InitializeComponent();
 
-            globalWellPlate.SetGridColor(Color.FromRgb(0,255,40));
-            globalWellPlate.SetClickColor(Colors.Aqua);
+            globalWellPlate.SetGridColor = Color.FromRgb(209, 232, 247);
+            //globalWellPlate.SetClickColor = Color.FromRgb(97,172,223);
             //globalWellPlate.SetStroke(Color.FromRgb(0, 255, 255));
             //globalWellPlate.SetStroke(Colors.Blue, 95);
-            globalWellPlate.SetMaxHeight = 400;
+            globalWellPlate.SetMaxHeight = 700;
             //globalWellPlate.TurnCoordinatesOff = true;
             //globalWellPlate.SetMaxWidth = 800;
             //globalWellPlate.IsRectangle = true;
             globalWellPlate.IsEditable = true;
-            globalWellPlate.SetWellPlateSize(3, 4); //width, height
-            globalWellPlate.ColorCoordinate("A2;3"); //multiple coordinates get split with a ';'
-            //globalWellPlate.ColorCoordinate("B1", Colors.Crimson);
+            globalWellPlate.SetWellPlateSize(16,24); //width, height
+            //globalWellPlate.ColorCoordinate("A2;3"); //multiple coordinates get split with a ';'
+            globalWellPlate.ColorCoordinate("A5", Color.FromRgb(222,233,212));
+            globalWellPlate.ColorCoordinate("B5", Color.FromRgb(251, 209, 205));
             //Debug.WriteLine(globalWellPlate.NumberToCoordinate(-11));
             //Debug.WriteLine(globalWellPlate.CoordinateToNumber("a2"));
             //Debug.WriteLine(globalWellPlate.LastClickedCoordinate);
-            
+
             //List<string> colorList = globalWellPlate.GiveColoredList();
-            
+
             //globalWellPlate.GiveNotColoredList();
 
 

@@ -10,9 +10,9 @@ namespace WellPlateUserControl
     {
         bool SetWellPlateSize(int width, int length);
 
-        bool SetGridColor(Color gridColor);
+        //bool SetGridColor(Color gridColor);
 
-        bool SetClickColor(Color clickColor);
+        //bool SetClickColor(Color clickColor);
 
         bool ColorCoordinate(string colorToCoordinate);
 

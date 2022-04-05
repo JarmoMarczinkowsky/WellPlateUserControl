@@ -110,6 +110,13 @@
             </Button>-->
         </Grid>
 
+        <Rectangle x:Name="rectPlaceHolder"
+                   Width="700"
+                   Height="700"
+                   Fill="LightBlue"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Bottom"/>
+        
         <Grid x:Name="gCoordinates"
               HorizontalAlignment="Left"
               VerticalAlignment="Bottom"/>

@@ -16,15 +16,15 @@ namespace WellPlateUserControl
             return _wellPlate.SetWellPlateSize(length, width);
         }
 
-        public bool SetGridColor(Color gridColor)
-        {
-            return _wellPlate.SetGridColor(gridColor);
-        }
+        //public bool SetGridColor(Color gridColor)
+        //{
+        //    return _wellPlate.SetGridColor(gridColor);
+        //}
 
-        public bool SetClickColor(Color clickColor)
-        {
-            return _wellPlate.SetClickColor(clickColor);
-        }
+        //public bool SetClickColor(Color clickColor)
+        //{
+        //    return _wellPlate.SetClickColor(clickColor);
+        //}
 
         public bool ColorCoordinate(string colorToCoordinate)
         {

@@ -58,7 +58,16 @@ namespace WellPlateUserControl
                 }
             }
         }
-        
+
+        private List<string> _getColoredList;
+        public List<string> GetColoredList
+        {
+            get
+            {
+                UpdateColoredList();
+                return _coloredCoordinates;
+            }
+        }
         public bool IsRectangle;
         public bool IsEditable;
         public bool TurnCoordinatesOff;
@@ -80,6 +89,27 @@ namespace WellPlateUserControl
         private bool _setTheMaxHeight;
 
         private Color _colorConverter = Colors.Black;
+
+        private Color _setGridColor = Colors.Black;
+        public Color SetGridColor
+        {
+            get { return _setGridColor; }
+            set
+            {
+                _setGridColor = value;
+            }
+        }
+
+        private Color _setClickColor = Colors.Red;
+        public Color SetClickColor
+        {
+            get { return _setClickColor; }
+            set
+            {
+                _setClickColor = value;
+            }
+        }
+
         private Color _clickColorConverter = Colors.Red;
         private Color _strokeColor;
         
@@ -92,6 +122,13 @@ namespace WellPlateUserControl
         {
             InitializeComponent();
             //rectPlaceHolder.Visibility = Visibility.Hidden;
+            HidePlaceholderRectangle();
+        }
+
+        private void HidePlaceholderRectangle()
+        {
+            //rectPlaceHolder.Fill = new SolidColorBrush(Colors.Blue);
+            rectPlaceHolder.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -142,7 +179,7 @@ namespace WellPlateUserControl
                             VerticalAlignment = VerticalAlignment.Bottom,
                             HorizontalAlignment = HorizontalAlignment.Left,
                             Name = $"{_alphabet[height]}{width + 1}_{1 + height + _heightWellPlate * width}",
-                            Fill = new SolidColorBrush(_colorConverter)
+                            Fill = new SolidColorBrush(_setGridColor)
                         };
 
                         _coordinates.Add(rectangle.Name);
@@ -186,11 +223,8 @@ namespace WellPlateUserControl
                         _letterDistance = (float)(rectangle.Width / 1.5);
 
                         //takes care of the position of the rectangle
-                        //directions: left, up, right, down
                         rectangle.Margin = new Thickness(
-                            _letterDistance + (_shapeDistance * rectangle.Width) - rectangle.Width + width * rectangle.Width * _shapeDistance,
-                            0,
-                            0,
+                            _letterDistance + (_shapeDistance * rectangle.Width) - rectangle.Width + width * rectangle.Width * _shapeDistance, 0, 0,
                             (_shapeDistance * rectangle.Height) - rectangle.Height + (_heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) * _shapeDistance);
 
                         _coordinates.Add(rectangle.Name);
@@ -208,11 +242,8 @@ namespace WellPlateUserControl
                             lblAlphabetic.Width = rectangle.Width;
                             lblAlphabetic.Height = rectangle.Height;
                             lblAlphabetic.VerticalContentAlignment = VerticalAlignment.Center;
-                            lblAlphabetic.FontSize = rectangle.Height / 2;
-                            lblAlphabetic.Margin = new Thickness(
-                                0,
-                                0,
-                                0,
+                            lblAlphabetic.FontSize = rectangle.Height / 2.5;
+                            lblAlphabetic.Margin = new Thickness(0, 0, 0,
                                 (_shapeDistance * rectangle.Height) - rectangle.Height + (_heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) * _shapeDistance);
                             gCoordinates.Children.Add(lblAlphabetic);
                         }
@@ -264,28 +295,16 @@ namespace WellPlateUserControl
         }
 
         /// <summary>
-        /// <para>Converts the entered gridcolor to a readable format for the code.</para>
-        /// <example>Use: 'Colors.Red' (without quotes).</example>
-        /// </summary>
-        /// <param name="gridColor">the color of the grid</param>
-        /// <returns>True if the color succeeds to be put inside the variable and an error if it fails to be put inside the variable</returns>
-        public bool SetGridColor(Color gridColor)
-        {
-            _colorConverter = gridColor;
-            return true;
-        }
-
-        /// <summary>
         /// <para>Converts the entered clickcolor to a readable format for the code.</para>
         /// <example>Use: 'Colors.[wishedColor]' without square brackets</example>
         /// </summary>
         /// <param name="clickColor">the color of the wells that you see when you click on them. Is also used for the coordinate system colors</param>
         /// <returns>True if the color succeeds to be put inside the variable and an error if it fails to be put inside the variable</returns>
-        public bool SetClickColor(Color clickColor)
-        {
-            _clickColorConverter = clickColor;
-            return true;
-        }
+        //public bool SetClickColor(Color clickColor)
+        //{
+        //    _clickColorConverter = clickColor;
+        //    return true;
+        //}
 
         /// <summary>
         /// <para>Give a number or a coordinate and the coordinate will get the 'click' color.</para>
@@ -327,7 +346,7 @@ namespace WellPlateUserControl
                                 {
                                     if (rectangle.Name.Split("_")[1] == formattedCoordinate)
                                     {
-                                        rectangle.Fill = new SolidColorBrush(_clickColorConverter);
+                                        rectangle.Fill = new SolidColorBrush(_setClickColor);
                                     }
                                 }
 
@@ -338,7 +357,7 @@ namespace WellPlateUserControl
 
                                     if (rectangle.Name.Split("_")[0] == _createEllipseName)
                                     {
-                                        rectangle.Fill = new SolidColorBrush(_clickColorConverter);
+                                        rectangle.Fill = new SolidColorBrush(_setClickColor);
                                     }
                                 }
                             }
@@ -426,15 +445,15 @@ namespace WellPlateUserControl
                             {
                                 //if an rectangle is the first color, convert it to the other color if you click it
                                 //turns rectangle on
-                                if (brush.Color == _colorConverter)
+                                if (brush.Color == _setGridColor)
                                 {
-                                    rectangle.Fill = new SolidColorBrush(_clickColorConverter);
+                                    rectangle.Fill = new SolidColorBrush(_setClickColor);
                                 }
                                 //if an rectangle is the clicked color, convert it to the first color if you click it
                                 //turns rectangle off
                                 else
                                 {
-                                    rectangle.Fill = new SolidColorBrush(_colorConverter);
+                                    rectangle.Fill = new SolidColorBrush(_setGridColor);
                                 }
                             }
                         }
@@ -569,7 +588,7 @@ namespace WellPlateUserControl
 
                 if (brush != null)
                 {
-                    if (brush.Color != _colorConverter)
+                    if (brush.Color != _setGridColor)
                     {
                         _coloredCoordinates.Add(rectangle.Name.Split("_")[0]);
                     }
