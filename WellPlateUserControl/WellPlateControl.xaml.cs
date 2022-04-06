@@ -357,8 +357,13 @@ namespace WellPlateUserControl
         }
 
         /// <summary>
-        /// Draws the wellplate. 
-        /// </summary>
+        /// Generates the wellplate based on the values the user entered. If it doesn't find any values that the user entered, it will use default values:<br></br>
+        /// The default values are:<br></br>
+        /// SetGridColor = Color.FromRgb(209, 232, 247);<br></br>
+        /// SetClickColor = Color.FromRgb(97, 172, 223);<br></br>
+        /// IsEditable = false;<br></br>
+        /// IsRectangle = false; <br></br>
+        /// </summary><br></br>
         /// <returns>True</returns>
         public bool DrawWellPlate()
         {
