@@ -203,9 +203,9 @@ namespace WellPlateUserControl
         private void PrepareValues()
         {
             _coordinates.Clear();
-
             //clears the previous shapes
             gGenerateWellPlate.Children.Clear();
+            gCoordinates.Children.Clear();
 
             _calcMaxWidth = _setMaxWidth - 16;
 
@@ -379,7 +379,6 @@ namespace WellPlateUserControl
                     CreateWells(width, height);
 
                     GenerateLabels(width, height);
-
                 }
             }
             GenerateBorder();
