@@ -386,14 +386,11 @@ namespace WellPlateUserControl
         }
 
         /// <summary>
-        /// <para>Give a number or a coordinate and the coordinate will get the 'click' color.</para>
-        /// <para>Use '<b>;</b>' to highlight more coordinates. Works with numbers and coordinates</para>
-        /// <para>For the next examples a 8x6 wellplate is being used</para>
-        /// <para><b>Example:</b> 'A4' colors the 4th circle on the upper row.</para>
-        /// <para><b>Example 2:</b> '4' also colors the 4th circle on the first column</para>
-        /// <para><b>Example:</b> 'A1;B3;B5;20' wil highlight all these coordinates</para>
+        /// <para>Enter a coordinate and it will get the 'click' color.</para>
+        /// <para>For the next example a 8x6 wellplate is being used</para>
+        /// <para><b>Example:</b> "A4" colors the 4th circle on the first row</para>
         /// </summary>
-        /// <param name="coordinate">the coordinate that is about to get colored. Put an ';' in it if you need to color more coordinates</param>
+        /// <param name="coordinate">the coordinate that is about to get colored.</param>
         /// <returns>True if everything succeeds or false if the code fails</returns>
         public bool ColorCoordinate(string coordinate)
         {
@@ -423,10 +420,15 @@ namespace WellPlateUserControl
             }
                 
             return true;
-            
-            
         }
 
+        /// <summary>
+        /// <para>Give a number and the coordinate will get the 'click' color.</para>
+        /// <para>For the next example a 8x6 wellplate is being used</para>
+        /// <para><b>Example:</b> '4' colors the 4th circle on the first column</para>
+        /// </summary>
+        /// <param name="coordinate">the coordinate that is about to get colored.</param>
+        /// <returns>True if everything succeeds or false if the code fails</returns>
         public bool ColorCoordinate(int coordinate)
         {
             foreach (object child in gGenerateWellPlate.Children)
@@ -441,7 +443,6 @@ namespace WellPlateUserControl
                         rectangle.Fill = new SolidColorBrush(_setClickColor);
                         return true;
                     }
-                    
                 }
             }
             return false;
