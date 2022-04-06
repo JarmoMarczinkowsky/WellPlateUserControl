@@ -29,7 +29,7 @@ namespace WellPlateUserControl
             get { return _setMaxHeight; }
             set 
             { 
-                if (value < 1)
+                if (value < 55)
                 {
                     throw new ArgumentOutOfRangeException("SetMaxHeight can't be smaller than 1");
                 }
@@ -47,7 +47,7 @@ namespace WellPlateUserControl
             get { return _setMaxWidth; }
             set 
             {
-                if (value < 1)
+                if (value < 20)
                 {
                     throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 1");
                 }
@@ -58,15 +58,6 @@ namespace WellPlateUserControl
             }
         }
 
-        //private List<string> _getColoredList;
-        //public List<string> GetColoredList
-        //{
-        //    get
-        //    {
-        //        UpdateColoredList();
-        //        return ColoredCoordinates;
-        //    }
-        //}
         public bool IsRectangle;
         public bool IsEditable;
         public bool TurnCoordinatesOff;
@@ -80,6 +71,8 @@ namespace WellPlateUserControl
         private float _shapeDistance = 1;
         private float _lastRectangleWidth;
         private float _letterDistance = 50;
+        private float _calcMaxHeight;
+        private float _calcMaxWidth;
         private float _recalcMaxWidth;
 
         private double _strokeThickness = 0.08;
@@ -210,6 +203,35 @@ namespace WellPlateUserControl
             }
         }
 
+        private void PrepareValues()
+        {
+            _coordinates.Clear();
+
+            //clears the previous shapes
+            gGenerateWellPlate.Children.Clear();
+
+            _calcMaxWidth = _setMaxWidth - 16;
+
+            if (_setTheMaxHeight)
+            {
+                _calcMaxHeight = _setMaxHeight - 50;
+            }
+
+            //checks if the user has chosen for rectangles and changes the spacing between the wells after that.
+            if (IsRectangle)
+            {
+                _shapeDistance = 1.05F;
+            }
+            else
+            {
+                _shapeDistance = 1.3F;
+            }
+
+            //calculates the size of a well and removes a third of the calculated well from the maximum width
+            _wellSize = _calcMaxWidth / (_shapeDistance * _widthWellPlate);
+            _recalcMaxWidth = (float)(_calcMaxWidth - (_wellSize / 1.5));
+        }
+
         private void CreateWells(int width, int height)
         {
             Rectangle rectangle = new Rectangle()
@@ -240,8 +262,8 @@ namespace WellPlateUserControl
             //default if the maximum width is not set is 600
             if (_setTheMaxHeight)
             {
-                rectangle.Width = _setMaxHeight / (_shapeDistance * _heightWellPlate);
-                rectangle.Height = _setMaxHeight / (_shapeDistance * _heightWellPlate);
+                rectangle.Width = _calcMaxHeight / (_shapeDistance * _heightWellPlate);
+                rectangle.Height = _calcMaxHeight / (_shapeDistance * _heightWellPlate);
             }
             else
             {
@@ -330,29 +352,7 @@ namespace WellPlateUserControl
 
         public bool DrawWellPlate()
         {
-            _coordinates.Clear();
-
-            //clears the previous shapes
-            gGenerateWellPlate.Children.Clear();
-
-            _setMaxWidth -= 16;
-
-            if (_setTheMaxHeight)
-            {
-                _setMaxHeight -= 50;
-            }
-
-            if (IsRectangle)
-            {
-                _shapeDistance = 1.05F;
-            }
-            else
-            {
-                _shapeDistance = 1.3F;
-            }
-
-            _wellSize = _setMaxWidth / (_shapeDistance * _widthWellPlate);
-            _recalcMaxWidth = (float)(_setMaxWidth - (_wellSize / 1.5));
+            PrepareValues();
 
             //generates the shapes
             for (int height = 0; height < _heightWellPlate; height++)

@@ -33,11 +33,11 @@ namespace TestApplication
             globalWellPlate.SetStrokeColor = Colors.Black;
             //globalWellPlate.StrokeThickness = 20;
             //globalWellPlate.TurnCoordinatesOff = true;
-            //globalWellPlate.SetMaxHeight = 700;
-            globalWellPlate.SetMaxWidth = 700;
+            //globalWellPlate.SetMaxHeight = 500;
+            globalWellPlate.SetMaxWidth = 600;
             //globalWellPlate.IsRectangle = true;
             globalWellPlate.IsEditable = true;
-            globalWellPlate.SetWellPlateSize(16,12); //width, height
+            globalWellPlate.SetWellPlateSize(12,8); //width, height
             //globalWellPlate.ColorCoordinate("A2;3"); //multiple coordinates get split with a ';'
             globalWellPlate.DrawWellPlate();
             globalWellPlate.ColorCoordinate("A5", Color.FromRgb(222,233,212));
