@@ -20,10 +20,6 @@ namespace WellPlateUserControl
 
         int CoordinateToNumber(string coordinate);
 
-        //List<string> GiveColoredList();
-
-        //List<string> GiveNotColoredList();
-
         public bool DrawWellPlate();
 
     }

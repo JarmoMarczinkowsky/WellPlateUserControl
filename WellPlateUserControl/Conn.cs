@@ -41,16 +41,6 @@ namespace WellPlateUserControl
             return _wellPlate.CoordinateToNumber(coordinate);
         }
 
-        //public List<string> GiveColoredList()
-        //{
-        //    return _wellPlate.GiveColoredList();
-        //}
-
-        //public List<string> GiveNotColoredList()
-        //{
-        //    return _wellPlate.GiveNotColoredList();
-        //}
-
         public bool DrawWellPlate()
         {
             return _wellPlate.DrawWellPlate();

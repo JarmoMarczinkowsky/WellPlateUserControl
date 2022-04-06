@@ -28,16 +28,16 @@ namespace TestApplication
         {
             InitializeComponent();
 
-            globalWellPlate.SetGridColor = Color.FromRgb(209, 232, 247);
-            globalWellPlate.SetClickColor = Color.FromRgb(97,172,223);
-            globalWellPlate.SetStrokeColor = Colors.Black;
-            //globalWellPlate.StrokeThickness = 20;
-            //globalWellPlate.TurnCoordinatesOff = true;
-            //globalWellPlate.SetMaxHeight = 500;
-            globalWellPlate.SetMaxWidth = 600;
-            //globalWellPlate.IsRectangle = true;
+            //globalWellPlate.SetGridColor = Color.FromRgb(209, 232, 247);
+            //globalWellPlate.SetClickColor = Color.FromRgb(97,172,223);
+            //globalWellPlate.SetStrokeColor = Colors.Black;
+            ////globalWellPlate.StrokeThickness = 20;
+            ////globalWellPlate.TurnCoordinatesOff = true;
+            globalWellPlate.SetMaxHeight = 700;
+            //globalWellPlate.SetMaxWidth = 600;
+            globalWellPlate.IsRectangle = true;
             globalWellPlate.IsEditable = true;
-            globalWellPlate.SetWellPlateSize(12,8); //width, height
+            globalWellPlate.SetWellPlateSize(16, 24); //width, height
             //globalWellPlate.ColorCoordinate("A2;3"); //multiple coordinates get split with a ';'
             globalWellPlate.DrawWellPlate();
             globalWellPlate.ColorCoordinate("A5", Color.FromRgb(222,233,212));
@@ -46,11 +46,15 @@ namespace TestApplication
             //Debug.WriteLine(globalWellPlate.CoordinateToNumber("a2"));
             //Debug.WriteLine(globalWellPlate.LastClickedCoordinate);
             //List<string> colorList2 = globalWellPlate.GiveColoredList();
-            //List<string> colorList = globalWellPlate.GiveColoredCoordinates;
-            
+            List<string> colorList = globalWellPlate.GetColoredCoordinates;
+            foreach (string myItem in colorList)
+            {
+                Debug.WriteLine($"colored: {myItem}");
+            }
+
 
             //List<string> notcolorList = globalWellPlate.GiveNotColoredCoordinates;
-            
+
 
             //globalWellPlate.GiveNotColoredList();
 

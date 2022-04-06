@@ -24,7 +24,7 @@ namespace WellPlateUserControl
         public string LastClickedCoordinate { get; private set; }
         
         private int _setMaxHeight = 601;
-        public int SetMaxHeight 
+        public int SetMaxHeight
         {
             get { return _setMaxHeight; }
             set 
@@ -65,8 +65,8 @@ namespace WellPlateUserControl
         private const string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private string _createEllipseName;
 
-        private int _widthWellPlate;
-        private int _heightWellPlate;
+        private int _widthWellPlate = 12;
+        private int _heightWellPlate = 8;
 
         private float _shapeDistance = 1;
         private float _lastRectangleWidth;
@@ -101,9 +101,7 @@ namespace WellPlateUserControl
         private bool _setTheMaxWidth;
         private bool _setTheMaxHeight;
 
-        private Color _colorConverter = Colors.Black;
-
-        private Color _setGridColor = Colors.Black;
+        private Color _setGridColor = Color.FromRgb(209, 232, 247);
         public Color SetGridColor
         {
             get { return _setGridColor; }
@@ -113,7 +111,7 @@ namespace WellPlateUserControl
             }
         }
 
-        private Color _setClickColor = Colors.Red;
+        private Color _setClickColor = Color.FromRgb(97, 172, 223);
         public Color SetClickColor
         {
             get { return _setClickColor; }
@@ -136,7 +134,7 @@ namespace WellPlateUserControl
         private List<string> _coordinates = new List<string>();
         
         private List<string> _coloredCoordinates = new List<string>();
-        public List<string> GiveColoredCoordinates
+        public List<string> GetColoredCoordinates
         {
             get
             {
@@ -147,7 +145,7 @@ namespace WellPlateUserControl
         }
 
         private List<string> _notColoredCoordinates = new List<string>();
-        public List<string> GiveNotColoredCoordinates
+        public List<string> GetNotColoredCoordinates
         {
             get
             {
@@ -161,13 +159,12 @@ namespace WellPlateUserControl
         public WellPlateControl()
         {
             InitializeComponent();
-            //rectPlaceHolder.Visibility = Visibility.Hidden;
+
             HidePlaceholderRectangle();
         }
 
         private void HidePlaceholderRectangle()
         {
-            //rectPlaceHolder.Fill = new SolidColorBrush(Colors.Blue);
             rectPlaceHolder.Visibility = Visibility.Hidden;
         }
 
@@ -203,6 +200,9 @@ namespace WellPlateUserControl
             }
         }
 
+        /// <summary>
+        /// Prepares the values needed for generating the wellplate
+        /// </summary>
         private void PrepareValues()
         {
             _coordinates.Clear();
@@ -232,6 +232,11 @@ namespace WellPlateUserControl
             _recalcMaxWidth = (float)(_calcMaxWidth - (_wellSize / 1.5));
         }
 
+        /// <summary>
+        /// <para>Is responsible for creating the wells</para>
+        /// </summary>
+        /// <param name="width">Current width of the for loop</param>
+        /// <param name="height">Current height of the for loop</param>
         private void CreateWells(int width, int height)
         {
             Rectangle rectangle = new Rectangle()
@@ -249,13 +254,11 @@ namespace WellPlateUserControl
             {
                 rectangle.RadiusX = 0;
                 rectangle.RadiusY = 0;
-                //_shapeDistance = 1.05F;
             }
             else
             {
                 rectangle.RadiusX = 1500;
                 rectangle.RadiusY = 1500;
-                //_shapeDistance = 1.3F;
             }
 
             //checks if the user has set a maximum height, otherwise it is going to use the maximum width that is set
@@ -292,6 +295,11 @@ namespace WellPlateUserControl
             gGenerateWellPlate.Children.Add(rectangle);
         }
 
+        /// <summary>
+        /// <para>Is repsonsible for creating the alphabetic and numeric labels with coordinates.</para>
+        /// </summary>
+        /// <param name="width">Current width of the for loop</param>
+        /// <param name="height">Current height of the for loop</param>
         private void GenerateLabels(int width, int height)
         {
             //takes care of the alphabetic labels
@@ -333,7 +341,9 @@ namespace WellPlateUserControl
                 gCoordinates.Children.Add(lblNumeric);
             }
         }
-        
+        /// <summary>
+        /// Is reponsible for the rounded border around the wellplate
+        /// </summary>
         private void GenerateBorder()
         {
             //rectangle that takes care of the outline of the wellplate
@@ -345,11 +355,14 @@ namespace WellPlateUserControl
             rectOutline.Height = _lastRectangleWidth * _heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
             rectOutline.Stroke = new SolidColorBrush(Colors.LightGray);
             rectOutline.StrokeThickness = 3;
-            
             rectOutline.RadiusX = 15;
             rectOutline.RadiusY = 15;
         }
 
+        /// <summary>
+        /// Draws the wellplate. 
+        /// </summary>
+        /// <returns>True</returns>
         public bool DrawWellPlate()
         {
             PrepareValues();
@@ -566,16 +579,16 @@ namespace WellPlateUserControl
             return -1;
         }
 
-        /// <summary>
-        /// <para>Set this function <b>after</b> WellPlateSize.</para>
-        /// <para>Gives a list of every colored well.</para>
-        /// </summary>
-        /// <returns>A list of every colored well</returns>
-        public List<string> GiveColoredList()
-        {
-            UpdateColoredList();
-            return _coloredCoordinates;
-        }
+        ///// <summary>
+        ///// <para>Set this function <b>after</b> WellPlateSize.</para>
+        ///// <para>Gives a list of every colored well.</para>
+        ///// </summary>
+        ///// <returns>A list of every colored well</returns>
+        //public List<string> GiveColoredList()
+        //{
+        //    UpdateColoredList();
+        //    return _coloredCoordinates;
+        //}
 
         /// <summary>
         /// <para>Set this function <b>after</b> WellPlateSize.</para>
