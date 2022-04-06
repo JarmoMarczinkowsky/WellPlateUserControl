@@ -28,21 +28,13 @@ namespace TestApplication
         {
             InitializeComponent();
 
-            globalWellPlate.SetWellPlateSize(24, 16);
-            globalWellPlate.DrawWellPlate();
-            globalWellPlate.SetWellPlateSize(6, 4);
-            globalWellPlate.DrawWellPlate();
-
-
-
-            globalWellPlate.SetWellPlateSize(2, 3);
-            globalWellPlate.DrawWellPlate();
-
-
 
             globalWellPlate.SetWellPlateSize(10, 10);
             globalWellPlate.DrawWellPlate();
-
+            globalWellPlate.ColorCoordinate(4);
+            globalWellPlate.ColorCoordinate("A1");
+            globalWellPlate.ColorCoordinate("A4");
+            globalWellPlate.ColorCoordinate("C4");
             ////globalWellPlate.SetGridColor = Color.FromRgb(209, 232, 247);
             ////globalWellPlate.SetClickColor = Color.FromRgb(97,172,223);
             ////globalWellPlate.SetStrokeColor = Colors.Black;
@@ -69,7 +61,6 @@ namespace TestApplication
 
 
             //List<string> notcolorList = globalWellPlate.GiveNotColoredCoordinates;
-
 
             //globalWellPlate.GiveNotColoredList();
 

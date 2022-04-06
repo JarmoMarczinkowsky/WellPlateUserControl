@@ -31,7 +31,7 @@ namespace WellPlateUserControl
             { 
                 if (value < 55)
                 {
-                    throw new ArgumentOutOfRangeException("SetMaxHeight can't be smaller than 1");
+                    throw new ArgumentOutOfRangeException("SetMaxHeight can't be smaller than 55");
                 }
                 else if (value != 601)
                 {
@@ -49,7 +49,7 @@ namespace WellPlateUserControl
             {
                 if (value < 20)
                 {
-                    throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 1");
+                    throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 20");
                 }
                 else
                 {
@@ -110,7 +110,7 @@ namespace WellPlateUserControl
             }
         }
 
-        private Color _setClickColor = Color.FromRgb(97, 172, 223);
+        private Color _setClickColor = Color.FromRgb(0, 157, 247);
         public Color SetClickColor
         {
             get { return _setClickColor; }
@@ -137,7 +137,7 @@ namespace WellPlateUserControl
         {
             get
             {
-                UpdateColoredList();
+                updateColoredList();
                 return _coloredCoordinates;
             }
             private set { _coloredCoordinates = value; }
@@ -148,7 +148,7 @@ namespace WellPlateUserControl
         {
             get
             {
-                GiveNotColoredList();
+                giveNotColoredList();
                 return _notColoredCoordinates;
             }
             private set { _notColoredCoordinates = value; }
@@ -160,7 +160,7 @@ namespace WellPlateUserControl
             InitializeComponent();
         }
 
-        private void HidePlaceHolder()
+        public void HidePlaceHolder()
         {
             rectPlaceHolder.Visibility = Visibility.Hidden;
         }
@@ -200,10 +200,10 @@ namespace WellPlateUserControl
         /// <summary>
         /// Prepares the values needed for generating the wellplate
         /// </summary>
-        private void PrepareValues()
+        private void prepareValues()
         {
             _coordinates.Clear();
-            //clears the previous shapes
+            //clears the previous shapes and labels
             gGenerateWellPlate.Children.Clear();
             gCoordinates.Children.Clear();
 
@@ -234,7 +234,7 @@ namespace WellPlateUserControl
         /// </summary>
         /// <param name="width">Current width of the for loop</param>
         /// <param name="height">Current height of the for loop</param>
-        private void CreateWells(int width, int height)
+        private void createWells(int width, int height)
         {
             Rectangle rectangle = new Rectangle()
             {
@@ -297,7 +297,7 @@ namespace WellPlateUserControl
         /// </summary>
         /// <param name="width">Current width of the for loop</param>
         /// <param name="height">Current height of the for loop</param>
-        private void GenerateLabels(int width, int height)
+        private void generateLabels(int width, int height)
         {
             //takes care of the alphabetic labels
             if (width == 0 && !TurnCoordinatesOff)
@@ -341,7 +341,7 @@ namespace WellPlateUserControl
         /// <summary>
         /// Is reponsible for the rounded border around the wellplate
         /// </summary>
-        private void GenerateBorder()
+        private void generateBorder()
         {
             //rectangle that takes care of the outline of the wellplate
             rectOutline.HorizontalAlignment = HorizontalAlignment.Left;
@@ -369,19 +369,19 @@ namespace WellPlateUserControl
         {
             HidePlaceHolder();
 
-            PrepareValues();
+            prepareValues();
 
             //generates the shapes
             for (int height = 0; height < _heightWellPlate; height++)
             {
                 for (int width = 0; width < _widthWellPlate; width++)
                 {
-                    CreateWells(width, height);
+                    createWells(width, height);
 
-                    GenerateLabels(width, height);
+                    generateLabels(width, height);
                 }
             }
-            GenerateBorder();
+            generateBorder();
             return true;
         }
 
@@ -397,58 +397,54 @@ namespace WellPlateUserControl
         /// <returns>True if everything succeeds or false if the code fails</returns>
         public bool ColorCoordinate(string coordinate)
         {
-            if (String.IsNullOrWhiteSpace(coordinate))
+            string formattedCoordinate;
+            
+            if (string.IsNullOrWhiteSpace(coordinate))
             {
                 throw new ArgumentNullException("coordinate does not take 'null' for an argument.");
             }
 
-            string formattedCoordinate;
-            List<string> coordinatesForColor = coordinate.Split(";".Trim()).ToList();
-
-            try
+            foreach (object child in gGenerateWellPlate.Children)
             {
-                //coordinate to color system
-                foreach (string newCoordinate in coordinatesForColor)
+                Rectangle rectangle = child as Rectangle;
+
+                formattedCoordinate = coordinate.Trim();
+
+                if (rectangle != null)
                 {
-                    if (!string.IsNullOrWhiteSpace(newCoordinate))
+                    _createEllipseName = $"{formattedCoordinate.ToUpper()}";
+
+                    if (rectangle.Name.Split("_")[0] == _createEllipseName)
                     {
-                        foreach (object child in gGenerateWellPlate.Children)
-                        {
-                            Rectangle rectangle = child as Rectangle;
-
-                            formattedCoordinate = newCoordinate.Trim();
-
-                            if (rectangle != null)
-                            {
-                                //is number
-                                if (char.IsDigit(formattedCoordinate[0]))
-                                {
-                                    if (rectangle.Name.Split("_")[1] == formattedCoordinate)
-                                    {
-                                        rectangle.Fill = new SolidColorBrush(_setClickColor);
-                                    }
-                                }
-
-                                //is alphabetic
-                                else
-                                {
-                                    _createEllipseName = $"{formattedCoordinate.ToUpper()}";
-
-                                    if (rectangle.Name.Split("_")[0] == _createEllipseName)
-                                    {
-                                        rectangle.Fill = new SolidColorBrush(_setClickColor);
-                                    }
-                                }
-                            }
-                        }
+                        rectangle.Fill = new SolidColorBrush(_setClickColor);
                     }
+                    
                 }
-                return true;
             }
-            catch (Exception ex)
+                
+            return true;
+            
+            
+        }
+
+        public bool ColorCoordinate(int coordinate)
+        {
+            foreach (object child in gGenerateWellPlate.Children)
             {
-                throw new Exception(ex.ToString());
+                Rectangle rectangle = child as Rectangle;
+
+                if (rectangle != null)
+                {
+                    //is number
+                    if (rectangle.Name.Split("_")[1] == coordinate.ToString())
+                    {
+                        rectangle.Fill = new SolidColorBrush(_setClickColor);
+                        return true;
+                    }
+                    
+                }
             }
+            return false;
         }
 
         /// <summary>
@@ -461,7 +457,7 @@ namespace WellPlateUserControl
         /// <returns>True if it succeeds and false if it doesn't succeed in coloring the correct coordinate</returns>
         public bool ColorCoordinate(string coordinate, Color chosenColor)
         {
-            if (String.IsNullOrWhiteSpace(coordinate))
+            if (string.IsNullOrWhiteSpace(coordinate))
             {
                 throw new ArgumentNullException("coordinate does not take 'null' for an argument.");
             }
@@ -567,7 +563,7 @@ namespace WellPlateUserControl
         /// <returns>Integer with the number the coordinate is linked to. <br>If it doesn't find anything, it will return -1</br>.<br>If it notices a null or whitespace it will return -2.</br></returns>
         public int CoordinateToNumber(string coordinate)
         {
-            if (String.IsNullOrWhiteSpace(coordinate))
+            if (string.IsNullOrWhiteSpace(coordinate))
             {
                 throw new ArgumentNullException("coordinate does not take 'null' for an argument.");
             }
@@ -598,9 +594,9 @@ namespace WellPlateUserControl
         /// <para>Gives a list of every not-colored well.</para>
         /// </summary>
         /// <returns>A list of every not-colored well</returns>
-        public void GiveNotColoredList()
+        public void giveNotColoredList()
         {
-            UpdateColoredList();
+            updateColoredList();
             _notColoredCoordinates.Clear();
 
             foreach (object child in gGenerateWellPlate.Children)
@@ -617,7 +613,7 @@ namespace WellPlateUserControl
         /// <summary>
         /// Will clear the list of every colored coordinate and refill them with the colored coordinates.
         /// </summary>
-        private void UpdateColoredList()
+        private void updateColoredList()
         {
             _coloredCoordinates.Clear();
 
