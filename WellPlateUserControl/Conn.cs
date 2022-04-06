@@ -50,5 +50,10 @@ namespace WellPlateUserControl
         //{
         //    return _wellPlate.GiveNotColoredList();
         //}
+
+        public bool DrawWellPlate()
+        {
+            return _wellPlate.DrawWellPlate();
+        }
     }
 }

@@ -24,5 +24,7 @@ namespace WellPlateUserControl
 
         //List<string> GiveNotColoredList();
 
+        public bool DrawWellPlate();
+
     }
 }

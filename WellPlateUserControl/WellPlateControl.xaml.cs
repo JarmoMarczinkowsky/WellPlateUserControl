@@ -80,8 +80,10 @@ namespace WellPlateUserControl
         private float _shapeDistance = 1;
         private float _lastRectangleWidth;
         private float _letterDistance = 50;
+        private float _recalcMaxWidth;
 
         private double _strokeThickness = 0.08;
+        private double _wellSize;
         public double StrokeThickness
         {
             get { return _strokeThickness; }
@@ -193,38 +195,12 @@ namespace WellPlateUserControl
         /// <returns>True if method succeeds and an out of range error if a values are higher than 26 or smaller than 1</returns>
         public bool SetWellPlateSize(int inputWidth, int inputHeight)
         {
-            if (inputWidth > 0 && inputWidth < _alphabet.Length 
-                               && inputHeight > 0 
-                               && inputHeight < _alphabet.Length)
+            if (inputWidth > 0 && inputWidth <= _alphabet.Length
+                               && inputHeight > 0
+                               && inputHeight <= _alphabet.Length)
             {
                 _heightWellPlate = inputHeight;
                 _widthWellPlate = inputWidth;
-
-                _coordinates.Clear();
-
-                //clears the previous shapes
-                gGenerateWellPlate.Children.Clear();
-
-                SetMaxWidth -= 16;
-                
-                if (_setTheMaxHeight)
-                {
-                    SetMaxHeight -= 50;
-                }
-
-
-                //generates the shapes
-                for (int height = 0; height < _heightWellPlate; height++)
-                {
-                    for (int width = 0; width < _widthWellPlate; width++)
-                    {
-                        CreateWells(width, height);
-                        
-                        GenerateLabels(width, height);
-                        
-                    }
-                }
-                GenerateBorder();
 
                 return true;
             }
@@ -251,26 +227,26 @@ namespace WellPlateUserControl
             {
                 rectangle.RadiusX = 0;
                 rectangle.RadiusY = 0;
-                _shapeDistance = 1.05F;
+                //_shapeDistance = 1.05F;
             }
             else
             {
                 rectangle.RadiusX = 1500;
                 rectangle.RadiusY = 1500;
-                _shapeDistance = 1.3F;
+                //_shapeDistance = 1.3F;
             }
 
             //checks if the user has set a maximum height, otherwise it is going to use the maximum width that is set
             //default if the maximum width is not set is 600
             if (_setTheMaxHeight)
             {
-                rectangle.Width = SetMaxHeight / (_shapeDistance * _heightWellPlate);
-                rectangle.Height = SetMaxHeight / (_shapeDistance * _heightWellPlate);
+                rectangle.Width = _setMaxHeight / (_shapeDistance * _heightWellPlate);
+                rectangle.Height = _setMaxHeight / (_shapeDistance * _heightWellPlate);
             }
             else
             {
-                rectangle.Width = SetMaxWidth / (_shapeDistance * _widthWellPlate);
-                rectangle.Height = SetMaxWidth / (_shapeDistance * _widthWellPlate);
+                rectangle.Width = _recalcMaxWidth / (_shapeDistance * _widthWellPlate);
+                rectangle.Height = _recalcMaxWidth / (_shapeDistance * _widthWellPlate);
             }
 
             //checks if stroke color is set and sets the stroke afterwards.
@@ -328,7 +304,7 @@ namespace WellPlateUserControl
                 lblNumeric.HorizontalContentAlignment = HorizontalAlignment.Center;
                 lblNumeric.FontSize = _lastRectangleWidth / 2.5;
                 lblNumeric.Margin = new Thickness(
-                    _letterDistance /*+ (_lastRectangleWidth * 0.2)*/ + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + width * _lastRectangleWidth * _shapeDistance,
+                    _letterDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + width * _lastRectangleWidth * _shapeDistance,
                     0,
                     0,
                     (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + _heightWellPlate * _lastRectangleWidth /*- (height * rectangle.Width) - rectangle.Height)*/ * _shapeDistance);
@@ -347,8 +323,50 @@ namespace WellPlateUserControl
             rectOutline.Height = _lastRectangleWidth * _heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
             rectOutline.Stroke = new SolidColorBrush(Colors.LightGray);
             rectOutline.StrokeThickness = 3;
+            
             rectOutline.RadiusX = 15;
             rectOutline.RadiusY = 15;
+        }
+
+        public bool DrawWellPlate()
+        {
+            _coordinates.Clear();
+
+            //clears the previous shapes
+            gGenerateWellPlate.Children.Clear();
+
+            _setMaxWidth -= 16;
+
+            if (_setTheMaxHeight)
+            {
+                _setMaxHeight -= 50;
+            }
+
+            if (IsRectangle)
+            {
+                _shapeDistance = 1.05F;
+            }
+            else
+            {
+                _shapeDistance = 1.3F;
+            }
+
+            _wellSize = _setMaxWidth / (_shapeDistance * _widthWellPlate);
+            _recalcMaxWidth = (float)(_setMaxWidth - (_wellSize / 1.5));
+
+            //generates the shapes
+            for (int height = 0; height < _heightWellPlate; height++)
+            {
+                for (int width = 0; width < _widthWellPlate; width++)
+                {
+                    CreateWells(width, height);
+
+                    GenerateLabels(width, height);
+
+                }
+            }
+            GenerateBorder();
+            return true;
         }
 
         /// <summary>

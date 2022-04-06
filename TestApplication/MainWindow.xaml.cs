@@ -30,15 +30,16 @@ namespace TestApplication
 
             globalWellPlate.SetGridColor = Color.FromRgb(209, 232, 247);
             globalWellPlate.SetClickColor = Color.FromRgb(97,172,223);
-            //globalWellPlate.SetStrokeColor = Colors.Black;
+            globalWellPlate.SetStrokeColor = Colors.Black;
             //globalWellPlate.StrokeThickness = 20;
-            globalWellPlate.SetMaxHeight = 700;
             //globalWellPlate.TurnCoordinatesOff = true;
-            //globalWellPlate.SetMaxWidth = 800;
+            //globalWellPlate.SetMaxHeight = 700;
+            globalWellPlate.SetMaxWidth = 700;
             //globalWellPlate.IsRectangle = true;
             globalWellPlate.IsEditable = true;
-            globalWellPlate.SetWellPlateSize(12,8); //width, height
+            globalWellPlate.SetWellPlateSize(16,12); //width, height
             //globalWellPlate.ColorCoordinate("A2;3"); //multiple coordinates get split with a ';'
+            globalWellPlate.DrawWellPlate();
             globalWellPlate.ColorCoordinate("A5", Color.FromRgb(222,233,212));
             globalWellPlate.ColorCoordinate("B5", Color.FromRgb(251, 209, 205));
             //Debug.WriteLine(globalWellPlate.NumberToCoordinate(-11));
