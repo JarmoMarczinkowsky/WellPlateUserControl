@@ -113,7 +113,7 @@
         <Rectangle x:Name="rectPlaceHolder"
                    Width="700"
                    Height="700"
-                   Fill="LightBlue"
+                   Fill="LightSteelBlue"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Bottom"/>
         

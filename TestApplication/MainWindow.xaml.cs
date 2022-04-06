@@ -35,7 +35,7 @@ namespace TestApplication
             ////globalWellPlate.TurnCoordinatesOff = true;
             globalWellPlate.SetMaxHeight = 700;
             //globalWellPlate.SetMaxWidth = 600;
-            globalWellPlate.IsRectangle = true;
+            //globalWellPlate.IsRectangle = true;
             globalWellPlate.IsEditable = true;
             globalWellPlate.SetWellPlateSize(16, 24); //width, height
             //globalWellPlate.ColorCoordinate("A2;3"); //multiple coordinates get split with a ';'

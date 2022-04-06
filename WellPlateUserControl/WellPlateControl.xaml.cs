@@ -98,7 +98,6 @@ namespace WellPlateUserControl
             }
         }
         private bool _setStrokeColor;
-        private bool _setTheMaxWidth;
         private bool _setTheMaxHeight;
 
         private Color _setGridColor = Color.FromRgb(209, 232, 247);
@@ -159,11 +158,9 @@ namespace WellPlateUserControl
         public WellPlateControl()
         {
             InitializeComponent();
-
-            HidePlaceholderRectangle();
         }
 
-        private void HidePlaceholderRectangle()
+        private void HidePlaceHolder()
         {
             rectPlaceHolder.Visibility = Visibility.Hidden;
         }
@@ -365,6 +362,8 @@ namespace WellPlateUserControl
         /// <returns>True</returns>
         public bool DrawWellPlate()
         {
+            HidePlaceHolder();
+
             PrepareValues();
 
             //generates the shapes
