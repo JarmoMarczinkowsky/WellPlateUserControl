@@ -25,7 +25,7 @@ Set this variable before the DrawWellPlate.
 Set the stroke of the wells in the wellplate.<br>
 [Optional]
 ```
-StrokeThickness = 20
+SetStrokeThickness = 20
 ```
 Thickness of the stroke is set in percentages.
 Will create a black stroke is SetStrokeColor is not set.<br>

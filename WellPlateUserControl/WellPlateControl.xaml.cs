@@ -24,6 +24,9 @@ namespace WellPlateUserControl
         public string LastClickedCoordinate { get; private set; }
         
         private int _setMaxHeight = 601;
+        /// <summary>
+        /// <para>Is used to set the maximum height of the wellplate in pixels</para>
+        /// </summary>
         public int SetMaxHeight
         {
             get { return _setMaxHeight; }
@@ -42,6 +45,9 @@ namespace WellPlateUserControl
         }
 
         private int _setMaxWidth = 600;
+        /// <summary>
+        /// <para>Is used to set the maximum width of the wellplate in pixels</para>
+        /// </summary>
         public int SetMaxWidth
         {
             get { return _setMaxWidth; }
@@ -77,7 +83,11 @@ namespace WellPlateUserControl
 
         private double _strokeThickness = 0.08;
         private double _wellSize;
-        public double StrokeThickness
+        /// <summary>
+        /// <para>Is used to set the thickness of the stroke in percentages.</para>
+        /// <para>If the color is not defined, it will use black.</para>
+        /// </summary>
+        public double SetStrokeThickness
         {
             get { return _strokeThickness; }
             set
@@ -101,6 +111,9 @@ namespace WellPlateUserControl
         private bool _setTheMaxHeight;
 
         private Color _setGridColor = Color.FromRgb(209, 232, 247);
+        /// <summary>
+        /// <para>Is used to set the color of the wellplate.</para>
+        /// </summary>
         public Color SetGridColor
         {
             get { return _setGridColor; }
@@ -110,7 +123,11 @@ namespace WellPlateUserControl
             }
         }
 
+        
         private Color _setClickColor = Color.FromRgb(0, 157, 247);
+        /// <summary>
+        /// Is used for the color of a well when it is clicked
+        /// </summary>
         public Color SetClickColor
         {
             get { return _setClickColor; }
@@ -502,7 +519,7 @@ namespace WellPlateUserControl
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ClickForColor(object sender, MouseButtonEventArgs e)
+        private void clickForColor(object sender, MouseButtonEventArgs e)
         {
             //loops through each of the rectangles
             foreach (object child in gGenerateWellPlate.Children)
