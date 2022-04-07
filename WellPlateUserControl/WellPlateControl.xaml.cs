@@ -68,6 +68,19 @@ namespace WellPlateUserControl
         public bool IsEditable;
         public bool TurnCoordinatesOff;
 
+        private double _setWellSize = -1;
+        public double SetWellSize
+        {
+            get { return _setWellSize; }
+            set
+            {
+                if (value > 1)
+                {
+                    _hasSetWellSize = true;
+                    _setWellSize = value;
+                }
+            }
+        }
         private const string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private string _createEllipseName;
 
@@ -109,6 +122,7 @@ namespace WellPlateUserControl
         }
         private bool _setStrokeColor;
         private bool _setTheMaxHeight;
+        private bool _hasSetWellSize;
 
         private Color _setGridColor = Color.FromRgb(209, 232, 247);
         /// <summary>
@@ -277,16 +291,26 @@ namespace WellPlateUserControl
 
             //checks if the user has set a maximum height, otherwise it is going to use the maximum width that is set
             //default if the maximum width is not set is 600
-            if (_setTheMaxHeight)
+            if (_hasSetWellSize)
             {
-                rectangle.Width = _calcMaxHeight / (_shapeDistance * _heightWellPlate);
-                rectangle.Height = _calcMaxHeight / (_shapeDistance * _heightWellPlate);
+                rectangle.Width = _setWellSize;
+                rectangle.Height = _setWellSize;
             }
             else
             {
-                rectangle.Width = _recalcMaxWidth / (_shapeDistance * _widthWellPlate);
-                rectangle.Height = _recalcMaxWidth / (_shapeDistance * _widthWellPlate);
+                if (_setTheMaxHeight)
+                {
+                    rectangle.Width = _calcMaxHeight / (_shapeDistance * _heightWellPlate);
+                    rectangle.Height = _calcMaxHeight / (_shapeDistance * _heightWellPlate);
+                }
+                else
+                {
+                    rectangle.Width = _recalcMaxWidth / (_shapeDistance * _widthWellPlate);
+                    rectangle.Height = _recalcMaxWidth / (_shapeDistance * _widthWellPlate);
+                }
             }
+            
+            
 
             //checks if stroke color is set and sets the stroke afterwards.
             if (_setStrokeColor)
