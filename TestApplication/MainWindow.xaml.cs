@@ -31,13 +31,14 @@ namespace TestApplication
             globalWellPlate.IsEditable = true;
             //globalWellPlate.SetStrokeColor = Colors.Black;
             //globalWellPlate.SetStrokeThickness = 80;
-            globalWellPlate.SetWellPlateSize(14, 8);
-            globalWellPlate.SetWellSize = 30;
+            globalWellPlate.SetWellPlateSize(24,24);
+            //globalWellPlate.SetMaxWidth = 800;
             globalWellPlate.DrawWellPlate();
             globalWellPlate.ColorCoordinate(4);
             globalWellPlate.ColorCoordinate("A1");
             globalWellPlate.ColorCoordinate("A4");
             globalWellPlate.ColorCoordinate("C4", Colors.Red);
+
             
 
 
@@ -45,8 +46,7 @@ namespace TestApplication
 
         private void ConnTest(object sender, RoutedEventArgs e)
         {
-            //make sure the colors get set before the grid size
-            //Debug.WriteLine(globalWellPlate.LastClickedCoordinate);
+            //placeholder
 
 
         }

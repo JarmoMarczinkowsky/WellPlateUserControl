@@ -22,80 +22,7 @@ namespace WellPlateUserControl
     public partial class WellPlateControl : UserControl
     {
         public string LastClickedCoordinate { get; private set; }
-        
-        private int _setMaxHeight = 601;
-        /// <summary>
-        /// <para>Is used to set the maximum height of the wellplate in pixels</para>
-        /// </summary>
-        public int SetMaxHeight
-        {
-            get { return _setMaxHeight; }
-            set 
-            { 
-                if (value < 55)
-                {
-                    throw new ArgumentOutOfRangeException("SetMaxHeight can't be smaller than 55");
-                }
-                else if (value != 601)
-                {
-                    _setMaxHeight = value;
-                    _setTheMaxHeight = true;
-                }
-            }
-        }
 
-        private int _setMaxWidth = 600;
-        /// <summary>
-        /// <para>Is used to set the maximum width of the wellplate in pixels</para>
-        /// </summary>
-        public int SetMaxWidth
-        {
-            get { return _setMaxWidth; }
-            set 
-            {
-                if (value < 20)
-                {
-                    throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 20");
-                }
-                else
-                {
-                    _setMaxWidth = value;
-                }
-            }
-        }
-
-        public bool IsRectangle;
-        public bool IsEditable;
-        public bool TurnCoordinatesOff;
-
-        private double _setWellSize = -1;
-        public double SetWellSize
-        {
-            get { return _setWellSize; }
-            set
-            {
-                if (value > 1)
-                {
-                    _hasSetWellSize = true;
-                    _setWellSize = value;
-                }
-            }
-        }
-        private const string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        private string _createEllipseName;
-
-        private int _widthWellPlate = 12;
-        private int _heightWellPlate = 8;
-
-        private float _shapeDistance = 1;
-        private float _lastRectangleWidth;
-        private float _letterDistance = 50;
-        private float _calcMaxHeight;
-        private float _calcMaxWidth;
-        private float _recalcMaxWidth;
-
-        private double _strokeThickness = 0.08;
-        private double _wellSize;
         /// <summary>
         /// <para>Is used to set the thickness of the stroke in percentages.</para>
         /// <para>If the color is not defined, it will use black.</para>
@@ -120,11 +47,27 @@ namespace WellPlateUserControl
                 }
             }
         }
-        private bool _setStrokeColor;
-        private bool _setTheMaxHeight;
-        private bool _hasSetWellSize;
 
-        private Color _setGridColor = Color.FromRgb(209, 232, 247);
+        /// <summary>
+        /// Is used to set a fixed size for the wells
+        /// </summary>
+        public double SetWellSize
+        {
+            get { return _setWellSize; }
+            set
+            {
+                if (value >= 1)
+                {
+                    _hasSetWellSize = true;
+                    _setWellSize = value;
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("Value can't be smaller than 1");
+                }
+            }
+        }
+
         /// <summary>
         /// <para>Is used to set the color of the wellplate.</para>
         /// </summary>
@@ -137,8 +80,6 @@ namespace WellPlateUserControl
             }
         }
 
-        
-        private Color _setClickColor = Color.FromRgb(0, 157, 247);
         /// <summary>
         /// Is used for the color of a well when it is clicked
         /// </summary>
@@ -151,7 +92,9 @@ namespace WellPlateUserControl
             }
         }
 
-        private Color _strokeColor;
+        /// <summary>
+        /// Is used to set a color for the stroke
+        /// </summary>
         public Color SetStrokeColor
         {
             get { return _strokeColor; }
@@ -161,9 +104,10 @@ namespace WellPlateUserControl
                 _strokeColor = value;
             }
         }
-        private List<string> _coordinates = new List<string>();
-        
-        private List<string> _coloredCoordinates = new List<string>();
+
+        /// <summary>
+        /// Is used to return a list with every colored well
+        /// </summary>
         public List<string> GetColoredCoordinates
         {
             get
@@ -174,7 +118,9 @@ namespace WellPlateUserControl
             private set { _coloredCoordinates = value; }
         }
 
-        private List<string> _notColoredCoordinates = new List<string>();
+        /// <summary>
+        /// Is used to return a list with every well that is not colored
+        /// </summary>
         public List<string> GetNotColoredCoordinates
         {
             get
@@ -185,6 +131,41 @@ namespace WellPlateUserControl
             private set { _notColoredCoordinates = value; }
         }
 
+        public bool IsRectangle;
+        public bool IsEditable;
+        public bool TurnCoordinatesOff;
+        
+        private double _setWellSize = -1;
+        
+        private const string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private string _createEllipseName;
+
+        private int _widthWellPlate = 12;
+        private int _heightWellPlate = 8;
+
+        private float _shapeDistance = 1;
+        private float _lastRectangleWidth;
+        private float _letterDistance = 50;
+        private float _calcMaxHeight;
+        private float _calcMaxWidth;
+        private float _recalcMaxWidth;
+
+        private double _strokeThickness = 0.08;
+        private double _wellSize;
+        private double _setMaxHeight;
+        private double _setMaxWidth;
+
+        private bool _setStrokeColor;
+        private bool _setTheMaxHeight;
+        private bool _hasSetWellSize;
+
+        private Color _setGridColor = Color.FromRgb(209, 232, 247);
+        private Color _setClickColor = Color.FromRgb(0, 157, 247);
+        private Color _strokeColor;
+
+        private List<string> _coordinates = new List<string>();
+        private List<string> _coloredCoordinates = new List<string>();
+        private List<string> _notColoredCoordinates = new List<string>();
 
         public WellPlateControl()
         {
@@ -238,11 +219,42 @@ namespace WellPlateUserControl
             gGenerateWellPlate.Children.Clear();
             gCoordinates.Children.Clear();
 
-            _calcMaxWidth = _setMaxWidth - 16;
+            //checks if a value is entered. If yes -> set the value to the corresponding variable. If both are no -> maxWidth becomes 600 pixels
+            if (!double.IsNaN(this.Width))
+            {
+                if (this.Width < 20)
+                {
+                    throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 20");
+                }
+                else
+                {
+                    _setMaxWidth = this.Width;
+                }
+            }
+            else if (!double.IsNaN(this.Height))
+            {
+                if (this.Height < 55)
+                {
+                    throw new ArgumentOutOfRangeException("SetMaxHeight can't be smaller than 55");
+                }
+                else
+                {
+                    _setMaxHeight = this.Height;
+                    _setTheMaxHeight = true;
+                }
+            }
+            else
+            {
+                _setMaxWidth = 600;
+            }
 
             if (_setTheMaxHeight)
             {
-                _calcMaxHeight = _setMaxHeight - 50;
+                _calcMaxHeight = (float)(_setMaxHeight - 50);
+            }
+            else
+            {
+                _calcMaxWidth = (float)(_setMaxWidth - 16);
             }
 
             //checks if the user has chosen for rectangles and changes the spacing between the wells after that.
@@ -257,7 +269,7 @@ namespace WellPlateUserControl
 
             //calculates the size of a well and removes a third of the calculated well from the maximum width
             _wellSize = _calcMaxWidth / (_shapeDistance * _widthWellPlate);
-            _recalcMaxWidth = (float)(_calcMaxWidth - (_wellSize / 1.5));
+            _recalcMaxWidth = (float)((_calcMaxWidth - (_wellSize / 1.5)) * 0.95);
         }
 
         /// <summary>
@@ -412,6 +424,9 @@ namespace WellPlateUserControl
 
             prepareValues();
 
+            //SetMaxWidth = this.Width;
+            //SetMaxHeight = (int)this.Height;
+
             //generates the shapes
             for (int height = 0; height < _heightWellPlate; height++)
             {
@@ -456,7 +471,6 @@ namespace WellPlateUserControl
                     {
                         rectangle.Fill = new SolidColorBrush(_setClickColor);
                     }
-                    
                 }
             }
                 
