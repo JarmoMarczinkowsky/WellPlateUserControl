@@ -248,6 +248,7 @@ namespace WellPlateUserControl
                 _setMaxWidth = 600;
             }
 
+            //recalculates the max height
             if (_setTheMaxHeight)
             {
                 _calcMaxHeight = (float)(_setMaxHeight - 50);
@@ -470,11 +471,12 @@ namespace WellPlateUserControl
                     if (rectangle.Name.Split("_")[0] == _createEllipseName)
                     {
                         rectangle.Fill = new SolidColorBrush(_setClickColor);
+                        return true;
+
                     }
                 }
             }
-                
-            return true;
+            return false;
         }
 
         /// <summary>
@@ -524,9 +526,11 @@ namespace WellPlateUserControl
                 if (rectangle.Name.Split("_")[0] == coordinate.ToUpper().Trim())
                 {
                     rectangle.Fill = new SolidColorBrush(chosenColor);
+                    return true;
+
                 }
             }
-            return true;
+            return false;
         }
 
         /// <summary>
@@ -545,9 +549,11 @@ namespace WellPlateUserControl
                 if (rectangle.Name.Split("_")[1] == coordinate.ToString())
                 {
                     rectangle.Fill = new SolidColorBrush(chosenColor);
+                    return true;
+
                 }
             }
-            return true;
+            return false;
         }
 
 
@@ -687,11 +693,5 @@ namespace WellPlateUserControl
                 }
             }
         }
-
-        
-
-        
-
-        
     }
 }

@@ -32,6 +32,7 @@ namespace TestApplication
             //globalWellPlate.SetStrokeColor = Colors.Black;
             //globalWellPlate.SetStrokeThickness = 80;
             globalWellPlate.SetWellPlateSize(24,24);
+            globalWellPlate.SetWellPlateSize(12,12);
             //globalWellPlate.SetMaxWidth = 800;
             globalWellPlate.DrawWellPlate();
             globalWellPlate.ColorCoordinate(4);
