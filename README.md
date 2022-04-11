@@ -7,6 +7,12 @@ The colors are used with the Color class from Microsoft. It is possible to use R
 
 <b>Functions:</b>
 ```
+SetWellPlateSize(8, 6)
+```
+Sets the size of the wellplate in wells. The first argument '8' is the width and the second argument '6' is the height of the wellplate. 
+Set this function after the colors, circlesize and/or the rectangle and before the coordinateconverter and/or functions that return items<br>
+[Optional]
+```
 SetGridColor(Colors.Black) 
 ```
 Gives the grid the color that you wish it to be. Default is black.
@@ -17,6 +23,30 @@ SetClickColor(Colors.Red)
 ```
 Sets the color of a clicked well to the color you wished. Default is red. 
 Set this function before the DrawWellPlate.<br>
+[Optional]
+```
+SetMaxWidth = <int>
+```
+Set this function before 'DrawWellPlate'.
+Set the maximum width of the wells that need to be generated. 
+Uses an integer for the 'width in pixels'.
+Default is 600 pixels.
+Will choose the highest line of code if both are set.<br>
+[Optional]
+```
+SetMaxHeight = <int>
+```
+Set this function before 'DrawWellPlate'.
+Set the maximum height of the wells that need to be generated. 
+Uses an integer for the 'height in pixels'.
+Default is 600 pixels.
+Will choose the highest line of code if both are set.<br>
+[Optional]
+```
+IsEditable = <bool>
+```
+Set this function before 'DrawWellPlate'.
+Makes the wellplate editable so you can color wells by clicking on them.<br>
 [Optional]
 ```
 SetStrokeColor = Colors.Blue
@@ -36,12 +66,6 @@ IsRectangle = <bool>
 ```
 Makes every well a rectangle instead of a circle. Will also increase the distance between the wells with 5 percent.
 Set this variable before the DrawWellPlate.<br>
-[Optional]
-```
-SetWellPlateSize(8, 6)
-```
-Sets the size of the wellplate in wells. The first argument '8' is the width and the second argument '6' is the height of the wellplate. 
-Set this function after the colors, circlesize and/or the rectangle and before the coordinateconverter and/or functions that return items<br>
 [Optional]
 ```
 DrawWellPlate
@@ -89,30 +113,6 @@ GetNotColoredList()
 ```
 Returns a list with the coordinates of every well that is currently not colored.
 Set this function after DrawWellPlate.<br>
-[Optional]
-```
-SetMaxWidth = <int>
-```
-Set this function before 'DrawWellPlate'.
-Set the maximum width of the wells that need to be generated. 
-Uses an integer for the 'width in pixels'.
-Default is 600 pixels.
-Will choose the highest line of code if both are set.<br>
-[Optional]
-```
-SetMaxHeight = <int>
-```
-Set this function before 'DrawWellPlate'.
-Set the maximum height of the wells that need to be generated. 
-Uses an integer for the 'height in pixels'.
-Default is 600 pixels.
-Will choose the highest line of code if both are set.<br>
-[Optional]
-```
-IsEditable = <bool>
-```
-Set this function before 'DrawWellPlate'.
-Makes the wellplate editable so you can color wells by clicking on them.<br>
 [Optional]
 ```
 LastClickedCoordinate
