@@ -229,6 +229,8 @@ namespace WellPlateUserControl
                 else
                 {
                     _setMaxWidth = this.Width;
+                    _calcMaxWidth = (float)(_setMaxWidth - 16);
+
                 }
             }
             else if (!double.IsNaN(this.Height))
@@ -240,23 +242,26 @@ namespace WellPlateUserControl
                 else
                 {
                     _setMaxHeight = this.Height;
+                    _calcMaxHeight = (float)(_setMaxHeight - 50);
                     _setTheMaxHeight = true;
                 }
             }
             else
             {
                 _setMaxWidth = 600;
+                _calcMaxWidth = (float)(_setMaxWidth - 16);
+
             }
 
-            //recalculates the max height
-            if (_setTheMaxHeight)
-            {
-                _calcMaxHeight = (float)(_setMaxHeight - 50);
-            }
-            else
-            {
-                _calcMaxWidth = (float)(_setMaxWidth - 16);
-            }
+            ////recalculates the max height
+            //if (_setTheMaxHeight)
+            //{
+            //    _calcMaxHeight = (float)(_setMaxHeight - 50);
+            //}
+            //else
+            //{
+            //    _calcMaxWidth = (float)(_setMaxWidth - 16);
+            //}
 
             //checks if the user has chosen for rectangles and changes the spacing between the wells after that.
             if (IsRectangle)
@@ -472,7 +477,6 @@ namespace WellPlateUserControl
                     {
                         rectangle.Fill = new SolidColorBrush(_setClickColor);
                         return true;
-
                     }
                 }
             }
