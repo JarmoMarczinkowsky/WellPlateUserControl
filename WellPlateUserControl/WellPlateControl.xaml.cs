@@ -394,8 +394,13 @@ namespace WellPlateUserControl
                     (_lastRectangleWidth / 5) + _letterDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + width * _lastRectangleWidth * _shapeDistance,
                     0,
                     0,
-                    (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + _heightWellPlate * _lastRectangleWidth /*- (height * rectangle.Width) - rectangle.Height)*/ * _shapeDistance);
+                    (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + _heightWellPlate * _lastRectangleWidth * _shapeDistance);
                 gCoordinates.Children.Add(lblNumeric);
+
+                if (width == 0)
+                {
+                    Debug.WriteLine($"Recommended height: {(_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + _heightWellPlate * _lastRectangleWidth * _shapeDistance}");
+                }
             }
         }
         /// <summary>
@@ -410,18 +415,11 @@ namespace WellPlateUserControl
             rectOutline.Fill = new SolidColorBrush(Colors.Transparent);
             rectOutline.Stroke = new SolidColorBrush(Colors.LightGray);
             rectOutline.StrokeThickness = 3;
+            rectOutline.Width = _lastRectangleWidth * _widthWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
+            rectOutline.Height = _lastRectangleWidth * _heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
+            rectOutline.RadiusX = 15;
+            rectOutline.RadiusY = 15;
 
-            if (this.Width > 250 || this.Height > 250)
-            {
-                rectOutline.Width = _lastRectangleWidth * _widthWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
-                rectOutline.Height = _lastRectangleWidth * _heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
-                rectOutline.RadiusX = 15;
-                rectOutline.RadiusY = 15;
-            }
-            else
-            {
-                rectOutline.Stroke = new SolidColorBrush(Colors.Transparent);
-            }
         }
 
         /// <summary>
