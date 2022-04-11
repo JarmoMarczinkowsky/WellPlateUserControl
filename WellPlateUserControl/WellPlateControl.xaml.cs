@@ -149,6 +149,7 @@ namespace WellPlateUserControl
         private float _calcMaxHeight;
         private float _calcMaxWidth;
         private float _recalcMaxWidth;
+        private float _recalcMaxHeight;
 
         private double _strokeThickness = 0.08;
         private double _wellSize;
@@ -253,16 +254,6 @@ namespace WellPlateUserControl
 
             }
 
-            ////recalculates the max height
-            //if (_setTheMaxHeight)
-            //{
-            //    _calcMaxHeight = (float)(_setMaxHeight - 50);
-            //}
-            //else
-            //{
-            //    _calcMaxWidth = (float)(_setMaxWidth - 16);
-            //}
-
             //checks if the user has chosen for rectangles and changes the spacing between the wells after that.
             if (IsRectangle)
             {
@@ -275,7 +266,15 @@ namespace WellPlateUserControl
 
             //calculates the size of a well and removes a third of the calculated well from the maximum width
             _wellSize = _calcMaxWidth / (_shapeDistance * _widthWellPlate);
-            _recalcMaxWidth = (float)((_calcMaxWidth - (_wellSize / 1.5)) * 0.95);
+            if (_setTheMaxHeight)
+            {
+                _recalcMaxHeight = (float)((_calcMaxHeight - (_wellSize / 1.5)) * 0.9);
+            }
+            else
+            {
+                _recalcMaxWidth = (float)((_calcMaxWidth - (_wellSize / 1.5)) * 0.95);
+            }
+
         }
 
         /// <summary>
@@ -318,8 +317,8 @@ namespace WellPlateUserControl
             {
                 if (_setTheMaxHeight)
                 {
-                    rectangle.Width = _calcMaxHeight / (_shapeDistance * _heightWellPlate);
-                    rectangle.Height = _calcMaxHeight / (_shapeDistance * _heightWellPlate);
+                    rectangle.Width = _recalcMaxHeight / (_shapeDistance * _heightWellPlate);
+                    rectangle.Height = _recalcMaxHeight / (_shapeDistance * _heightWellPlate);
                 }
                 else
                 {
@@ -358,20 +357,22 @@ namespace WellPlateUserControl
         /// <param name="height">Current height of the for loop</param>
         private void generateLabels(int width, int height)
         {
+            float textBlockSizeModifier = .45F;
+
             //takes care of the alphabetic labels
             if (width == 0 && !TurnCoordinatesOff)
             {
-                Label lblAlphabetic = new Label();
-                lblAlphabetic.Content = $"{_alphabet[height]}";
+                TextBlock lblAlphabetic = new TextBlock();
+                lblAlphabetic.Text = $"{_alphabet[height]}";
                 lblAlphabetic.Foreground = new SolidColorBrush(Colors.Black);
                 lblAlphabetic.HorizontalAlignment = HorizontalAlignment.Left;
                 lblAlphabetic.VerticalAlignment = VerticalAlignment.Bottom;
                 lblAlphabetic.Width = _lastRectangleWidth;
                 lblAlphabetic.Height = _lastRectangleWidth;
-                lblAlphabetic.VerticalContentAlignment = VerticalAlignment.Center;
-                lblAlphabetic.FontSize = _lastRectangleWidth / 2.5;
+                //lblAlphabetic.VerticalContentAlignment = VerticalAlignment.Center;
+                lblAlphabetic.FontSize = _lastRectangleWidth * textBlockSizeModifier;
                 lblAlphabetic.Margin = new Thickness(0, 0, 0,
-                    (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + (_heightWellPlate * _lastRectangleWidth - (height * _lastRectangleWidth) - _lastRectangleWidth) * _shapeDistance);
+                    (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + (_heightWellPlate * _lastRectangleWidth - (height * _lastRectangleWidth) - _lastRectangleWidth) * _shapeDistance - (_lastRectangleWidth / 4));
                 gCoordinates.Children.Add(lblAlphabetic);
 
             }
@@ -379,18 +380,18 @@ namespace WellPlateUserControl
             //takes care of the numeric labels
             if (height == 0 && !TurnCoordinatesOff)
             {
-                Label lblNumeric = new Label();
-                lblNumeric.Content = $"{width + 1}";
+                TextBlock lblNumeric = new TextBlock();
+                lblNumeric.Text = $"{width + 1}";
                 lblNumeric.Foreground = new SolidColorBrush(Colors.Black);
                 //lblNumeric.Background = new SolidColorBrush(Colors.LightGray);
                 lblNumeric.HorizontalAlignment = HorizontalAlignment.Left;
                 lblNumeric.VerticalAlignment = VerticalAlignment.Bottom;
+                //lblNumeric.HorizontalContentAlignment = HorizontalAlignment.Center;
                 lblNumeric.Width = _lastRectangleWidth;
+                lblNumeric.FontSize = _lastRectangleWidth * textBlockSizeModifier;
 
-                lblNumeric.HorizontalContentAlignment = HorizontalAlignment.Center;
-                lblNumeric.FontSize = _lastRectangleWidth / 2.5;
                 lblNumeric.Margin = new Thickness(
-                    _letterDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + width * _lastRectangleWidth * _shapeDistance,
+                    (_lastRectangleWidth / 5) + _letterDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + width * _lastRectangleWidth * _shapeDistance,
                     0,
                     0,
                     (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + _heightWellPlate * _lastRectangleWidth /*- (height * rectangle.Width) - rectangle.Height)*/ * _shapeDistance);
@@ -411,8 +412,12 @@ namespace WellPlateUserControl
             rectOutline.Height = _lastRectangleWidth * _heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
             rectOutline.Stroke = new SolidColorBrush(Colors.LightGray);
             rectOutline.StrokeThickness = 3;
-            rectOutline.RadiusX = 15;
-            rectOutline.RadiusY = 15;
+
+            if (this.Width > 250 || this.Height > 250)
+            {
+                rectOutline.RadiusX = 15;
+                rectOutline.RadiusY = 15;
+            }
         }
 
         /// <summary>
