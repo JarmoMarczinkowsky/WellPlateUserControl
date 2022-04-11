@@ -408,15 +408,19 @@ namespace WellPlateUserControl
             rectOutline.VerticalAlignment = VerticalAlignment.Bottom;
             rectOutline.Margin = new Thickness(_letterDistance, 0, 0, 0);
             rectOutline.Fill = new SolidColorBrush(Colors.Transparent);
-            rectOutline.Width = _lastRectangleWidth * _widthWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
-            rectOutline.Height = _lastRectangleWidth * _heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
             rectOutline.Stroke = new SolidColorBrush(Colors.LightGray);
             rectOutline.StrokeThickness = 3;
 
             if (this.Width > 250 || this.Height > 250)
             {
+                rectOutline.Width = _lastRectangleWidth * _widthWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
+                rectOutline.Height = _lastRectangleWidth * _heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
                 rectOutline.RadiusX = 15;
                 rectOutline.RadiusY = 15;
+            }
+            else
+            {
+                rectOutline.Stroke = new SolidColorBrush(Colors.Transparent);
             }
         }
 
