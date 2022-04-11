@@ -9,7 +9,7 @@
     <Grid x:Name="gRefreshTest">
         <global:WellPlateControl x:Name="globalWellPlate"
                                  Width="600"
-                                 Height="525"/>
+                                 Height="400"/>
 
 
         <!--<Button x:Name="ConnClick" Click="ConnTest"

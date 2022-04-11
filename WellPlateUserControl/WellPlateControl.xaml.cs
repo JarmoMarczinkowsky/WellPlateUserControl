@@ -215,6 +215,9 @@ namespace WellPlateUserControl
         /// </summary>
         private void prepareValues()
         {
+            double tooBigPercentage = 100;
+            double bigNumber;
+
             _coordinates.Clear();
             //clears the previous shapes and labels
             gGenerateWellPlate.Children.Clear();
@@ -273,6 +276,42 @@ namespace WellPlateUserControl
             else
             {
                 _recalcMaxWidth = (float)((_calcMaxWidth - (_wellSize / 1.5)) * 0.95);
+            }
+
+            if (_hasSetWellSize)
+            {
+                _lastRectangleWidth = (float)_setWellSize;
+            }
+            else
+            {
+                if (_setTheMaxHeight)
+                {
+                    _lastRectangleWidth = _recalcMaxHeight / (_shapeDistance * _heightWellPlate);
+                }
+                else
+                {
+                    _lastRectangleWidth = _recalcMaxWidth / (_shapeDistance * _widthWellPlate);
+                }
+            }
+
+            //in case given height is smaller than needed height
+            if ((_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + _heightWellPlate * _lastRectangleWidth * _shapeDistance + (_lastRectangleWidth * 0.45) > this.Height)
+            {
+                bigNumber = (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + _heightWellPlate * _lastRectangleWidth * _shapeDistance + (_lastRectangleWidth * 0.45);
+
+                tooBigPercentage = (bigNumber - this.Height) / this.Height * 100;
+
+                if (_setTheMaxHeight)
+                {
+                    _recalcMaxHeight = (float)(_recalcMaxHeight / (tooBigPercentage + 100) * 100);
+
+                }
+                else
+                {
+                    _recalcMaxWidth = (float)(_recalcMaxWidth / (tooBigPercentage + 100) * 100);
+                }
+
+                Debug.WriteLine($"{tooBigPercentage}%");
             }
 
         }
@@ -399,7 +438,7 @@ namespace WellPlateUserControl
 
                 if (width == 0)
                 {
-                    Debug.WriteLine($"Recommended height: {(_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + _heightWellPlate * _lastRectangleWidth * _shapeDistance}");
+                    Debug.WriteLine($"Recommended height: {(_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + _heightWellPlate * _lastRectangleWidth * _shapeDistance + lblNumeric.FontSize}");
                 }
             }
         }

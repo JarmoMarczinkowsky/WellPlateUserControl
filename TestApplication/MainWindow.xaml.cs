@@ -31,7 +31,7 @@ namespace TestApplication
             globalWellPlate.IsEditable = true;
             //globalWellPlate.SetStrokeColor = Colors.Black;
             //globalWellPlate.SetStrokeThickness = 80;
-            globalWellPlate.SetWellPlateSize(24,23);
+            globalWellPlate.SetWellPlateSize(24,24);
             //globalWellPlate.SetWellPlateSize(4,3);
             //globalWellPlate.SetMaxWidth = 800;
             globalWellPlate.DrawWellPlate();
