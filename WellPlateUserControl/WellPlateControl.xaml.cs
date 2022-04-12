@@ -175,7 +175,7 @@ namespace WellPlateUserControl
 
         public void HidePlaceHolder()
         {
-            rectPlaceHolder.Visibility = Visibility.Hidden;
+            this.Background = new SolidColorBrush(Colors.Transparent);
         }
 
         /// <summary>
