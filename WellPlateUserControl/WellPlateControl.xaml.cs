@@ -694,17 +694,6 @@ namespace WellPlateUserControl
             return -1;
         }
 
-        ///// <summary>
-        ///// <para>Set this function <b>after</b> WellPlateSize.</para>
-        ///// <para>Gives a list of every colored well.</para>
-        ///// </summary>
-        ///// <returns>A list of every colored well</returns>
-        //public List<string> GiveColoredList()
-        //{
-        //    UpdateColoredList();
-        //    return _coloredCoordinates;
-        //}
-
         /// <summary>
         /// <para>Set this function <b>after</b> WellPlateSize.</para>
         /// <para>Gives a list of every not-colored well.</para>

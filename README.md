@@ -2,7 +2,7 @@
 
 Note:
 The colors are used with the Color class from Microsoft. It is possible to use RGB-colors by using: Color.FromRgb(0,0,0)
-Make sure you set the <b>width</b>, <b>height</b> and <b>'VerticalAlignment="Top"'</b> of the usercontrol
+Make sure you set the <b>width</b>, <b>height</b> and <b>VerticalAlignment="Top"</b> of the usercontrol
 
 <h3>A usercontrol that creates a grid for the wellplate.</h3>
 
