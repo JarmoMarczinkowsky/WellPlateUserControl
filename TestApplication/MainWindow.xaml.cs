@@ -29,16 +29,22 @@ namespace TestApplication
             InitializeComponent();
 
             globalWellPlate.IsEditable = true;
+            globalWellPlate.IsRectangle = true;
+            globalWellPlate.SetGridColor = Colors.Black;
+            globalWellPlate.SetClickColor = Colors.Crimson;
             //globalWellPlate.SetStrokeColor = Colors.Black;
             //globalWellPlate.SetStrokeThickness = 80;
-            globalWellPlate.SetWellPlateSize(4, 4);
-            //globalWellPlate.SetWellPlateSize(4,3);
+            globalWellPlate.SetWellPlateSize(12, 8);
             //globalWellPlate.SetMaxWidth = 800;
             globalWellPlate.DrawWellPlate();
             globalWellPlate.ColorCoordinate(4);
             globalWellPlate.ColorCoordinate("A1");
             globalWellPlate.ColorCoordinate("C4", Colors.Red);
             globalWellPlate.ColorCoordinate(5, Colors.Green);
+            globalWellPlate.CoordinateToNumber("A4");
+            globalWellPlate.NumberToCoordinate(6);
+            Debug.WriteLine(globalWellPlate.GetColoredCoordinates);
+            Debug.WriteLine(globalWellPlate.GetNotColoredCoordinates);
 
         }
 

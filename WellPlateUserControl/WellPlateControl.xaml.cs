@@ -408,7 +408,6 @@ namespace WellPlateUserControl
                 lblAlphabetic.VerticalAlignment = VerticalAlignment.Bottom;
                 lblAlphabetic.Width = _lastRectangleWidth;
                 lblAlphabetic.Height = _lastRectangleWidth;
-                //lblAlphabetic.VerticalContentAlignment = VerticalAlignment.Center;
                 lblAlphabetic.FontSize = _lastRectangleWidth * textBlockSizeModifier;
                 lblAlphabetic.Margin = new Thickness(0, 0, 0,
                     (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + (_heightWellPlate * _lastRectangleWidth - (height * _lastRectangleWidth) - _lastRectangleWidth) * _shapeDistance - (_lastRectangleWidth / 4));
@@ -422,10 +421,8 @@ namespace WellPlateUserControl
                 TextBlock lblNumeric = new TextBlock();
                 lblNumeric.Text = $"{width + 1}";
                 lblNumeric.Foreground = new SolidColorBrush(Colors.Black);
-                //lblNumeric.Background = new SolidColorBrush(Colors.LightGray);
                 lblNumeric.HorizontalAlignment = HorizontalAlignment.Left;
                 lblNumeric.VerticalAlignment = VerticalAlignment.Bottom;
-                //lblNumeric.HorizontalContentAlignment = HorizontalAlignment.Center;
                 lblNumeric.Width = _lastRectangleWidth;
                 lblNumeric.FontSize = _lastRectangleWidth * textBlockSizeModifier;
 
@@ -458,7 +455,7 @@ namespace WellPlateUserControl
             rectOutline.Width = _lastRectangleWidth * _widthWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
             rectOutline.Height = _lastRectangleWidth * _heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
             
-            if (_lastRectangleWidth > 15)
+            if (_lastRectangleWidth > 15 && !IsRectangle)
             {
                 rectOutline.RadiusX = 15;
                 rectOutline.RadiusY = 15;
