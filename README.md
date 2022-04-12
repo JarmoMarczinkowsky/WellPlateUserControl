@@ -102,4 +102,12 @@ LastClickedCoordinate
 ```
 Will return the coordinate of the last clicked well. Also works when IsEditable is off.<br>
 [Optional]
+```
+Clear()
+Clear("A1")
+Clear(1)
+```
+Will the clear the well on the entered coordinate. If it gets left empty, it will clear the entire wellplate of colored coordinates.
+Set this function after DrawWellPlate.<br>
+[Optional]
 
