@@ -2,6 +2,7 @@
 
 Note:
 The colors are used with the Color class from Microsoft. It is possible to use RGB-colors by using: Color.FromRgb(0,0,0)
+Make sure you set the <b>width</b>, <b>height</b> and <b>'VerticalAlignment="Top"'</b> of the usercontrol
 
 <h3>A usercontrol that creates a grid for the wellplate.</h3>
 
@@ -23,24 +24,6 @@ SetClickColor(Colors.Red)
 ```
 Sets the color of a clicked well to the color you wished. Default is red. 
 Set this function before the DrawWellPlate.<br>
-[Optional]
-```
-SetMaxWidth = <int>
-```
-Set this function before 'DrawWellPlate'.
-Set the maximum width of the wells that need to be generated. 
-Uses an integer for the 'width in pixels'.
-Default is 600 pixels.
-Will choose the highest line of code if both are set.<br>
-[Optional]
-```
-SetMaxHeight = <int>
-```
-Set this function before 'DrawWellPlate'.
-Set the maximum height of the wells that need to be generated. 
-Uses an integer for the 'height in pixels'.
-Default is 600 pixels.
-Will choose the highest line of code if both are set.<br>
 [Optional]
 ```
 IsEditable = <bool>
