@@ -21,6 +21,230 @@
 
         </Grid>
 
+        <Grid x:Name="gPlaceHolder">
+            <Grid>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,-240,120,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,-240,40,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,-240,-40,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,-240,-120,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,-240,-200,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,-240,-280,0"/>
+            </Grid>
+            <Grid>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,-160,120,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,-160,40,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Red"
+                     Margin="0,-160,-40,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,-160,-120,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,-160,-200,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,-160,-280,0"/>
+            </Grid>
+            <Grid>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,-80,120,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,-80,40,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,-80,-40,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,-80,-120,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,-80,-200,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,-80,-280,0"/>
+            </Grid>
+            <Grid>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,0,120,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,0,40,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,0,-40,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,0,-120,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,0,-200,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,0,-280,0"/>
+                
+            </Grid>
+            <Grid>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,80,120,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,80,40,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,80,-40,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,80,-120,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,80,-200,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,80,-280,0"/>
+                
+            </Grid>
+            <Grid>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,160,120,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,160,40,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,160,-40,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,160,-120,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,160,-200,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Green"
+                     Margin="0,160,-280,0"/>
+            </Grid>
+            <Grid>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,240,120,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,240,40,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,240,-40,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,240,-120,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,240,-200,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,240,-280,0"/>
+                
+            </Grid>
+            <Grid>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,320,120,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,320,40,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,320,-40,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,320,-120,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,320,-200,0"/>
+                <Ellipse Width="40"
+                     Height="40"
+                     Fill="Black"
+                     Margin="0,320,-280,0"/>
+                
+            </Grid>
+
+            <Rectangle
+                Width="300"
+                Height="360"
+                Margin="0,40,-80,0"
+                Stroke="Black"
+                RadiusX="40"
+                RadiusY="40"/>
+
+
+        </Grid>
         <!--<Rectangle x:Name="rectPlaceHolder"
                    Width="700"
                    Height="700"
