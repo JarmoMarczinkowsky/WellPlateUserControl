@@ -439,6 +439,7 @@ namespace WellPlateUserControl
                 if (width == 0)
                 {
                     Debug.WriteLine($"Recommended height: {(_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + _heightWellPlate * _lastRectangleWidth * _shapeDistance + lblNumeric.FontSize}");
+                    Debug.WriteLine($"Well size: {_lastRectangleWidth}");
                 }
             }
         }
@@ -453,19 +454,25 @@ namespace WellPlateUserControl
             rectOutline.Margin = new Thickness(_letterDistance, 0, 0, 0);
             rectOutline.Fill = new SolidColorBrush(Colors.Transparent);
             rectOutline.Stroke = new SolidColorBrush(Colors.LightGray);
-            rectOutline.StrokeThickness = 3;
+            rectOutline.StrokeThickness = _lastRectangleWidth * 0.1;
             rectOutline.Width = _lastRectangleWidth * _widthWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
             rectOutline.Height = _lastRectangleWidth * _heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
-            rectOutline.RadiusX = 15;
-            rectOutline.RadiusY = 15;
+            
+            if (_lastRectangleWidth > 15)
+            {
+                rectOutline.RadiusX = 15;
+                rectOutline.RadiusY = 15;
+            }
+
+            
 
         }
 
         /// <summary>
         /// Generates the wellplate based on the values the user entered. If it doesn't find any values that the user entered, it will use default values:<br></br>
         /// The default values are:<br></br>
-        /// SetGridColor = Color.FromRgb(209, 232, 247);<br></br>
-        /// SetClickColor = Color.FromRgb(97, 172, 223);<br></br>
+        /// SetGridColor = Color.FromRgb(209, 232, 247); (lightblue)<br></br>
+        /// SetClickColor = Color.FromRgb(0, 157, 247); (blue)<br></br>
         /// IsEditable = false;<br></br>
         /// IsRectangle = false; <br></br>
         /// </summary><br></br>

@@ -31,17 +31,14 @@ namespace TestApplication
             globalWellPlate.IsEditable = true;
             //globalWellPlate.SetStrokeColor = Colors.Black;
             //globalWellPlate.SetStrokeThickness = 80;
-            globalWellPlate.SetWellPlateSize(24,24);
+            globalWellPlate.SetWellPlateSize(4, 4);
             //globalWellPlate.SetWellPlateSize(4,3);
             //globalWellPlate.SetMaxWidth = 800;
             globalWellPlate.DrawWellPlate();
             globalWellPlate.ColorCoordinate(4);
             globalWellPlate.ColorCoordinate("A1");
-            globalWellPlate.ColorCoordinate("A4");
             globalWellPlate.ColorCoordinate("C4", Colors.Red);
-
-            
-
+            globalWellPlate.ColorCoordinate(5, Colors.Green);
 
         }
 
