@@ -35,6 +35,7 @@ namespace TestApplication
             //globalWellPlate.SetStrokeColor = Colors.Black;
             //globalWellPlate.SetStrokeThickness = 80;
             globalWellPlate.SetWellPlateSize(8,24);
+            //globalWellPlate.SetWellSize = 5;
             //globalWellPlate.SetMaxWidth = 800;
             globalWellPlate.DrawWellPlate();
             globalWellPlate.ColorCoordinate(4);
@@ -51,9 +52,9 @@ namespace TestApplication
         private void ConnTest(object sender, RoutedEventArgs e)
         {
             //placeholder
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < 20; i++)
             {
-                globalWellPlate.SetWellPlateSize(8, 18);
+                globalWellPlate.SetWellPlateSize(8, 24);
                 globalWellPlate.DrawWellPlate();
             }
 

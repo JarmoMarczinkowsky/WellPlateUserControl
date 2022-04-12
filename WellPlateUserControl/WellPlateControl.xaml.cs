@@ -297,7 +297,6 @@ namespace WellPlateUserControl
                 if (_setTheMaxHeight)
                 {
                     _recalcMaxHeight = (float)(_recalcMaxHeight / (biggerThanSpaceAvailablePercentage + 100) * 100);
-
                 }
                 else
                 {
@@ -374,7 +373,6 @@ namespace WellPlateUserControl
                 (_shapeDistance * rectangle.Height) - rectangle.Height + (_heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) * _shapeDistance);
 
             _coordinates.Add(rectangle.Name);
-
             gGenerateWellPlate.Children.Add(rectangle);
         }
 
@@ -463,7 +461,7 @@ namespace WellPlateUserControl
         public bool DrawWellPlate()
         {
             //var size = new Size(double.PositiveInfinity, double.PositiveInfinity);
-            //Debug.WriteLine(this.Measure(size));
+            //Debug.WriteLine(gGenerateWellPlate.Measure(size));
 
             HidePlaceHolder();
 
@@ -727,7 +725,7 @@ namespace WellPlateUserControl
         }
 
         /// <summary>
-        /// Clears entire wellplate
+        /// Clears entire wellplate of colored wells.
         /// </summary>
         public void Clear()
         {
@@ -747,6 +745,10 @@ namespace WellPlateUserControl
             }
         }
 
+        /// <summary>
+        /// Will clear the well on the entered coordinate
+        /// </summary>
+        /// <param name="coordinate">The coordinate of the well that needs to be cleared</param>
         public void Clear(string coordinate)
         {
             string formattedCoordinate;
@@ -775,6 +777,10 @@ namespace WellPlateUserControl
             }
         }
 
+        /// <summary>
+        /// Will clear the well on the entered number
+        /// </summary>
+        /// <param name="coordinate">The number of the well that needs to be cleared</param>
         public void Clear(int coordinate)
         {
             foreach (object child in gGenerateWellPlate.Children)
