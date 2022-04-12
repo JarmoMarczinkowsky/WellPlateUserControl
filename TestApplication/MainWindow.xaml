@@ -13,8 +13,8 @@
                                  VerticalAlignment="Top" Margin="100,193,100,0"/>
 
 
-        <!--<Button x:Name="ConnClick" Click="ConnTest"
+        <Button x:Name="ConnClick" Click="ConnTest"
                 Width="20"
-                Height="20"/>-->
+                Height="20"/>
     </Grid>
 </Window>

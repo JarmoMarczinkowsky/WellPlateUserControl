@@ -134,9 +134,9 @@ namespace WellPlateUserControl
         public bool IsRectangle;
         public bool IsEditable;
         public bool TurnCoordinatesOff;
-        
+
         private double _setWellSize = -1;
-        
+
         private const string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private string _createEllipseName;
 
@@ -365,8 +365,8 @@ namespace WellPlateUserControl
                     rectangle.Height = _recalcMaxWidth / (_shapeDistance * _widthWellPlate);
                 }
             }
-            
-            
+
+
 
             //checks if stroke color is set and sets the stroke afterwards.
             if (_setStrokeColor)
@@ -454,14 +454,14 @@ namespace WellPlateUserControl
             rectOutline.StrokeThickness = _lastRectangleWidth * 0.1;
             rectOutline.Width = _lastRectangleWidth * _widthWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
             rectOutline.Height = _lastRectangleWidth * _heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
-            
+
             if (_lastRectangleWidth > 15 && !IsRectangle)
             {
                 rectOutline.RadiusX = 15;
                 rectOutline.RadiusY = 15;
             }
 
-            
+
 
         }
 
@@ -476,6 +476,9 @@ namespace WellPlateUserControl
         /// <returns>True</returns>
         public bool DrawWellPlate()
         {
+            //var size = new Size(double.PositiveInfinity, double.PositiveInfinity);
+            //Debug.WriteLine(this.Measure(size));
+
             HidePlaceHolder();
 
             prepareValues();
@@ -507,7 +510,7 @@ namespace WellPlateUserControl
         public bool ColorCoordinate(string coordinate)
         {
             string formattedCoordinate;
-            
+
             if (string.IsNullOrWhiteSpace(coordinate))
             {
                 throw new ArgumentNullException("coordinate does not take 'null' for an argument.");
@@ -732,6 +735,73 @@ namespace WellPlateUserControl
                     if (brush.Color != _setGridColor)
                     {
                         _coloredCoordinates.Add(rectangle.Name.Split("_")[0]);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Clears entire wellplate
+        /// </summary>
+        public void Clear()
+        {
+            foreach (object child in gGenerateWellPlate.Children)
+            {
+                Rectangle rectangle = child as Rectangle;
+                SolidColorBrush brush = rectangle.Fill as SolidColorBrush;
+
+                if (brush != null && rectangle != null)
+                {
+                    if (brush.Color != _setGridColor)
+                    {
+                        rectangle.Fill = new SolidColorBrush(_setGridColor);
+                    }
+                }
+
+            }
+        }
+
+        public void Clear(string coordinate)
+        {
+            string formattedCoordinate;
+
+            if (string.IsNullOrWhiteSpace(coordinate))
+            {
+                throw new ArgumentNullException("coordinate does not take 'null' for an argument.");
+            }
+
+            foreach (object child in gGenerateWellPlate.Children)
+            {
+                Rectangle rectangle = child as Rectangle;
+
+                formattedCoordinate = coordinate.Trim();
+
+                if (rectangle != null)
+                {
+                    _createEllipseName = $"{formattedCoordinate.ToUpper()}";
+
+                    if (rectangle.Name.Split("_")[0] == _createEllipseName)
+                    {
+                        rectangle.Fill = new SolidColorBrush(_setGridColor);
+                        break;
+                    }
+                }
+            }
+        }
+
+        public void Clear(int coordinate)
+        {
+            foreach (object child in gGenerateWellPlate.Children)
+            {
+                Rectangle rectangle = child as Rectangle;
+
+                if (rectangle != null)
+                {
+                    //is number
+                    if (rectangle.Name.Split("_")[1] == coordinate.ToString())
+                    {
+                        rectangle.Fill = new SolidColorBrush(_setGridColor);
+                        break;
                     }
                 }
             }

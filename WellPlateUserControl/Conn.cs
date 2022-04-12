@@ -45,5 +45,10 @@ namespace WellPlateUserControl
         {
             return _wellPlate.DrawWellPlate();
         }
+
+        public void Clear()
+        {
+            _wellPlate.Clear();
+        }
     }
 }

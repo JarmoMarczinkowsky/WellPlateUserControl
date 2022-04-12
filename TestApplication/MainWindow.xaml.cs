@@ -51,7 +51,8 @@ namespace TestApplication
         private void ConnTest(object sender, RoutedEventArgs e)
         {
             //placeholder
-
+            globalWellPlate.Clear("C4");
+            globalWellPlate.Clear(4);
 
         }
     }

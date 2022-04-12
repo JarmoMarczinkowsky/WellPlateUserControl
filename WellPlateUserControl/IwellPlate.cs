@@ -22,5 +22,7 @@ namespace WellPlateUserControl
 
         public bool DrawWellPlate();
 
+        public void Clear();
+
     }
 }
