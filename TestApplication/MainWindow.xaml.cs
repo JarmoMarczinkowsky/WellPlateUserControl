@@ -29,30 +29,33 @@ namespace TestApplication
             InitializeComponent();
 
             globalWellPlate.IsEditable = true;
-            globalWellPlate.IsRectangle = true;
-            globalWellPlate.SetGridColor = Colors.Black;
-            globalWellPlate.SetClickColor = Colors.Crimson;
+            //globalWellPlate.IsRectangle = true;
+            //globalWellPlate.SetGridColor = Colors.Black;
+            //globalWellPlate.SetClickColor = Colors.Crimson;
             //globalWellPlate.SetStrokeColor = Colors.Black;
             //globalWellPlate.SetStrokeThickness = 80;
-            globalWellPlate.SetWellPlateSize(12, 8);
+            globalWellPlate.SetWellPlateSize(8,24);
             //globalWellPlate.SetMaxWidth = 800;
             globalWellPlate.DrawWellPlate();
             globalWellPlate.ColorCoordinate(4);
             globalWellPlate.ColorCoordinate("A1");
             globalWellPlate.ColorCoordinate("C4", Colors.Red);
             globalWellPlate.ColorCoordinate(5, Colors.Green);
-            globalWellPlate.CoordinateToNumber("A4");
-            globalWellPlate.NumberToCoordinate(6);
-            Debug.WriteLine(globalWellPlate.GetColoredCoordinates);
-            Debug.WriteLine(globalWellPlate.GetNotColoredCoordinates);
+            //globalWellPlate.CoordinateToNumber("A4");
+            //globalWellPlate.NumberToCoordinate(6);
+            //Debug.WriteLine(globalWellPlate.GetColoredCoordinates);
+            //Debug.WriteLine(globalWellPlate.GetNotColoredCoordinates);
 
         }
 
         private void ConnTest(object sender, RoutedEventArgs e)
         {
             //placeholder
-            globalWellPlate.Clear("C4");
-            globalWellPlate.Clear(4);
+            for (int i = 0; i < 200; i++)
+            {
+                globalWellPlate.SetWellPlateSize(8, 18);
+                globalWellPlate.DrawWellPlate();
+            }
 
         }
     }

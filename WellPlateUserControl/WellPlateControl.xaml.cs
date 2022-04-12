@@ -142,6 +142,8 @@ namespace WellPlateUserControl
 
         private int _widthWellPlate = 12;
         private int _heightWellPlate = 8;
+        private const int _widthLeftOver = 16;
+        private const int _heightLeftOver = 50;
 
         private float _shapeDistance = 1;
         private float _lastRectangleWidth;
@@ -150,6 +152,7 @@ namespace WellPlateUserControl
         private float _calcMaxWidth;
         private float _recalcMaxWidth;
         private float _recalcMaxHeight;
+        private const float _fontSizeModifier = 0.45F;
 
         private double _strokeThickness = 0.08;
         private double _wellSize;
@@ -216,8 +219,8 @@ namespace WellPlateUserControl
         /// </summary>
         private void prepareValues()
         {
-            double tooBigPercentage = 100;
-            double bigNumber;
+            double biggerThanSpaceAvailablePercentage = 100;
+            double highestTextblock;
 
             _coordinates.Clear();
             //clears the previous shapes and labels
@@ -227,35 +230,33 @@ namespace WellPlateUserControl
             //checks if a value is entered. If yes -> set the value to the corresponding variable. If both are no -> maxWidth becomes 600 pixels
             if (!double.IsNaN(this.Width))
             {
-                if (this.Width < 20)
+                if (this.Width < (_widthLeftOver + 4))
                 {
                     throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 20");
                 }
                 else
                 {
                     _setMaxWidth = this.Width;
-                    _calcMaxWidth = (float)(_setMaxWidth - 16);
-
+                    _calcMaxWidth = (float)(_setMaxWidth - _widthLeftOver);
                 }
             }
             else if (!double.IsNaN(this.Height))
             {
-                if (this.Height < 55)
+                if (this.Height < (_heightLeftOver + 5))
                 {
                     throw new ArgumentOutOfRangeException("SetMaxHeight can't be smaller than 55");
                 }
                 else
                 {
                     _setMaxHeight = this.Height;
-                    _calcMaxHeight = (float)(_setMaxHeight - 50);
+                    _calcMaxHeight = (float)(_setMaxHeight - _heightLeftOver);
                     _setTheMaxHeight = true;
                 }
             }
             else
             {
                 _setMaxWidth = 600;
-                _calcMaxWidth = (float)(_setMaxWidth - 16);
-
+                _calcMaxWidth = (float)(_setMaxWidth - _widthLeftOver);
             }
 
             //checks if the user has chosen for rectangles and changes the spacing between the wells after that.
@@ -273,48 +274,37 @@ namespace WellPlateUserControl
             if (_setTheMaxHeight)
             {
                 _recalcMaxHeight = (float)((_calcMaxHeight - (_wellSize / 1.5)) * 0.9);
+                _lastRectangleWidth = _recalcMaxHeight / (_shapeDistance * _heightWellPlate);
             }
             else
             {
                 _recalcMaxWidth = (float)((_calcMaxWidth - (_wellSize / 1.5)) * 0.95);
+                _lastRectangleWidth = _recalcMaxWidth / (_shapeDistance * _widthWellPlate);
             }
 
             if (_hasSetWellSize)
             {
                 _lastRectangleWidth = (float)_setWellSize;
             }
-            else
-            {
-                if (_setTheMaxHeight)
-                {
-                    _lastRectangleWidth = _recalcMaxHeight / (_shapeDistance * _heightWellPlate);
-                }
-                else
-                {
-                    _lastRectangleWidth = _recalcMaxWidth / (_shapeDistance * _widthWellPlate);
-                }
-            }
+
+            highestTextblock = (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + _heightWellPlate * _lastRectangleWidth * _shapeDistance + (_lastRectangleWidth * _fontSizeModifier);
 
             //in case given height is smaller than needed height
-            if ((_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + _heightWellPlate * _lastRectangleWidth * _shapeDistance + (_lastRectangleWidth * 0.45) > this.Height)
+            if (highestTextblock > this.Height)
             {
-                bigNumber = (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + _heightWellPlate * _lastRectangleWidth * _shapeDistance + (_lastRectangleWidth * 0.45);
-
-                tooBigPercentage = (bigNumber - this.Height) / this.Height * 100;
+                biggerThanSpaceAvailablePercentage = (highestTextblock - this.Height) / this.Height * 100;
 
                 if (_setTheMaxHeight)
                 {
-                    _recalcMaxHeight = (float)(_recalcMaxHeight / (tooBigPercentage + 100) * 100);
+                    _recalcMaxHeight = (float)(_recalcMaxHeight / (biggerThanSpaceAvailablePercentage + 100) * 100);
 
                 }
                 else
                 {
-                    _recalcMaxWidth = (float)(_recalcMaxWidth / (tooBigPercentage + 100) * 100);
+                    _recalcMaxWidth = (float)(_recalcMaxWidth / (biggerThanSpaceAvailablePercentage + 100) * 100);
                 }
-
-                Debug.WriteLine($"{tooBigPercentage}%");
+                Debug.WriteLine($"{biggerThanSpaceAvailablePercentage}%");
             }
-
         }
 
         /// <summary>
@@ -366,8 +356,6 @@ namespace WellPlateUserControl
                     rectangle.Height = _recalcMaxWidth / (_shapeDistance * _widthWellPlate);
                 }
             }
-
-
 
             //checks if stroke color is set and sets the stroke afterwards.
             if (_setStrokeColor)
@@ -461,9 +449,6 @@ namespace WellPlateUserControl
                 rectOutline.RadiusX = 15;
                 rectOutline.RadiusY = 15;
             }
-
-
-
         }
 
         /// <summary>

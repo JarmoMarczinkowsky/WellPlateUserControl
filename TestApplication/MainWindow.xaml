@@ -9,8 +9,8 @@
     <Grid x:Name="gRefreshTest">
         <global:WellPlateControl x:Name="globalWellPlate"
                                  Width="400"
-                                 Height="400"
-                                 VerticalAlignment="Top" Margin="100,193,100,0"/>
+                                 Height="438"
+                                 VerticalAlignment="Center" Margin="100,0,100,0"/>
 
 
         <Button x:Name="ConnClick" Click="ConnTest"
