@@ -21,7 +21,7 @@ namespace TestApplication
     /// </summary>
     public partial class MainWindow : Window
     {
-        private WellPlateUserControl.Conn _wellPlate = new WellPlateUserControl.Conn();
+        //private WellPlateUserControl.Conn _wellPlate = new WellPlateUserControl.Conn();
 
 
         public MainWindow()
@@ -29,12 +29,12 @@ namespace TestApplication
             InitializeComponent();
 
             globalWellPlate.IsEditable = true;
-            //globalWellPlate.IsRectangle = true;
+            globalWellPlate.IsRectangle = true;
             //globalWellPlate.SetGridColor = Colors.Black;
             //globalWellPlate.SetClickColor = Colors.Crimson;
             //globalWellPlate.SetStrokeColor = Colors.Black;
             //globalWellPlate.SetStrokeThickness = 80;
-            globalWellPlate.SetWellPlateSize(8,24);
+            globalWellPlate.SetWellPlateSize(12,8);
             //globalWellPlate.SetWellSize = 5;
             //globalWellPlate.SetMaxWidth = 800;
             globalWellPlate.DrawWellPlate();
@@ -54,7 +54,8 @@ namespace TestApplication
             //placeholder
             for (int i = 0; i < 20; i++)
             {
-                globalWellPlate.SetWellPlateSize(8, 24);
+                globalWellPlate.IsRectangle = false;
+                globalWellPlate.SetWellPlateSize(12,8);
                 globalWellPlate.DrawWellPlate();
             }
 

@@ -460,15 +460,9 @@ namespace WellPlateUserControl
         /// <returns>True</returns>
         public bool DrawWellPlate()
         {
-            //var size = new Size(double.PositiveInfinity, double.PositiveInfinity);
-            //Debug.WriteLine(gGenerateWellPlate.Measure(size));
-
             HidePlaceHolder();
 
             prepareValues();
-
-            //SetMaxWidth = this.Width;
-            //SetMaxHeight = (int)this.Height;
 
             //generates the shapes
             for (int height = 0; height < _heightWellPlate; height++)

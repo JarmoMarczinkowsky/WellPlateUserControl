@@ -9,7 +9,7 @@
     <Grid x:Name="gRefreshTest">
         <global:WellPlateControl x:Name="globalWellPlate"
                                  Width="400"
-                                 Height="438"
+                                 Height="400"
                                  VerticalAlignment="Center" Margin="100,0,100,0"/>
 
 
