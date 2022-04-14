@@ -179,7 +179,7 @@ namespace WellPlateUserControl
 
         public void HidePlaceHolder()
         {
-            //this.Background = new SolidColorBrush(Colors.Transparent);
+            //this.Background = new SolidColorBrush(Colors.Gray);
             imgPlaceHolder.Visibility = Visibility.Hidden;
             //gPlaceHolder.Children.Clear();
         }
@@ -398,6 +398,7 @@ namespace WellPlateUserControl
                 lblAlphabetic.Width = _lastRectangleWidth;
                 lblAlphabetic.Height = _lastRectangleWidth;
                 lblAlphabetic.FontSize = _lastRectangleWidth * textBlockSizeModifier;
+                lblAlphabetic.TextAlignment = TextAlignment.Center;
                 lblAlphabetic.Margin = new Thickness(0, 0, 0,
                     (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + (_heightWellPlate * _lastRectangleWidth - (height * _lastRectangleWidth) - _lastRectangleWidth) * _shapeDistance - (_lastRectangleWidth / 4));
                 gCoordinates.Children.Add(lblAlphabetic);
@@ -412,11 +413,12 @@ namespace WellPlateUserControl
                 lblNumeric.Foreground = new SolidColorBrush(Colors.Black);
                 lblNumeric.HorizontalAlignment = HorizontalAlignment.Left;
                 lblNumeric.VerticalAlignment = VerticalAlignment.Bottom;
+                lblNumeric.TextAlignment = TextAlignment.Center;
                 lblNumeric.Width = _lastRectangleWidth;
                 lblNumeric.FontSize = _lastRectangleWidth * textBlockSizeModifier;
 
                 lblNumeric.Margin = new Thickness(
-                    (_lastRectangleWidth / 5) + _letterDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + width * _lastRectangleWidth * _shapeDistance,
+                    _letterDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + width * _lastRectangleWidth * _shapeDistance,
                     0,
                     0,
                     (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + _heightWellPlate * _lastRectangleWidth * _shapeDistance);

@@ -54,7 +54,7 @@ namespace TestApplication
         {
             //placeholder
             //globalWellPlate.IsRectangle = false;
-            globalWellPlate.SetWellPlateSize(6, 10);
+            globalWellPlate.SetWellPlateSize(6, 4);
             globalWellPlate.DrawWellPlate();
 
         }
