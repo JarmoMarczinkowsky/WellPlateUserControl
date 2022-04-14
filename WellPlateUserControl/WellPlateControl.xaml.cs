@@ -230,36 +230,7 @@ namespace WellPlateUserControl
             gCoordinates.Children.Clear();
 
             //checks if a value is entered. If yes -> set the value to the corresponding variable. If both are no -> maxWidth becomes 600 pixels
-            if (!double.IsNaN(this.Width))
-            {
-                if (this.Width < (_widthLeftOver + 4))
-                {
-                    throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 20");
-                }
-                else
-                {
-                    _setMaxWidth = this.Width;
-                    _calcMaxWidth = (float)(_setMaxWidth - _widthLeftOver);
-                }
-            }
-            else if (!double.IsNaN(this.Height))
-            {
-                if (this.Height < (_heightLeftOver + 5))
-                {
-                    throw new ArgumentOutOfRangeException("SetMaxHeight can't be smaller than 55");
-                }
-                else
-                {
-                    _setMaxHeight = this.Height;
-                    _calcMaxHeight = (float)(_setMaxHeight - _heightLeftOver);
-                    _setTheMaxHeight = true;
-                }
-            }
-            else
-            {
-                _setMaxWidth = 600;
-                _calcMaxWidth = (float)(_setMaxWidth - _widthLeftOver);
-            }
+            checkControlSize();
 
             //checks if the user has chosen for rectangles and changes the spacing between the wells after that.
             if (IsRectangle)
@@ -296,6 +267,40 @@ namespace WellPlateUserControl
             //in case given height is smaller than needed height
             heightCheck(highestTextblock);
             
+        }
+
+        private void checkControlSize()
+        {
+            if (!double.IsNaN(this.Width))
+            {
+                if (this.Width < (_widthLeftOver + 4))
+                {
+                    throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 20");
+                }
+                else
+                {
+                    _setMaxWidth = this.Width;
+                    _calcMaxWidth = (float)(_setMaxWidth - _widthLeftOver);
+                }
+            }
+            else if (!double.IsNaN(this.Height))
+            {
+                if (this.Height < (_heightLeftOver + 5))
+                {
+                    throw new ArgumentOutOfRangeException("SetMaxHeight can't be smaller than 55");
+                }
+                else
+                {
+                    _setMaxHeight = this.Height;
+                    _calcMaxHeight = (float)(_setMaxHeight - _heightLeftOver);
+                    _setTheMaxHeight = true;
+                }
+            }
+            else
+            {
+                _setMaxWidth = 600;
+                _calcMaxWidth = (float)(_setMaxWidth - _widthLeftOver);
+            }
         }
 
         private void heightCheck(double highestTextblock)

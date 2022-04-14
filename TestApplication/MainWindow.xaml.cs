@@ -34,7 +34,7 @@ namespace TestApplication
             //globalWellPlate.SetClickColor = Colors.Crimson;
             //globalWellPlate.SetStrokeColor = Colors.White;
             //globalWellPlate.SetStrokeThickness = 80;
-            globalWellPlate.SetWellPlateSize(1,26);
+            globalWellPlate.SetWellPlateSize(12, 8);
             //globalWellPlate.SetGridColor = Colors.Transparent;
             //globalWellPlate.SetWellSize = 5;
             //globalWellPlate.SetMaxWidth = 800;
@@ -52,7 +52,6 @@ namespace TestApplication
 
         private void ConnTest(object sender, RoutedEventArgs e)
         {
-            //placeholder
             //globalWellPlate.IsRectangle = false;
             globalWellPlate.SetWellPlateSize(6, 4);
             globalWellPlate.DrawWellPlate();
