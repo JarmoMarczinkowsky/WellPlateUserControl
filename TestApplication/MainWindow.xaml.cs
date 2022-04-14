@@ -29,12 +29,13 @@ namespace TestApplication
             InitializeComponent();
 
             globalWellPlate.IsEditable = true;
-            globalWellPlate.IsRectangle = true;
+            //globalWellPlate.IsRectangle = true;
             //globalWellPlate.SetGridColor = Colors.Black;
             //globalWellPlate.SetClickColor = Colors.Crimson;
-            //globalWellPlate.SetStrokeColor = Colors.Black;
+            //globalWellPlate.SetStrokeColor = Colors.White;
             //globalWellPlate.SetStrokeThickness = 80;
-            globalWellPlate.SetWellPlateSize(12,8);
+            globalWellPlate.SetWellPlateSize(1,26);
+            //globalWellPlate.SetGridColor = Colors.Transparent;
             //globalWellPlate.SetWellSize = 5;
             //globalWellPlate.SetMaxWidth = 800;
             globalWellPlate.DrawWellPlate();
@@ -52,12 +53,9 @@ namespace TestApplication
         private void ConnTest(object sender, RoutedEventArgs e)
         {
             //placeholder
-            for (int i = 0; i < 20; i++)
-            {
-                globalWellPlate.IsRectangle = false;
-                globalWellPlate.SetWellPlateSize(12,8);
-                globalWellPlate.DrawWellPlate();
-            }
+            //globalWellPlate.IsRectangle = false;
+            globalWellPlate.SetWellPlateSize(6, 10);
+            globalWellPlate.DrawWellPlate();
 
         }
     }

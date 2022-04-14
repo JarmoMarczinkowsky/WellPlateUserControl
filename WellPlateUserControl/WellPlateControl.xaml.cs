@@ -142,6 +142,7 @@ namespace WellPlateUserControl
 
         private int _widthWellPlate = 12;
         private int _heightWellPlate = 8;
+        private int _wellRoundedCorner = 0;
         private const int _widthLeftOver = 16;
         private const int _heightLeftOver = 50;
 
@@ -178,8 +179,9 @@ namespace WellPlateUserControl
 
         public void HidePlaceHolder()
         {
-            this.Background = new SolidColorBrush(Colors.Transparent);
-            gPlaceHolder.Children.Clear();
+            //this.Background = new SolidColorBrush(Colors.Transparent);
+            //gPlaceHolder.Children.Clear();
+            //imgPlaceHolder.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -263,10 +265,12 @@ namespace WellPlateUserControl
             if (IsRectangle)
             {
                 _shapeDistance = 1.05F;
+                _wellRoundedCorner = 0;
             }
             else
             {
                 _shapeDistance = 1.3F;
+                _wellRoundedCorner = 1600;
             }
 
             //calculates the size of a well and removes a third of the calculated well from the maximum width
@@ -290,6 +294,13 @@ namespace WellPlateUserControl
             highestTextblock = (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + _heightWellPlate * _lastRectangleWidth * _shapeDistance + (_lastRectangleWidth * _fontSizeModifier);
 
             //in case given height is smaller than needed height
+            heightCheck(highestTextblock);
+            
+        }
+
+        private void heightCheck(double highestTextblock)
+        {
+            double biggerThanSpaceAvailablePercentage;
             if (highestTextblock > this.Height)
             {
                 biggerThanSpaceAvailablePercentage = (highestTextblock - this.Height) / this.Height * 100;
@@ -302,7 +313,6 @@ namespace WellPlateUserControl
                 {
                     _recalcMaxWidth = (float)(_recalcMaxWidth / (biggerThanSpaceAvailablePercentage + 100) * 100);
                 }
-                Debug.WriteLine($"{biggerThanSpaceAvailablePercentage}%");
             }
         }
 
@@ -324,16 +334,8 @@ namespace WellPlateUserControl
             _coordinates.Add(rectangle.Name);
 
             //checks if the user wants a rectangle. Otherwise it will round the rectangles so it looks like circles.
-            if (IsRectangle)
-            {
-                rectangle.RadiusX = 0;
-                rectangle.RadiusY = 0;
-            }
-            else
-            {
-                rectangle.RadiusX = 1500;
-                rectangle.RadiusY = 1500;
-            }
+            rectangle.RadiusX = _wellRoundedCorner;
+            rectangle.RadiusY = _wellRoundedCorner;
 
             //checks if the user has set a maximum height, otherwise it is going to use the maximum width that is set
             //default if the maximum width is not set is 600
@@ -585,7 +587,6 @@ namespace WellPlateUserControl
                 {
                     rectangle.Fill = new SolidColorBrush(chosenColor);
                     return true;
-
                 }
             }
             return false;
@@ -609,6 +610,7 @@ namespace WellPlateUserControl
                 {
                     if (((Rectangle)child).IsMouseOver)
                     {
+
                         SolidColorBrush brush = rectangle.Fill as SolidColorBrush;
                         if (brush != null)
                         {
