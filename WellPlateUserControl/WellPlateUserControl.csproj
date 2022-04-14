@@ -12,7 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Images\WellPlatePreview.png" />
+    <Resource Include="Images\WellPlatePreview.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\WellPlatePreview.png" />
   </ItemGroup>
 

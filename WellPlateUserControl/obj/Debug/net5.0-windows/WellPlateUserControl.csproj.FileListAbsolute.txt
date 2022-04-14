@@ -24,4 +24,3 @@ C:\Users\jarmo\Documents\School\Softwaredeveloper\Leerjaar 2\Stage\Applicaties\W
 C:\Users\jarmo\Documents\School\Softwaredeveloper\Leerjaar 2\Stage\Applicaties\WellPlateUserControl\WellPlateUserControl\obj\Debug\net5.0-windows\ref\WellPlateUserControl.dll
 C:\Users\jarmo\Documents\School\Softwaredeveloper\Leerjaar 2\Stage\Applicaties\WellPlateUserControl\WellPlateUserControl\obj\Debug\net5.0-windows\WellPlateUserControl.pdb
 C:\Users\jarmo\Documents\School\Softwaredeveloper\Leerjaar 2\Stage\Applicaties\WellPlateUserControl\WellPlateUserControl\obj\Debug\net5.0-windows\WellPlateUserControl.genruntimeconfig.cache
-C:\Users\jarmo\Documents\School\Softwaredeveloper\Leerjaar 2\Stage\Applicaties\WellPlateUserControl\WellPlateUserControl\obj\Debug\net5.0-windows\WellPlateUserControl_Content.g.cs

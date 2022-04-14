@@ -180,8 +180,8 @@ namespace WellPlateUserControl
         public void HidePlaceHolder()
         {
             //this.Background = new SolidColorBrush(Colors.Transparent);
+            imgPlaceHolder.Visibility = Visibility.Hidden;
             //gPlaceHolder.Children.Clear();
-            //imgPlaceHolder.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -221,7 +221,7 @@ namespace WellPlateUserControl
         /// </summary>
         private void prepareValues()
         {
-            double biggerThanSpaceAvailablePercentage = 100;
+            //double biggerThanSpaceAvailablePercentage = 100;
             double highestTextblock;
 
             _coordinates.Clear();

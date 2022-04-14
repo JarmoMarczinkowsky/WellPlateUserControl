@@ -21,9 +21,13 @@
 
         </Grid>
 
-        <Image Source="C:\Users\jarmo\Documents\School\Softwaredeveloper\Leerjaar 2\Stage\Applicaties\WellPlateUserControl\WellPlateUserControl\Images\WellPlatePreview.png"
-               Width="300"
-               Height="250"/>
+        <Viewbox>
+            <Image x:Name="imgPlaceHolder" 
+                   Source="pack://application:,,,/WellPlateUserControl;component/Images/WellPlatePreview.png"
+                   Width="300"
+                   Height="250"/>
+            
+        </Viewbox>
 
         <!--<Grid x:Name="gPlaceHolder">
             <Grid>
