@@ -105,6 +105,15 @@ namespace WellPlateUserControl
             }
         }
 
+        public Color SetLabelColor
+        {
+            get { return _setLabelColor; }
+            set
+            {
+                _setLabelColor = value;
+            }
+        }
+
         /// <summary>
         /// Is used to return a list with every colored well
         /// </summary>
@@ -166,6 +175,7 @@ namespace WellPlateUserControl
 
         private Color _setGridColor = Color.FromRgb(209, 232, 247);
         private Color _setClickColor = Color.FromRgb(0, 157, 247);
+        private Color _setLabelColor = Colors.Black;
         private Color _strokeColor;
 
         private List<string> _coordinates = new List<string>();
@@ -179,11 +189,8 @@ namespace WellPlateUserControl
 
         public void HidePlaceHolder()
         {
-            //this.Background = new SolidColorBrush(Colors.Gray);
+            this.Background = new SolidColorBrush(Colors.Transparent);
             imgPlaceHolder.Visibility = Visibility.Hidden;
-            //gPlaceHolder.Children.Clear();
-
-
         }
 
         /// <summary>
@@ -300,7 +307,7 @@ namespace WellPlateUserControl
             }
             else
             {
-                _setMaxWidth = 600;
+                _setMaxWidth = 600; //default width if it doesn't find a width or height is 600 pixels
                 _calcMaxWidth = (float)(_setMaxWidth - _widthLeftOver);
             }
         }
@@ -399,7 +406,7 @@ namespace WellPlateUserControl
             {
                 TextBlock lblAlphabetic = new TextBlock();
                 lblAlphabetic.Text = $"{_alphabet[height]}";
-                lblAlphabetic.Foreground = new SolidColorBrush(Colors.Black);
+                lblAlphabetic.Foreground = new SolidColorBrush(_setLabelColor);
                 lblAlphabetic.HorizontalAlignment = HorizontalAlignment.Left;
                 lblAlphabetic.VerticalAlignment = VerticalAlignment.Bottom;
                 lblAlphabetic.Width = _lastRectangleWidth;
@@ -417,7 +424,7 @@ namespace WellPlateUserControl
             {
                 TextBlock lblNumeric = new TextBlock();
                 lblNumeric.Text = $"{width + 1}";
-                lblNumeric.Foreground = new SolidColorBrush(Colors.Black);
+                lblNumeric.Foreground = new SolidColorBrush(_setLabelColor);
                 lblNumeric.HorizontalAlignment = HorizontalAlignment.Left;
                 lblNumeric.VerticalAlignment = VerticalAlignment.Bottom;
                 lblNumeric.TextAlignment = TextAlignment.Center;
@@ -449,7 +456,7 @@ namespace WellPlateUserControl
             rectOutline.Margin = new Thickness(_letterDistance, 0, 0, 0);
             rectOutline.Fill = new SolidColorBrush(Colors.Transparent);
             rectOutline.Stroke = new SolidColorBrush(Colors.LightGray);
-            rectOutline.StrokeThickness = _lastRectangleWidth * 0.1;
+            rectOutline.StrokeThickness = _lastRectangleWidth * 0.1; //the 0.1 makes sure the stroke is 10% of the width of a well
             rectOutline.Width = _lastRectangleWidth * _widthWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
             rectOutline.Height = _lastRectangleWidth * _heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
 
@@ -573,7 +580,6 @@ namespace WellPlateUserControl
                 {
                     rectangle.Fill = new SolidColorBrush(chosenColor);
                     return true;
-
                 }
             }
             return false;
