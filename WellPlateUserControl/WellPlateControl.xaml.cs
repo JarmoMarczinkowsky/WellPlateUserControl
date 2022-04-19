@@ -182,6 +182,8 @@ namespace WellPlateUserControl
             //this.Background = new SolidColorBrush(Colors.Gray);
             imgPlaceHolder.Visibility = Visibility.Hidden;
             //gPlaceHolder.Children.Clear();
+
+
         }
 
         /// <summary>

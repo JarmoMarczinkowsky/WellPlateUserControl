@@ -53,7 +53,7 @@ namespace TestApplication
         private void ConnTest(object sender, RoutedEventArgs e)
         {
             //globalWellPlate.IsRectangle = false;
-            globalWellPlate.SetWellPlateSize(6, 4);
+            globalWellPlate.SetWellPlateSize(12,24);
             globalWellPlate.DrawWellPlate();
 
         }
