@@ -411,8 +411,8 @@ namespace WellPlateUserControl
                 rectangle.StrokeThickness = rectangle.Width * _strokeThickness;
             }
 
-            //the distance between the letters and the wells is 2/3 the size of a well
-            _letterDistance = (float)(rectangle.Width / 1.5);
+            //the distance between the letters and the wells is 5/6 the size of a well
+            _letterDistance = (float)(rectangle.Width / 1.2);
 
             //takes care of the position of the rectangle
             rectangle.Margin = new Thickness(
