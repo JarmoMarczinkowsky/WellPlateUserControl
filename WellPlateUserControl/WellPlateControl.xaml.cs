@@ -209,16 +209,7 @@ namespace WellPlateUserControl
         }
 
         /// <summary>
-        /// <para>Generates the wellplate</para>
-        /// <para>If you have set the colors, set this <b>after</b> them</para>
-        /// <para>Can be used without defining other parameters like colors.</para>
-        /// <example>If used without other parameters, a few default values will be used:</example><br></br>
-        /// <example>maxWidth = 600</example><br></br>
-        /// <example>No stroke</example>
-        /// <example>strokeThickness = 16%</example><br></br>
-        /// <example>gridColor = black</example><br></br>
-        /// <example>clickColor = red</example><br></br>
-        /// <example>Use: '8,6' will create a grid that is 8 wide and 6 high</example>
+        /// <para>Is responsible for the size of the wellplate</para>
         /// </summary>
         /// <param name="inputWidth">The width that the grid is going to be</param>
         /// <param name="inputHeight">The height that the grid is going to be</param>
@@ -309,6 +300,9 @@ namespace WellPlateUserControl
             }
         }
 
+        /// <summary>
+        /// Sets the distance between 2 wells
+        /// </summary>
         private void RectangleDistance()
         {
             if (IsRectangle)
@@ -517,9 +511,11 @@ namespace WellPlateUserControl
         /// The default values are:<br></br>
         /// SetGridColor = Color.FromRgb(209, 232, 247); (lightblue)<br></br>
         /// SetClickColor = Color.FromRgb(0, 157, 247); (blue)<br></br>
+        /// SetLabelColor = Colors.Black<br></br>
+        /// SetBorderColor = Colors.LightGray<br></br>
         /// IsEditable = false;<br></br>
         /// IsRectangle = false; <br></br>
-        /// </summary><br></br>
+        /// </summary>
         /// <returns>True</returns>
         public bool DrawWellPlate()
         {

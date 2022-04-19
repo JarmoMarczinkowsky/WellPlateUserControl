@@ -58,6 +58,7 @@ namespace TestApplication
             globalWellPlate.Clear("A1");
             globalWellPlate.SetWellPlateSize(8,20);
             globalWellPlate.DrawWellPlate();
+            globalWellPlate.ColorCoordinate("C3", Colors.Brown);
 
         }
     }

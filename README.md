@@ -38,6 +38,18 @@ Set this variable before the DrawWellPlate.
 Set the stroke of the wells in the wellplate.<br>
 [Optional]
 ```
+SetLabelColor = Colors.Black
+```
+Set this variable before the DrawWellPlate.
+Sets the color of the labels with coordinates.<br> 
+[Optional]
+```
+SetBorderColor = Colors.Black
+```
+Set this variable before the DrawWellPlate.
+Sets the color of the border around the wellplate.<br> 
+[Optional]
+```
 SetStrokeThickness = 20
 ```
 Thickness of the stroke is set in percentages.
@@ -51,7 +63,7 @@ Makes every well a rectangle instead of a circle. Will also increase the distanc
 Set this variable before the DrawWellPlate.<br>
 [Optional]
 ```
-DrawWellPlate
+DrawWellPlate()
 ```
 Set this function after the colors, circlesize and/or the rectangle and before the coordinateconverter and/or functions that return items.
 Generates the wellplate based on the values the user entered. If it doesn't find any values that the user entered, it will use default values:<br>
