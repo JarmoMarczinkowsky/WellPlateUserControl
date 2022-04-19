@@ -34,12 +34,12 @@ namespace TestApplication
             //globalWellPlate.SetClickColor = Colors.Crimson;
             //globalWellPlate.SetStrokeColor = Colors.White;
             //globalWellPlate.SetStrokeThickness = 80;
-            globalWellPlate.SetWellPlateSize(12, 8);
+            globalWellPlate.SetWellPlateSize(20,8);
             //globalWellPlate.SetGridColor = Colors.Transparent;
             //globalWellPlate.SetWellSize = 5;
             //globalWellPlate.SetMaxWidth = 800;
-            globalWellPlate.SetLabelColor = Colors.Red;
-            //globalWellPlate.SetBorderColor = Colors.Green;
+            //globalWellPlate.SetLabelColor = Colors.Red;
+            //globalWellPlate.SetBorderColor = Colors.Blue;
             globalWellPlate.DrawWellPlate();
             globalWellPlate.ColorCoordinate(4);
             globalWellPlate.ColorCoordinate("A1");
@@ -56,7 +56,7 @@ namespace TestApplication
         {
             //globalWellPlate.IsRectangle = false;
             globalWellPlate.Clear("A1");
-            globalWellPlate.SetWellPlateSize(24,16);
+            globalWellPlate.SetWellPlateSize(8,20);
             globalWellPlate.DrawWellPlate();
 
         }

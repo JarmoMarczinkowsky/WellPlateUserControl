@@ -105,6 +105,9 @@ namespace WellPlateUserControl
             }
         }
 
+        /// <summary>
+        /// Is used to set a color for the coordinates surrounding the wellplate
+        /// </summary>
         public Color SetLabelColor
         {
             get { return _setLabelColor; }
@@ -114,6 +117,9 @@ namespace WellPlateUserControl
             }
         }
 
+        /// <summary>
+        /// Is used to set a color for the border surrounding the wellplate
+        /// </summary>
         public Color SetBorderColor
         {
             get { return _setBorderColor; }
@@ -251,42 +257,24 @@ namespace WellPlateUserControl
             checkControlSize();
 
             //checks if the user has chosen for rectangles and changes the spacing between the wells after that.
-            if (IsRectangle)
-            {
-                _shapeDistance = 1.05F;
-                _wellRoundedCorner = 0;
-            }
-            else
-            {
-                _shapeDistance = 1.3F;
-                _wellRoundedCorner = 1600;
-            }
+            RectangleDistance();
 
             //calculates the size of a well and removes a third of the calculated well from the maximum width
-            _wellSize = _calcMaxWidth / (_shapeDistance * _widthWellPlate);
-            if (_setTheMaxHeight)
-            {
-                _recalcMaxHeight = (float)((_calcMaxHeight - (_wellSize / 1.5)) * 0.9);
-                _lastRectangleWidth = _recalcMaxHeight / (_shapeDistance * _heightWellPlate);
-            }
-            else
-            {
-                _recalcMaxWidth = (float)((_calcMaxWidth - (_wellSize / 1.5)) * 0.95);
-                _lastRectangleWidth = _recalcMaxWidth / (_shapeDistance * _widthWellPlate);
-            }
-
-            if (_hasSetWellSize)
-            {
-                _lastRectangleWidth = (float)_setWellSize;
-            }
-
+            calculateMaxSize();
+            
+            //calculates the height of the numeric labels
             highestTextblock = (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + _heightWellPlate * _lastRectangleWidth * _shapeDistance + (_lastRectangleWidth * _fontSizeModifier);
 
             //in case given height is smaller than needed height
             heightCheck(highestTextblock);
-            
+
+            calculateRectangleSize();
+
         }
 
+        /// <summary>
+        /// Checks if the width of the usercontrol is set. If it doesn't find a width, it will search for the height, otherwise it will just use a width of 600
+        /// </summary>
         private void checkControlSize()
         {
             if (!double.IsNaN(this.Width))
@@ -321,6 +309,40 @@ namespace WellPlateUserControl
             }
         }
 
+        private void RectangleDistance()
+        {
+            if (IsRectangle)
+            {
+                _shapeDistance = 1.05F; //1.05 is 5% the size of a well between two wells
+                _wellRoundedCorner = 0; //0 = no rounded corners
+            }
+            else
+            {
+                _shapeDistance = 1.3F; //1.3 is 30% the size of a well between two wells
+                _wellRoundedCorner = 1600; //extremely high value so the wells stay rounded even if they are big
+            }
+        }
+
+        private void calculateMaxSize()
+        {
+            _wellSize = _calcMaxWidth / (_shapeDistance * _widthWellPlate);
+            if (_setTheMaxHeight)
+            {
+                _recalcMaxHeight = (float)((_calcMaxHeight - (_wellSize / 1.5)) * 0.9); //0.9 is 90% the size of the wellplate
+                _lastRectangleWidth = _recalcMaxHeight / (_shapeDistance * _heightWellPlate);
+            }
+            else
+            {
+                _recalcMaxWidth = (float)((_calcMaxWidth - (_wellSize / 1.5)) * 0.95); //0.95 is 95% the size of the wellplate
+                _lastRectangleWidth = _recalcMaxWidth / (_shapeDistance * _widthWellPlate);
+            }
+        }
+
+        /// <summary>
+        /// Checks if the size of the highest textblock is going to be bigger than the usercontrol height. 
+        /// If it is it will resize the entered height to a more suitable height
+        /// </summary>
+        /// <param name="highestTextblock"></param>
         private void heightCheck(double highestTextblock)
         {
             double biggerThanSpaceAvailablePercentage;
@@ -335,6 +357,30 @@ namespace WellPlateUserControl
                 else
                 {
                     _recalcMaxWidth = (float)(_recalcMaxWidth / (biggerThanSpaceAvailablePercentage + 100) * 100);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Calculate the size of the wells
+        /// </summary>
+        private void calculateRectangleSize()
+        {
+            if (_hasSetWellSize)
+            {
+                _lastRectangleWidth = (float)_setWellSize;
+            }
+            else
+            {
+                if (_setTheMaxHeight)
+                {
+                    //the size of a well is the maximum height divided by (the distance between the wells * the amount of wells in height)
+                    _lastRectangleWidth = _recalcMaxHeight / (_shapeDistance * _heightWellPlate);
+                }
+                else
+                {
+                    //the size of a well is the maximum size divided by (the distance between the wells * the amount of wells in width)
+                    _lastRectangleWidth = _recalcMaxWidth / (_shapeDistance * _widthWellPlate);
                 }
             }
         }
@@ -360,26 +406,9 @@ namespace WellPlateUserControl
             rectangle.RadiusX = _wellRoundedCorner;
             rectangle.RadiusY = _wellRoundedCorner;
 
-            //checks if the user has set a maximum height, otherwise it is going to use the maximum width that is set
-            //default if the maximum width is not set is 600
-            if (_hasSetWellSize)
-            {
-                rectangle.Width = _setWellSize;
-                rectangle.Height = _setWellSize;
-            }
-            else
-            {
-                if (_setTheMaxHeight)
-                {
-                    rectangle.Width = _recalcMaxHeight / (_shapeDistance * _heightWellPlate);
-                    rectangle.Height = _recalcMaxHeight / (_shapeDistance * _heightWellPlate);
-                }
-                else
-                {
-                    rectangle.Width = _recalcMaxWidth / (_shapeDistance * _widthWellPlate);
-                    rectangle.Height = _recalcMaxWidth / (_shapeDistance * _widthWellPlate);
-                }
-            }
+            //the size of the wells
+            rectangle.Width = _lastRectangleWidth;
+            rectangle.Height = _lastRectangleWidth;
 
             //checks if stroke color is set and sets the stroke afterwards.
             if (_setStrokeColor)
@@ -388,8 +417,7 @@ namespace WellPlateUserControl
                 rectangle.StrokeThickness = rectangle.Width * _strokeThickness;
             }
 
-            _lastRectangleWidth = (float)rectangle.Width;
-
+            //the distance between the letters and the wells is 2/3 the size of a well
             _letterDistance = (float)(rectangle.Width / 1.5);
 
             //takes care of the position of the rectangle
@@ -408,8 +436,6 @@ namespace WellPlateUserControl
         /// <param name="height">Current height of the for loop</param>
         private void generateLabels(int width, int height)
         {
-            float textBlockSizeModifier = .45F;
-
             //takes care of the alphabetic labels
             if (width == 0 && !TurnCoordinatesOff)
             {
@@ -420,12 +446,11 @@ namespace WellPlateUserControl
                 lblAlphabetic.VerticalAlignment = VerticalAlignment.Bottom;
                 lblAlphabetic.Width = _lastRectangleWidth;
                 lblAlphabetic.Height = _lastRectangleWidth;
-                lblAlphabetic.FontSize = _lastRectangleWidth * textBlockSizeModifier;
+                lblAlphabetic.FontSize = _lastRectangleWidth * _fontSizeModifier;
                 lblAlphabetic.TextAlignment = TextAlignment.Center;
                 lblAlphabetic.Margin = new Thickness(0, 0, 0,
                     (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + (_heightWellPlate * _lastRectangleWidth - (height * _lastRectangleWidth) - _lastRectangleWidth) * _shapeDistance - (_lastRectangleWidth / 4));
                 gCoordinates.Children.Add(lblAlphabetic);
-
             }
 
             //takes care of the numeric labels
@@ -438,7 +463,7 @@ namespace WellPlateUserControl
                 lblNumeric.VerticalAlignment = VerticalAlignment.Bottom;
                 lblNumeric.TextAlignment = TextAlignment.Center;
                 lblNumeric.Width = _lastRectangleWidth;
-                lblNumeric.FontSize = _lastRectangleWidth * textBlockSizeModifier;
+                lblNumeric.FontSize = _lastRectangleWidth * _fontSizeModifier;
 
                 lblNumeric.Margin = new Thickness(
                     _letterDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + width * _lastRectangleWidth * _shapeDistance,
@@ -469,10 +494,21 @@ namespace WellPlateUserControl
             rectOutline.Width = _lastRectangleWidth * _widthWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
             rectOutline.Height = _lastRectangleWidth * _heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
 
+            //if the size of a well is bigger than 15 and not a rectangle it will 
             if (_lastRectangleWidth > 15 && !IsRectangle)
             {
                 rectOutline.RadiusX = 15;
                 rectOutline.RadiusY = 15;
+            }
+            else if(!IsRectangle)
+            {
+                rectOutline.RadiusX = 3;
+                rectOutline.RadiusY = 3;
+            }
+            else
+            {
+                rectOutline.RadiusX = 0;
+                rectOutline.RadiusY = 0;
             }
         }
 
@@ -634,7 +670,6 @@ namespace WellPlateUserControl
                 {
                     if (((Rectangle)child).IsMouseOver)
                     {
-
                         SolidColorBrush brush = rectangle.Fill as SolidColorBrush;
                         if (brush != null)
                         {
@@ -761,7 +796,6 @@ namespace WellPlateUserControl
                         rectangle.Fill = new SolidColorBrush(_setGridColor);
                     }
                 }
-
             }
         }
 

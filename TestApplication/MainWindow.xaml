@@ -10,7 +10,7 @@
         <global:WellPlateControl x:Name="globalWellPlate"
                                  Height="400"
                                  Width="400"
-                                 VerticalAlignment="Center" Margin="96,0,106,0"/>
+                                 VerticalAlignment="Center"/>
 
 
         <Button x:Name="ConnClick" Click="ConnTest"
