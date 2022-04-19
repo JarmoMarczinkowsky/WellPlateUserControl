@@ -465,12 +465,6 @@ namespace WellPlateUserControl
                     0,
                     (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + _heightWellPlate * _lastRectangleWidth * _shapeDistance);
                 gCoordinates.Children.Add(lblNumeric);
-
-                if (width == 0)
-                {
-                    Debug.WriteLine($"Recommended height: {(_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + _heightWellPlate * _lastRectangleWidth * _shapeDistance + lblNumeric.FontSize}");
-                    Debug.WriteLine($"Well size: {_lastRectangleWidth}");
-                }
             }
         }
         /// <summary>
@@ -488,7 +482,7 @@ namespace WellPlateUserControl
             rectOutline.Width = _lastRectangleWidth * _widthWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
             rectOutline.Height = _lastRectangleWidth * _heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
 
-            //if the size of a well is bigger than 15 and not a rectangle it will 
+            //if the size of a well is bigger than 15 and not a rectangle it will round the border
             if (_lastRectangleWidth > 15 && !IsRectangle)
             {
                 rectOutline.RadiusX = 15;
@@ -588,7 +582,6 @@ namespace WellPlateUserControl
 
                 if (rectangle != null)
                 {
-                    //is number
                     if (rectangle.Name.Split("_")[1] == coordinate.ToString())
                     {
                         rectangle.Fill = new SolidColorBrush(_setClickColor);
@@ -839,7 +832,6 @@ namespace WellPlateUserControl
 
                 if (rectangle != null)
                 {
-                    //is number
                     if (rectangle.Name.Split("_")[1] == coordinate.ToString())
                     {
                         rectangle.Fill = new SolidColorBrush(_setGridColor);
