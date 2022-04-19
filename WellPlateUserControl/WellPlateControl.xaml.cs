@@ -114,6 +114,14 @@ namespace WellPlateUserControl
             }
         }
 
+        public Color SetBorderColor
+        {
+            get { return _setBorderColor; }
+            set
+            {
+                _setBorderColor = value;
+            }
+        }
         /// <summary>
         /// Is used to return a list with every colored well
         /// </summary>
@@ -176,6 +184,7 @@ namespace WellPlateUserControl
         private Color _setGridColor = Color.FromRgb(209, 232, 247);
         private Color _setClickColor = Color.FromRgb(0, 157, 247);
         private Color _setLabelColor = Colors.Black;
+        private Color _setBorderColor = Colors.LightGray;
         private Color _strokeColor;
 
         private List<string> _coordinates = new List<string>();
@@ -455,7 +464,7 @@ namespace WellPlateUserControl
             rectOutline.VerticalAlignment = VerticalAlignment.Bottom;
             rectOutline.Margin = new Thickness(_letterDistance, 0, 0, 0);
             rectOutline.Fill = new SolidColorBrush(Colors.Transparent);
-            rectOutline.Stroke = new SolidColorBrush(Colors.LightGray);
+            rectOutline.Stroke = new SolidColorBrush(_setBorderColor);
             rectOutline.StrokeThickness = _lastRectangleWidth * 0.1; //the 0.1 makes sure the stroke is 10% of the width of a well
             rectOutline.Width = _lastRectangleWidth * _widthWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
             rectOutline.Height = _lastRectangleWidth * _heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;

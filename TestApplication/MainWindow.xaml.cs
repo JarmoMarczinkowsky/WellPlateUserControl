@@ -38,6 +38,8 @@ namespace TestApplication
             //globalWellPlate.SetGridColor = Colors.Transparent;
             //globalWellPlate.SetWellSize = 5;
             //globalWellPlate.SetMaxWidth = 800;
+            globalWellPlate.SetLabelColor = Colors.Red;
+            //globalWellPlate.SetBorderColor = Colors.Green;
             globalWellPlate.DrawWellPlate();
             globalWellPlate.ColorCoordinate(4);
             globalWellPlate.ColorCoordinate("A1");
@@ -53,7 +55,8 @@ namespace TestApplication
         private void ConnTest(object sender, RoutedEventArgs e)
         {
             //globalWellPlate.IsRectangle = false;
-            globalWellPlate.SetWellPlateSize(12,24);
+            globalWellPlate.Clear("A1");
+            globalWellPlate.SetWellPlateSize(24,16);
             globalWellPlate.DrawWellPlate();
 
         }
