@@ -14,13 +14,13 @@ Sets the size of the wellplate in wells. The first argument '8' is the width and
 Set this function after the colors, circlesize and/or the rectangle and before the coordinateconverter and/or functions that return items<br>
 [Optional]
 ```
-SetGridColor(Colors.Black) 
+GridColor(Colors.Black) 
 ```
 Gives the grid the color that you wish it to be. Default is black.
 Set this function before the DrawWellPlate.<br>
 [Optional]
 ```
-SetClickColor(Colors.Red)
+ClickColor(Colors.Red)
 ```
 Sets the color of a clicked well to the color you wished. Default is red. 
 Set this function before the DrawWellPlate.<br>
@@ -32,25 +32,25 @@ Set this function before 'DrawWellPlate'.
 Makes the wellplate editable so you can color wells by clicking on them.<br>
 [Optional]
 ```
-SetStrokeColor = Colors.Blue
+StrokeColor = Colors.Blue
 ```
 Set this variable before the DrawWellPlate.
 Set the stroke of the wells in the wellplate.<br>
 [Optional]
 ```
-SetLabelColor = Colors.Black
+LabelColor = Colors.Black
 ```
 Set this variable before the DrawWellPlate.
 Sets the color of the labels with coordinates.<br> 
 [Optional]
 ```
-SetBorderColor = Colors.Black
+BorderColor = Colors.Black
 ```
 Set this variable before the DrawWellPlate.
 Sets the color of the border around the wellplate.<br> 
 [Optional]
 ```
-SetStrokeThickness = 20
+StrokeThickness = 20
 ```
 Thickness of the stroke is set in percentages.
 Will create a black stroke is SetStrokeColor is not set.<br>
@@ -72,6 +72,8 @@ SetGridColor = Color.FromRgb(209, 232, 247);<br>
 SetClickColor = Color.FromRgb(97, 172, 223);<br>
 IsEditable = false;<br>
 IsRectangle = false;<br>
+LabelColor = Colors.Black<br></br>
+BorderColor = Colors.LightGray
 [Mandatory]
 ```
 ColorCoordinate("A1")
@@ -98,13 +100,13 @@ For example: "D4" returns '4' in a 8x6 wellplate.
 Set this function after the DrawWellPlate.<br>
 [Optional]
 ```
-GetColoredList()
+ColoredList()
 ```
 Returns a list with the coordinates with every coordinate that is currently colored.
 Set this function after the DrawWellPlate.<br>
 [Optional]
 ```
-GetNotColoredList()
+NotColoredList()
 ```
 Returns a list with the coordinates of every well that is currently not colored.
 Set this function after DrawWellPlate.<br>
