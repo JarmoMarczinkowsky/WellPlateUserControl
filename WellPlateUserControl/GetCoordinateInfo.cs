@@ -46,7 +46,5 @@ namespace WellPlateUserControl
             }
             return -1;
         }
-
-        
     }
 }

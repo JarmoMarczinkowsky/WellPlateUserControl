@@ -22,10 +22,7 @@ namespace WellPlateUserControl
     public partial class WellPlateControl : UserControl
     {
         GetCoordinateInfo getCoordinateInfo = new();
-        
-        
-
-        
+        SizeHandler sizeHandler = new();
 
         public string LastClickedCoordinate { get; private set; }
 
@@ -95,7 +92,6 @@ namespace WellPlateUserControl
             set
             {
                 _setClickColor = value;
-                //wellColorHandler._setClickColor = value;
             }
         }
 
@@ -170,15 +166,13 @@ namespace WellPlateUserControl
         private const string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private string _createEllipseName;
 
-        private int _widthWellPlate = 12;
-        private int _heightWellPlate = 8;
-        private int _wellRoundedCorner = 0;
+        private int _wellRoundedCorner;
         private const int _widthLeftOver = 16;
         private const int _heightLeftOver = 50;
 
-        private float _shapeDistance = 1;
+        private float _shapeDistance;
         private float _lastRectangleWidth;
-        private float _letterDistance = 50;
+        private float _letterDistance;
         private float _calcMaxHeight;
         private float _calcMaxWidth;
         private float _recalcMaxWidth;
@@ -195,7 +189,7 @@ namespace WellPlateUserControl
         private bool _hasSetWellSize;
 
         private Color _setGridColor = Color.FromRgb(209, 232, 247);
-        private Color _setClickColor = Color.FromRgb(0, 157, 247);
+        private Color _setClickColor = Colors.CadetBlue;
         private Color _setLabelColor = Colors.Black;
         private Color _setBorderColor = Colors.LightGray;
         private Color _strokeColor;
@@ -224,19 +218,8 @@ namespace WellPlateUserControl
         /// <returns>True if method succeeds and an out of range error if a values are higher than 26 or smaller than 1</returns>
         public bool SetWellPlateSize(int inputWidth, int inputHeight)
         {
-            if (inputWidth > 0 && inputWidth <= _alphabet.Length
-                               && inputHeight > 0
-                               && inputHeight <= _alphabet.Length)
-            {
-                _heightWellPlate = inputHeight;
-                _widthWellPlate = inputWidth;
-
-                return true;
-            }
-            else
-            {
-                throw new ArgumentOutOfRangeException($"Number can't be bigger than 26 or smaller than 1: length = {inputWidth}, width = {inputHeight}");
-            }
+            bool setPlateSize = sizeHandler.SetWellPlateSize(inputWidth, inputHeight, _alphabet);
+            return setPlateSize;
         }
 
         /// <summary>
@@ -262,7 +245,7 @@ namespace WellPlateUserControl
             calculateMaxSize();
             
             //calculates the height of the numeric labels
-            highestTextblock = (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + _heightWellPlate * _lastRectangleWidth * _shapeDistance + (_lastRectangleWidth * _fontSizeModifier);
+            highestTextblock = (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + sizeHandler._heightWellPlate * _lastRectangleWidth * _shapeDistance + (_lastRectangleWidth * _fontSizeModifier);
 
             //in case given height is smaller than needed height
             heightCheck(highestTextblock);
@@ -327,16 +310,16 @@ namespace WellPlateUserControl
 
         private void calculateMaxSize()
         {
-            _wellSize = _calcMaxWidth / (_shapeDistance * _widthWellPlate);
+            _wellSize = _calcMaxWidth / (_shapeDistance * sizeHandler._widthWellPlate);
             if (_setTheMaxHeight)
             {
                 _recalcMaxHeight = (float)((_calcMaxHeight - (_wellSize / 1.5)) * 0.9); //0.9 is 90% the size of the wellplate
-                _lastRectangleWidth = _recalcMaxHeight / (_shapeDistance * _heightWellPlate);
+                _lastRectangleWidth = _recalcMaxHeight / (_shapeDistance * sizeHandler._heightWellPlate);
             }
             else
             {
                 _recalcMaxWidth = (float)((_calcMaxWidth - (_wellSize / 1.5)) * 0.95); //0.95 is 95% the size of the wellplate
-                _lastRectangleWidth = _recalcMaxWidth / (_shapeDistance * _widthWellPlate);
+                _lastRectangleWidth = _recalcMaxWidth / (_shapeDistance * sizeHandler._widthWellPlate);
             }
         }
 
@@ -377,12 +360,12 @@ namespace WellPlateUserControl
                 if (_setTheMaxHeight)
                 {
                     //the size of a well is the maximum height divided by (the distance between the wells * the amount of wells in height)
-                    _lastRectangleWidth = _recalcMaxHeight / (_shapeDistance * _heightWellPlate);
+                    _lastRectangleWidth = _recalcMaxHeight / (_shapeDistance * sizeHandler._heightWellPlate);
                 }
                 else
                 {
                     //the size of a well is the maximum size divided by (the distance between the wells * the amount of wells in width)
-                    _lastRectangleWidth = _recalcMaxWidth / (_shapeDistance * _widthWellPlate);
+                    _lastRectangleWidth = _recalcMaxWidth / (_shapeDistance * sizeHandler._widthWellPlate);
                 }
             }
         }
@@ -398,8 +381,9 @@ namespace WellPlateUserControl
             {
                 VerticalAlignment = VerticalAlignment.Bottom,
                 HorizontalAlignment = HorizontalAlignment.Left,
-                Name = $"{_alphabet[height]}{width + 1}_{1 + height + _heightWellPlate * width}",
-                Fill = new SolidColorBrush(_setGridColor)
+                Name = $"{_alphabet[height]}{width + 1}_{1 + height + sizeHandler._heightWellPlate * width}",
+                Fill = new SolidColorBrush(_setGridColor),
+                Effect = null
             };
 
             _coordinates.Add(rectangle.Name);
@@ -425,7 +409,7 @@ namespace WellPlateUserControl
             //takes care of the position of the rectangle
             rectangle.Margin = new Thickness(
                 _letterDistance + (_shapeDistance * rectangle.Width) - rectangle.Width + width * rectangle.Width * _shapeDistance, 0, 0,
-                (_shapeDistance * rectangle.Height) - rectangle.Height + (_heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) * _shapeDistance);
+                (_shapeDistance * rectangle.Height) - rectangle.Height + (sizeHandler._heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) * _shapeDistance);
 
             _coordinates.Add(rectangle.Name);
             gGenerateWellPlate.Children.Add(rectangle);
@@ -451,7 +435,7 @@ namespace WellPlateUserControl
                 lblAlphabetic.FontSize = _lastRectangleWidth * _fontSizeModifier;
                 lblAlphabetic.TextAlignment = TextAlignment.Center;
                 lblAlphabetic.Margin = new Thickness(0, 0, 0,
-                    (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + (_heightWellPlate * _lastRectangleWidth - (height * _lastRectangleWidth) - _lastRectangleWidth) * _shapeDistance - (_lastRectangleWidth / 4));
+                    (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + (sizeHandler._heightWellPlate * _lastRectangleWidth - (height * _lastRectangleWidth) - _lastRectangleWidth) * _shapeDistance - (_lastRectangleWidth / 4));
                 gCoordinates.Children.Add(lblAlphabetic);
             }
 
@@ -471,7 +455,7 @@ namespace WellPlateUserControl
                     _letterDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + width * _lastRectangleWidth * _shapeDistance,
                     0,
                     0,
-                    (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + _heightWellPlate * _lastRectangleWidth * _shapeDistance);
+                    (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + sizeHandler._heightWellPlate * _lastRectangleWidth * _shapeDistance);
                 gCoordinates.Children.Add(lblNumeric);
             }
         }
@@ -487,8 +471,9 @@ namespace WellPlateUserControl
             rectOutline.Fill = new SolidColorBrush(Colors.Transparent);
             rectOutline.Stroke = new SolidColorBrush(_setBorderColor);
             rectOutline.StrokeThickness = _lastRectangleWidth * 0.1; //the 0.1 makes sure the stroke is 10% of the width of a well
-            rectOutline.Width = _lastRectangleWidth * _widthWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
-            rectOutline.Height = _lastRectangleWidth * _heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
+            rectOutline.Width = _lastRectangleWidth * sizeHandler._widthWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
+            rectOutline.Height = _lastRectangleWidth * sizeHandler._heightWellPlate * _shapeDistance + (_shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
+            rectOutline.Effect = null;
 
             //if the size of a well is bigger than 15 and not a rectangle it will round the border
             if (_lastRectangleWidth > 15 && !IsRectangle)
@@ -526,9 +511,9 @@ namespace WellPlateUserControl
             prepareValues();
 
             //generates the shapes
-            for (int height = 0; height < _heightWellPlate; height++)
+            for (int height = 0; height < sizeHandler._heightWellPlate; height++)
             {
-                for (int width = 0; width < _widthWellPlate; width++)
+                for (int width = 0; width < sizeHandler._widthWellPlate; width++)
                 {
                     createWells(width, height);
 
@@ -700,15 +685,8 @@ namespace WellPlateUserControl
         /// <returns>String with the coordinate the number is linked to. If it doesn't find anything, it will return "nothing found"</returns>
         public string NumberToCoordinate(int coordinate)
         {
-            //foreach (string loopedCoordinate in _coordinates)
-            //{
-            //    if (loopedCoordinate.Split("_")[1].Trim() == coordinate.ToString())
-            //    {
-            //        return $"{loopedCoordinate.Split("_")[0]}";
-            //    }
-            //}
-            string myCoordinate = getCoordinateInfo.NumberToCoordinate(coordinate, _coordinates);
-            return myCoordinate;
+            string convertedCoordinate = getCoordinateInfo.NumberToCoordinate(coordinate, _coordinates);
+            return convertedCoordinate;
         }
 
         /// <summary>
@@ -719,21 +697,8 @@ namespace WellPlateUserControl
         /// <returns>Integer with the number the coordinate is linked to. <br>If it doesn't find anything, it will return -1</br>.<br>If it notices a null or whitespace it will return -2.</br></returns>
         public int CoordinateToNumber(string coordinate)
         {
-            //if (string.IsNullOrWhiteSpace(coordinate))
-            //{
-            //    throw new ArgumentNullException("coordinate does not take 'null' for an argument.");
-            //}
-
-            //foreach (string loopedCoordinate in _coordinates)
-            //{
-            //    if (loopedCoordinate.Split("_")[0] == coordinate.ToUpper())
-            //    {
-            //        return Convert.ToInt32(loopedCoordinate.Split("_")[1].Trim());
-            //    }
-            //}
-            //return -1;
-            int myCoordinate = getCoordinateInfo.CoordinateToNumber(coordinate, _coordinates);
-            return myCoordinate;
+            int convertedNumber = getCoordinateInfo.CoordinateToNumber(coordinate, _coordinates);
+            return convertedNumber;
         }
 
         /// <summary>

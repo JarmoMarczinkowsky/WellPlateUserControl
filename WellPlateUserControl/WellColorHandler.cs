@@ -19,6 +19,7 @@ namespace WellPlateUserControl
 
     class WellColorHandler
     {
+        public string Test { get; set; }
         //public string MyName;
         //public void TestMe()
         //{

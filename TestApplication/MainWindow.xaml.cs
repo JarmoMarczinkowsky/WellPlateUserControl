@@ -34,7 +34,7 @@ namespace TestApplication
             //globalWellPlate.ClickColor = Colors.Azure;
             globalWellPlate.StrokeColor = Colors.Tomato;
             globalWellPlate.StrokeThickness = 20;
-            globalWellPlate.SetWellPlateSize(24,16);
+            globalWellPlate.SetWellPlateSize(12, 8);
             //globalWellPlate.WellSize = 30;
             globalWellPlate.LabelColor = Colors.Red;
             //globalWellPlate.BorderColor = Colors.Blue;
@@ -44,7 +44,7 @@ namespace TestApplication
             //globalWellPlate.ColorCoordinate("C4", Colors.Red);
             //globalWellPlate.ColorCoordinate(5, Colors.Green);
             Debug.WriteLine(globalWellPlate.CoordinateToNumber("A4"));
-            //Debug.WriteLine(globalWellPlate.NumberToCoordinate(6));
+            Debug.WriteLine(globalWellPlate.NumberToCoordinate(6));
             //Debug.WriteLine(globalWellPlate.ColoredCoordinates);
             //Debug.WriteLine(globalWellPlate.NotColoredCoordinates);
 
