@@ -30,35 +30,23 @@ namespace TestApplication
 
             globalWellPlate.IsEditable = true;
             //globalWellPlate.IsRectangle = true;
-            //globalWellPlate.SetGridColor = Colors.Black;
-            //globalWellPlate.SetClickColor = Colors.Crimson;
-            //globalWellPlate.SetStrokeColor = Colors.White;
-            //globalWellPlate.SetStrokeThickness = 80;
-            globalWellPlate.SetWellPlateSize(20,8);
-            //globalWellPlate.SetGridColor = Colors.Transparent;
-            //globalWellPlate.SetWellSize = 5;
-            //globalWellPlate.SetMaxWidth = 800;
-            //globalWellPlate.SetLabelColor = Colors.Red;
-            //globalWellPlate.SetBorderColor = Colors.Blue;
+            //globalWellPlate.GridColor = Colors.Black;
+            globalWellPlate.ClickColor = Colors.Crimson;
+            //globalWellPlate.StrokeColor = Colors.Black;
+            //globalWellPlate.StrokeThickness = 80;
+            globalWellPlate.SetWellPlateSize(12,1);
+            //globalWellPlate.WellSize = 5;
+            //globalWellPlate.LabelColor = Colors.Red;
+            //globalWellPlate.BorderColor = Colors.Blue;
             globalWellPlate.DrawWellPlate();
-            globalWellPlate.ColorCoordinate(4);
-            globalWellPlate.ColorCoordinate("A1");
-            globalWellPlate.ColorCoordinate("C4", Colors.Red);
-            globalWellPlate.ColorCoordinate(5, Colors.Green);
+            //globalWellPlate.ColorCoordinate(4);
+            //globalWellPlate.ColorCoordinate("A1");
+            //globalWellPlate.ColorCoordinate("C4", Colors.Red);
+            //globalWellPlate.ColorCoordinate(5, Colors.Green);
             //globalWellPlate.CoordinateToNumber("A4");
             //globalWellPlate.NumberToCoordinate(6);
-            //Debug.WriteLine(globalWellPlate.GetColoredCoordinates);
-            //Debug.WriteLine(globalWellPlate.GetNotColoredCoordinates);
-
-        }
-
-        private void ConnTest(object sender, RoutedEventArgs e)
-        {
-            //globalWellPlate.IsRectangle = false;
-            globalWellPlate.Clear("A1");
-            globalWellPlate.SetWellPlateSize(8,20);
-            globalWellPlate.DrawWellPlate();
-            globalWellPlate.ColorCoordinate("C3", Colors.Brown);
+            //Debug.WriteLine(globalWellPlate.ColoredCoordinates);
+            //Debug.WriteLine(globalWellPlate.NotColoredCoordinates);
 
         }
     }

@@ -27,7 +27,7 @@ namespace WellPlateUserControl
         /// <para>Is used to set the thickness of the stroke in percentages.</para>
         /// <para>If the color is not defined, it will use black.</para>
         /// </summary>
-        public double SetStrokeThickness
+        public double StrokeThickness
         {
             get { return _strokeThickness; }
             set
@@ -51,7 +51,7 @@ namespace WellPlateUserControl
         /// <summary>
         /// Is used to set a fixed size for the wells
         /// </summary>
-        public double SetWellSize
+        public double WellSize
         {
             get { return _setWellSize; }
             set
@@ -71,7 +71,7 @@ namespace WellPlateUserControl
         /// <summary>
         /// <para>Is used to set the color of the wellplate.</para>
         /// </summary>
-        public Color SetGridColor
+        public Color GridColor
         {
             get { return _setGridColor; }
             set
@@ -83,7 +83,7 @@ namespace WellPlateUserControl
         /// <summary>
         /// Is used for the color of a well when it is clicked
         /// </summary>
-        public Color SetClickColor
+        public Color ClickColor
         {
             get { return _setClickColor; }
             set
@@ -95,7 +95,7 @@ namespace WellPlateUserControl
         /// <summary>
         /// Is used to set a color for the stroke
         /// </summary>
-        public Color SetStrokeColor
+        public Color StrokeColor
         {
             get { return _strokeColor; }
             set
@@ -108,7 +108,7 @@ namespace WellPlateUserControl
         /// <summary>
         /// Is used to set a color for the coordinates surrounding the wellplate
         /// </summary>
-        public Color SetLabelColor
+        public Color LabelColor
         {
             get { return _setLabelColor; }
             set
@@ -120,7 +120,7 @@ namespace WellPlateUserControl
         /// <summary>
         /// Is used to set a color for the border surrounding the wellplate
         /// </summary>
-        public Color SetBorderColor
+        public Color BorderColor
         {
             get { return _setBorderColor; }
             set
@@ -131,7 +131,7 @@ namespace WellPlateUserControl
         /// <summary>
         /// Is used to return a list with every colored well
         /// </summary>
-        public List<string> GetColoredCoordinates
+        public List<string> ColoredCoordinates
         {
             get
             {
@@ -144,7 +144,7 @@ namespace WellPlateUserControl
         /// <summary>
         /// Is used to return a list with every well that is not colored
         /// </summary>
-        public List<string> GetNotColoredCoordinates
+        public List<string> NotColoredCoordinates
         {
             get
             {
@@ -196,6 +196,7 @@ namespace WellPlateUserControl
         private List<string> _coordinates = new List<string>();
         private List<string> _coloredCoordinates = new List<string>();
         private List<string> _notColoredCoordinates = new List<string>();
+
 
         public WellPlateControl()
         {
@@ -503,10 +504,10 @@ namespace WellPlateUserControl
         /// <summary>
         /// Generates the wellplate based on the values the user entered. If it doesn't find any values that the user entered, it will use default values:<br></br>
         /// The default values are:<br></br>
-        /// SetGridColor = Color.FromRgb(209, 232, 247); (lightblue)<br></br>
-        /// SetClickColor = Color.FromRgb(0, 157, 247); (blue)<br></br>
-        /// SetLabelColor = Colors.Black<br></br>
-        /// SetBorderColor = Colors.LightGray<br></br>
+        /// GridColor = Color.FromRgb(209, 232, 247); (lightblue)<br></br>
+        /// ClickColor = Color.FromRgb(0, 157, 247); (blue)<br></br>
+        /// LabelColor = Colors.Black<br></br>
+        /// BorderColor = Colors.LightGray<br></br>
         /// IsEditable = false;<br></br>
         /// IsRectangle = false; <br></br>
         /// </summary>
