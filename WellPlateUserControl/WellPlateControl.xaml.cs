@@ -21,9 +21,15 @@ namespace WellPlateUserControl
     /// </summary>
     public partial class WellPlateControl : UserControl
     {
+        GetCoordinateInfo getCoordinateInfo = new();
+        
+        
+
+        
+
         public string LastClickedCoordinate { get; private set; }
 
-        /// <summary>
+       /// <summary>
         /// <para>Is used to set the thickness of the stroke in percentages.</para>
         /// <para>If the color is not defined, it will use black.</para>
         /// </summary>
@@ -89,6 +95,7 @@ namespace WellPlateUserControl
             set
             {
                 _setClickColor = value;
+                //wellColorHandler._setClickColor = value;
             }
         }
 
@@ -693,14 +700,15 @@ namespace WellPlateUserControl
         /// <returns>String with the coordinate the number is linked to. If it doesn't find anything, it will return "nothing found"</returns>
         public string NumberToCoordinate(int coordinate)
         {
-            foreach (string loopedCoordinate in _coordinates)
-            {
-                if (loopedCoordinate.Split("_")[1].Trim() == coordinate.ToString())
-                {
-                    return $"{loopedCoordinate.Split("_")[0]}";
-                }
-            }
-            return "";
+            //foreach (string loopedCoordinate in _coordinates)
+            //{
+            //    if (loopedCoordinate.Split("_")[1].Trim() == coordinate.ToString())
+            //    {
+            //        return $"{loopedCoordinate.Split("_")[0]}";
+            //    }
+            //}
+            string myCoordinate = getCoordinateInfo.NumberToCoordinate(coordinate, _coordinates);
+            return myCoordinate;
         }
 
         /// <summary>
@@ -711,19 +719,21 @@ namespace WellPlateUserControl
         /// <returns>Integer with the number the coordinate is linked to. <br>If it doesn't find anything, it will return -1</br>.<br>If it notices a null or whitespace it will return -2.</br></returns>
         public int CoordinateToNumber(string coordinate)
         {
-            if (string.IsNullOrWhiteSpace(coordinate))
-            {
-                throw new ArgumentNullException("coordinate does not take 'null' for an argument.");
-            }
+            //if (string.IsNullOrWhiteSpace(coordinate))
+            //{
+            //    throw new ArgumentNullException("coordinate does not take 'null' for an argument.");
+            //}
 
-            foreach (string loopedCoordinate in _coordinates)
-            {
-                if (loopedCoordinate.Split("_")[0] == coordinate.ToUpper())
-                {
-                    return Convert.ToInt32(loopedCoordinate.Split("_")[1].Trim());
-                }
-            }
-            return -1;
+            //foreach (string loopedCoordinate in _coordinates)
+            //{
+            //    if (loopedCoordinate.Split("_")[0] == coordinate.ToUpper())
+            //    {
+            //        return Convert.ToInt32(loopedCoordinate.Split("_")[1].Trim());
+            //    }
+            //}
+            //return -1;
+            int myCoordinate = getCoordinateInfo.CoordinateToNumber(coordinate, _coordinates);
+            return myCoordinate;
         }
 
         /// <summary>
