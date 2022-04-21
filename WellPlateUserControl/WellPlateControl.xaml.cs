@@ -172,16 +172,16 @@ namespace WellPlateUserControl
         //private const int _heightLeftOver = 50;
 
         //private float _shapeDistance;
-        private float _lastRectangleWidth;
+        //private float calculateWellSize.LastRectangleWidth;
         private float _letterDistance;
         //private float _calcMaxHeight;
         //private float _calcMaxWidth;
-        private float _recalcMaxWidth;
-        private float _recalcMaxHeight;
+        //private float _recalcMaxWidth;
+        //private float calculateWellSize.RecalcMaxHeight;
         private const float _fontSizeModifier = 0.45F;
 
         private double _strokeThickness = 0.08;
-        private double _wellSize;
+        //private double _wellSize;
         //private double _setMaxHeight;
         //private double _setMaxWidth;
 
@@ -242,15 +242,14 @@ namespace WellPlateUserControl
             //checks if the user has chosen for rectangles and changes the spacing between the wells after that.
             calculateWellSize.RectangleDistance(IsRectangle);
 
-
             //calculates the size of a well and removes a third of the calculated well from the maximum width
-            calculateMaxSize();
+            calculateWellSize.CalculateMaxSize(sizeHandler._widthWellPlate, sizeHandler._heightWellPlate);
             
             //calculates the height of the numeric labels
-            highestTextblock = (calculateWellSize._shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + sizeHandler._heightWellPlate * _lastRectangleWidth * calculateWellSize._shapeDistance + (_lastRectangleWidth * _fontSizeModifier);
+            highestTextblock = (calculateWellSize._shapeDistance * calculateWellSize.LastRectangleWidth) - calculateWellSize.LastRectangleWidth + sizeHandler._heightWellPlate * calculateWellSize.LastRectangleWidth * calculateWellSize._shapeDistance + (calculateWellSize.LastRectangleWidth * _fontSizeModifier);
 
             //in case given height is smaller than needed height
-            heightCheck(highestTextblock);
+            calculateWellSize.HeightCheck(highestTextblock, this.Width, this.Height);
 
             calculateRectangleSize();
 
@@ -297,58 +296,58 @@ namespace WellPlateUserControl
         /// <summary>
         /// Sets the distance between 2 wells
         /// </summary>
-        private void rectangleDistance()
-        {
-            //if (IsRectangle)
-            //{
-            //    calculateWellSize._shapeDistance = 1.05F; //1.05 is 5% the size of a well between two wells
-            //    _wellRoundedCorner = 0; //0 = no rounded corners
-            //}
-            //else
-            //{
-            //    calculateWellSize._shapeDistance = 1.3F; //1.3 is 30% the size of a well between two wells
-            //    _wellRoundedCorner = 1600; //extremely high value so the wells stay rounded even if they are big
-            //}
-            calculateWellSize.RectangleDistance(IsRectangle);
-        }
+        //private void rectangleDistance()
+        //{
+        //    //if (IsRectangle)
+        //    //{
+        //    //    calculateWellSize._shapeDistance = 1.05F; //1.05 is 5% the size of a well between two wells
+        //    //    _wellRoundedCorner = 0; //0 = no rounded corners
+        //    //}
+        //    //else
+        //    //{
+        //    //    calculateWellSize._shapeDistance = 1.3F; //1.3 is 30% the size of a well between two wells
+        //    //    _wellRoundedCorner = 1600; //extremely high value so the wells stay rounded even if they are big
+        //    //}
+        //    calculateWellSize.RectangleDistance(IsRectangle);
+        //}
 
-        private void calculateMaxSize()
-        {
-            _wellSize = calculateWellSize.CalcMaxWidth / (calculateWellSize._shapeDistance * sizeHandler._widthWellPlate);
-            if (calculateWellSize.SetTheMaxHeight)
-            {
-                _recalcMaxHeight = (float)((calculateWellSize.CalcMaxHeight - (_wellSize / 1.5)) * 0.9); //0.9 is 90% the size of the wellplate
-                _lastRectangleWidth = _recalcMaxHeight / (calculateWellSize._shapeDistance * sizeHandler._heightWellPlate);
-            }
-            else
-            {
-                _recalcMaxWidth = (float)((calculateWellSize.CalcMaxWidth - (_wellSize / 1.5)) * 0.95); //0.95 is 95% the size of the wellplate
-                _lastRectangleWidth = _recalcMaxWidth / (calculateWellSize._shapeDistance * sizeHandler._widthWellPlate);
-            }
-        }
+        //private void calculateMaxSize()
+        //{
+        //    _wellSize = calculateWellSize.CalcMaxWidth / (calculateWellSize._shapeDistance * sizeHandler._widthWellPlate);
+        //    if (calculateWellSize.SetTheMaxHeight)
+        //    {
+        //        _recalcMaxHeight = (float)((calculateWellSize.CalcMaxHeight - (_wellSize / 1.5)) * 0.9); //0.9 is 90% the size of the wellplate
+        //        calculateWellSize.LastRectangleWidth = _recalcMaxHeight / (calculateWellSize._shapeDistance * sizeHandler._heightWellPlate);
+        //    }
+        //    else
+        //    {
+        //        _recalcMaxWidth = (float)((calculateWellSize.CalcMaxWidth - (_wellSize / 1.5)) * 0.95); //0.95 is 95% the size of the wellplate
+        //        calculateWellSize.LastRectangleWidth = _recalcMaxWidth / (calculateWellSize._shapeDistance * sizeHandler._widthWellPlate);
+        //    }
+        //}
 
-        /// <summary>
-        /// Checks if the size of the highest textblock is going to be bigger than the usercontrol height. 
-        /// If it is it will resize the entered height to a more suitable height
-        /// </summary>
-        /// <param name="highestTextblock"></param>
-        private void heightCheck(double highestTextblock)
-        {
-            double biggerThanSpaceAvailablePercentage;
-            if (highestTextblock > this.Height)
-            {
-                biggerThanSpaceAvailablePercentage = (highestTextblock - this.Height) / this.Height * 100;
+        ///// <summary>
+        ///// Checks if the size of the highest textblock is going to be bigger than the usercontrol height. 
+        ///// If it is it will resize the entered height to a more suitable height
+        ///// </summary>
+        ///// <param name="highestTextblock"></param>
+        //private void heightCheck(double highestTextblock)
+        //{
+        //    double biggerThanSpaceAvailablePercentage;
+        //    if (highestTextblock > this.Height)
+        //    {
+        //        biggerThanSpaceAvailablePercentage = (highestTextblock - this.Height) / this.Height * 100;
 
-                if (calculateWellSize.SetTheMaxHeight)
-                {
-                    _recalcMaxHeight = (float)(_recalcMaxHeight / (biggerThanSpaceAvailablePercentage + 100) * 100);
-                }
-                else
-                {
-                    _recalcMaxWidth = (float)(_recalcMaxWidth / (biggerThanSpaceAvailablePercentage + 100) * 100);
-                }
-            }
-        }
+        //        if (calculateWellSize.SetTheMaxHeight)
+        //        {
+        //            calculateWellSize.RecalcMaxHeight = (float)(calculateWellSize.RecalcMaxHeight / (biggerThanSpaceAvailablePercentage + 100) * 100);
+        //        }
+        //        else
+        //        {
+        //            calculateWellSize.RecalcMaxWidth = (float)(calculateWellSize.RecalcMaxWidth / (biggerThanSpaceAvailablePercentage + 100) * 100);
+        //        }
+        //    }
+        //}
 
         /// <summary>
         /// Calculate the size of the wells
@@ -357,19 +356,19 @@ namespace WellPlateUserControl
         {
             if (_hasSetWellSize)
             {
-                _lastRectangleWidth = (float)_setWellSize;
+                calculateWellSize.LastRectangleWidth = (float)_setWellSize;
             }
             else
             {
                 if (calculateWellSize.SetTheMaxHeight)
                 {
                     //the size of a well is the maximum height divided by (the distance between the wells * the amount of wells in height)
-                    _lastRectangleWidth = _recalcMaxHeight / (calculateWellSize._shapeDistance * sizeHandler._heightWellPlate);
+                    calculateWellSize.LastRectangleWidth = calculateWellSize.RecalcMaxHeight / (calculateWellSize._shapeDistance * sizeHandler._heightWellPlate);
                 }
                 else
                 {
                     //the size of a well is the maximum size divided by (the distance between the wells * the amount of wells in width)
-                    _lastRectangleWidth = _recalcMaxWidth / (calculateWellSize._shapeDistance * sizeHandler._widthWellPlate);
+                    calculateWellSize.LastRectangleWidth = calculateWellSize.RecalcMaxWidth / (calculateWellSize._shapeDistance * sizeHandler._widthWellPlate);
                 }
             }
         }
@@ -397,8 +396,8 @@ namespace WellPlateUserControl
             rectangle.RadiusY = calculateWellSize._wellRoundedCorner;
 
             //the size of the wells
-            rectangle.Width = _lastRectangleWidth;
-            rectangle.Height = _lastRectangleWidth;
+            rectangle.Width = calculateWellSize.LastRectangleWidth;
+            rectangle.Height = calculateWellSize.LastRectangleWidth;
 
             //checks if stroke color is set and sets the stroke afterwards.
             if (_setStrokeColor)
@@ -434,12 +433,12 @@ namespace WellPlateUserControl
                 lblAlphabetic.Foreground = new SolidColorBrush(_setLabelColor);
                 lblAlphabetic.HorizontalAlignment = HorizontalAlignment.Left;
                 lblAlphabetic.VerticalAlignment = VerticalAlignment.Bottom;
-                lblAlphabetic.Width = _lastRectangleWidth;
-                lblAlphabetic.Height = _lastRectangleWidth;
-                lblAlphabetic.FontSize = _lastRectangleWidth * _fontSizeModifier;
+                lblAlphabetic.Width = calculateWellSize.LastRectangleWidth;
+                lblAlphabetic.Height = calculateWellSize.LastRectangleWidth;
+                lblAlphabetic.FontSize = calculateWellSize.LastRectangleWidth * _fontSizeModifier;
                 lblAlphabetic.TextAlignment = TextAlignment.Center;
                 lblAlphabetic.Margin = new Thickness(0, 0, 0,
-                    (calculateWellSize._shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + (sizeHandler._heightWellPlate * _lastRectangleWidth - (height * _lastRectangleWidth) - _lastRectangleWidth) * calculateWellSize._shapeDistance - (_lastRectangleWidth / 4));
+                    (calculateWellSize._shapeDistance * calculateWellSize.LastRectangleWidth) - calculateWellSize.LastRectangleWidth + (sizeHandler._heightWellPlate * calculateWellSize.LastRectangleWidth - (height * calculateWellSize.LastRectangleWidth) - calculateWellSize.LastRectangleWidth) * calculateWellSize._shapeDistance - (calculateWellSize.LastRectangleWidth / 4));
                 gCoordinates.Children.Add(lblAlphabetic);
             }
 
@@ -452,14 +451,14 @@ namespace WellPlateUserControl
                 lblNumeric.HorizontalAlignment = HorizontalAlignment.Left;
                 lblNumeric.VerticalAlignment = VerticalAlignment.Bottom;
                 lblNumeric.TextAlignment = TextAlignment.Center;
-                lblNumeric.Width = _lastRectangleWidth;
-                lblNumeric.FontSize = _lastRectangleWidth * _fontSizeModifier;
+                lblNumeric.Width = calculateWellSize.LastRectangleWidth;
+                lblNumeric.FontSize = calculateWellSize.LastRectangleWidth * _fontSizeModifier;
 
                 lblNumeric.Margin = new Thickness(
-                    _letterDistance + (calculateWellSize._shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + width * _lastRectangleWidth * calculateWellSize._shapeDistance,
+                    _letterDistance + (calculateWellSize._shapeDistance * calculateWellSize.LastRectangleWidth) - calculateWellSize.LastRectangleWidth + width * calculateWellSize.LastRectangleWidth * calculateWellSize._shapeDistance,
                     0,
                     0,
-                    (calculateWellSize._shapeDistance * _lastRectangleWidth) - _lastRectangleWidth + sizeHandler._heightWellPlate * _lastRectangleWidth * calculateWellSize._shapeDistance);
+                    (calculateWellSize._shapeDistance * calculateWellSize.LastRectangleWidth) - calculateWellSize.LastRectangleWidth + sizeHandler._heightWellPlate * calculateWellSize.LastRectangleWidth * calculateWellSize._shapeDistance);
                 gCoordinates.Children.Add(lblNumeric);
             }
         }
@@ -474,13 +473,13 @@ namespace WellPlateUserControl
             rectOutline.Margin = new Thickness(_letterDistance, 0, 0, 0);
             rectOutline.Fill = new SolidColorBrush(Colors.Transparent);
             rectOutline.Stroke = new SolidColorBrush(_setBorderColor);
-            rectOutline.StrokeThickness = _lastRectangleWidth * 0.1; //the 0.1 makes sure the stroke is 10% of the width of a well
-            rectOutline.Width = _lastRectangleWidth * sizeHandler._widthWellPlate * calculateWellSize._shapeDistance + (calculateWellSize._shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
-            rectOutline.Height = _lastRectangleWidth * sizeHandler._heightWellPlate * calculateWellSize._shapeDistance + (calculateWellSize._shapeDistance * _lastRectangleWidth) - _lastRectangleWidth;
+            rectOutline.StrokeThickness = calculateWellSize.LastRectangleWidth * 0.1; //the 0.1 makes sure the stroke is 10% of the width of a well
+            rectOutline.Width = calculateWellSize.LastRectangleWidth * sizeHandler._widthWellPlate * calculateWellSize._shapeDistance + (calculateWellSize._shapeDistance * calculateWellSize.LastRectangleWidth) - calculateWellSize.LastRectangleWidth;
+            rectOutline.Height = calculateWellSize.LastRectangleWidth * sizeHandler._heightWellPlate * calculateWellSize._shapeDistance + (calculateWellSize._shapeDistance * calculateWellSize.LastRectangleWidth) - calculateWellSize.LastRectangleWidth;
             rectOutline.Effect = null;
 
             //if the size of a well is bigger than 15 and not a rectangle it will round the border
-            if (_lastRectangleWidth > 15 && !IsRectangle)
+            if (calculateWellSize.LastRectangleWidth > 15 && !IsRectangle)
             {
                 rectOutline.RadiusX = 15;
                 rectOutline.RadiusY = 15;

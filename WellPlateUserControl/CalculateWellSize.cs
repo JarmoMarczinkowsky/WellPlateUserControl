@@ -9,6 +9,8 @@ namespace WellPlateUserControl
 {
     class CalculateWellSize
     {
+        
+
         private const int _widthLeftOver = 16;
         private const int _heightLeftOver = 50;
         
@@ -19,8 +21,15 @@ namespace WellPlateUserControl
         public float CalcMaxWidth;
         public bool SetTheMaxHeight;
         public float _shapeDistance;
-        
+        public float RecalcMaxWidth;
+        public float RecalcMaxHeight;
+        public float LastRectangleWidth;
+
+
+        public double WellSize;
+
         public int _wellRoundedCorner;
+
 
         /// <summary>
         /// Checks if the width of the usercontrol is set. If it doesn't find a width, it will search for the height, otherwise it will just use a width of 600
@@ -75,5 +84,49 @@ namespace WellPlateUserControl
                 _wellRoundedCorner = 1600; //extremely high value so the wells stay rounded even if they are big
             }
         }
+
+
+        public void CalculateMaxSize(int widthWellPlate, int heightWellPlate)
+        {
+            SizeHandler sizeHandler = new();
+
+            WellSize = CalcMaxWidth / (_shapeDistance * widthWellPlate);
+            if (SetTheMaxHeight)
+            {
+                RecalcMaxHeight = (float)((CalcMaxHeight - (WellSize / 1.5)) * 0.9); //0.9 is 90% the size of the wellplate
+                LastRectangleWidth = RecalcMaxHeight / (_shapeDistance * heightWellPlate);
+            }
+            else
+            {
+                RecalcMaxWidth = (float)((CalcMaxWidth - (WellSize / 1.5)) * 0.95); //0.95 is 95% the size of the wellplate
+                LastRectangleWidth = RecalcMaxWidth / (_shapeDistance * widthWellPlate);
+            }
+        }
+
+        /// <summary>
+        /// Checks if the size of the highest textblock is going to be bigger than the usercontrol height. 
+        /// If it is it will resize the entered height to a more suitable height
+        /// </summary>
+        /// <param name="highestTextblock"></param>
+        public void HeightCheck(double highestTextblock, double thisWidth, double thisHeight)
+        {
+            double biggerThanSpaceAvailablePercentage;
+
+            if (highestTextblock > thisWidth)
+            {
+                biggerThanSpaceAvailablePercentage = (highestTextblock - thisHeight) / thisHeight * 100;
+
+                if (SetTheMaxHeight)
+                {
+                    RecalcMaxHeight = (float)(RecalcMaxHeight / (biggerThanSpaceAvailablePercentage + 100) * 100);
+                }
+                else
+                {
+                    RecalcMaxWidth = (float)(RecalcMaxWidth / (biggerThanSpaceAvailablePercentage + 100) * 100);
+                }
+            }
+        }
+
+
     }
 }

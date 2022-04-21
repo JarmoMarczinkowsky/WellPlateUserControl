@@ -28,13 +28,13 @@ namespace TestApplication
         {
             InitializeComponent();
 
-            globalWellPlate.IsEditable = false;
+            globalWellPlate.IsEditable = true;
             //globalWellPlate.IsRectangle = true;
             //globalWellPlate.GridColor = Colors.Turquoise;
             //globalWellPlate.ClickColor = Colors.Azure;
             //globalWellPlate.StrokeColor = Colors.Tomato;
             //globalWellPlate.StrokeThickness = 20;
-            globalWellPlate.SetWellPlateSize(12, 18);
+            globalWellPlate.SetWellPlateSize(24,12);
             //globalWellPlate.WellSize = 30;
             //globalWellPlate.LabelColor = Colors.Red;
             //globalWellPlate.BorderColor = Colors.Blue;

@@ -10,6 +10,7 @@ namespace WellPlateUserControl
     {
         public int _heightWellPlate;
         public int _widthWellPlate;
+
         /// <summary>
         /// <para>Is responsible for the size of the wellplate</para>
         /// </summary>
