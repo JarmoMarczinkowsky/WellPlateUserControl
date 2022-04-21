@@ -11,12 +11,20 @@ namespace WellPlateUserControl
     {
         private const int _widthLeftOver = 16;
         private const int _heightLeftOver = 50;
+        
         private double _setMaxHeight;
         private double _setMaxWidth;
+        
         public float CalcMaxHeight;
         public float CalcMaxWidth;
         public bool SetTheMaxHeight;
+        public float _shapeDistance;
+        
+        public int _wellRoundedCorner;
 
+        /// <summary>
+        /// Checks if the width of the usercontrol is set. If it doesn't find a width, it will search for the height, otherwise it will just use a width of 600
+        /// </summary>
         public void CheckControlSize(double width, double height)
         {
             if (!double.IsNaN(width))
@@ -48,6 +56,23 @@ namespace WellPlateUserControl
             {
                 _setMaxWidth = 600; //default width if it doesn't find a width or height is 600 pixels
                 CalcMaxWidth = (float)(_setMaxWidth - _widthLeftOver);
+            }
+        }
+
+        /// <summary>
+        /// Sets the distance between 2 wells
+        /// </summary>
+        public void RectangleDistance(bool IsRectangle)
+        {
+            if (IsRectangle)
+            {
+                _shapeDistance = 1.05F; //1.05 is 5% the size of a well between two wells
+                _wellRoundedCorner = 0; //0 = no rounded corners
+            }
+            else
+            {
+                _shapeDistance = 1.3F; //1.3 is 30% the size of a well between two wells
+                _wellRoundedCorner = 1600; //extremely high value so the wells stay rounded even if they are big
             }
         }
     }
