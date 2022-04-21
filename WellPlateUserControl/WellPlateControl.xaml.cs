@@ -23,10 +23,11 @@ namespace WellPlateUserControl
     {
         GetCoordinateInfo getCoordinateInfo = new();
         SizeHandler sizeHandler = new();
+        CalculateWellSize calculateWellSize = new();
 
         public string LastClickedCoordinate { get; private set; }
 
-       /// <summary>
+        /// <summary>
         /// <para>Is used to set the thickness of the stroke in percentages.</para>
         /// <para>If the color is not defined, it will use black.</para>
         /// </summary>
@@ -167,25 +168,25 @@ namespace WellPlateUserControl
         private string _createEllipseName;
 
         private int _wellRoundedCorner;
-        private const int _widthLeftOver = 16;
-        private const int _heightLeftOver = 50;
+        //private const int _widthLeftOver = 16;
+        //private const int _heightLeftOver = 50;
 
         private float _shapeDistance;
         private float _lastRectangleWidth;
         private float _letterDistance;
-        private float _calcMaxHeight;
-        private float _calcMaxWidth;
+        //private float _calcMaxHeight;
+        //private float _calcMaxWidth;
         private float _recalcMaxWidth;
         private float _recalcMaxHeight;
         private const float _fontSizeModifier = 0.45F;
 
         private double _strokeThickness = 0.08;
         private double _wellSize;
-        private double _setMaxHeight;
-        private double _setMaxWidth;
+        //private double _setMaxHeight;
+        //private double _setMaxWidth;
 
         private bool _setStrokeColor;
-        private bool _setTheMaxHeight;
+        //private bool _setTheMaxHeight;
         private bool _hasSetWellSize;
 
         private Color _setGridColor = Color.FromRgb(209, 232, 247);
@@ -236,10 +237,10 @@ namespace WellPlateUserControl
             gCoordinates.Children.Clear();
 
             //checks if a value is entered. If yes -> set the value to the corresponding variable. If both are no -> maxWidth becomes 600 pixels
-            checkControlSize();
+            calculateWellSize.CheckControlSize(this.Width, this.Height);
 
             //checks if the user has chosen for rectangles and changes the spacing between the wells after that.
-            RectangleDistance();
+            rectangleDistance();
 
             //calculates the size of a well and removes a third of the calculated well from the maximum width
             calculateMaxSize();
@@ -257,44 +258,45 @@ namespace WellPlateUserControl
         /// <summary>
         /// Checks if the width of the usercontrol is set. If it doesn't find a width, it will search for the height, otherwise it will just use a width of 600
         /// </summary>
-        private void checkControlSize()
-        {
-            if (!double.IsNaN(this.Width))
-            {
-                if (this.Width < (_widthLeftOver + 4))
-                {
-                    throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 20");
-                }
-                else
-                {
-                    _setMaxWidth = this.Width;
-                    _calcMaxWidth = (float)(_setMaxWidth - _widthLeftOver);
-                }
-            }
-            else if (!double.IsNaN(this.Height))
-            {
-                if (this.Height < (_heightLeftOver + 5))
-                {
-                    throw new ArgumentOutOfRangeException("SetMaxHeight can't be smaller than 55");
-                }
-                else
-                {
-                    _setMaxHeight = this.Height;
-                    _calcMaxHeight = (float)(_setMaxHeight - _heightLeftOver);
-                    _setTheMaxHeight = true;
-                }
-            }
-            else
-            {
-                _setMaxWidth = 600; //default width if it doesn't find a width or height is 600 pixels
-                _calcMaxWidth = (float)(_setMaxWidth - _widthLeftOver);
-            }
-        }
+        //private void checkControlSize()
+        //{
+        //    //if (!double.IsNaN(this.Width))
+        //    //{
+        //    //    if (this.Width < (_widthLeftOver + 4))
+        //    //    {
+        //    //        throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 20");
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        _setMaxWidth = this.Width;
+        //    //        _calcMaxWidth = (float)(_setMaxWidth - _widthLeftOver);
+        //    //    }
+        //    //}
+        //    //else if (!double.IsNaN(this.Height))
+        //    //{
+        //    //    if (this.Height < (_heightLeftOver + 5))
+        //    //    {
+        //    //        throw new ArgumentOutOfRangeException("SetMaxHeight can't be smaller than 55");
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        _setMaxHeight = this.Height;
+        //    //        _calcMaxHeight = (float)(_setMaxHeight - _heightLeftOver);
+        //    //        _setTheMaxHeight = true;
+        //    //    }
+        //    //}
+        //    //else
+        //    //{
+        //    //    _setMaxWidth = 600; //default width if it doesn't find a width or height is 600 pixels
+        //    //    _calcMaxWidth = (float)(_setMaxWidth - _widthLeftOver);
+        //    //}
+        //    calculateWellSize.CheckControlSize(this.Width, this.Height);
+        //}
 
         /// <summary>
         /// Sets the distance between 2 wells
         /// </summary>
-        private void RectangleDistance()
+        private void rectangleDistance()
         {
             if (IsRectangle)
             {
@@ -310,15 +312,15 @@ namespace WellPlateUserControl
 
         private void calculateMaxSize()
         {
-            _wellSize = _calcMaxWidth / (_shapeDistance * sizeHandler._widthWellPlate);
-            if (_setTheMaxHeight)
+            _wellSize = calculateWellSize.CalcMaxWidth / (_shapeDistance * sizeHandler._widthWellPlate);
+            if (calculateWellSize.SetTheMaxHeight)
             {
-                _recalcMaxHeight = (float)((_calcMaxHeight - (_wellSize / 1.5)) * 0.9); //0.9 is 90% the size of the wellplate
+                _recalcMaxHeight = (float)((calculateWellSize.CalcMaxHeight - (_wellSize / 1.5)) * 0.9); //0.9 is 90% the size of the wellplate
                 _lastRectangleWidth = _recalcMaxHeight / (_shapeDistance * sizeHandler._heightWellPlate);
             }
             else
             {
-                _recalcMaxWidth = (float)((_calcMaxWidth - (_wellSize / 1.5)) * 0.95); //0.95 is 95% the size of the wellplate
+                _recalcMaxWidth = (float)((calculateWellSize.CalcMaxWidth - (_wellSize / 1.5)) * 0.95); //0.95 is 95% the size of the wellplate
                 _lastRectangleWidth = _recalcMaxWidth / (_shapeDistance * sizeHandler._widthWellPlate);
             }
         }
@@ -335,7 +337,7 @@ namespace WellPlateUserControl
             {
                 biggerThanSpaceAvailablePercentage = (highestTextblock - this.Height) / this.Height * 100;
 
-                if (_setTheMaxHeight)
+                if (calculateWellSize.SetTheMaxHeight)
                 {
                     _recalcMaxHeight = (float)(_recalcMaxHeight / (biggerThanSpaceAvailablePercentage + 100) * 100);
                 }
@@ -357,7 +359,7 @@ namespace WellPlateUserControl
             }
             else
             {
-                if (_setTheMaxHeight)
+                if (calculateWellSize.SetTheMaxHeight)
                 {
                     //the size of a well is the maximum height divided by (the distance between the wells * the amount of wells in height)
                     _lastRectangleWidth = _recalcMaxHeight / (_shapeDistance * sizeHandler._heightWellPlate);
