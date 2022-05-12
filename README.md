@@ -11,7 +11,7 @@ Make sure you set the <b>width</b>, <b>height</b> and <b>VerticalAlignment</b> o
 SetWellPlateSize(8, 6)
 ```
 Sets the size of the wellplate in wells. The first argument '8' is the width and the second argument '6' is the height of the wellplate. 
-Set this function after the colors, circlesize and/or the rectangle and before the coordinateconverter and/or functions that return items<br>
+Set this function before the coordinateconverter and/or functions that return items<br>
 [Optional]
 ```
 GridColor(Colors.Black) 
