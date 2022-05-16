@@ -55,13 +55,11 @@ StrokeThickness = 20
 Thickness of the stroke is set in percentages.
 Will create a black stroke is SetStrokeColor is not set.<br>
 Set this variable before DrawWellPlate.<br>
-[Optional]
 ```
 IsRectangle = <bool>
 ```
 Makes every well a rectangle instead of a circle. Will also increase the distance between the wells with 5 percent.
 Set this variable before the DrawWellPlate.<br>
-[Optional]
 ```
 DrawWellPlate()
 ```
@@ -74,7 +72,6 @@ IsEditable = false;<br>
 IsRectangle = false;<br>
 LabelColor = Colors.Black<br></br>
 BorderColor = Colors.LightGray
-[Mandatory]
 ```
 ColorCoordinate("A1")
 ColorCoordinate("6")
@@ -85,37 +82,31 @@ Works with strings and numbers. It colors the coordinate that you enter with the
 Enter "A5", with the double quotes, to color coordinate a5. Enter "3", with the double quotes, to color the third well in the wellplate.
 The second argument is optional and takes care of the color of the chosen well.
 Set this function after the DrawWellPlate.<br>
-[Optional]
 ```
 NumberToCoordinate(4)
 ```
 Returns the coordinate belonging to that number. For example: '4' returns 'D4' in a 8x6 wellplate.
 Set this function after the DrawWellPlate.<br>
-[Optional]
 ```
 CoordinateToNumber("D4")
 ```
 Returns the number belonging to that coordinate. 
 For example: "D4" returns '4' in a 8x6 wellplate.
 Set this function after the DrawWellPlate.<br>
-[Optional]
 ```
 ColoredList()
 ```
 Returns a list with the coordinates with every coordinate that is currently colored.
 Set this function after the DrawWellPlate.<br>
-[Optional]
 ```
 NotColoredList()
 ```
 Returns a list with the coordinates of every well that is currently not colored.
 Set this function after DrawWellPlate.<br>
-[Optional]
 ```
 LastClickedCoordinate
 ```
 Will return the coordinate of the last clicked well. Also works when IsEditable is off.<br>
-[Optional]
 ```
 Clear()
 Clear("A1")
@@ -123,5 +114,4 @@ Clear(1)
 ```
 Will the clear the well on the entered coordinate. If it gets left empty, it will clear the entire wellplate of colored coordinates.
 Set this function after DrawWellPlate.<br>
-[Optional]
 
