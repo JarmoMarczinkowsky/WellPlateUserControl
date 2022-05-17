@@ -67,10 +67,12 @@ Set this function after the colors, circlesize and/or the rectangle and before t
 Generates the wellplate based on the values the user entered. If it doesn't find any values that the user entered, it will use default values:<br>
 The default values are:<br>
 SetGridColor = Color.FromRgb(209, 232, 247);<br>
-SetClickColor = Color.FromRgb(97, 172, 223);<br>
+SetClickColor = Color.CadetBlue;<br>
+stroke = off<br>
 IsEditable = false;<br>
 IsRectangle = false;<br>
-LabelColor = Colors.Black<br></br>
+TurnCoordinatesOff = false;<br>
+LabelColor = Colors.Black<br>
 BorderColor = Colors.LightGray
 ```
 ColorCoordinate("A1")
