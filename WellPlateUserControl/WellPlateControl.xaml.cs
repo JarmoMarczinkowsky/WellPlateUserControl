@@ -167,26 +167,12 @@ namespace WellPlateUserControl
         private const string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private string _createEllipseName;
 
-        //private int _wellRoundedCorner;
-        //private const int _widthLeftOver = 16;
-        //private const int _heightLeftOver = 50;
-
-        //private float _shapeDistance;
-        //private float calculateWellSize.LastRectangleWidth;
         private float _letterDistance;
-        //private float _calcMaxHeight;
-        //private float _calcMaxWidth;
-        //private float _recalcMaxWidth;
-        //private float calculateWellSize.RecalcMaxHeight;
         private const float _fontSizeModifier = 0.45F;
 
         private double _strokeThickness = 0.08;
-        //private double _wellSize;
-        //private double _setMaxHeight;
-        //private double _setMaxWidth;
-
+        
         private bool _setStrokeColor;
-        //private bool _setTheMaxHeight;
         private bool _hasSetWellSize;
 
         private Color _setGridColor = Color.FromRgb(209, 232, 247);
@@ -500,7 +486,7 @@ namespace WellPlateUserControl
         /// Generates the wellplate based on the values the user entered. If it doesn't find any values that the user entered, it will use default values:<br></br>
         /// The default values are:<br></br>
         /// GridColor = Color.FromRgb(209, 232, 247); (lightblue)<br></br>
-        /// ClickColor = Color.FromRgb(0, 157, 247); (blue)<br></br>
+        /// ClickColor = Colors.CadetBlue; (blue)<br></br>
         /// LabelColor = Colors.Black<br></br>
         /// BorderColor = Colors.LightGray<br></br>
         /// IsEditable = false;<br></br>
