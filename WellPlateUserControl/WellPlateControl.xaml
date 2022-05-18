@@ -32,7 +32,7 @@
               VerticalAlignment="Bottom"/>
 
         <Rectangle x:Name="rectOutline"/>
-        <Grid PreviewMouseDown="clickForColor" 
+        <Grid PreviewMouseDown="ClickForColor" 
               x:Name="gGenerateWellPlate"
                
               HorizontalAlignment="Left"

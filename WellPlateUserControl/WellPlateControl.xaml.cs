@@ -16,6 +16,10 @@ using System.Windows.Shapes;
 
 namespace WellPlateUserControl
 {
+    //The delegate for the subscribe click event
+    public delegate void Notify();
+
+
     /// <summary>
     /// Interaction logic for WellPlateControl.xaml
     /// </summary>
@@ -24,6 +28,7 @@ namespace WellPlateUserControl
         GetCoordinateInfo getCoordinateInfo = new();
         SizeHandler sizeHandler = new();
         CalculateWellSize calculateWellSize = new();
+        public event Notify WellClicked;
 
         public string LastClickedCoordinate { get; private set; }
 
@@ -630,7 +635,7 @@ namespace WellPlateUserControl
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void clickForColor(object sender, MouseButtonEventArgs e)
+        public void ClickForColor(object sender, MouseButtonEventArgs e)
         {
             //loops through each of the rectangles
             foreach (object child in gGenerateWellPlate.Children)
@@ -664,6 +669,7 @@ namespace WellPlateUserControl
                     }
                 }
             }
+            WellClicked?.Invoke();
         }
 
         /// <summary>
