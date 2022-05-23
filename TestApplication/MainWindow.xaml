@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:global="clr-namespace:WellPlateUserControl;assembly=WellPlateUserControl"
         mc:Ignorable="d"
-        Title="MainWindow" Width="600" Height="400">
+        Title="MainWindow" Height="700" Width="600">
     <Grid x:Name="gRefreshTest">
         <global:WellPlateControl x:Name="globalWellPlate"
-                                 Width="600"
+                                 Width="400"
                                  Height="400"
                                  VerticalAlignment="Center"/>
 
