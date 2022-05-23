@@ -9,8 +9,6 @@ namespace WellPlateUserControl
 {
     class CalculateWellSize
     {
-        
-
         private const int _widthLeftOver = 16;
         private const int _heightLeftOver = 50;
         
@@ -24,7 +22,7 @@ namespace WellPlateUserControl
         public float RecalcMaxWidth;
         public float RecalcMaxHeight;
         public float LastRectangleWidth;
-
+        //public 
 
         public double WellSize;
 
@@ -36,19 +34,20 @@ namespace WellPlateUserControl
         /// </summary>
         public void CheckControlSize(double width, double height)
         {
-            if (!double.IsNaN(width))
-            {
-                if (width < (_widthLeftOver + 4))
-                {
-                    throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 20");
-                }
-                else
-                {
-                    _setMaxWidth = width;
-                    CalcMaxWidth = (float)(_setMaxWidth - _widthLeftOver);
-                }
-            }
-            else if (!double.IsNaN(height))
+            //if (!double.IsNaN(width))
+            //{
+            //    if (width < (_widthLeftOver + 4))
+            //    {
+            //        throw new ArgumentOutOfRangeException("maxWidth can't be smaller than 20");
+            //    }
+            //    else
+            //    {
+            //        _setMaxWidth = width;
+            //        CalcMaxWidth = (float)(_setMaxWidth - _widthLeftOver);
+            //    }
+            //}
+            //else
+            if (!double.IsNaN(height))
             {
                 if (height < (_heightLeftOver + 5))
                 {
@@ -90,14 +89,15 @@ namespace WellPlateUserControl
         {
             SizeHandler sizeHandler = new();
 
-            WellSize = CalcMaxWidth / (_shapeDistance * widthWellPlate);
             if (SetTheMaxHeight)
             {
+                WellSize = CalcMaxHeight / (_shapeDistance * widthWellPlate);
                 RecalcMaxHeight = (float)((CalcMaxHeight - (WellSize / 1.5)) * 0.9); //0.9 is 90% the size of the wellplate
                 LastRectangleWidth = RecalcMaxHeight / (_shapeDistance * heightWellPlate);
             }
             else
             {
+                WellSize = CalcMaxWidth / (_shapeDistance * widthWellPlate);
                 RecalcMaxWidth = (float)((CalcMaxWidth - (WellSize / 1.5)) * 0.95); //0.95 is 95% the size of the wellplate
                 LastRectangleWidth = RecalcMaxWidth / (_shapeDistance * widthWellPlate);
             }
@@ -112,16 +112,22 @@ namespace WellPlateUserControl
         {
             double biggerThanSpaceAvailablePercentage;
 
-            if (highestTextblock > thisWidth)
+            if (highestTextblock > thisHeight)
             {
-                biggerThanSpaceAvailablePercentage = (highestTextblock - thisHeight) / thisHeight * 100;
+                //biggerThanSpaceAvailablePercentage = (highestTextblock - thisHeight) / thisHeight * 100;
 
                 if (SetTheMaxHeight)
                 {
+                    biggerThanSpaceAvailablePercentage = (highestTextblock - RecalcMaxHeight) / RecalcMaxHeight * 100;
+
+
+
                     RecalcMaxHeight = (float)(RecalcMaxHeight / (biggerThanSpaceAvailablePercentage + 100) * 100);
                 }
                 else
                 {
+                    biggerThanSpaceAvailablePercentage = (highestTextblock - RecalcMaxWidth) / RecalcMaxWidth * 100;
+
                     RecalcMaxWidth = (float)(RecalcMaxWidth / (biggerThanSpaceAvailablePercentage + 100) * 100);
                 }
             }

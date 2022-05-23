@@ -403,7 +403,7 @@ namespace WellPlateUserControl
             //takes care of the position of the rectangle
             rectangle.Margin = new Thickness(
                 _letterDistance + (calculateWellSize._shapeDistance * rectangle.Width) - rectangle.Width + width * rectangle.Width * calculateWellSize._shapeDistance, 0, 0,
-                (calculateWellSize._shapeDistance * rectangle.Height) - rectangle.Height + (sizeHandler._heightWellPlate * rectangle.Width - (height * rectangle.Width) - rectangle.Height) * calculateWellSize._shapeDistance);
+                rectangle.Height + (calculateWellSize._shapeDistance * rectangle.Height) - rectangle.Height + (sizeHandler._heightWellPlate * rectangle.Width - (height * rectangle.Width) ) * calculateWellSize._shapeDistance);
 
             _coordinates.Add(rectangle.Name);
             gGenerateWellPlate.Children.Add(rectangle);
@@ -429,7 +429,7 @@ namespace WellPlateUserControl
                 lblAlphabetic.FontSize = calculateWellSize.LastRectangleWidth * _fontSizeModifier;
                 lblAlphabetic.TextAlignment = TextAlignment.Center;
                 lblAlphabetic.Margin = new Thickness(0, 0, 0,
-                    (calculateWellSize._shapeDistance * calculateWellSize.LastRectangleWidth) - calculateWellSize.LastRectangleWidth + (sizeHandler._heightWellPlate * calculateWellSize.LastRectangleWidth - (height * calculateWellSize.LastRectangleWidth) - calculateWellSize.LastRectangleWidth) * calculateWellSize._shapeDistance - (calculateWellSize.LastRectangleWidth / 4));
+                    calculateWellSize.LastRectangleWidth + (calculateWellSize._shapeDistance * calculateWellSize.LastRectangleWidth) - calculateWellSize.LastRectangleWidth + (sizeHandler._heightWellPlate * calculateWellSize.LastRectangleWidth - (height * calculateWellSize.LastRectangleWidth) ) * calculateWellSize._shapeDistance - (calculateWellSize.LastRectangleWidth / 4));
                 gCoordinates.Children.Add(lblAlphabetic);
             }
 
@@ -449,7 +449,7 @@ namespace WellPlateUserControl
                     _letterDistance + (calculateWellSize._shapeDistance * calculateWellSize.LastRectangleWidth) - calculateWellSize.LastRectangleWidth + width * calculateWellSize.LastRectangleWidth * calculateWellSize._shapeDistance,
                     0,
                     0,
-                    (calculateWellSize._shapeDistance * calculateWellSize.LastRectangleWidth) - calculateWellSize.LastRectangleWidth + sizeHandler._heightWellPlate * calculateWellSize.LastRectangleWidth * calculateWellSize._shapeDistance);
+                    calculateWellSize.LastRectangleWidth + calculateWellSize.LastRectangleWidth * 0.3 + (calculateWellSize._shapeDistance * calculateWellSize.LastRectangleWidth) + sizeHandler._heightWellPlate * calculateWellSize.LastRectangleWidth * calculateWellSize._shapeDistance);
                 gCoordinates.Children.Add(lblNumeric);
             }
         }
@@ -461,7 +461,7 @@ namespace WellPlateUserControl
             //rectangle that takes care of the outline of the wellplate
             rectOutline.HorizontalAlignment = HorizontalAlignment.Left;
             rectOutline.VerticalAlignment = VerticalAlignment.Bottom;
-            rectOutline.Margin = new Thickness(_letterDistance, 0, 0, 0);
+            rectOutline.Margin = new Thickness(_letterDistance, 0, 0, calculateWellSize.LastRectangleWidth * 2 + calculateWellSize.LastRectangleWidth * 0.3);
             rectOutline.Fill = new SolidColorBrush(Colors.Transparent);
             rectOutline.Stroke = new SolidColorBrush(_setBorderColor);
             rectOutline.StrokeThickness = calculateWellSize.LastRectangleWidth * 0.1; //the 0.1 makes sure the stroke is 10% of the width of a well
@@ -515,7 +515,15 @@ namespace WellPlateUserControl
                 }
             }
             generateBorder();
+
+            
+
             return true;
+        }
+
+        private void setWell(string height)
+        {
+
         }
 
         /// <summary>
