@@ -34,7 +34,7 @@ namespace TestApplication
             //globalWellPlate.ClickColor = Colors.Azure;
             //globalWellPlate.StrokeColor = Colors.Tomato;
             //globalWellPlate.StrokeThickness = 20;
-            globalWellPlate.SetWellPlateSize(24,12);
+            globalWellPlate.SetWellPlateSize(8,10);
             //globalWellPlate.WellSize = 30;
             //globalWellPlate.LabelColor = Colors.Red;
             //globalWellPlate.BorderColor = Colors.Blue;

@@ -198,7 +198,7 @@ namespace WellPlateUserControl
 
         public void HidePlaceHolder()
         {
-            this.Background = new SolidColorBrush(Colors.Transparent);
+            //this.Background = new SolidColorBrush(Colors.Transparent);
             imgPlaceHolder.Visibility = Visibility.Hidden;
         }
 

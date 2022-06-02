@@ -8,8 +8,9 @@
         Title="MainWindow" Height="700" Width="600">
     <Grid x:Name="gRefreshTest">
         <global:WellPlateControl x:Name="globalWellPlate"
-                                 Width="400"
+                                 Background="Gray"
                                  Height="400"
+                                 Width="600"
                                  VerticalAlignment="Center"/>
 
     </Grid>

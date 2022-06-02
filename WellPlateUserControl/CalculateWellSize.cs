@@ -112,7 +112,7 @@ namespace WellPlateUserControl
         {
             double biggerThanSpaceAvailablePercentage;
 
-            if (highestTextblock > thisWidth)
+            if (highestTextblock > thisHeight)
             {
                 biggerThanSpaceAvailablePercentage = (highestTextblock - thisHeight) / thisHeight * 100;
 
