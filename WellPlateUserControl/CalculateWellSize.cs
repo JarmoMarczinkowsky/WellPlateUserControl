@@ -85,7 +85,7 @@ namespace WellPlateUserControl
             }
         }
 
-
+        //calculates size of the wells 
         public void CalculateMaxSize(int widthWellPlate, int heightWellPlate)
         {
             SizeHandler sizeHandler = new();

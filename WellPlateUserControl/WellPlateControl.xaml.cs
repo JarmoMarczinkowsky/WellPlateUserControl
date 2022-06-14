@@ -34,7 +34,7 @@ namespace WellPlateUserControl
 
         /// <summary>
         /// <para>Is used to set the thickness of the stroke in percentages.</para>
-        /// <para>If the color is not defined, it will use black.</para>
+        /// <para>If the color is not defined, it will use black</para>
         /// </summary>
         public double StrokeThickness
         {
@@ -78,7 +78,7 @@ namespace WellPlateUserControl
         }
 
         /// <summary>
-        /// <para>Is used to set the color of the wellplate.</para>
+        /// <para>Is used to set the color of the wells in the wellplate</para>
         /// </summary>
         public Color GridColor
         {
@@ -453,6 +453,7 @@ namespace WellPlateUserControl
                 gCoordinates.Children.Add(lblNumeric);
             }
         }
+
         /// <summary>
         /// Is reponsible for the rounded border around the wellplate
         /// </summary>
@@ -497,7 +498,8 @@ namespace WellPlateUserControl
         /// IsEditable = false;<br></br>
         /// IsRectangle = false; <br></br>
         /// </summary>
-        /// <returns>True</returns>
+        /// <returns>True. If something goes wrong, it will always be somewhere else in the code.<br></br>
+        /// Returns True, because at the time of creation I didn't know how to make a void from a function with the conn-class</returns>
         public bool DrawWellPlate()
         {
             HidePlaceHolder();
@@ -524,7 +526,7 @@ namespace WellPlateUserControl
         /// <para><b>Example:</b> "A4" colors the 4th circle on the first row</para>
         /// </summary>
         /// <param name="coordinate">the coordinate that is about to get colored.</param>
-        /// <returns>True if everything succeeds or false if the code fails</returns>
+        /// <returns>True if everything succeeds or false if the code doesn't find the entered coordinate</returns>
         public bool ColorCoordinate(string coordinate)
         {
             string formattedCoordinate;
@@ -560,7 +562,7 @@ namespace WellPlateUserControl
         /// <para><b>Example:</b> '4' colors the 4th circle on the first column</para>
         /// </summary>
         /// <param name="coordinate">the coordinate that is about to get colored.</param>
-        /// <returns>True if everything succeeds or false if the code fails</returns>
+        /// <returns>True if everything succeeds or false if the code doesn't find the numbered well</returns>
         public bool ColorCoordinate(int coordinate)
         {
             foreach (object child in gGenerateWellPlate.Children)
@@ -586,7 +588,7 @@ namespace WellPlateUserControl
         /// </summary>
         /// <param name="coordinate">The coordinate that needs to be colored. For example: "A5" or "D4" </param>
         /// <param name="chosenColor">The color that the coordinate needs to be colored. For example Colors.Aqua to make the color Aqua</param>
-        /// <returns>True if it succeeds and false if it doesn't succeed in coloring the correct coordinate</returns>
+        /// <returns>True if everything succeeds or false if the code doesn't find the entered coordinate</returns>
         public bool ColorCoordinate(string coordinate, Color chosenColor)
         {
             if (string.IsNullOrWhiteSpace(coordinate))
@@ -613,7 +615,7 @@ namespace WellPlateUserControl
         /// </summary>
         /// <param name="coordinate">The number that a coordinate has that needs to be colored. For example: 3 or 52 </param>
         /// <param name="chosenColor">The color that the coordinate needs to be colored. For example Colors.Aqua to make the color Aqua</param>
-        /// <returns>True if it succeeds and false if it doesn't succeed in coloring the correct coordinate</returns>
+        /// <returns>True if everything succeeds or false if the code doesn't find the numbered well</returns>
         public bool ColorCoordinate(int coordinate, Color chosenColor)
         {
             foreach (object child in gGenerateWellPlate.Children)
@@ -632,6 +634,7 @@ namespace WellPlateUserControl
         /// <summary>
         /// <para>If you click an rectangle, it will get the color of the 'clickcolor'.</para>
         /// <para>If you click it again, it will change back to the grid color</para>
+        /// <para>Don't forget to set the IsEditable variable to true to let the user change the color of the wells by clicking</para>
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -677,7 +680,7 @@ namespace WellPlateUserControl
         /// <example>Example: '4' in a 8x6 returns D1</example>
         /// </summary>
         /// <param name="coordinate">Integer that gets used to convert to the correct coordinate</param>
-        /// <returns>String with the coordinate the number is linked to. If it doesn't find anything, it will return "nothing found"</returns>
+        /// <returns>String with the coordinate the number is linked to.<br></br>It will return an empty if it doesn't find anything. </returns>
         public string NumberToCoordinate(int coordinate)
         {
             string convertedCoordinate = getCoordinateInfo.NumberToCoordinate(coordinate, _coordinates);
@@ -689,7 +692,7 @@ namespace WellPlateUserControl
         /// <example>Example: 'D1' in a 8x6 grid returns 4</example>
         /// </summary>
         /// <param name="coordinate">String that gets used to convert to the correct number</param>
-        /// <returns>Integer with the number the coordinate is linked to. <br>If it doesn't find anything, it will return -1</br>.<br>If it notices a null or whitespace it will return -2.</br></returns>
+        /// <returns>Integer with the number the coordinate is linked to. <br></br>it will return -1 if it doesn't find anything</returns>
         public int CoordinateToNumber(string coordinate)
         {
             int convertedNumber = getCoordinateInfo.CoordinateToNumber(coordinate, _coordinates);
