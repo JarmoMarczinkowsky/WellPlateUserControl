@@ -33,9 +33,9 @@ ClickColor is the variable used to set the color of a well after you’ve clicke
 Default is: Colors.CadetBlue.<br>
 RGB-colors are possible with ‘Color.FromRgb(0,0,0)’ for the argument.<br>
 Hex-colors are possible with ‘(Color)ColorConverter.ConvertFromString("#ff0d00")’ for the argument.<br>
-```
 
-<br><b>Make sure the wells are clickable</b>
+<br><b>Makes the wells clickable</b>
+```
 IsEditable = true;
 ```
 This variable is used to make the wellplate clickable. If it is set, the user can click on a well in the wellplate and the well will change to color to the set ClickColor.<br>
