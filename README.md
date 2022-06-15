@@ -97,16 +97,16 @@ ColorCoordinate(“B2”, Colors.Red);
 ColorCoordinate(5, Colors.Green);
 ```
 These functions are used to color a specific well in a wellplate. You can use this function in 4 different ways.<br> 
-Method 1:  ```ColorCoordinate(“A1”);```
+Method 1:  ```ColorCoordinate(“A1”);```<br>
 You enter only the coordinate. This will make sure that the well on coordinate ‘A1’ gets a different color than the other wells.<br>
 It will choose the color that is used for the ClickColor. In case this one isn’t set either, it will use CadetBlue.<br>
-Method 2: ```ColorCoordinate(4);```
+Method 2: ```ColorCoordinate(4);```<br>
 You enter only the number of a well. This will make sure that the 4th well gets a different color than the other wells.<br>
 It will choose the color that is used for the ClickColor.<br>
 In case this one isn’t set either, it will use CadetBlue.<br>
-Method 3: ```ColorCoordinate(“B2”, Colors.Red);```
+Method 3: ```ColorCoordinate(“B2”, Colors.Red);```<br>
 You enter the coordinate of the well and the color it has to become. This will make sure that the well on coordinate ‘B2’ becomes red.<br>
-Method 4: ```ColorCoordinate(4, Colors.Green);```
+Method 4: ```ColorCoordinate(4, Colors.Green);```<br>
 You enter the number of the well and the color it has to become. This will make sure that the 5th well will become green.<br>
 
 ```
