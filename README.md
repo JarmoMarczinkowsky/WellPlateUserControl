@@ -50,6 +50,12 @@ Set this variable before the DrawWellPlate.
 Sets the color of the border around the wellplate.<br> 
 [Optional]
 ```
+WellPlateBackground = Colors.Cyan
+```
+Set this variable before DrawWellPlate.<br>
+This viariable is used to set the background color of the wellplate. 
+Default is: Colors.Transparent
+```
 StrokeThickness = 20
 ```
 Thickness of the stroke is set in percentages.
@@ -68,12 +74,16 @@ Generates the wellplate based on the values the user entered. If it doesn't find
 The default values are:<br>
 SetGridColor = Color.FromRgb(209, 232, 247);<br>
 SetClickColor = Color.CadetBlue;<br>
-stroke = off<br>
 IsEditable = false;<br>
 IsRectangle = false;<br>
 TurnCoordinatesOff = false;<br>
 LabelColor = Colors.Black<br>
-BorderColor = Colors.LightGray
+BorderColor = Colors.LightGray<br>
+WellPlateBackground = Colors.Transparent<br>
+stroke = off<br>
+in case a stroke is set:<br>
+StrokeThickness = 16; //percent<br>
+StrokeColor = Colors.Black;
 ```
 ColorCoordinate("A1")
 ColorCoordinate("6")

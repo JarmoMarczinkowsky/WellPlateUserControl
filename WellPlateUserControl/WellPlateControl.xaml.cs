@@ -137,9 +137,21 @@ namespace WellPlateUserControl
                 _setBorderColor = value;
             }
         }
+
         /// <summary>
-        /// Is used to return a list with every colored well
+        /// Is used to set a background color for the wellplate
         /// </summary>
+        public Color WellPlateBackground
+        {
+            get { return _setWellPlateBackground; }
+            set
+            {
+                _setWellPlateBackground = value;
+            }
+
+        }        /// <summary>
+                 /// Is used to return a list with every colored well
+                 /// </summary>
         public List<string> ColoredCoordinates
         {
             get
@@ -185,6 +197,7 @@ namespace WellPlateUserControl
         private Color _setLabelColor = Colors.Black;
         private Color _setBorderColor = Colors.LightGray;
         private Color _strokeColor;
+        private Color _setWellPlateBackground = Colors.Transparent;
 
         private List<string> _coordinates = new List<string>();
         private List<string> _coloredCoordinates = new List<string>();
@@ -369,7 +382,7 @@ namespace WellPlateUserControl
             rectOutline.HorizontalAlignment = HorizontalAlignment.Left;
             rectOutline.VerticalAlignment = VerticalAlignment.Bottom;
             rectOutline.Margin = new Thickness(_letterDistance, 0, 0, 0);
-            rectOutline.Fill = new SolidColorBrush(Colors.Transparent);
+            rectOutline.Fill = new SolidColorBrush(_setWellPlateBackground);
             rectOutline.Stroke = new SolidColorBrush(_setBorderColor);
             rectOutline.StrokeThickness = calculateWellSize.LastRectangleWidth * 0.1; //the 0.1 makes sure the stroke is 10% of the width of a well
             rectOutline.Width = calculateWellSize.LastRectangleWidth * sizeHandler._widthWellPlate * calculateWellSize._shapeDistance + (calculateWellSize._shapeDistance * calculateWellSize.LastRectangleWidth) - calculateWellSize.LastRectangleWidth;
