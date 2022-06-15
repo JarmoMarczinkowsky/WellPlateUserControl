@@ -105,16 +105,17 @@ TurnCoordinatesOff = true;
 ```
 This variable is used to hide the coordinates around the wellplate.<br>
 Default is false.<br>
--+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+
 
-<br><b>Draws the wellplate</b>
+---
+<b>Draws the wellplate</b><br>
 ```
-DrawWellPlate();
+DrawWellPlate();  
 ```
 This function is used to draw the wellplate. You won’t see the wellplate without this function.<br>
 Set this function beneath the arguments which you can find above.<br>
-Set this function above the arguments which you can find below.<br>
--+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+-+-=+-+
+Set this function above the arguments which you can find below.
+
+---
 
 <br><b>Give a well a color</b>
 ```
