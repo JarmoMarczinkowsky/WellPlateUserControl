@@ -8,122 +8,131 @@ Make sure you set the <b>width</b>, <b>height</b> and <b>VerticalAlignment</b> o
 
 <b>Functions:</b>
 ```
-SetWellPlateSize(8, 6)
+SetWellPlateSize(12, 8);
 ```
-Sets the size of the wellplate in wells. The first argument '8' is the width and the second argument '6' is the height of the wellplate. 
-Set this function before the coordinateconverter and/or functions that return items<br>
-[Optional]
+SetWellPlateSize is the command used to configure the amount of columns and rows.  
+SetWellPlateSize takes two integers for arguments: width and height. 
+
 ```
-GridColor(Colors.Black) 
+GridColor = Colors.Black;
 ```
-Gives the grid the color that you wish it to be. Default is black.
-Set this function before the DrawWellPlate.<br>
-[Optional]
+GridColor is the variable used to set the colors of the wells in the wellplate. 
+Uses one argument.
+Default is: Color.FromRgb(209, 232, 247). That is a light blue color.
+RGB-colors are possible with ‘Color.FromRgb(0,0,0)’ for the argument. 
+Hex-colors are possible with ‘(Color)ColorConverter.ConvertFromString("#ff0d00")’ for the argument.
 ```
-ClickColor(Colors.Red)
+ClickColor = Colors.Red;
 ```
-Sets the color of a clicked well to the color you wished. Default is red. 
-Set this function before the DrawWellPlate.<br>
-[Optional]
+ClickColor is the variable used to set the color of a well after you’ve clicked it. 
+Default is: Colors.CadetBlue.
+RGB-colors are possible with ‘Color.FromRgb(0,0,0)’ for the argument. 
+Hex-colors are possible with ‘(Color)ColorConverter.ConvertFromString("#ff0d00")’ for the argument.
 ```
-IsEditable = <bool>
+IsEditable = true;
 ```
-Set this function before 'DrawWellPlate'.
-Makes the wellplate editable so you can color wells by clicking on them.<br>
-[Optional]
+This variable is used to make the wellplate clickable. If it is set, the user can click on a well in the wellplate and the well will change to color to the set ClickColor.
+Default is: false. 
 ```
-StrokeColor = Colors.Blue
+StrokeColor = Colors.Green;
 ```
-Set this variable before the DrawWellPlate.
-Set the stroke of the wells in the wellplate.<br>
-[Optional]
+This variable is used to set a small stroke around every well with a color. 
+Default is no stroke.
+Default size of the stroke is 16% of a well.
+RGB-colors are possible with ‘Color.FromRgb(0,0,0)’ for the argument. 
+Hex-colors are possible with ‘(Color)ColorConverter.ConvertFromString("#ff0d00")’ for the argument.
 ```
-LabelColor = Colors.Black
+StrokeThickness = 20;
 ```
-Set this variable before the DrawWellPlate.
-Sets the color of the labels with coordinates.<br> 
-[Optional]
+This variable is used to set the thickness of a stroke. It uses percentages.
+Default is 16%. If the color of the stroke is not set, it will use black.
 ```
-BorderColor = Colors.Black
+IsRectangle = true;
 ```
-Set this variable before the DrawWellPlate.
-Sets the color of the border around the wellplate.<br> 
-[Optional]
+This variable is used to make every well rectangular instead of an ellipse.
+Default is false.
 ```
-WellPlateBackground = Colors.Cyan
+WellSize = 30;
 ```
-Set this variable before DrawWellPlate.<br>
-This viariable is used to set the background color of the wellplate. 
-Default is: Colors.Transparent
+This variable is used to give every well a fixed size instead of calculating it according to the width and height of the wellplate. 
+Warning: has a high chance of generating wells outside of the wellplate. Use at your own caution.
 ```
-StrokeThickness = 20
+LabelColor = Colors.Black;
 ```
-Thickness of the stroke is set in percentages.
-Will create a black stroke is SetStrokeColor is not set.<br>
-Set this variable before DrawWellPlate.<br>
+This variable is used to give the numeric and alphabetic coordinate labels a different color. 
+Default is black.
+RGB-colors are possible with ‘Color.FromRgb(0,0,0)’ for the argument. 
+Hex-colors are possible with ‘(Color)ColorConverter.ConvertFromString("#ff0d00")’ for the argument.
 ```
-IsRectangle = <bool>
+BorderColor = Colors.LightGray;
 ```
-Makes every well a rectangle instead of a circle. Will also increase the distance between the wells with 5 percent.
-Set this variable before the DrawWellPlate.<br>
+This variable is used to give the border around the wellplate a different color. 
+RGB-colors are possible with ‘Color.FromRgb(0,0,0)’ for the argument. 
+Hex-colors are possible with ‘(Color)ColorConverter.ConvertFromString("#ff0d00")’ for the argument.
+Default is light gray.
 ```
-DrawWellPlate()
+WellPlateBackground = Colors.Cyan;
 ```
-Set this function after the colors, circlesize and/or the rectangle and before the coordinateconverter and/or functions that return items.
-Generates the wellplate based on the values the user entered. If it doesn't find any values that the user entered, it will use default values:<br>
-The default values are:<br>
-SetGridColor = Color.FromRgb(209, 232, 247);<br>
-SetClickColor = Color.CadetBlue;<br>
-IsEditable = false;<br>
-IsRectangle = false;<br>
-TurnCoordinatesOff = false;<br>
-LabelColor = Colors.Black<br>
-BorderColor = Colors.LightGray<br>
-WellPlateBackground = Colors.Transparent<br>
-stroke = off<br>
-in case a stroke is set:<br>
-StrokeThickness = 16; //percent<br>
-StrokeColor = Colors.Black;
+This variable is used to give the background of the wellplate a color.
+RGB-colors are possible with ‘Color.FromRgb(0,0,0)’ for the argument. 
+Hex-colors are possible with ‘(Color)ColorConverter.ConvertFromString("#ff0d00")’ for the argument.
+Default is transparent.
 ```
-ColorCoordinate("A1")
-ColorCoordinate("6")
-ColorCoordinate("A5", Colors.Green)
-ColorCoordinate(5, Colors.Blue)
+TurnCoordinatesOff = true;
 ```
-Works with strings and numbers. It colors the coordinate that you enter with the 'clickColor' you entered earlier. 
-Enter "A5", with the double quotes, to color coordinate a5. Enter "3", with the double quotes, to color the third well in the wellplate.
-The second argument is optional and takes care of the color of the chosen well.
-Set this function after the DrawWellPlate.<br>
+This variable is used to hide the coordinates around the wellplate. 
+Default is false.
+--------------------------------------------------------------------------------------------------------------------------------------
 ```
-NumberToCoordinate(4)
+DrawWellPlate();
 ```
-Returns the coordinate belonging to that number. For example: '4' returns 'D4' in a 8x6 wellplate.
-Set this function after the DrawWellPlate.<br>
+This function is used to draw the wellplate. You won’t see the wellplate without this function.
+Set this function beneath the arguments which you can find above.
+Set this function above the arguments which you can find below.
+--------------------------------------------------------------------------------------------------------------------------------------
 ```
-CoordinateToNumber("D4")
+ColorCoordinate(“A1”);
+ColorCoordinate(4);
+ColorCoordinate(“B2”, Colors.Red);
+ColorCoordinate(5, Colors.Green);
 ```
-Returns the number belonging to that coordinate. 
-For example: "D4" returns '4' in a 8x6 wellplate.
-Set this function after the DrawWellPlate.<br>
+These functions are used to color a specific well in a wellplate. You can use this function in 4 different ways. 
+Method 1:  ```ColorCoordinate(“A1”);```
+You enter only the coordinate. This will make sure that the well on coordinate ‘A1’ gets a different color than the other wells. It will choose the color that is used for the ClickColor. In case this one isn’t set either, it will use CadetBlue.
+Method 2: ```ColorCoordinate(4);```
+You enter only the number of a well. This will make sure that the 4th well gets a different color than the other wells. It will choose the color that is used for the ClickColor. In case this one isn’t set either, it will use CadetBlue.
+Method 3: ```ColorCoordinate(“B2”, Colors.Red);```
+You enter the coordinate of the well and the color it has to become. This will make sure that the well on coordinate ‘B2’ becomes red.
+Method 4: ```ColorCoordinate(4, Colors.Green);```
+You enter the number of the well and the color it has to become. This will make sure that the 5th well will become green.
+
 ```
-ColoredList()
+CoordinateToNumber(“A4”);
 ```
-Returns a list with the coordinates with every coordinate that is currently colored.
-Set this function after the DrawWellPlate.<br>
+This function will return the number of the well that belongs on coordinate ‘A4’. It will return ‘-1’ if it doesn’t find anything.
 ```
-NotColoredList()
+NumberToCoordinate(5);
 ```
-Returns a list with the coordinates of every well that is currently not colored.
-Set this function after DrawWellPlate.<br>
+This function will return the coordinate that belongs to the 5th well. It will return an empty string if it doesn’t find anything.
 ```
-LastClickedCoordinate
+List<string> coloredCoordinates = globalWellPlate.ColoredCoordinates;
 ```
-Will return the coordinate of the last clicked well. Also works when IsEditable is off.<br>
+This variable returns a list with every coordinate that has been colored by either a click or the use of ‘ColorCoordinate()’.
 ```
+List<string> notColoredCoordinates = globalWellPlate.NotColoredCoordinates;
+```
+This variable returns a list with every coordinate that has not been colored by either a click or the use of ‘ColorCoordinate()’.
+```
+string lastClicked = globalWellPlate.LastClickedCoordinate;
+```
+Returns the coordinate of the last clicked coordinate.
+```
+Clear(“A4”)
+Clear(4)
 Clear()
-Clear("A1")
-Clear(1)
 ```
-Will the clear the well on the entered coordinate. If it gets left empty, it will clear the entire wellplate of colored coordinates.
-Set this function after DrawWellPlate.<br>
+This function will change the color of a colored well to the color that is used for the wellplate itself.  
+Use a coordinate like ‘B5’ to revert the color of B5 back to the color of the wellplate.
+Use a number like ‘5’ to revert the color of the 5th well back to the color of the wellplate.
+Leave the function empty to clear every color in the wellplate.
 
