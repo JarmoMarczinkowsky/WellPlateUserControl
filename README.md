@@ -64,9 +64,9 @@ IsRectangle = true;
 ```
 This variable is used to make every well rectangular instead of an ellipse.<br>
 Default is false.
-```
 
 <br><b>Set a fixed size for the wells</b>
+```
 WellSize = 30;
 ```
 This variable is used to give every well a fixed size instead of calculating it according to the width and height of the wellplate.<br> 
