@@ -175,8 +175,28 @@ namespace WellPlateUserControl
             private set { _notColoredCoordinates = value; }
         }
 
+        /// <summary>
+        /// Will create rectangles instead of ellipses for the wells.<br></br>
+        /// Is used like a boolean variable.<br></br>
+        /// Default: false<br></br><br></br>
+        /// <example>Example: globalWellPlate.IsRectangle = true;</example>
+        /// </summary>
         public bool IsRectangle;
+
+        /// <summary>
+        /// User will be able to color a well by clicking on it<br></br>
+        /// Is used like a boolean variable<br></br>
+        /// Default: false;<br></br><br></br>
+        /// <example>Example: globalWellPlate.IsEditable = true;</example>
+        /// </summary>
         public bool IsEditable;
+
+        /// <summary>
+        /// Will turn the labels for the coordinates off<br></br>
+        /// Is used like a boolean variable<br></br>
+        /// Default: false;<br><br></br></br>
+        /// <example>Example: globalWellPlate.TurnCoordinatesOff = true;</example>
+        /// </summary>
         public bool TurnCoordinatesOff;
 
         private double _setWellSize = -1;
