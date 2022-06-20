@@ -211,6 +211,7 @@ namespace WellPlateUserControl
         
         private bool _setStrokeColor;
         private bool _hasSetWellSize;
+        private bool _hasSetWellPlateSize;
 
         private Color _setGridColor = Color.FromRgb(209, 232, 247);
         private Color _setClickColor = Colors.CadetBlue;
@@ -244,6 +245,7 @@ namespace WellPlateUserControl
         public bool SetWellPlateSize(int inputWidth, int inputHeight)
         {
             bool setPlateSize = sizeHandler.SetWellPlateSize(inputWidth, inputHeight, _alphabet);
+            _hasSetWellPlateSize = setPlateSize;
             return setPlateSize;
         }
 
@@ -442,6 +444,11 @@ namespace WellPlateUserControl
         public bool DrawWellPlate()
         {
             HidePlaceHolder();
+
+            if (!_hasSetWellPlateSize)
+            {
+                throw new ArgumentException("Please make sure you have used 'SetWellPlateSize(int width, int height)'");
+            }
 
             prepareValues();
 
